@@ -4,8 +4,9 @@
 		<meta http-equiv="Pragma" content="no-cache" charset=gb2312>
 		<link rel="stylesheet" href="/style/normal_ws.css" type="text/css"></link>
 		<link rel="stylesheet" href="/style/sys.css" type="text/css"></link>
+		<link rel="stylesheet" href="/style/table.css" type="text/css"></link>
 		<link href="/style/menuExpandable3.css" rel="stylesheet" type="text/css"></link>
-		<script src="/style/wwyfunc.js" language='javascript' type='text/JavaScript' > </script>
+		<script src="/style/wwyfunc.js"  type='text/javascript' > </script>
 		<% init_sysparam(); //初始化系统参数,获得例如表计个数,串口个数,串口方案个数等参数 %>
 	</HEAD>
 	<body> 
