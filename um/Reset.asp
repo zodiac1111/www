@@ -280,7 +280,6 @@
 							</tr>
 						</thead>
 						<tbody id="tr_dat">
-							电量数据
 						</tbody>
 					</table>
 			</div>
