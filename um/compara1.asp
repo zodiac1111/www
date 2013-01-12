@@ -79,7 +79,7 @@
 			<input type="button" name="Refresh" value="读取" id="Refresh" onclick="return RefreshWin();">
 			<!-- 提交操作类型 更新,还是其他 -->
 			<input class="hideinp" type="text" name="OpType" value="" id="optype">
-			<button id=btnsio>
+			<button id="btnsio">
 				更新
 			</button>
 		</p>
