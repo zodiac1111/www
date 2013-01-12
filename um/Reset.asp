@@ -3,13 +3,10 @@
 		<title>Arm Home</title>
 		<!--   Copyright (c) Echon., 2006. All Rights Reserved. -->
 		<meta http-equiv="Pragma" content="no-cache" charset=gb2312>
-		<link rel="stylesheet" href="/style/normal_ws.css" type="text/css">
-		</link>
-		<link rel="stylesheet" href="/style/sys.css" type="text/css">
-		</link>
-		<link href="/style/menuExpandable3.css" rel="stylesheet" type="text/css">
-		</link>
-		<script src="/style/wwyfunc.js" language='javascript' type='text/JavaScript'></script>
+		<link rel="stylesheet" href="/style/normal_ws.css" type="text/css"/>
+		<link rel="stylesheet" href="/style/sys.css" type="text/css"/>
+		<link href="/style/menuExpandable3.css" rel="stylesheet" type="text/css" />
+		<script src="/style/wwyfunc.js" type="text/javascript"></script>
 		<!-- 基于jquery的日期时间控件所需要的文件 -开始 -->
 		<link rel="stylesheet" media="all" type="text/css" href="/style/jquery-ui.css" />
 		<link rel="stylesheet" media="all" type="text/css" href="/style/jquery-ui-timepicker-addon.css" />
@@ -54,32 +51,32 @@
 						<tr>
 							<td>1</td>
 							<td>服务器端重新加载规约文本.</td>
-							<td>< button id="btnResetPro" class=reboot></td>
+							<td><button id="btnResetPro" class=reboot></button></td>
 						</tr>
 						<tr>
 							<td>2</td>
 							<td>重启web服务器.</td>
-							<td>< button id="btnResetWeb" class="reboot" >
+							<td><button id="btnResetWeb" class="reboot"></button>
 
 							</td>
 						</tr>
 						<tr>
 							<td>3</td>
 							<td>重启抄表程序</td>
-							<td> < button id="btnResetSample" class="reboot" /> </td>
+							<td><button id="btnResetSample" class=reboot></button></td>
 						</tr>
 						<tr>
 							<td>4</td>
 							<td>重启终端操作系统</td>
-							<td>< button id=btnResetRtu class=reboot></button> </td>
+							<td><button id=btnResetRtu class=reboot></button> </td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
 			<!-- ###标签2 ### -->
 			<div id="tabs-log">
-				<textarea id=log_text class=log_txt>
-				<p ALIGN="center">
+				<textarea id=log_text class=log_txt ></textarea>
+				<p align="center">
 					<!--
 					<button id="import_log">导入</button>
 					<button id="export_log">导出</button>
@@ -91,7 +88,7 @@
 					<button id="save_log" title="将文本保存到终端日志文件中.">
 						保存
 					</button>
-					<img class="waiticon" id=log_wait></img>
+					<img class="waiticon" id="log_wait" />
 				</p>
 				<!-- 保存确认对话框1 -->
 				<div id="dialog-confirm" class=dialog title="确认将修改保存到终端中?">
@@ -116,7 +113,7 @@
 					<button id="save_monport" title="将文本保存到终端监视端口文件">
 						保存
 					</button>
-					<img class="waiticon" id=monprot_wait></img>
+					<img class="waiticon" id="monprot_wait" />
 				</p>
 				<!-- 保存确认对话框1 -->
 				<div id="dialog-confirm-monport" class=dialog title="确认将修改保存到终端中?">
@@ -144,7 +141,7 @@
 					<button class="ui-button" id="btnPost" title="查询选中时段和指定表计的电量数据">
 						查询
 					</button>
-					<img class="waiticon" id=msgbox_wait />
+					<img class="waiticon" id="msgbox_wait" />
 					<div class=hide>
 						<form id="history_tou" name="history_tou">
 							<label> 时间戳(秒):
@@ -159,7 +156,7 @@
 							</label>
 						</form>
 					</div>
-					<script language=javascript>
+					<script type="text/javascript">
 						var startDateTextBox = $('#stime');
 						var endDateTextBox = $('#etime');
 						var stime_stamp = document.getElementById("stime_stamp");
