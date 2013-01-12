@@ -2,7 +2,7 @@
 	<head>
 		<title>Arm Home</title>
 		<!--   Copyright (c) Echon., 2006. All Rights Reserved. -->
-		<meta http-equiv="Pragma" content="no-cache" charset=gb2312>
+		<meta http-equiv="Pragma" content="no-cache" charset="gb2312" />
 		<link rel="stylesheet" href="/style/normal_ws.css" type="text/css"/>
 		<link rel="stylesheet" href="/style/sys.css" type="text/css"/>
 		<link href="/style/menuExpandable3.css" rel="stylesheet" type="text/css" />
@@ -51,31 +51,30 @@
 						<tr>
 							<td>1</td>
 							<td>服务器端重新加载规约文本.</td>
-							<td><button id="btnResetPro" class=reboot></button></td>
+							<td><button id="btnResetPro" class=reboot>重启</button></td>
 						</tr>
 						<tr>
 							<td>2</td>
 							<td>重启web服务器.</td>
-							<td><button id="btnResetWeb" class="reboot"></button>
-
+							<td><button id="btnResetWeb" class="reboot">重启</button>
 							</td>
 						</tr>
 						<tr>
 							<td>3</td>
 							<td>重启抄表程序</td>
-							<td><button id="btnResetSample" class=reboot></button></td>
+							<td><button id="btnResetSample" class=reboot>重启</button></td>
 						</tr>
 						<tr>
 							<td>4</td>
 							<td>重启终端操作系统</td>
-							<td><button id=btnResetRtu class=reboot></button> </td>
+							<td><button id="btnResetRtu" class="reboot">重启</button> </td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
 			<!-- ###标签2 ### -->
 			<div id="tabs-log">
-				<textarea id=log_text class=log_txt ></textarea>
+				<textarea id="log_text" class="log_txt"> </textarea>
 				<p align="center">
 					<!--
 					<button id="import_log">导入</button>
@@ -92,15 +91,15 @@
 				</p>
 				<!-- 保存确认对话框1 -->
 				<div id="dialog-confirm" class=dialog title="确认将修改保存到终端中?">
-					<span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>
+					<span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"> </span>
 					这个操作会将文本框中的内容保存到终端日志文件中,不能撤销,请自留备份.是否保存到终端?
 				</div>
 
 
 
 </div>			<div id="tabs-monport-cfg">
-				<textarea id=monport_text class=log_txt></textarea>
-				<p ALIGN="center">
+				<textarea id="monport_text" class="log_txt"> </textarea>
+				<p align="center">
 					<button id="import_monprot" title="调试中...">
 						导入
 					</button>
@@ -117,7 +116,7 @@
 				</p>
 				<!-- 保存确认对话框1 -->
 				<div id="dialog-confirm-monport" class=dialog title="确认将修改保存到终端中?">
-					<span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>
+					<span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"> </span>
 					<p>
 						这个操作会将文本框中的内容保存到终端监视端口文件中.
 						<br>
@@ -235,7 +234,7 @@
 					</script>
 					<!-- <button class="ui-button" id="btn" title="测试中...">子页面加载</button> -->
 					<!-- <button class="ui-button" id="showLog" title="从服务器加载日志">查看日志</button> -->
-					<table class="sioplanTable" ID="history_tou" border="1" cellspacing="1" cellpadding="1">
+					<table class="sioplanTable" id="tbl_history_tou" border="1" cellspacing="1" cellpadding="1">
 						<thead>
 							<tr>
 								<th rowspan=2>表号</th>
@@ -269,7 +268,7 @@
 								<th>谷</th>
 							</tr>
 						</thead>
-						<tbody id=tr_dat></tbody>
+						<tbody id="tr_dat">电量数据</tbody>
 					</table>
 			</div>
 		</div>
