@@ -86,7 +86,7 @@
 			</div>
 			<!-- ###标签2 ### -->
 			<div id="tabs-log">
-				<textarea id="log_text" class="log_txt"> </textarea>
+				<textarea id="log_text" class="log_txt" > </textarea>
 				<p align="center">
 					<!--
 					<button id="import_log">导入</button>
@@ -108,8 +108,8 @@
 				</div>
 
 			</div>
-			<div id="tabs-monport-cfg">
-				<textarea id="monport_text" class="log_txt"> </textarea>
+			<div id="tabs-monport-cfg" >
+				<textarea id="monport_text" class="log_txt" > </textarea>
 				<p align="center">
 					<button id="import_monprot" title="调试中...">
 						导入

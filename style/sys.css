@@ -1550,6 +1550,7 @@ TD.lb-bkg-w {
 	box-shadow: 0pt 1px 2px rgba(0, 0, 0, 0.18) inset;
 	overflow-y: auto;
 	margin: auto;
+	font-family: monospace;
 }
 /*µÈ´ýÍ¼±ê*/
 .waiticon {
