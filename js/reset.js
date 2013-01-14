@@ -158,6 +158,8 @@ $(document).ready(function() {
 	$("#mon_msg").click(function() {
 		$("#mon_msg_stop").show();
 		$("#mon_msg").hide();
+		$("#log_wait").show();
+		$("#msg_text").html("等待中...");
 		$.ajax({
 			type : "post",
 			url : "/goform/msg",
@@ -170,6 +172,7 @@ $(document).ready(function() {
 				//start();
 				$("#mon_msg").show();
 				$("#mon_msg_stop").hide();
+				//$("#log_wait").hide();
 				$("#msg_text").html(data);
 				//alert("成功"+textStatus);
 				// $(".ajax.ajaxResult").html("");
