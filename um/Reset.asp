@@ -289,7 +289,7 @@
 								<th>¹È</th>
 							</tr>
 						</thead>
-						<tbody id="tr_dat"></tbody>
+						<tbody id="tr_dat"> </tbody>
 					</table>
 			</div>
 		</div>

@@ -41,6 +41,7 @@ $(document).ready(function() {
 			$("#log").html(result);
 		});
 	});
+	$("#mon_msg_stop").hide();
 	/**
 	 * 历史电量查询post
 	 */
@@ -155,17 +156,22 @@ $(document).ready(function() {
 	 * 报文监视
 	 */
 	$("#mon_msg").click(function() {
+		$("#mon_msg_stop").show();
+		$("#mon_msg").hide();
 		$.ajax({
 			type : "post",
 			url : "/goform/msg",
-			data: $("#cmd").val(),
+			data : $("#cmd").val(),
 			beforeSend : function(XMLHttpRequest) {
 				//ShowLoading();
 				;
 			},
 			success : function(data, textStatus) {
+				//start();
+				$("#mon_msg").show();
+				$("#mon_msg_stop").hide();
 				$("#msg_text").html(data);
-					//alert("成功"+textStatus);
+				//alert("成功"+textStatus);
 				// $(".ajax.ajaxResult").html("");
 				// $("item", data).each(function(i, domEle) {
 				// $(".ajax.ajaxResult").append("<li>" + $(domEle).children("title").text() + "</li>");
@@ -193,6 +199,8 @@ $(document).ready(function() {
 		//});
 	});
 	$("#mon_msg_stop").click(function() {
+		$("#mon_msg").show();
+		$("#mon_msg_stop").hide();
 		$.post('/goform/msg_stop', "stop", function(result) {
 			alert("停止监听");
 			// 动态加载完的页面才可以接收鼠标悬停等事件
@@ -256,6 +264,24 @@ $(function() {
 	$("#save_monport").button({
 		icons : {
 			primary : "ui-icon-arrowstop-1-n"
+		},
+		text : true
+	});
+});
+///报文监视按钮-开始
+$(function() {
+	$("#mon_msg").button({
+		icons : {
+			primary : "ui-icon-play"
+		},
+		text : true
+	});
+});
+///报文监视按钮-停止
+$(function() {
+	$("#mon_msg_stop").button({
+		icons : {
+			primary : "ui-icon-pause"
 		},
 		text : true
 	});
