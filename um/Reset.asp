@@ -140,7 +140,7 @@
 			</div>
 			<div id="tabs-msg" >
 				<textarea id="msg_text" class="log_txt" ></textarea>
-				<input type="text" name="cmd" id="cmd"  value="ping 127.0.0.1">
+				<input type="text" name="cmd" id="cmd"  value="ping 127.0.0.1 -c 4">
 				<button id="mon_msg" title="开始监视报文">
 					开始
 				</button>
