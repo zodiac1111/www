@@ -68,7 +68,9 @@ $(document).ready(function() {
 	$("#load_log").click(function() {
 		// 显示
 		$("#log_wait").show("fade", {}, 1);
+		$("#log_wait").attr("disabled","true");//按钮不应该能按
 		$.post("/goform/load_log", "load", function(result) {
+			$("#log_wait").attr("disabled","false");
 			$("#log_wait").hide("fade", {}, 1000);
 			var b = document.getElementById("log_text");
 			b.value = result;
@@ -110,10 +112,12 @@ $(document).ready(function() {
 	 * 从服务器加载 监视端口配置文件(端口文本描述)
 	 */
 	$("#load_monport").click(function() {
+		$("#load_monport").attr("disabled","true");
 		$("#monprot_wait").show("fade", {}, 1);
 		$.post(form_load_monport, "load_monport", function(result) {
 			$("#monprot_wait").hide("fade", {}, 1000);
 			monport_txt.value = result;
+			$("#load_monport").attr("disabled","fasle");
 			//$("#log_text").html("1231");
 			//$("#log_text").html(result);
 			// 完成之后隐藏
@@ -155,14 +159,14 @@ $(document).ready(function() {
 	/**
 	 * 报文监视
 	 */
-	$("#msg_text").addClass("textarea_bgpic"); //测试背景图片时用到的.
+	//$("#msg_text").addClass("textarea_bgpic"); //测试背景图片时用到的.
 	$("#mon_msg").click(function() {
 		$("#mon_msg_stop").show();
 		//按钮变化
 		$("#mon_msg").hide();
-		$("#log_wait").show();
+		//$("#log_wait").show();
 		//按钮旁边的等待动画 不需要了
-		//$("#msg_text").addClass("textarea_bgpic");
+		$("#msg_text").addClass("textarea_bgpic");
 		//文本框等待动画
 		$("#msg_text").html("");
 		//清空文本框
