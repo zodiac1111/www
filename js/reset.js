@@ -165,7 +165,7 @@ $(document).ready(function() {
 			},
 			success : function(data, textStatus) {
 				$("#msg_text").html(data);
-					alert("成功"+textStatus);
+					//alert("成功"+textStatus);
 				// $(".ajax.ajaxResult").html("");
 				// $("item", data).each(function(i, domEle) {
 				// $(".ajax.ajaxResult").append("<li>" + $(domEle).children("title").text() + "</li>");
@@ -173,7 +173,7 @@ $(document).ready(function() {
 			},
 			complete : function(XMLHttpRequest, textStatus) {
 				//HideLoading();
-				alert("完成");
+				//alert("完成");
 			},
 			error : function() {
 				//请求出错处理
