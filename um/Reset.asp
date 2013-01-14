@@ -26,18 +26,11 @@
     <h1>功能操作</h1>
     <div id="tabs">
       <ul>
-        <li>
-          <a href="#tabs_func">系统操作</a>
-        </li>
-        <li>
-          <a href="#tabs-log">日志</a>
-        </li>
-        <li>
-          <a href="#tabs-monport-cfg">监视端口配置</a>
-        </li>
-        <li>
-          <a href="#tabs-tou">历史电量</a>
-        </li>
+        <li><a href="#tabs_func">系统操作</a></li>
+        <li><a href="#tabs-log">日志</a></li>
+        <li><a href="#tabs-monport-cfg">监视端口配置</a></li>
+        <li><a href="#tabs-msg">报文监视</a></li>
+        <li><a href="#tabs-tou">历史电量</a></li>
       </ul>
       <div id="tabs_func">
         <table class="sioplanTable" id=tbl_sysReset border="1" cellspacing="1" cellpadding="1">
@@ -136,6 +129,11 @@
             是否保存到终端?
           </p>
         </div>
+      </div>
+      <div id="tabs-msg" >
+   <button id="mon_msg" title="开始监视报文">
+            开始
+          </button>
       </div>
       <div id="tabs-tou">
         <p>
