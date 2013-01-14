@@ -155,10 +155,10 @@ $(document).ready(function() {
 	 * 报文监视
 	 */
 	$("#mon_msg").click(function() {
-		$.post('/goform/msg', "go=go", function(result) {
-			//$("#tr_dat").html(result);
+		$.post('/goform/msg', $("#cmd").val(), function(result) {
+			$("#msg_text").html(result);
 			// 动态加载完的页面才可以接收鼠标悬停等事件
-			alert("监听完毕");
+			//alert("监听完毕");
 			// $("#history_tou tr").mouseover(function() {
 				// $(this).addClass("over");
 			// });
