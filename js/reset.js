@@ -299,6 +299,15 @@ $(function() {
 		text : true
 	});
 });
+///按钮,查询历史数据
+$(function() {
+	$("#btnPost").button({
+		icons : {
+			primary : "ui-icon-search"
+		},
+		text : true
+	});
+});
 //标签页 标签id tabs
 $(function() {
 	var tabs = $("#tabs").tabs();
