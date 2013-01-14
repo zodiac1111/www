@@ -7,6 +7,7 @@
 		<link rel="stylesheet" href="/style/sys.css" type="text/css"/>
 		<link href="/style/menuExpandable3.css" rel="stylesheet" type="text/css"/>
 		<script src="/style/wwyfunc.js" type="text/javascript"></script>
+		<link rel="stylesheet" href="/style/table.css" type="text/css"/>
 		<!-- jquery -¿ªÊ¼-->
 		<link rel="stylesheet" media="all" type="text/css" href="/style/jquery-ui.css" />
 		<link rel="stylesheet" media="all" type="text/css" href="/style/jquery-ui-timepicker-addon.css" />

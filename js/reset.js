@@ -155,17 +155,42 @@ $(document).ready(function() {
 	 * 报文监视
 	 */
 	$("#mon_msg").click(function() {
-		$.post('/goform/msg', $("#cmd").val(), function(result) {
-			$("#msg_text").html(result);
-			// 动态加载完的页面才可以接收鼠标悬停等事件
-			//alert("监听完毕");
-			// $("#history_tou tr").mouseover(function() {
-			// $(this).addClass("over");
-			// });
-			// $("#history_tou tr").mouseout(function() {
-			// $(this).removeClass("over");
-			//});
+		$.ajax({
+			type : "post",
+			url : "/goform/msg",
+			data: $("#cmd").val(),
+			beforeSend : function(XMLHttpRequest) {
+				//ShowLoading();
+				;
+			},
+			success : function(data, textStatus) {
+				$("#msg_text").html(data);
+					alert("成功"+textStatus);
+				// $(".ajax.ajaxResult").html("");
+				// $("item", data).each(function(i, domEle) {
+				// $(".ajax.ajaxResult").append("<li>" + $(domEle).children("title").text() + "</li>");
+				// });
+			},
+			complete : function(XMLHttpRequest, textStatus) {
+				//HideLoading();
+				alert("完成");
+			},
+			error : function() {
+				//请求出错处理
+				;
+			}
 		});
+		// $.post('/goform/msg', $("#cmd").val(), function(result) {
+		// $("#msg_text").html(result);
+		// 动态加载完的页面才可以接收鼠标悬停等事件
+		//alert("监听完毕");
+		// $("#history_tou tr").mouseover(function() {
+		// $(this).addClass("over");
+		// });
+		// $("#history_tou tr").mouseout(function() {
+		// $(this).removeClass("over");
+		//});
+		//});
 	});
 	$("#mon_msg_stop").click(function() {
 		$.post('/goform/msg_stop', "stop", function(result) {
@@ -179,6 +204,11 @@ $(document).ready(function() {
 			// $(this).removeClass("over");
 			//});
 		});
+	});
+	$("#mon_test").click(function() {
+		//
+		//alert("显示测试");
+		$("#msg_text").append();
 	});
 });
 //文本提示信息,鼠标移上 显示提示信息
