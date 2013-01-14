@@ -155,25 +155,31 @@ $(document).ready(function() {
 	/**
 	 * 报文监视
 	 */
+	$("#msg_text").addClass("textarea_bgpic"); //测试背景图片时用到的.
 	$("#mon_msg").click(function() {
 		$("#mon_msg_stop").show();
+		//按钮变化
 		$("#mon_msg").hide();
 		$("#log_wait").show();
-		$("#msg_text").html("等待中...");
+		//按钮旁边的等待动画 不需要了
+		//$("#msg_text").addClass("textarea_bgpic");
+		//文本框等待动画
+		$("#msg_text").html("");
+		//清空文本框
 		$.ajax({
 			type : "post",
 			url : "/goform/msg",
 			data : $("#cmd").val(),
 			beforeSend : function(XMLHttpRequest) {
-				//ShowLoading();
+				//ShowLoading(); //发送前
 				;
 			},
 			success : function(data, textStatus) {
 				//start();
-				$("#mon_msg").show();
+				$("#mon_msg").show();//按钮变化
 				$("#mon_msg_stop").hide();
-				//$("#log_wait").hide();
-				$("#msg_text").html(data);
+				$("#msg_text").removeClass("textarea_bgpic");//除去等待动画
+				$("#msg_text").html(data);//填充数据
 				//alert("成功"+textStatus);
 				// $(".ajax.ajaxResult").html("");
 				// $("item", data).each(function(i, domEle) {
