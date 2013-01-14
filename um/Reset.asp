@@ -139,10 +139,16 @@
 				</div>
 			</div>
 			<div id="tabs-msg" >
-				<textarea id="msg_text" class="log_txt" ></textarea>
+				<textarea id="msg_text" class="log_txt" readonly> </textarea>
 				<input type="text" name="cmd" id="cmd"  value="ping 127.0.0.1 -c 4">
 				<button id="mon_msg" title="开始监视报文">
 					开始
+				</button>
+				<button id="mon_msg_stop" title="停止监视报文">
+					停止
+				</button>
+				<button id="mon_test" title="调试中">
+					test
 				</button>
 			</div>
 			<div id="tabs-tou">

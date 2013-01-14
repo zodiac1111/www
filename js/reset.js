@@ -160,10 +160,23 @@ $(document).ready(function() {
 			// 动态加载完的页面才可以接收鼠标悬停等事件
 			//alert("监听完毕");
 			// $("#history_tou tr").mouseover(function() {
-				// $(this).addClass("over");
+			// $(this).addClass("over");
 			// });
 			// $("#history_tou tr").mouseout(function() {
-				// $(this).removeClass("over");
+			// $(this).removeClass("over");
+			//});
+		});
+	});
+	$("#mon_msg_stop").click(function() {
+		$.post('/goform/msg_stop', "stop", function(result) {
+			alert("停止监听");
+			// 动态加载完的页面才可以接收鼠标悬停等事件
+			//alert("监听完毕");
+			// $("#history_tou tr").mouseover(function() {
+			// $(this).addClass("over");
+			// });
+			// $("#history_tou tr").mouseout(function() {
+			// $(this).removeClass("over");
 			//});
 		});
 	});
