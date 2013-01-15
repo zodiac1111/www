@@ -26,22 +26,14 @@
 		<h1>功能操作</h1>
 		<div id="tabs">
 			<ul>
-				<li>
-					<a href="#tabs_func">系统操作</a>
-				</li>
-				<li>
-					<a href="#tabs-log">日志</a>
-				</li>
-				<li>
-					<a href="#tabs-monport-cfg">监视端口配置</a>
-				</li>
-				<li>
-					<a href="#tabs-msg">报文监视</a>
-				</li>
-				<li>
-					<a href="#tabs-tou">历史电量</a>
-				</li>
+				<li><a href="#tabs_func">系统操作</a></li>
+				<li><a href="#tabs-log">日志</a></li>
+				<li><a href="#tabs-monport-cfg">监视端口配置</a></li>
+				<li><a href="#tabs-procotol-cfg">规约配置</a></li>
+				<li><a href="#tabs-msg">报文监视</a></li>
+				<li><a href="#tabs-tou">历史电量</a></li>
 			</ul>
+			<!-- ###标签1 功能 ### -->
 			<div id="tabs_func">
 				<table class="sioplanTable" id=tbl_sysReset border="1" cellspacing="1" cellpadding="1">
 					<thead>
@@ -55,39 +47,27 @@
 						<tr>
 							<td>1</td>
 							<td>服务器端重新加载规约文本.</td>
-							<td>
-							<button id="btnResetPro" class=reboot>
-								重启
-							</button></td>
+							<td><button id="btnResetPro" class=reboot> 重启 </button></td>
 						</tr>
 						<tr>
 							<td>2</td>
 							<td>重启web服务器.</td>
-							<td>
-							<button id="btnResetWeb" class="reboot">
-								重启
-							</button></td>
+							<td><button id="btnResetWeb" class="reboot"> 重启 </button></td>
 						</tr>
 						<tr>
 							<td>3</td>
 							<td>重启抄表程序</td>
-							<td>
-							<button id="btnResetSample" class=reboot>
-								重启
-							</button></td>
+							<td><button id="btnResetSample" class=reboot> 重启 </button></td>
 						</tr>
 						<tr>
 							<td>4</td>
 							<td>重启终端操作系统</td>
-							<td>
-							<button id="btnResetRtu" class="reboot">
-								重启
-							</button></td>
+							<td><button id="btnResetRtu" class="reboot"> 重启 </button></td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
-			<!-- ###标签2 ### -->
+			<!-- ###标签2 日志 ### -->
 			<div id="tabs-log">
 				<textarea id="log_text" class="log_txt" > </textarea>
 				<p align="center">
@@ -96,35 +76,23 @@
 					<button id="export_log">导出</button>
 
 					_______-->
-					<button id="load_log" title="从终端读取日志文件.">
-						读取
-					</button>
-					<button id="save_log" title="将文本保存到终端日志文件中.">
-						保存
-					</button><img class="waiticon" id="log_wait" />
+					<button id="load_log" title="从终端读取日志文件."> 读取 </button>
+					<button id="save_log" title="将文本保存到终端日志文件中."> 保存 </button><img class="waiticon" id="log_wait" />
 				</p>
 				<!-- 保存确认对话框1 -->
 				<div id="dialog-confirm" class=dialog title="确认将修改保存到终端中?">
 					<span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"> </span>
 					这个操作会将文本框中的内容保存到终端日志文件中,不能撤销,请自留备份.是否保存到终端?
 				</div>
-
 			</div>
+			<!-- ###标签3 监视端口描述配置文件 ### -->
 			<div id="tabs-monport-cfg" >
 				<textarea id="monport_text" class="log_txt" > </textarea>
 				<p align="center">
-					<button id="import_monprot" title="调试中...">
-						导入
-					</button>
-					<button id="export_monprot" title="调试中...">
-						导出
-					</button>
-					<button id="load_monport" title="从终端读取监视端口配置文件(文本格式)">
-						读取
-					</button>
-					<button id="save_monport" title="将文本保存到终端监视端口文件">
-						保存
-					</button><img class="waiticon" id="monprot_wait" />
+					<button id="import_monprot" title="调试中..."> 导入 </button>
+					<button id="export_monprot" title="调试中..."> 导出 </button>
+					<button id="load_monport" title="从终端读取监视端口配置文件(文本格式)"> 读取 </button>
+					<button id="save_monport" title="将文本保存到终端监视端口文件"> 保存 </button><img class="waiticon" id="monprot_wait" />
 				</p>
 				<!-- 保存确认对话框1 -->
 				<div id="dialog-confirm-monport" class=dialog title="确认将修改保存到终端中?">
@@ -138,18 +106,34 @@
 					</p>
 				</div>
 			</div>
+			<!-- ###标签: 规约描述配置文件 ### -->
+			<div id="tabs-procotol-cfg" >
+				<textarea id="procotol_text" class="log_txt" > </textarea>
+				<p align="center">
+					<button id="import_procotolt" title="调试中..."> 导入 </button>
+					<button id="export_procotol" title="调试中..."> 导出 </button>
+					<button id="load_procotol" title="从终端读取规约配置文件(文本格式)"> 读取 </button>
+					<button id="save_procotol" title="将文本保存到终端规约配置文件"> 保存 </button><!-- <img class="waiticon" id="monprot_wait" />-->
+				</p>
+				<!-- 保存确认对话框1 -->
+				<div id="dialog-confirm-procotol" class=dialog title="确认将修改保存到终端中?">
+					<span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"> </span>
+					<p>
+						这个操作会将文本框中的内容保存到终端规约配置文件中.
+						<br>
+						终端重启后生效.该操作不能撤销,请自留备份.
+						<br>
+						是否保存到终端?
+					</p>
+				</div>
+			</div>
+			<!-- ###标签 报文监视(调试中) ### -->
 			<div id="tabs-msg" >
 				<textarea id="msg_text" class="log_txt" readonly> </textarea>
 				<input type="text" name="cmd" id="cmd"  value="ping 127.0.0.1 -c 4">
-				<button id="mon_msg" title="开始监视报文">
-					开始
-				</button>
-				<button id="mon_msg_stop" title="停止监视报文">
-					停止
-				</button>
-				<button id="mon_test" title="调试中">
-					test
-				</button>
+				<button id="mon_msg" title="开始监视报文"> 开始 </button>
+				<button id="mon_msg_stop" title="停止监视报文"> 停止 </button>
+				<button id="mon_test" title="调试中"> test </button>
 			</div>
 			<div id="tabs-tou">
 				<p>
@@ -161,9 +145,7 @@
 						<input type="text"
 						name="etime" id="etime" readonly class="date " title="选择截止时刻">
 					</label>
-					<button class="ui-button" id="btnPost" title="查询选中时段和指定表计的电量数据">
-						查询
-					</button><img class="waiticon" id="msgbox_wait" />
+					<button class="ui-button" id="btnPost" title="查询选中时段和指定表计的电量数据"> 查询 </button><img class="waiticon" id="msgbox_wait" />
 					<div class=hide>
 						<form id="history_tou" name="history_tou">
 							<label> 时间戳(秒):
@@ -289,7 +271,7 @@
 								<th>谷</th>
 							</tr>
 						</thead>
-						<tbody id="tr_dat"> </tbody>
+						<tbody id="tr_dat"></tbody>
 					</table>
 			</div>
 		</div>

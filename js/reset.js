@@ -6,8 +6,10 @@ var etime = document.getElementById("etime_stamp");
 var mtr_no = document.getElementById("mtr_no");
 var form_load_monport = "/goform/load_monport_cfg";
 var form_save_monport = "/goform/save_monport_cfg";
+var form_load_protocol = "/goform/load_procotol_cfg";
+var form_save_protocol = "/goform/save_procotol_cfg";
 
-$(document).ready(function() { // 所有脚本都在文档加载完全后执行
+$(document).ready(function() {// 所有脚本都在文档加载完全后执行
 	/**
 	 * 功能操作
 	 */
@@ -113,16 +115,18 @@ $(document).ready(function() { // 所有脚本都在文档加载完全后执行
 	 * 从服务器加载 监视端口配置文件(端口文本描述)
 	 */
 	$("#load_monport").click(function() {
-		$("#load_monport").attr("disabled", "true");
-		$("#monprot_wait").show("fade", {}, 1);
+		//$("#load_monport").attr("disabled", "true");
+		$("#monport_text").addClass("textarea_bgpic");
+		monport_txt.value = "";
+		$("#monprot_wait").show();
 		$.post(form_load_monport, "load_monport", function(result) {
-			$("#monprot_wait").hide("fade", {}, 1000);
+			$("#monprot_wait").hide();
+			$("#monport_text").removeClass("textarea_bgpic");
 			monport_txt.value = result;
-			$("#load_monport").attr("disabled", "fasle");
+			//$("#load_monport").attr("disabled", "fasle");
 			//$("#log_text").html("1231");
 			//$("#log_text").html(result);
 			// 完成之后隐藏
-
 		});
 	});
 	/**
@@ -158,15 +162,61 @@ $(document).ready(function() { // 所有脚本都在文档加载完全后执行
 		}
 	});
 	/**
+	 * 加载规约配置文件
+	 */
+	$("#load_procotol").click(function() {
+		$("#procotol_text").addClass("textarea_bgpic");
+		$("#procotol_text").val("");
+		$.post(form_load_protocol, "load_monport", function(result) {
+			$("#procotol_text").removeClass("textarea_bgpic");
+			$("#procotol_text").val(result);
+			//$("#log_text").html("1231");
+			//$("#log_text").html(result);
+			// 完成之后隐藏
+		});
+	});
+	$("#save_procotol").click(function() {
+		if (monport_txt.value == "") {
+			alert("文本不能为空");
+		} else {
+			//确认信息框
+			$(function() {
+				$("#dialog-confirm-monport").dialog({
+					modal : true,
+					//position: { my: "center", at: "center", of: window },
+					buttons : {
+						"保存" : function() {
+							$(this).dialog("close");
+							//alert("确认保存");
+							//$("#monprot_wait").show("fade", {}, 1);
+							$.post(form_save_protocol, $("#procotol_text").val(), function(result) {
+								// 完成之后隐藏
+								//$("#monprot_wait").hide("fade", {}, 1000);
+							});
+						},
+						"取消" : function() {
+							$(this).dialog("close");
+							//alert("取消了");
+							//return;
+						}
+					}
+				});
+			});
+		}
+	});
+	/**
 	 * 报文监视
 	 */
 	//$("#msg_text").addClass("textarea_bgpic"); //测试背景图片时用到的.
 	$("#mon_msg").click(function() {
 		// alert("点击");
-		$("#mon_msg_stop").show();//按钮变化
+		$("#mon_msg_stop").show();
+		//按钮变化
 		$("#mon_msg").hide();
-		$("#msg_text").addClass("textarea_bgpic");	//文本框等待动画
-		$("#msg_text").html("");//清空内容
+		$("#msg_text").addClass("textarea_bgpic");
+		//文本框等待动画
+		$("#msg_text").html("");
+		//清空内容
 		//清空文本框
 		$.ajax({
 			type : "post",
@@ -181,7 +231,8 @@ $(document).ready(function() { // 所有脚本都在文档加载完全后执行
 			success : function(data, textStatus) {
 				//alert("成功"+textStatus);
 				//start();
-				$("#msg_text").html(data);//填充数据
+				$("#msg_text").html(data);
+				//填充数据
 			},
 			//完成(成功/失败)
 			complete : function(XMLHttpRequest, textStatus) {
@@ -262,6 +313,24 @@ $(document).ready(function() { // 所有脚本都在文档加载完全后执行
 	///保存监视端口参数按钮
 	$(function() {
 		$("#save_monport").button({
+			icons : {
+				primary : "ui-icon-arrowstop-1-n"
+			},
+			text : true
+		});
+	});
+	///加载规约配置文件
+	$(function() {
+		$("#load_procotol").button({
+			icons : {
+				primary : "ui-icon-arrowstop-1-s"
+			},
+			text : true
+		});
+	});
+	///保存规约配置文件
+	$(function() {
+		$("#save_procotol").button({
 			icons : {
 				primary : "ui-icon-arrowstop-1-n"
 			},
