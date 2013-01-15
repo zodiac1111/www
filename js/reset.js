@@ -7,7 +7,7 @@ var mtr_no = document.getElementById("mtr_no");
 var form_load_monport = "/goform/load_monport_cfg";
 var form_save_monport = "/goform/save_monport_cfg";
 
-$(document).ready(function() {
+$(document).ready(function() { // 所有脚本都在文档加载完全后执行
 	/**
 	 * 功能操作
 	 */
@@ -68,9 +68,10 @@ $(document).ready(function() {
 	$("#load_log").click(function() {
 		// 显示
 		$("#log_wait").show("fade", {}, 1);
-		$("#log_wait").attr("disabled","true");//按钮不应该能按
+		$("#log_wait").attr("disabled", "true");
+		//按钮不应该能按
 		$.post("/goform/load_log", "load", function(result) {
-			$("#log_wait").attr("disabled","false");
+			$("#log_wait").attr("disabled", "false");
 			$("#log_wait").hide("fade", {}, 1000);
 			var b = document.getElementById("log_text");
 			b.value = result;
@@ -112,12 +113,12 @@ $(document).ready(function() {
 	 * 从服务器加载 监视端口配置文件(端口文本描述)
 	 */
 	$("#load_monport").click(function() {
-		$("#load_monport").attr("disabled","true");
+		$("#load_monport").attr("disabled", "true");
 		$("#monprot_wait").show("fade", {}, 1);
 		$.post(form_load_monport, "load_monport", function(result) {
 			$("#monprot_wait").hide("fade", {}, 1000);
 			monport_txt.value = result;
-			$("#load_monport").attr("disabled","fasle");
+			$("#load_monport").attr("disabled", "fasle");
 			//$("#log_text").html("1231");
 			//$("#log_text").html(result);
 			// 完成之后隐藏
@@ -161,14 +162,11 @@ $(document).ready(function() {
 	 */
 	//$("#msg_text").addClass("textarea_bgpic"); //测试背景图片时用到的.
 	$("#mon_msg").click(function() {
-		$("#mon_msg_stop").show();
-		//按钮变化
+		// alert("点击");
+		$("#mon_msg_stop").show();//按钮变化
 		$("#mon_msg").hide();
-		//$("#log_wait").show();
-		//按钮旁边的等待动画 不需要了
-		$("#msg_text").addClass("textarea_bgpic");
-		//文本框等待动画
-		$("#msg_text").html("");
+		$("#msg_text").addClass("textarea_bgpic");	//文本框等待动画
+		$("#msg_text").html("");//清空内容
 		//清空文本框
 		$.ajax({
 			type : "post",
@@ -176,46 +174,36 @@ $(document).ready(function() {
 			data : $("#cmd").val(),
 			beforeSend : function(XMLHttpRequest) {
 				//ShowLoading(); //发送前
-				;
+				//alert("发送前");
+				//$("#msg_text").addClass("textarea_bgpic_t");
 			},
+			//成功(先成功,后完成)
 			success : function(data, textStatus) {
-				//start();
-				$("#mon_msg").show();//按钮变化
-				$("#mon_msg_stop").hide();
-				$("#msg_text").removeClass("textarea_bgpic");//除去等待动画
-				$("#msg_text").html(data);//填充数据
 				//alert("成功"+textStatus);
-				// $(".ajax.ajaxResult").html("");
-				// $("item", data).each(function(i, domEle) {
-				// $(".ajax.ajaxResult").append("<li>" + $(domEle).children("title").text() + "</li>");
-				// });
+				//start();
+				$("#msg_text").html(data);//填充数据
 			},
+			//完成(成功/失败)
 			complete : function(XMLHttpRequest, textStatus) {
-				//HideLoading();
 				//alert("完成");
+				//HideLoading();
+				$("#mon_msg").show();
+				$("#mon_msg_stop").hide();
+				$("#msg_text").removeClass("textarea_bgpic");
 			},
 			error : function() {
-				//请求出错处理
-				;
+				$("#msg_text").html("Ajax错误");
 			}
 		});
-		// $.post('/goform/msg', $("#cmd").val(), function(result) {
-		// $("#msg_text").html(result);
-		// 动态加载完的页面才可以接收鼠标悬停等事件
-		//alert("监听完毕");
-		// $("#history_tou tr").mouseover(function() {
-		// $(this).addClass("over");
-		// });
-		// $("#history_tou tr").mouseout(function() {
-		// $(this).removeClass("over");
-		//});
-		//});
 	});
+	/**
+	 * 停止端口监视按钮
+	 */
 	$("#mon_msg_stop").click(function() {
 		$("#mon_msg").show();
 		$("#mon_msg_stop").hide();
 		$.post('/goform/msg_stop', "stop", function(result) {
-			alert("停止监听");
+			alert("手动停止监听");
 			// 动态加载完的页面才可以接收鼠标悬停等事件
 			//alert("监听完毕");
 			// $("#history_tou tr").mouseover(function() {
@@ -231,90 +219,90 @@ $(document).ready(function() {
 		//alert("显示测试");
 		$("#msg_text").append();
 	});
-});
-//文本提示信息,鼠标移上 显示提示信息
-$(function() {
-	$(document).tooltip();
-});
-//重启按钮
-$(function() {
-	$(".reboot").button({
-		icons : {
-			primary : "ui-icon-power"
-		},
-		text : true
+	//文本提示信息,鼠标移上 显示提示信息
+	$(function() {
+		$(document).tooltip();
 	});
-});
-///加载日志按钮
-$(function() {
-	$("#load_log").button({
-		icons : {
-			primary : "ui-icon-arrowstop-1-s"
-		},
-		text : true
+	//重启按钮
+	$(function() {
+		$(".reboot").button({
+			icons : {
+				primary : "ui-icon-power"
+			},
+			text : true
+		});
 	});
-});
-///保存日志按钮
-$(function() {
-	$("#save_log").button({
-		icons : {
-			primary : "ui-icon-arrowstop-1-n"
-		},
-		text : true
+	///加载日志按钮
+	$(function() {
+		$("#load_log").button({
+			icons : {
+				primary : "ui-icon-arrowstop-1-s"
+			},
+			text : true
+		});
 	});
-});
-///加载监视端口按钮
-$(function() {
-	$("#load_monport").button({
-		icons : {
-			primary : "ui-icon-arrowstop-1-s"
-		},
-		text : true
+	///保存日志按钮
+	$(function() {
+		$("#save_log").button({
+			icons : {
+				primary : "ui-icon-arrowstop-1-n"
+			},
+			text : true
+		});
 	});
-});
-///保存监视端口参数按钮
-$(function() {
-	$("#save_monport").button({
-		icons : {
-			primary : "ui-icon-arrowstop-1-n"
-		},
-		text : true
+	///加载监视端口按钮
+	$(function() {
+		$("#load_monport").button({
+			icons : {
+				primary : "ui-icon-arrowstop-1-s"
+			},
+			text : true
+		});
 	});
-});
-///报文监视按钮-开始
-$(function() {
-	$("#mon_msg").button({
-		icons : {
-			primary : "ui-icon-play"
-		},
-		text : true
+	///保存监视端口参数按钮
+	$(function() {
+		$("#save_monport").button({
+			icons : {
+				primary : "ui-icon-arrowstop-1-n"
+			},
+			text : true
+		});
 	});
-});
-///报文监视按钮-停止
-$(function() {
-	$("#mon_msg_stop").button({
-		icons : {
-			primary : "ui-icon-pause"
-		},
-		text : true
+	///报文监视按钮-开始
+	$(function() {
+		$("#mon_msg").button({
+			icons : {
+				primary : "ui-icon-play"
+			},
+			text : true
+		});
 	});
-});
-///按钮,查询历史数据
-$(function() {
-	$("#btnPost").button({
-		icons : {
-			primary : "ui-icon-search"
-		},
-		text : true
+	///报文监视按钮-停止
+	$(function() {
+		$("#mon_msg_stop").button({
+			icons : {
+				primary : "ui-icon-pause"
+			},
+			text : true
+		});
 	});
-});
-//标签页 标签id tabs
-$(function() {
-	var tabs = $("#tabs").tabs();
-	tabs.find(".ui-tabs-nav").sortable({
-		axis : "x",
-		stop : function() {
-			tabs.tabs("refresh");
-		}
+	///按钮,查询历史数据
+	$(function() {
+		$("#btnPost").button({
+			icons : {
+				primary : "ui-icon-search"
+			},
+			text : true
+		});
+	});
+	//标签页 标签id tabs
+	$(function() {
+		var tabs = $("#tabs").tabs();
+		tabs.find(".ui-tabs-nav").sortable({
+			axis : "x",
+			stop : function() {
+				tabs.tabs("refresh");
+			}
+		});
 	});
 });

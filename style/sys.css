@@ -1571,6 +1571,11 @@ TD.lb-bkg-w {
 .hide{
 	display: none;
 }
-.textarea_bgpic{
-	background: url('/style/images/loader.gif') no-repeat 50% 50%;
+/*浏览器发送数据的等待标志.*/
+.textarea_bgpic_t{ 
+	background: url('/style/images/350_t.gif') no-repeat 50% 50%;
+}
+/*浏览器接收数据的等待.*/
+.textarea_bgpic{ 
+	background: url('/style/images/350_r.gif') no-repeat 50% 50%;
 }
