@@ -50,9 +50,12 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 	$("#btnPost").click(function() {
 		// 显示
 		//$("#tr_dat").html("");
-		$("#msgbox_wait").show("fade", {}, 1);
+		//$("#msgbox_wait").show("fade", {}, 1);
 		//$("#msgbox_wait").addClass("waiticon");
+		$("#tr_dat").html("<tr><td colspan=\"999\" ></td></tr>");
+		$("#tr_dat tr td").addClass('load_bgpic_hight');
 		$.post('/goform/get_tou', $("#history_tou").serialize() + "&mtr_no=" + $("#mtr_no").val(), function(result) {
+			$("#tr_dat tr td").removeClass('load_bgpic_hight');
 			$("#tr_dat").html(result);
 			// 动态加载完的页面才可以接收鼠标悬停等事件
 			$("#history_tou tr").mouseover(function() {
@@ -62,7 +65,7 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 				$(this).removeClass("over");
 			});
 			// 完成之后隐藏
-			$("#msgbox_wait").hide("fade", {}, 1000);
+			//$("#msgbox_wait").hide("fade", {}, 1000);
 			//$("#msgbox_wait").removeClass("waiticon");
 		});
 	});

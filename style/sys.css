@@ -1584,3 +1584,7 @@ TD.lb-bkg-w {
 .textarea_bgpic{ 
 	background: url('/style/images/load_r.gif') no-repeat 50% 50%;
 }
+.load_bgpic_hight{ 
+	background: url('/style/images/load_r.gif') no-repeat 50% 50%;
+	height: 86px;
+}

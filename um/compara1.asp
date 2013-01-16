@@ -27,26 +27,27 @@
 			// });
 			//串口参数 post提交
 			$(document).ready(function() {
-				// $.post('/goform/sioplan', $("#paraform").serialize() + "&init=1", function(result) {
+				// $.post('/goform/sioplan',
+				// //$.param($("#paraform")),
+				// //$("#paraform").serialize(),
+				// "test", function(result) {
 				// $("#tbody_dat").html(result);
-				// $("#tbody_dat tr").mouseover(function() {
-				// $(this).addClass("over");
+				// alert("OK");
 				// });
-				// $("#tbody_dat tr").mouseout(function() {
-				// $(this).removeClass("over");
-				// });
-				// //alert("OK");
-				// });
+				$("#tbody_dat tr td").addClass('load_bgpic_hight');
 				$("#btnsio").click(function() {
+					$("#tbody_dat").html("<tr><td colspan=\"6\" ></td></tr>");
+					$("#tbody_dat tr td").addClass('load_bgpic_hight');
 					$.post('/goform/sioplan',
 					//$.param($("#paraform")),
-					//$("#paraform").serialize(), 
-					"test",
-					function(result) {
+					//$("#paraform").serialize(),
+					"test", function(result) {
+						$("#tbody_dat tr td").removeClass('load_bgpic_hight');
 						$("#tbody_dat").html(result);
-						alert("OK");
+						//alert("OK");
 					});
 				});
+				//$("#btnsio").click();
 			});
 		</script>
 	</head>
@@ -65,7 +66,11 @@
 					</tr>
 				</thead>
 				<!-- 循环依次添加所有串口方案 一列一条  -->
-				<tbody id="tbody_dat" ><tr><td>数据</td></tr> </tbody>
+				<tbody id="tbody_dat" >
+					<tr>
+						<td colspan="6" ></td>
+					</tr>
+				</tbody>
 			</table>
 		</form>
 		<p align="center" height=25>

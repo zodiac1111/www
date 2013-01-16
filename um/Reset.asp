@@ -183,7 +183,6 @@
 						name="etime" id="etime" readonly class="date " title="选择截止时刻">
 					</label>
 					<button class="ui-button" id="btnPost" title="查询选中时段和指定表计的电量数据"> 查询 </button>
-					<input type="text" class="waiticon" id="msgbox_wait" />
 					<div class=hide>
 						<form id="history_tou" name="history_tou">
 							<label> 时间戳(秒):
