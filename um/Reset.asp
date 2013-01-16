@@ -1,5 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
-<!--   华立电力2013 --> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--   华立电力2013 -->
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -32,6 +32,7 @@
 				<li><a href="#tabs-monport-cfg">监视端口配置</a></li>
 				<li><a href="#tabs-procotol-cfg">规约配置</a></li>
 				<li><a href="#tabs-msg">报文监视</a></li>
+				<li><a href="#tabs-info">配置信息</a></li>
 				<li><a href="#tabs-tou">历史电量</a></li>
 			</ul>
 			<!-- ###标签1 功能 ### -->
@@ -68,7 +69,7 @@
 					</tbody>
 				</table>
 			</div>
-			<!-- ###标签2 日志 ### -->
+			<!-- ###标签: 日志 ### -->
 			<div id="tabs-log">
 				<textarea id="log_text" class="log_txt" rows="20" cols="80" > </textarea>
 				<p align="center">
@@ -86,7 +87,7 @@
 					这个操作会将文本框中的内容保存到终端日志文件中,不能撤销,请自留备份.是否保存到终端?
 				</div>
 			</div>
-			<!-- ###标签3 监视端口描述配置文件 ### -->
+			<!-- ###标签: 监视端口描述配置文件 ### -->
 			<div id="tabs-monport-cfg" >
 				<textarea id="monport_text" class="log_txt" rows="20" cols="80" > </textarea>
 				<p align="center">
@@ -129,13 +130,48 @@
 				</div>
 			</div>
 			<!-- ###标签 报文监视(调试中) ### -->
-			<div id="tabs-msg" >
+			<div id="tabs-msg" title="调试中">
 				<textarea id="msg_text" class="log_txt" readonly> </textarea>
 				<input type="text" name="cmd" id="cmd"  value="ping 127.0.0.1 -c 4">
 				<button id="mon_msg" title="开始监视报文"> 开始 </button>
 				<button id="mon_msg_stop" title="停止监视报文"> 停止 </button>
 				<button id="mon_test" title="调试中"> test </button>
 			</div>
+			<!-- ###标签 web配置 ### -->
+			<div id="tabs-info" title="调试中">
+				<button id="info" title="显示配置"> 显示 </button>
+				<table class="infoTable">
+					<thead>
+						<tr>
+							<th>项目</th>
+							<th>值</th>
+						</tr>
+					</thead>
+					<tbody>
+					<tr>
+						<td>服务器程序</td>
+						<td id="info_webbin">/mnt/nor/bin/webs</td>
+					</tr>
+					<tr>
+						<td>服务器配置文件</td>
+						<td id="info_webconf">/mnt/nor/conf/goahead.conf</td>
+					</tr>
+					<tr>
+						<td>页面根目录</td>
+						<td id="info_wwwroot">/mnt/nor/wwwdemo</td>
+					</tr>
+					<tr>
+						<td>终端配置文件目录(conf)</td>
+						<td id="info_rtuconf">/mnt/nor/conf</td>
+					</tr>
+					<tr>
+						<td>终端参数文件目录(para)</td>
+						<td id="info_rtupara">/mnt/nor/para</td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+			<!-- ###标签 历史电量数据标签 ### -->
 			<div id="tabs-tou">
 				<p>
 					<h1>获取和设置日期时间:</h1><label> 表号:
@@ -146,7 +182,8 @@
 						<input type="text"
 						name="etime" id="etime" readonly class="date " title="选择截止时刻">
 					</label>
-					<button class="ui-button" id="btnPost" title="查询选中时段和指定表计的电量数据"> 查询 </button><input type="text" class="waiticon" id="msgbox_wait" />
+					<button class="ui-button" id="btnPost" title="查询选中时段和指定表计的电量数据"> 查询 </button>
+					<input type="text" class="waiticon" id="msgbox_wait" />
 					<div class=hide>
 						<form id="history_tou" name="history_tou">
 							<label> 时间戳(秒):
@@ -161,119 +198,123 @@
 							</label>
 						</form>
 					</div>
-					<script type="text/javascript">
-						var startDateTextBox = $('#stime');
-						var endDateTextBox = $('#etime');
-						var stime_stamp = document.getElementById("stime_stamp");
-						var etime_stamp = document.getElementById("etime_stamp");
-						var tz = document.getElementById("timezone");
-						var tz2 = document.getElementById("timezone2");
-						//开始时间控件的属性设置
-						startDateTextBox.datetimepicker({
-							maxDate : 0,
-							controlType : 'select', //选择方式选时刻
-							dateFormat : "yy-mm-dd", //日期格式
-							//showSecond: true, //显示秒
-							timeFormat : 'HH:mm', //时刻格式
-							separator : ' ', //日期时刻分割字符(串)
-							//showTimezone: true, //显示时区
-							//timezone: '+0800',    //默认时区
-							//点击关闭(完成)按钮事件
-							//如果开始时间晚于结束时间,则将开始时间设置为结束时间
-							onClose : function(dateText, inst) {
-								if (endDateTextBox.val() != '') {
-									var testStartDate = startDateTextBox.datetimepicker('getDate');
-									var testEndDate = endDateTextBox.datetimepicker('getDate');
-									if (testStartDate > testEndDate)
-										endDateTextBox.datetimepicker('setDate', testStartDate);
-								} else {
-									endDateTextBox.val(dateText);
-								}
+				</p>
+				<script type="text/javascript">
+					var startDateTextBox = $('#stime');
+					var endDateTextBox = $('#etime');
+					var stime_stamp = document.getElementById("stime_stamp");
+					var etime_stamp = document.getElementById("etime_stamp");
+					var tz = document.getElementById("timezone");
+					var tz2 = document.getElementById("timezone2");
+					//开始时间控件的属性设置
+					startDateTextBox.datetimepicker({
+						maxDate : 0,
+						controlType : 'select', //选择方式选时刻
+						dateFormat : "yy-mm-dd", //日期格式
+						//showSecond: true, //显示秒
+						timeFormat : 'HH:mm', //时刻格式
+						separator : ' ', //日期时刻分割字符(串)
+						//showTimezone: true, //显示时区
+						//timezone: '+0800',    //默认时区
+						//点击关闭(完成)按钮事件
+						//如果开始时间晚于结束时间,则将开始时间设置为结束时间
+						onClose : function(dateText, inst) {
+							if (endDateTextBox.val() != '') {
 								var testStartDate = startDateTextBox.datetimepicker('getDate');
-								if (testStartDate != null)
-									stime_stamp.value = testStartDate.getTime() / 1000;
-								//Date.parse(endDateTextBox.datetimepicker('getDate'))/1000;
-							},
-							onSelect : function(selectedDateTime) {//选择时限定开始时间必须早于结束时间
-								endDateTextBox.datetimepicker('option', 'minDate', startDateTextBox.datetimepicker('getDate'));
-								//tz.value=startDateTextBox.datetimepicker.timezone;
-								var testStartDate = startDateTextBox.datetimepicker('getDate');
-								tz.value = testStartDate.getTimezoneOffset();
-								//这里转换成位标准时间,没有时区信息了.
+								var testEndDate = endDateTextBox.datetimepicker('getDate');
+								if (testStartDate > testEndDate)
+									endDateTextBox.datetimepicker('setDate', testStartDate);
+							} else {
+								endDateTextBox.val(dateText);
+							}
+							var testStartDate = startDateTextBox.datetimepicker('getDate');
+							if (testStartDate != null)
 								stime_stamp.value = testStartDate.getTime() / 1000;
-								//Date.parse(startDateTextBox.datetimepicker('getDate'))/1000;
+							//Date.parse(endDateTextBox.datetimepicker('getDate'))/1000;
+						},
+						onSelect : function(selectedDateTime) {//选择时限定开始时间必须早于结束时间
+							endDateTextBox.datetimepicker('option', 'minDate', startDateTextBox.datetimepicker('getDate'));
+							//tz.value=startDateTextBox.datetimepicker.timezone;
+							var testStartDate = startDateTextBox.datetimepicker('getDate');
+							tz.value = testStartDate.getTimezoneOffset();
+							//这里转换成位标准时间,没有时区信息了.
+							stime_stamp.value = testStartDate.getTime() / 1000;
+							//Date.parse(startDateTextBox.datetimepicker('getDate'))/1000;
+						}
+					});
+					//结束时间控件的属性设置
+					endDateTextBox.datetimepicker({
+						maxDate : 0, //不能选择未来
+						controlType : 'select', //选择方式选时刻
+						dateFormat : "yy-mm-dd", //日期格式
+						//showSecond: true, //显示秒
+						timeFormat : 'HH:mm', //时刻格式
+						separator : ' ', //日期时刻分割字符(串)
+						//showTimezone: true, //显示时区
+						//timezone: '+0800',    //默认时区
+						onClose : function(dateText, inst) {//关闭时候判断
+							if (startDateTextBox.val() != '') {
+								var testStartDate = startDateTextBox.datetimepicker('getDate');
+								var testEndDate = endDateTextBox.datetimepicker('getDate');
+								if (testStartDate > testEndDate)
+									startDateTextBox.datetimepicker('setDate', testEndDate);
+							} else {
+								startDateTextBox.val(dateText);
 							}
-						});
-						//结束时间控件的属性设置
-						endDateTextBox.datetimepicker({
-							maxDate : 0, //不能选择未来
-							controlType : 'select', //选择方式选时刻
-							dateFormat : "yy-mm-dd", //日期格式
-							//showSecond: true, //显示秒
-							timeFormat : 'HH:mm', //时刻格式
-							separator : ' ', //日期时刻分割字符(串)
-							//showTimezone: true, //显示时区
-							//timezone: '+0800',    //默认时区
-							onClose : function(dateText, inst) {//关闭时候判断
-								if (startDateTextBox.val() != '') {
-									var testStartDate = startDateTextBox.datetimepicker('getDate');
-									var testEndDate = endDateTextBox.datetimepicker('getDate');
-									if (testStartDate > testEndDate)
-										startDateTextBox.datetimepicker('setDate', testEndDate);
-								} else {
-									startDateTextBox.val(dateText);
-								}
-								var testEndDate = endDateTextBox.datetimepicker('getDate');
-								if (testStartDate != null)
-									etime_stamp.value = testEndDate.getTime() / 1000;
-								//stime_stamp.value=
-								//  Date.parse(startDateTextBox.datetimepicker('getDate'))/1000;
-							},
-							onSelect : function(selectedDateTime) {//选择时候防止误选
-								startDateTextBox.datetimepicker('option', 'maxDate', endDateTextBox.datetimepicker('getDate'));
-
-								var testEndDate = endDateTextBox.datetimepicker('getDate');
-								tz2.value = testEndDate.getTimezoneOffset();
+							var testEndDate = endDateTextBox.datetimepicker('getDate');
+							if (testStartDate != null)
 								etime_stamp.value = testEndDate.getTime() / 1000;
-							}
-						});
-					</script><!-- <button class="ui-button" id="btn" title="测试中...">子页面加载</button> --><!-- <button class="ui-button" id="showLog" title="从服务器加载日志">查看日志</button> -->
-					<table class="sioplanTable" id="tbl_history_tou" border="1" cellspacing="1" cellpadding="1">
-						<thead>
-							<tr>
-								<th rowspan=2>表号</th>
-								<th rowspan=2>序号</th>
-								<th rowspan=2>时刻</th>
-								<th colspan=5>正向有功</th>
-								<th colspan=5>反向有功</th>
-								<th colspan=5>正向无功</th>
-								<th colspan=5>反向无功</th>
-							</tr>
-							<tr>
-								<th>总</th>
-								<th>尖</th>
-								<th>峰</th>
-								<th>平</th>
-								<th>谷</th>
-								<th>总</th>
-								<th>尖</th>
-								<th>峰</th>
-								<th>平</th>
-								<th>谷</th>
-								<th>总</th>
-								<th>尖</th>
-								<th>峰</th>
-								<th>平</th>
-								<th>谷</th>
-								<th>总</th>
-								<th>尖</th>
-								<th>峰</th>
-								<th>平</th>
-								<th>谷</th>
-							</tr>
-						</thead>
-						<tbody id="tr_dat"> </tbody>
-					</table>
+							//毫秒转化为秒
+							//stime_stamp.value=
+							//  Date.parse(startDateTextBox.datetimepicker('getDate'))/1000;
+						},
+						onSelect : function(selectedDateTime) {//选择时候防止误选
+							startDateTextBox.datetimepicker('option', 'maxDate', endDateTextBox.datetimepicker('getDate'));
+
+							var testEndDate = endDateTextBox.datetimepicker('getDate');
+							tz2.value = testEndDate.getTimezoneOffset();
+							etime_stamp.value = testEndDate.getTime() / 1000;
+						}
+					});
+				</script><!-- <button class="ui-button" id="btn" title="测试中...">子页面加载</button> --><!-- <button class="ui-button" id="showLog" title="从服务器加载日志">查看日志</button> -->
+				<table class="sioplanTable" id="tbl_history_tou" border="1" cellspacing="1" cellpadding="1">
+					<thead>
+						<tr>
+							<th rowspan=2>表号</th>
+							<th rowspan=2>序号</th>
+							<th rowspan=2>时刻</th>
+							<th colspan=5>正向有功</th>
+							<th colspan=5>反向有功</th>
+							<th colspan=5>正向无功</th>
+							<th colspan=5>反向无功</th>
+						</tr>
+						<tr>
+							<th>总</th>
+							<th>尖</th>
+							<th>峰</th>
+							<th>平</th>
+							<th>谷</th>
+							<th>总</th>
+							<th>尖</th>
+							<th>峰</th>
+							<th>平</th>
+							<th>谷</th>
+							<th>总</th>
+							<th>尖</th>
+							<th>峰</th>
+							<th>平</th>
+							<th>谷</th>
+							<th>总</th>
+							<th>尖</th>
+							<th>峰</th>
+							<th>平</th>
+							<th>谷</th>
+						</tr>
+					</thead>
+					<tbody id="tr_dat">
+
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</body>

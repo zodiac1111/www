@@ -1,5 +1,5 @@
 /*各种表格的样式*/
-/* 串口方案表格样式 */
+/* #### 串口方案表格样式 */
 .sioplanTable {
 	BORDER-BOTTOM: #76A8D9 2px outset;
 	BORDER-LEFT: #76A8D9 2px outset;
@@ -23,4 +23,30 @@
 
 .sioplanTable td {
 	BACKGROUND-COLOR: #F7FAFF;
+}
+/* #### 终端信息(info)表格样式 */
+.infoTable {
+	BORDER-BOTTOM: #76A8D9 2px outset;
+	BORDER-LEFT: #76A8D9 2px outset;
+	BORDER-RIGHT: #76A8D9 2px outset;
+	BORDER-TOP: #76A8D9 2px outset;
+	text-align: center; /*表格内文本水平居中*/
+	margin: auto; /*整个表格居中*/
+}
+/* 表头 */
+.infoTable thead {
+	
+}
+
+.infoTable th {
+	BACKGROUND-COLOR: #76A8D9;
+	BORDER-BOTTOM: #ffffff 2px outset;
+	BORDER-LEFT: #ffffff 2px outset;
+	BORDER-RIGHT: #ffffff 2px outset;
+	BORDER-TOP: #ffffff 2px outset;
+}
+
+.infoTable td {
+	BACKGROUND-COLOR: #F7FAFF;
+	text-align: left;
 }
