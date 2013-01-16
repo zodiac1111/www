@@ -1,20 +1,20 @@
 <html>
 <head>
-<title>ÖÕ¶ËÊı¾İä¯ÀÀ</title>
-<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>ç»ˆç«¯æ•°æ®æµè§ˆ</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet" href="/style/emx_nav_left1.css" type="text/css">
 <style type="text/css">
 img {border-width: 0px 0px 0px 0px}
 </style>
-		<!- »ùÓÚjqueryµÄÈÕÆÚÊ±¼ä¿Ø¼şËùĞèÒªµÄÎÄ¼ş -¿ªÊ¼->
+		<!- åŸºäºjqueryçš„æ—¥æœŸæ—¶é—´æ§ä»¶æ‰€éœ€è¦çš„æ–‡ä»¶ -å¼€å§‹->
 		<link rel="stylesheet" media="all" type="text/css" href="/style/jquery-ui.css"/> 
 		<link rel="stylesheet" media="all" type="text/css" href="/style/jquery-ui-timepicker-addon.css"/>
 		<script type="text/javascript" src="/style/jquery-1.8.3.min.js"></script>
 		<script type="text/javascript" src="/style/jquery-ui.min.js"></script>
 		<script type="text/javascript" src="/style/jquery-ui-timepicker-addon.js"></script>
-		<script type="text/javascript" src="/style/jquery-ui-timepicker-zh-CN-GB2312.js"></script>
+		<script type="text/javascript" src="/style/jquery-ui-timepicker-zh-CN.js"></script>
 		<script type="text/javascript" src="/style/jquery-ui-sliderAccess.js"></script>
-		<!- »ùÓÚjqueryµÄÈÕÆÚÊ±¼ä¿Ø¼şËùĞèÒªµÄÎÄ¼ş -½áÊø->
+		<!- åŸºäºjqueryçš„æ—¥æœŸæ—¶é—´æ§ä»¶æ‰€éœ€è¦çš„æ–‡ä»¶ -ç»“æŸ->
 </head>
 <body >
 <table width="101%" border="0" cellspacing="0" cellpadding="4">
@@ -31,9 +31,9 @@ img {border-width: 0px 0px 0px 0px}
 <table width="101%" border="0" cellspacing="0" cellpadding="2" bgcolor="#76A8D9">
   <tr> 
     <td> 
-      &#149; <a href="#">ÀúÊ·Ë²Ê±Á¿Êı¾İ</a></td>
+      &#149; <a href="#">å†å²ç¬æ—¶é‡æ•°æ®</a></td>
     <td align="right">
-     <a >ÆğÊ¼Ê±¼ä</a> &#149; <a ><input type="text" name="rest_example_4_start" id="rest_example_4_start" value="" /> </a>&nbsp;<a>½áÊøÊ±¼ä</a>     &#149; <a > <input type="text" name="rest_example_4_end" id="rest_example_4_end" value="" /></a>    
+     <a >èµ·å§‹æ—¶é—´</a> &#149; <a ><input type="text" name="rest_example_4_start" id="rest_example_4_start" value="" /> </a>&nbsp;<a>ç»“æŸæ—¶é—´</a>     &#149; <a > <input type="text" name="rest_example_4_end" id="rest_example_4_end" value="" /></a>    
       <a href="">search</a> 
 <script language=javascript>
 var startDateTextBox = $('#rest_example_4_start');

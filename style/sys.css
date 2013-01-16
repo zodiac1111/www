@@ -9,7 +9,7 @@
 
 .sysTDTitleStyle {
 	text-align: center;
-	font-family: "黑体";
+	font-family: "榛戜綋";
 	font-size: 16px;
 	font-weight: bold;
 	BACKGROUND-COLOR: #F7FAFF;
@@ -66,7 +66,7 @@
 	BORDER-LEFT: #ffffff 2px outset;
 	PADDING-TOP: 0px;
 	BORDER-BOTTOM: #ffffff 2px outset;
-	FONT-FAMILY: "宋体";
+	FONT-FAMILY: "瀹嬩綋";
 	text-align: right;
 }
 
@@ -79,7 +79,7 @@
 	BORDER-LEFT: #ffffff 2px outset;
 	PADDING-TOP: 0px;
 	BORDER-BOTTOM: #ffffff 2px outset;
-	FONT-FAMILY: "宋体";
+	FONT-FAMILY: "瀹嬩綋";
 	text-align: left;
 }
 
@@ -92,7 +92,7 @@
 	BORDER-LEFT: #ffffff 2px outset;
 	PADDING-TOP: 0px;
 	BORDER-BOTTOM: #ffffff 2px outset;
-	FONT-FAMILY: "宋体";
+	FONT-FAMILY: "瀹嬩綋";
 	text-align: center;
 }
 
@@ -159,17 +159,17 @@
 .msnbox {
 	BACKGROUND-COLOR: #76A8D9;
 }
-/*鼠标划过的行样式 addclass 或removeclass */
+/*榧犳爣鍒掕繃鐨勮鏍峰紡 addclass 鎴杛emoveclass */
 tr.over td {
 	background: #D6E8F8;
 	/*font-weight: bold;  */
 }
-/* 监视参数 表格样式 */
+/* 鐩戣鍙傛暟 琛ㄦ牸鏍峰紡 */
 .monparamTable {
 	border-color: #76A8D9;
-	margin: auto; /*整个表格居中*/
+	margin: auto; /*鏁翠釜琛ㄦ牸灞呬腑*/
 }
-/* 监视参数 表头样式 */
+/* 鐩戣鍙傛暟 琛ㄥご鏍峰紡 */
 .monparamTableHead {
 	BACKGROUND-COLOR: #76A8D9;
 	/*BORDER-BOTTOM:#76A8D9 0px solid;
@@ -185,13 +185,13 @@ tr.over td {
 	BORDER-LEFT: #ffffff 2px outset;
 	PADDING-TOP: 0px;
 	BORDER-BOTTOM: #ffffff 2px outset;
-	FONT-FAMILY: "宋体";
+	FONT-FAMILY: "瀹嬩綋";
 }
-/* 表计参数 表格样式 */
+/* 琛ㄨ鍙傛暟 琛ㄦ牸鏍峰紡 */
 .mtrparamTable {
 	border-color: #76A8D9;
 }
-/* 表计参数 表头样式 */
+/* 琛ㄨ鍙傛暟 琛ㄥご鏍峰紡 */
 .mtrparamTableHead {
 	BACKGROUND-COLOR: #76A8D9;
 	/*BORDER-BOTTOM:#76A8D9 0px solid;
@@ -207,9 +207,9 @@ tr.over td {
 	BORDER-LEFT: #ffffff 2px outset;
 	PADDING-TOP: 0px;
 	BORDER-BOTTOM: #ffffff 2px outset;
-	FONT-FAMILY: "宋体";
+	FONT-FAMILY: "瀹嬩綋";
 }
-/* 一般表数据单元样式 */
+/* 涓�鑸〃鏁版嵁鍗曞厓鏍峰紡 */
 .sysTableData {
 	BACKGROUND-COLOR: #F7FAFF;
 	text-align: center;
@@ -298,7 +298,7 @@ tr.over td {
 }
 
 .iptTd {
-	FONT-FAMILY: "宋体";
+	FONT-FAMILY: "瀹嬩綋";
 	FONT-SIZE: 12px;
 	BORDER: 1PX #999999 SOLID;
 	BACKGROUND-COLOR: #ffffff;
@@ -902,14 +902,14 @@ a.menu:hover {
 }
 
 .ipt {
-	FONT-FAMILY: "宋体";
+	FONT-FAMILY: "瀹嬩綋";
 	FONT-SIZE: 12px;
 	BORDER: 1PX #999999 SOLID;
 	background-color: FFFFFF
 }
 
 .iptB {
-	FONT-FAMILY: "宋体";
+	FONT-FAMILY: "瀹嬩綋";
 	FONT-SIZE: 12px;
 	border-left: 0px transparent solid;
 	border-top: 0px transparent solid;
@@ -919,31 +919,31 @@ a.menu:hover {
 }
 
 .iptK {
-	FONT-FAMILY: "宋体";
+	FONT-FAMILY: "瀹嬩綋";
 	FONT-SIZE: 12px;
 	border: 0px solid;
 	background-color: transparent
 }
 
 select {
-	FONT-FAMILY: "宋体";
+	FONT-FAMILY: "瀹嬩綋";
 	FONT-SIZE: 9pt;
 }
 
 table {
-	FONT-FAMILY: "宋体";
+	FONT-FAMILY: "瀹嬩綋";
 	FONT-SIZE: 9pt;
 	border-collapse: collapse;
 	border-color: #000000;
 }
 
 td {
-	font-family: "宋体";
+	font-family: "瀹嬩綋";
 	font-size: 9pt;
 }
 
 body {
-	FONT-FAMILY: "宋体";
+	FONT-FAMILY: "瀹嬩綋";
 	FONT-SIZE: 9pt;
 }
 
@@ -973,7 +973,7 @@ body {
 }
 
 .h9 {
-	FONT-FAMILY: "宋体";
+	FONT-FAMILY: "瀹嬩綋";
 	FONT-SIZE: 12px
 }
 
@@ -983,7 +983,7 @@ body {
 }
 
 .h14 {
-	font-family: "黑体";
+	font-family: "榛戜綋";
 	font-size: 14px;
 	font-weight: bold
 }
@@ -1387,7 +1387,7 @@ TD.label {
 	BORDER-LEFT: #ffffff 2px outset;
 	PADDING-TOP: 0px;
 	BORDER-BOTTOM: #ffffff 2px outset;
-	FONT-FAMILY: "宋体"
+	FONT-FAMILY: "瀹嬩綋"
 }
 
 TD.lb-head {
@@ -1399,7 +1399,7 @@ TD.lb-head {
 	BORDER-LEFT: #ffffff 2px outset;
 	PADDING-TOP: 0px;
 	BORDER-BOTTOM: #ffffff 2px inset;
-	FONT-FAMILY: "宋体"
+	FONT-FAMILY: "瀹嬩綋"
 }
 
 TD.lb-end {
@@ -1411,7 +1411,7 @@ TD.lb-end {
 	BORDER-LEFT: #ffffff 2px;
 	PADDING-TOP: 0px;
 	BORDER-BOTTOM: #ffffff 2px inset;
-	FONT-FAMILY: "宋体"
+	FONT-FAMILY: "瀹嬩綋"
 }
 
 TD.lb-bottom {
@@ -1423,7 +1423,7 @@ TD.lb-bottom {
 	BORDER-LEFT: #ffffff 2px;
 	PADDING-TOP: 0px;
 	BORDER-BOTTOM: #ffffff 2px inset;
-	FONT-FAMILY: "宋体"
+	FONT-FAMILY: "瀹嬩綋"
 }
 
 TD.lb-top {
@@ -1436,7 +1436,7 @@ TD.lb-top {
 	BORDER-LEFT: #ffffff 2px outset;
 	PADDING-TOP: 0px;
 	BORDER-BOTTOM: #ffffff 2px;
-	FONT-FAMILY: "宋体"
+	FONT-FAMILY: "瀹嬩綋"
 }
 
 TD.lb-top-left {
@@ -1448,7 +1448,7 @@ TD.lb-top-left {
 	BORDER-LEFT: #ffffff 2px;
 	PADDING-TOP: 0px;
 	BORDER-BOTTOM: #ffffff 2px inset;
-	FONT-FAMILY: "宋体"
+	FONT-FAMILY: "瀹嬩綋"
 }
 
 TD.lb-top-head {
@@ -1461,7 +1461,7 @@ TD.lb-top-head {
 	BORDER-LEFT: #ffffff 2px outset;
 	PADDING-TOP: 0px;
 	BORDER-BOTTOM: #ffffff 2px inset;
-	FONT-FAMILY: "宋体"
+	FONT-FAMILY: "瀹嬩綋"
 }
 
 TD.lb-none {
@@ -1473,7 +1473,7 @@ TD.lb-none {
 	BORDER-LEFT: #ffffff 2px;
 	PADDING-TOP: 0px;
 	BORDER-BOTTOM: #ffffff 2px inset;
-	FONT-FAMILY: "宋体"
+	FONT-FAMILY: "瀹嬩綋"
 }
 
 TD.lb-body {
@@ -1486,7 +1486,7 @@ TD.lb-body {
 	BORDER-LEFT: #ffffff 2px outset;
 	PADDING-TOP: 0px;
 	BORDER-BOTTOM: #ffffff 1px outset;
-	FONT-FAMILY: "宋体"
+	FONT-FAMILY: "瀹嬩綋"
 }
 
 TD.lb-bkg {
@@ -1503,7 +1503,7 @@ TD.lb-bkg {
 	BORDER-BOTTOM: #ffffff 2px inset;
 	PADDING-BOTTOM: 0px;
 	FONT-SIZE: 12px;
-	FONT-FAMILY: "宋体"
+	FONT-FAMILY: "瀹嬩綋"
 }
 
 TD.lb-bkg-s {
@@ -1520,7 +1520,7 @@ TD.lb-bkg-s {
 	BORDER-BOTTOM: #ffffff 2px inset;
 	PADDING-BOTTOM: 0px;
 	FONT-SIZE: 12px;
-	FONT-FAMILY: "宋体"
+	FONT-FAMILY: "瀹嬩綋"
 }
 
 TD.lb-bkg-w {
@@ -1537,9 +1537,9 @@ TD.lb-bkg-w {
 	BORDER-BOTTOM: #ffffff 2px inset;
 	PADDING-BOTTOM: 0px;
 	FONT-SIZE: 12px;
-	FONT-FAMILY: "宋体"
+	FONT-FAMILY: "瀹嬩綋"
 }
-/*显示日志文本*/
+/*鏄剧ず鏃ュ織鏂囨湰*/
 .log_txt {
 	border-radius: 3px;
 	padding: 5px;
@@ -1552,7 +1552,7 @@ TD.lb-bkg-w {
 	margin: auto;
 	font-family: monospace;
 }
-/*等待图标*/
+/*绛夊緟鍥炬爣*/
 .waiticon {
 	position:fixed;
 	float:left;
@@ -1571,11 +1571,11 @@ TD.lb-bkg-w {
 .hide{
 	display: none;
 }
-/*浏览器发送数据的等待标志.*/
+/*娴忚鍣ㄥ彂閫佹暟鎹殑绛夊緟鏍囧織.*/
 .textarea_bgpic_t{ 
 	background: url('/style/images/350_t.gif') no-repeat 50% 50%;
 }
-/*浏览器接收数据的等待.*/
+/*娴忚鍣ㄦ帴鏀舵暟鎹殑绛夊緟.*/
 .textarea_bgpic{ 
 	background: url('/style/images/350_r.gif') no-repeat 50% 50%;
 }

@@ -3,22 +3,22 @@
 	<HEAD>
 		<title>Arm Home</title>
 		<!--  Copyright (c) Echon., 2006. All Rights Reserved. -->
-		<meta http-equiv="Pragma" content="no-cache" charset="gb2312">
+		<meta http-equiv="Pragma" content="no-cache" charset="utf-8">
 		<link rel="stylesheet" href="/style/normal_ws.css" type="text/css"/>
 		<link rel="stylesheet" href="/style/sys.css" type="text/css"/>
 		<link href="/style/menuExpandable3.css" rel="stylesheet" type="text/css"/>
 		<script src="/style/wwyfunc.js" type="text/javascript"></script>
 		<link rel="stylesheet" href="/style/table.css" type="text/css"/>
-		<!-- jquery -¿ªÊ¼-->
+		<!-- jquery -å¼€å§‹-->
 		<link rel="stylesheet" media="all" type="text/css" href="/style/jquery-ui.css" />
 		<link rel="stylesheet" media="all" type="text/css" href="/style/jquery-ui-timepicker-addon.css" />
 		<script type="text/javascript" src="/style/jquery-1.8.3.min.js"></script>
 		<script type="text/javascript" src="/style/jquery-ui.min.js"></script>
-		<script type="text/javascript" src="/style/jquery-ui.min-zh-CN-GB2312.js"></script>
-		<!-- jqueryµÄ -½áÊø -->
-		<% init_sysparam(); //³õÊ¼»¯ÏµÍ³²ÎÊı,»ñµÃÀıÈç±í¼Æ¸öÊı,´®¿Ú¸öÊı,´®¿Ú·½°¸¸öÊıµÈ²ÎÊı %>
+		<script type="text/javascript" src="/style/jquery-ui.min-zh-CN.js"></script>
+		<!-- jqueryçš„ -ç»“æŸ -->
+		<% init_sysparam(); //åˆå§‹åŒ–ç³»ç»Ÿå‚æ•°,è·å¾—ä¾‹å¦‚è¡¨è®¡ä¸ªæ•°,ä¸²å£ä¸ªæ•°,ä¸²å£æ–¹æ¡ˆä¸ªæ•°ç­‰å‚æ•° %>
 		<script type="text/javascript">
-		//´®¿Ú²ÎÊı postÌá½»
+		//ä¸²å£å‚æ•° postæäº¤
 			$(document).ready(function() {
 				$.post('/goform/sioplan', $("#paraform").serialize() + "&init=1", function(result) {
 					$("#tbody_dat").html(result);
@@ -30,7 +30,7 @@
 						$(this).removeClass("over");
 					});
 					//alert("OK");
-					//$("#tip").html("Íê³É");
+					//$("#tip").html("å®Œæˆ");
 				});
 				$("#btnsio").click(function() {
 					$.post('/goform/sioplan',
@@ -45,7 +45,7 @@
 							$(this).removeClass("over");
 						});
 						alert("OK");
-						//$("#tip").html("Íê³É");
+						//$("#tip").html("å®Œæˆ");
 					});
 				});
 			});
@@ -57,32 +57,32 @@
 			<table id="Table1" border="1" cellspacing="1" cellpadding="1" class="sioplanTable">
 				<thead>
 					<tr>
-						<th>´®¿Ú·½°¸ºÅ</th>
-						<th>Ğ£ÑéÎ»</th>
-						<th>Êı¾İÎ»</th>
-						<th>Í£Ö¹Î»</th>
-						<th>²¨ÌØÂÊ</th>
-						<th>Í¨Ñ¶·½Ê½</th>
+						<th>ä¸²å£æ–¹æ¡ˆå·</th>
+						<th>æ ¡éªŒä½</th>
+						<th>æ•°æ®ä½</th>
+						<th>åœæ­¢ä½</th>
+						<th>æ³¢ç‰¹ç‡</th>
+						<th>é€šè®¯æ–¹å¼</th>
 					</tr>
 				</thead>
-				<!-- Ñ­»·ÒÀ´ÎÌí¼ÓËùÓĞ´®¿Ú·½°¸ Ò»ÁĞÒ»Ìõ  -->
+				<!-- å¾ªç¯ä¾æ¬¡æ·»åŠ æ‰€æœ‰ä¸²å£æ–¹æ¡ˆ ä¸€åˆ—ä¸€æ¡  -->
 				<tbody id="tbody_dat" >
 				</tbody>
 			</table>
 		</form>
 		<p align="center" height=25>
-			<input type="button" name="Update" value="ÉèÖÃ" id="Update" onclick="db_update();">
+			<input type="button" name="Update" value="è®¾ç½®" id="Update" onclick="db_update();">
 			<!--
-			<input type=button name=bDelItem value="É¾³ı" ID="bDelItem"  onclick="return
+			<input type=button name=bDelItem value="åˆ é™¤" ID="bDelItem"  onclick="return
 			DelSubmit();">
-			<input type=button  name=bAddItem value="Ìí¼Ó" ID="bAddItem" OnClick="return
+			<input type=button  name=bAddItem value="æ·»åŠ " ID="bAddItem" OnClick="return
 			Redirect('AddRoutePara.asp');" >
 			-->
-			<input type="button" name="Refresh" value="¶ÁÈ¡" id="Refresh" onclick="return RefreshWin();">
-			<!-- Ìá½»²Ù×÷ÀàĞÍ ¸üĞÂ,»¹ÊÇÆäËû -->
+			<input type="button" name="Refresh" value="è¯»å–" id="Refresh" onclick="return RefreshWin();">
+			<!-- æäº¤æ“ä½œç±»å‹ æ›´æ–°,è¿˜æ˜¯å…¶ä»– -->
 			<input class="hideinp" type="text" name="OpType" value="" id="optype">
 			<button id="btnsio">
-				¸üĞÂ
+				æ›´æ–°
 			</button>
 		</p>
 	</body>

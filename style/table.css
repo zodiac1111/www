@@ -1,14 +1,14 @@
-/*¸÷ÖÖ±í¸ñµÄÑùÊ½*/
-/* ´®¿Ú·½°¸±í¸ñÑùÊ½ */
+/*å„ç§è¡¨æ ¼çš„æ ·å¼*/
+/* ä¸²å£æ–¹æ¡ˆè¡¨æ ¼æ ·å¼ */
 .sioplanTable {
 	BORDER-BOTTOM: #76A8D9 2px outset;
 	BORDER-LEFT: #76A8D9 2px outset;
 	BORDER-RIGHT: #76A8D9 2px outset;
 	BORDER-TOP: #76A8D9 2px outset;
-	text-align: center; /*±í¸ñÄÚÎÄ±¾Ë®Æ½¾ÓÖĞ*/
-	margin: auto; /*Õû¸ö±í¸ñ¾ÓÖĞ*/
+	text-align: center; /*è¡¨æ ¼å†…æ–‡æœ¬æ°´å¹³å±…ä¸­*/
+	margin: auto; /*æ•´ä¸ªè¡¨æ ¼å±…ä¸­*/
 }
-/* ±íÍ· */
+/* è¡¨å¤´ */
 .sioplanTable thead {
 	
 }

@@ -58,27 +58,27 @@ function reloadYC(str)
 	var	td=document.createElement('td');
 	var	tablebody = document.createElement("TBODY");
 				
-	td.innerHTML='ĞòºÅ';
+	td.innerHTML='åºå·';
 	td.style.border = "#ffffff 2px outset";		
 	tr.appendChild(td);
 		
 	td=document.createElement('td');
-	td.innerHTML='Ò£²âÃû³Æ';
+	td.innerHTML='é¥æµ‹åç§°';
 	td.style.border = "#ffffff 2px outset";
 	tr.appendChild(td);
 		
 	td=document.createElement('td');
 	td.style.border = "#ffffff 2px outset";
-	td.innerHTML='Ò£²âÖµ';
+	td.innerHTML='é¥æµ‹å€¼';
 	tr.appendChild(td);
 	
 	td=document.createElement('td');
-	td.innerHTML='ÖµÉÏÏŞ';
+	td.innerHTML='å€¼ä¸Šé™';
 	td.style.border = "#ffffff 2px outset";
 	tr.appendChild(td);
 		
 	td=document.createElement('td');
-	td.innerHTML='ÖµÏÂÏŞ';
+	td.innerHTML='å€¼ä¸‹é™';
 	td.style.border = "#ffffff 2px outset";
 	tr.appendChild(td);
 		
@@ -178,19 +178,19 @@ function reloadYX(str)
 	var   td=document.createElement('td');
 	var tablebody = document.createElement("TBODY");
 				
-	td.innerHTML='ĞòºÅ';
+	td.innerHTML='åºå·';
 	td.style.border = "#ffffff 2px outset";	
 	td.width="5%";	
 	tr.appendChild(td);
 	
 	td=document.createElement('td');
-	td.innerHTML='Ò£ĞÅ±àÂë';
+	td.innerHTML='é¥ä¿¡ç¼–ç ';
 	td.style.border = "#ffffff 2px outset";
 	td.align="center";
 	tr.appendChild(td);
 		
 	td=document.createElement('td');
-	td.innerHTML='Ò£ĞÅÃû³Æ';
+	td.innerHTML='é¥ä¿¡åç§°';
 	td.style.border = "#ffffff 2px outset";
 	td.align="center";
 	tr.appendChild(td);
@@ -198,12 +198,12 @@ function reloadYX(str)
 	td=document.createElement('td');
 	td.style.border = "#ffffff 2px outset";
 	td.width="10%";
-	td.innerHTML='Ò£ĞÅÖµ';
+	td.innerHTML='é¥ä¿¡å€¼';
 	td.align="center";
 	tr.appendChild(td);
 	
 	td=document.createElement('td');
-	td.innerHTML='È¡·´±êÖ¾';
+	td.innerHTML='å–åæ ‡å¿—';
 	td.style.border = "#ffffff 2px outset";
 	td.width="10%";	
 	tr.appendChild(td);
@@ -248,14 +248,14 @@ function reloadYX(str)
 		{
 			font=document.createElement('font');
 			font.color='#FFFFFF';
-			font.innerHTML='ºÏ';
+			font.innerHTML='åˆ';
 			td.style.backgroundColor='#FF0000';
 		}
 		else
 		{
 			font=document.createElement('font');
 			font.color='#ffFFff';
-			font.innerHTML='·Ö';
+			font.innerHTML='åˆ†';
 			td.style.backgroundColor='#00FF00';
 		}
 		td.align="center";
@@ -265,7 +265,7 @@ function reloadYX(str)
 		tr.appendChild(td);
 		
 		td=document.createElement('td');
-		td.innerHTML='·ñ';
+		td.innerHTML='å¦';
 		td.style.backgroundColor="#FFFFFF";
 		
 		//td.align="center";

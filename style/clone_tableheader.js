@@ -2,20 +2,20 @@
 
 function FixTable(TableID, FixColumnNumber, width, height) {
 	// / <summary>
-	// / Ëø¶¨±íÍ·ºÍÁĞ
+	// / é”å®šè¡¨å¤´å’Œåˆ—
 	// / <para> http://blog.csdn.net/SongYanJun2011 </para>
 	// / </summary>
 	// / <param name="TableID" type="String">
-	// / ÒªËø¶¨µÄTableµÄID
+	// / è¦é”å®šçš„Tableçš„ID
 	// / </param>
 	// / <param name="FixColumnNumber" type="Number">
-	// / ÒªËø¶¨ÁĞµÄ¸öÊı
+	// / è¦é”å®šåˆ—çš„ä¸ªæ•°
 	// / </param>
 	// / <param name="width" type="Number">
-	// / ÏÔÊ¾µÄ¿í¶È
+	// / æ˜¾ç¤ºçš„å®½åº¦
 	// / </param>
 	// / <param name="height" type="Number">
-	// / ÏÔÊ¾µÄ¸ß¶È
+	// / æ˜¾ç¤ºçš„é«˜åº¦
 	// / </param>
 	if ($("#" + TableID + "_tableLayout").length != 0) {
 		$("#" + TableID + "_tableLayout").before($("#" + TableID));

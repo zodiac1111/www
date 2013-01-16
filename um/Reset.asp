@@ -3,159 +3,159 @@
 	<head>
 		<title>Arm Home</title>
 		<!--   Copyright (c) Echon., 2006. All Rights Reserved. -->
-		<meta http-equiv="Pragma" content="no-cache" charset="gb2312" />
+		<meta http-equiv="Pragma" content="no-cache" charset="utf-8" />
 		<link rel="stylesheet" href="/style/normal_ws.css" type="text/css"/>
 		<link rel="stylesheet" href="/style/sys.css" type="text/css"/>
 		<link rel="stylesheet" href="/style/table.css" type="text/css"/>
 		<link href="/style/menuExpandable3.css" rel="stylesheet" type="text/css" />
 		<script src="/style/wwyfunc.js" type="text/javascript"></script>
-		<!-- »ùÓÚjqueryµÄÈÕÆÚÊ±¼ä¿Ø¼şËùĞèÒªµÄÎÄ¼ş -¿ªÊ¼ -->
+		<!-- åŸºäºjqueryçš„æ—¥æœŸæ—¶é—´æ§ä»¶æ‰€éœ€è¦çš„æ–‡ä»¶ -å¼€å§‹ -->
 		<link rel="stylesheet" media="all" type="text/css" href="/style/jquery-ui.css" />
 		<link rel="stylesheet" media="all" type="text/css" href="/style/jquery-ui-timepicker-addon.css" />
 		<script type="text/javascript" src="/js/jquery-1.8.3.js"></script>
 		<script type="text/javascript" src="/style/jquery-ui.min.js"></script>
-		<script type="text/javascript" src="/style/jquery-ui.min-zh-CN-GB2312.js"></script>
+		<script type="text/javascript" src="/style/jquery-ui.min-zh-CN.js"></script>
 		<script type="text/javascript" src="/style/jquery-ui-timepicker-addon.js"></script>
-		<script type="text/javascript" src="/style/jquery-ui-timepicker-zh-CN-GB2312.js"></script>
+		<script type="text/javascript" src="/style/jquery-ui-timepicker-zh-CN.js"></script>
 		<script type="text/javascript" src="/style/jquery-ui-sliderAccess.js"></script>
 		<script type="text/javascript" src="/js/reset.js"></script>
-		<!-- »ùÓÚjqueryµÄÈÕÆÚÊ±¼ä¿Ø¼şËùĞèÒªµÄÎÄ¼ş -½áÊø -->
-		<% init_sysparam(); //¼ÓÔØÏµÍ³²ÎÊı %>
+		<!-- åŸºäºjqueryçš„æ—¥æœŸæ—¶é—´æ§ä»¶æ‰€éœ€è¦çš„æ–‡ä»¶ -ç»“æŸ -->
+		<% init_sysparam(); //åŠ è½½ç³»ç»Ÿå‚æ•° %>
 	</head>
 	<body>
 		<br />
-		<h1>¹¦ÄÜ²Ù×÷</h1>
+		<h1>åŠŸèƒ½æ“ä½œ</h1>
 		<div id="tabs">
 			<ul>
-				<li><a href="#tabs_func">ÏµÍ³²Ù×÷</a></li>
-				<li><a href="#tabs-log">ÈÕÖ¾</a></li>
-				<li><a href="#tabs-monport-cfg">¼àÊÓ¶Ë¿ÚÅäÖÃ</a></li>
-				<li><a href="#tabs-procotol-cfg">¹æÔ¼ÅäÖÃ</a></li>
-				<li><a href="#tabs-msg">±¨ÎÄ¼àÊÓ</a></li>
-				<li><a href="#tabs-tou">ÀúÊ·µçÁ¿</a></li>
+				<li><a href="#tabs_func">ç³»ç»Ÿæ“ä½œ</a></li>
+				<li><a href="#tabs-log">æ—¥å¿—</a></li>
+				<li><a href="#tabs-monport-cfg">ç›‘è§†ç«¯å£é…ç½®</a></li>
+				<li><a href="#tabs-procotol-cfg">è§„çº¦é…ç½®</a></li>
+				<li><a href="#tabs-msg">æŠ¥æ–‡ç›‘è§†</a></li>
+				<li><a href="#tabs-tou">å†å²ç”µé‡</a></li>
 			</ul>
-			<!-- ###±êÇ©1 ¹¦ÄÜ ### -->
+			<!-- ###æ ‡ç­¾1 åŠŸèƒ½ ### -->
 			<div id="tabs_func">
 				<table class="sioplanTable" id=tbl_sysReset border="1" cellspacing="1" cellpadding="1">
 					<thead>
 						<tr>
-							<th>ĞòºÅ</th>
-							<th>ËµÃ÷</th>
-							<th>²Ù×÷</th>
+							<th>åºå·</th>
+							<th>è¯´æ˜</th>
+							<th>æ“ä½œ</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
 							<td>1</td>
-							<td>·şÎñÆ÷¶ËÖØĞÂ¼ÓÔØ¹æÔ¼ÎÄ±¾.</td>
-							<td><button id="btnResetPro" class=reboot> ÖØÆô </button></td>
+							<td>æœåŠ¡å™¨ç«¯é‡æ–°åŠ è½½è§„çº¦æ–‡æœ¬.</td>
+							<td><button id="btnResetPro" class=reboot> é‡å¯ </button></td>
 						</tr>
 						<tr>
 							<td>2</td>
-							<td>ÖØÆôweb·şÎñÆ÷.</td>
-							<td><button id="btnResetWeb" class="reboot"> ÖØÆô </button></td>
+							<td>é‡å¯webæœåŠ¡å™¨.</td>
+							<td><button id="btnResetWeb" class="reboot"> é‡å¯ </button></td>
 						</tr>
 						<tr>
 							<td>3</td>
-							<td>ÖØÆô³­±í³ÌĞò</td>
-							<td><button id="btnResetSample" class=reboot> ÖØÆô </button></td>
+							<td>é‡å¯æŠ„è¡¨ç¨‹åº</td>
+							<td><button id="btnResetSample" class=reboot> é‡å¯ </button></td>
 						</tr>
 						<tr>
 							<td>4</td>
-							<td>ÖØÆôÖÕ¶Ë²Ù×÷ÏµÍ³</td>
-							<td><button id="btnResetRtu" class="reboot"> ÖØÆô </button></td>
+							<td>é‡å¯ç»ˆç«¯æ“ä½œç³»ç»Ÿ</td>
+							<td><button id="btnResetRtu" class="reboot"> é‡å¯ </button></td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
-			<!-- ###±êÇ©2 ÈÕÖ¾ ### -->
+			<!-- ###æ ‡ç­¾2 æ—¥å¿— ### -->
 			<div id="tabs-log">
 				<textarea id="log_text" class="log_txt" > </textarea>
 				<p align="center">
 					<!--
-					<button id="import_log">µ¼Èë</button>
-					<button id="export_log">µ¼³ö</button>
+					<button id="import_log">å¯¼å…¥</button>
+					<button id="export_log">å¯¼å‡º</button>
 
 					_______-->
-					<button id="load_log" title="´ÓÖÕ¶Ë¶ÁÈ¡ÈÕÖ¾ÎÄ¼ş."> ¶ÁÈ¡ </button>
-					<button id="save_log" title="½«ÎÄ±¾±£´æµ½ÖÕ¶ËÈÕÖ¾ÎÄ¼şÖĞ."> ±£´æ </button><img class="waiticon" id="log_wait" />
+					<button id="load_log" title="ä»ç»ˆç«¯è¯»å–æ—¥å¿—æ–‡ä»¶."> è¯»å– </button>
+					<button id="save_log" title="å°†æ–‡æœ¬ä¿å­˜åˆ°ç»ˆç«¯æ—¥å¿—æ–‡ä»¶ä¸­."> ä¿å­˜ </button><img class="waiticon" id="log_wait" />
 				</p>
-				<!-- ±£´æÈ·ÈÏ¶Ô»°¿ò1 -->
-				<div id="dialog-confirm" class=dialog title="È·ÈÏ½«ĞŞ¸Ä±£´æµ½ÖÕ¶ËÖĞ?">
+				<!-- ä¿å­˜ç¡®è®¤å¯¹è¯æ¡†1 -->
+				<div id="dialog-confirm" class=dialog title="ç¡®è®¤å°†ä¿®æ”¹ä¿å­˜åˆ°ç»ˆç«¯ä¸­?">
 					<span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"> </span>
-					Õâ¸ö²Ù×÷»á½«ÎÄ±¾¿òÖĞµÄÄÚÈİ±£´æµ½ÖÕ¶ËÈÕÖ¾ÎÄ¼şÖĞ,²»ÄÜ³·Ïú,Çë×ÔÁô±¸·İ.ÊÇ·ñ±£´æµ½ÖÕ¶Ë?
+					è¿™ä¸ªæ“ä½œä¼šå°†æ–‡æœ¬æ¡†ä¸­çš„å†…å®¹ä¿å­˜åˆ°ç»ˆç«¯æ—¥å¿—æ–‡ä»¶ä¸­,ä¸èƒ½æ’¤é”€,è¯·è‡ªç•™å¤‡ä»½.æ˜¯å¦ä¿å­˜åˆ°ç»ˆç«¯?
 				</div>
 			</div>
-			<!-- ###±êÇ©3 ¼àÊÓ¶Ë¿ÚÃèÊöÅäÖÃÎÄ¼ş ### -->
+			<!-- ###æ ‡ç­¾3 ç›‘è§†ç«¯å£æè¿°é…ç½®æ–‡ä»¶ ### -->
 			<div id="tabs-monport-cfg" >
 				<textarea id="monport_text" class="log_txt" > </textarea>
 				<p align="center">
-					<button id="import_monprot" title="µ÷ÊÔÖĞ..."> µ¼Èë </button>
-					<button id="export_monprot" title="µ÷ÊÔÖĞ..."> µ¼³ö </button>
-					<button id="load_monport" title="´ÓÖÕ¶Ë¶ÁÈ¡¼àÊÓ¶Ë¿ÚÅäÖÃÎÄ¼ş(ÎÄ±¾¸ñÊ½)"> ¶ÁÈ¡ </button>
-					<button id="save_monport" title="½«ÎÄ±¾±£´æµ½ÖÕ¶Ë¼àÊÓ¶Ë¿ÚÎÄ¼ş"> ±£´æ </button><img class="waiticon" id="monprot_wait" />
+					<button id="import_monprot" title="è°ƒè¯•ä¸­..."> å¯¼å…¥ </button>
+					<button id="export_monprot" title="è°ƒè¯•ä¸­..."> å¯¼å‡º </button>
+					<button id="load_monport" title="ä»ç»ˆç«¯è¯»å–ç›‘è§†ç«¯å£é…ç½®æ–‡ä»¶(æ–‡æœ¬æ ¼å¼)"> è¯»å– </button>
+					<button id="save_monport" title="å°†æ–‡æœ¬ä¿å­˜åˆ°ç»ˆç«¯ç›‘è§†ç«¯å£æ–‡ä»¶"> ä¿å­˜ </button><img class="waiticon" id="monprot_wait" />
 				</p>
-				<!-- ±£´æÈ·ÈÏ¶Ô»°¿ò1 -->
-				<div id="dialog-confirm-monport" class=dialog title="È·ÈÏ½«ĞŞ¸Ä±£´æµ½ÖÕ¶ËÖĞ?">
+				<!-- ä¿å­˜ç¡®è®¤å¯¹è¯æ¡†1 -->
+				<div id="dialog-confirm-monport" class=dialog title="ç¡®è®¤å°†ä¿®æ”¹ä¿å­˜åˆ°ç»ˆç«¯ä¸­?">
 					<span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"> </span>
 					<p>
-						Õâ¸ö²Ù×÷»á½«ÎÄ±¾¿òÖĞµÄÄÚÈİ±£´æµ½ÖÕ¶Ë¼àÊÓ¶Ë¿ÚÎÄ¼şÖĞ.
+						è¿™ä¸ªæ“ä½œä¼šå°†æ–‡æœ¬æ¡†ä¸­çš„å†…å®¹ä¿å­˜åˆ°ç»ˆç«¯ç›‘è§†ç«¯å£æ–‡ä»¶ä¸­.
 						<br>
-						ÖÕ¶ËÖØÆôºóÉúĞ§.¸Ã²Ù×÷²»ÄÜ³·Ïú,Çë×ÔÁô±¸·İ.
+						ç»ˆç«¯é‡å¯åç”Ÿæ•ˆ.è¯¥æ“ä½œä¸èƒ½æ’¤é”€,è¯·è‡ªç•™å¤‡ä»½.
 						<br>
-						ÊÇ·ñ±£´æµ½ÖÕ¶Ë?
+						æ˜¯å¦ä¿å­˜åˆ°ç»ˆç«¯?
 					</p>
 				</div>
 			</div>
-			<!-- ###±êÇ©: ¹æÔ¼ÃèÊöÅäÖÃÎÄ¼ş ### -->
+			<!-- ###æ ‡ç­¾: è§„çº¦æè¿°é…ç½®æ–‡ä»¶ ### -->
 			<div id="tabs-procotol-cfg" >
 				<textarea id="procotol_text" class="log_txt" > </textarea>
 				<p align="center">
-					<button id="import_procotolt" title="µ÷ÊÔÖĞ..."> µ¼Èë </button>
-					<button id="export_procotol" title="µ÷ÊÔÖĞ..."> µ¼³ö </button>
-					<button id="load_procotol" title="´ÓÖÕ¶Ë¶ÁÈ¡¹æÔ¼ÅäÖÃÎÄ¼ş(ÎÄ±¾¸ñÊ½)"> ¶ÁÈ¡ </button>
-					<button id="save_procotol" title="½«ÎÄ±¾±£´æµ½ÖÕ¶Ë¹æÔ¼ÅäÖÃÎÄ¼ş"> ±£´æ </button><!-- <img class="waiticon" id="monprot_wait" />-->
+					<button id="import_procotolt" title="è°ƒè¯•ä¸­..."> å¯¼å…¥ </button>
+					<button id="export_procotol" title="è°ƒè¯•ä¸­..."> å¯¼å‡º </button>
+					<button id="load_procotol" title="ä»ç»ˆç«¯è¯»å–è§„çº¦é…ç½®æ–‡ä»¶(æ–‡æœ¬æ ¼å¼)"> è¯»å– </button>
+					<button id="save_procotol" title="å°†æ–‡æœ¬ä¿å­˜åˆ°ç»ˆç«¯è§„çº¦é…ç½®æ–‡ä»¶"> ä¿å­˜ </button><!-- <img class="waiticon" id="monprot_wait" />-->
 				</p>
-				<!-- ±£´æÈ·ÈÏ¶Ô»°¿ò1 -->
-				<div id="dialog-confirm-procotol" class=dialog title="È·ÈÏ½«ĞŞ¸Ä±£´æµ½ÖÕ¶ËÖĞ?">
+				<!-- ä¿å­˜ç¡®è®¤å¯¹è¯æ¡†1 -->
+				<div id="dialog-confirm-procotol" class=dialog title="ç¡®è®¤å°†ä¿®æ”¹ä¿å­˜åˆ°ç»ˆç«¯ä¸­?">
 					<span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"> </span>
 					<p>
-						Õâ¸ö²Ù×÷»á½«ÎÄ±¾¿òÖĞµÄÄÚÈİ±£´æµ½ÖÕ¶Ë¹æÔ¼ÅäÖÃÎÄ¼şÖĞ.
+						è¿™ä¸ªæ“ä½œä¼šå°†æ–‡æœ¬æ¡†ä¸­çš„å†…å®¹ä¿å­˜åˆ°ç»ˆç«¯è§„çº¦é…ç½®æ–‡ä»¶ä¸­.
 						<br>
-						ÖÕ¶ËÖØÆôºóÉúĞ§.¸Ã²Ù×÷²»ÄÜ³·Ïú,Çë×ÔÁô±¸·İ.
+						ç»ˆç«¯é‡å¯åç”Ÿæ•ˆ.è¯¥æ“ä½œä¸èƒ½æ’¤é”€,è¯·è‡ªç•™å¤‡ä»½.
 						<br>
-						ÊÇ·ñ±£´æµ½ÖÕ¶Ë?
+						æ˜¯å¦ä¿å­˜åˆ°ç»ˆç«¯?
 					</p>
 				</div>
 			</div>
-			<!-- ###±êÇ© ±¨ÎÄ¼àÊÓ(µ÷ÊÔÖĞ) ### -->
+			<!-- ###æ ‡ç­¾ æŠ¥æ–‡ç›‘è§†(è°ƒè¯•ä¸­) ### -->
 			<div id="tabs-msg" >
 				<textarea id="msg_text" class="log_txt" readonly> </textarea>
 				<input type="text" name="cmd" id="cmd"  value="ping 127.0.0.1 -c 4">
-				<button id="mon_msg" title="¿ªÊ¼¼àÊÓ±¨ÎÄ"> ¿ªÊ¼ </button>
-				<button id="mon_msg_stop" title="Í£Ö¹¼àÊÓ±¨ÎÄ"> Í£Ö¹ </button>
-				<button id="mon_test" title="µ÷ÊÔÖĞ"> test </button>
+				<button id="mon_msg" title="å¼€å§‹ç›‘è§†æŠ¥æ–‡"> å¼€å§‹ </button>
+				<button id="mon_msg_stop" title="åœæ­¢ç›‘è§†æŠ¥æ–‡"> åœæ­¢ </button>
+				<button id="mon_test" title="è°ƒè¯•ä¸­"> test </button>
 			</div>
 			<div id="tabs-tou">
 				<p>
-					<h1>»ñÈ¡ºÍÉèÖÃÈÕÆÚÊ±¼ä:</h1><label> ±íºÅ:
+					<h1>è·å–å’Œè®¾ç½®æ—¥æœŸæ—¶é—´:</h1><label> è¡¨å·:
 						<input type="text" name="mtr_no" id="mtr_no" size=3 value="0">
-					</label><label> Ê±¼ä·¶Î§:
-						<input type="text" name="stime" id="stime" readonly class="date " title="Ñ¡Ôñ¿ªÊ¼Ê±¿Ì">
+					</label><label> æ—¶é—´èŒƒå›´:
+						<input type="text" name="stime" id="stime" readonly class="date " title="é€‰æ‹©å¼€å§‹æ—¶åˆ»">
 					</label><label> ~
 						<input type="text"
-						name="etime" id="etime" readonly class="date " title="Ñ¡Ôñ½ØÖ¹Ê±¿Ì">
+						name="etime" id="etime" readonly class="date " title="é€‰æ‹©æˆªæ­¢æ—¶åˆ»">
 					</label>
-					<button class="ui-button" id="btnPost" title="²éÑ¯Ñ¡ÖĞÊ±¶ÎºÍÖ¸¶¨±í¼ÆµÄµçÁ¿Êı¾İ"> ²éÑ¯ </button><img class="waiticon" id="msgbox_wait" />
+					<button class="ui-button" id="btnPost" title="æŸ¥è¯¢é€‰ä¸­æ—¶æ®µå’ŒæŒ‡å®šè¡¨è®¡çš„ç”µé‡æ•°æ®"> æŸ¥è¯¢ </button><img class="waiticon" id="msgbox_wait" />
 					<div class=hide>
 						<form id="history_tou" name="history_tou">
-							<label> Ê±¼ä´Á(Ãë):
+							<label> æ—¶é—´æˆ³(ç§’):
 								<input type="text" name="stime_stamp" id="stime_stamp" value="0" readonly>
 							</label><label> ~
 								<input type="text" name="etime_stamp" id="etime_stamp" value="0" readonly>
 							</label>
 							<br>
-							<label> Ê±ÇøÆ«ÒÆ(·ÖÖÓ)
+							<label> æ—¶åŒºåç§»(åˆ†é’Ÿ)
 								<input type="text" name="timezone" id="timezone" value="0" readonly>
 								<input type="text" name="timezone2" id="timezone2" value="0" readonly>
 							</label>
@@ -168,18 +168,18 @@
 						var etime_stamp = document.getElementById("etime_stamp");
 						var tz = document.getElementById("timezone");
 						var tz2 = document.getElementById("timezone2");
-						//¿ªÊ¼Ê±¼ä¿Ø¼şµÄÊôĞÔÉèÖÃ
+						//å¼€å§‹æ—¶é—´æ§ä»¶çš„å±æ€§è®¾ç½®
 						startDateTextBox.datetimepicker({
 							maxDate : 0,
-							controlType : 'select', //Ñ¡Ôñ·½Ê½Ñ¡Ê±¿Ì
-							dateFormat : "yy-mm-dd", //ÈÕÆÚ¸ñÊ½
-							//showSecond: true, //ÏÔÊ¾Ãë
-							timeFormat : 'HH:mm', //Ê±¿Ì¸ñÊ½
-							separator : ' ', //ÈÕÆÚÊ±¿Ì·Ö¸î×Ö·û(´®)
-							//showTimezone: true, //ÏÔÊ¾Ê±Çø
-							//timezone: '+0800',    //Ä¬ÈÏÊ±Çø
-							//µã»÷¹Ø±Õ(Íê³É)°´Å¥ÊÂ¼ş
-							//Èç¹û¿ªÊ¼Ê±¼äÍíÓÚ½áÊøÊ±¼ä,Ôò½«¿ªÊ¼Ê±¼äÉèÖÃÎª½áÊøÊ±¼ä
+							controlType : 'select', //é€‰æ‹©æ–¹å¼é€‰æ—¶åˆ»
+							dateFormat : "yy-mm-dd", //æ—¥æœŸæ ¼å¼
+							//showSecond: true, //æ˜¾ç¤ºç§’
+							timeFormat : 'HH:mm', //æ—¶åˆ»æ ¼å¼
+							separator : ' ', //æ—¥æœŸæ—¶åˆ»åˆ†å‰²å­—ç¬¦(ä¸²)
+							//showTimezone: true, //æ˜¾ç¤ºæ—¶åŒº
+							//timezone: '+0800',    //é»˜è®¤æ—¶åŒº
+							//ç‚¹å‡»å…³é—­(å®Œæˆ)æŒ‰é’®äº‹ä»¶
+							//å¦‚æœå¼€å§‹æ—¶é—´æ™šäºç»“æŸæ—¶é—´,åˆ™å°†å¼€å§‹æ—¶é—´è®¾ç½®ä¸ºç»“æŸæ—¶é—´
 							onClose : function(dateText, inst) {
 								if (endDateTextBox.val() != '') {
 									var testStartDate = startDateTextBox.datetimepicker('getDate');
@@ -194,27 +194,27 @@
 									stime_stamp.value = testStartDate.getTime() / 1000;
 								//Date.parse(endDateTextBox.datetimepicker('getDate'))/1000;
 							},
-							onSelect : function(selectedDateTime) {//Ñ¡ÔñÊ±ÏŞ¶¨¿ªÊ¼Ê±¼ä±ØĞëÔçÓÚ½áÊøÊ±¼ä
+							onSelect : function(selectedDateTime) {//é€‰æ‹©æ—¶é™å®šå¼€å§‹æ—¶é—´å¿…é¡»æ—©äºç»“æŸæ—¶é—´
 								endDateTextBox.datetimepicker('option', 'minDate', startDateTextBox.datetimepicker('getDate'));
 								//tz.value=startDateTextBox.datetimepicker.timezone;
 								var testStartDate = startDateTextBox.datetimepicker('getDate');
 								tz.value = testStartDate.getTimezoneOffset();
-								//ÕâÀï×ª»»³ÉÎ»±ê×¼Ê±¼ä,Ã»ÓĞÊ±ÇøĞÅÏ¢ÁË.
+								//è¿™é‡Œè½¬æ¢æˆä½æ ‡å‡†æ—¶é—´,æ²¡æœ‰æ—¶åŒºä¿¡æ¯äº†.
 								stime_stamp.value = testStartDate.getTime() / 1000;
 								//Date.parse(startDateTextBox.datetimepicker('getDate'))/1000;
 							}
 						});
-						//½áÊøÊ±¼ä¿Ø¼şµÄÊôĞÔÉèÖÃ
+						//ç»“æŸæ—¶é—´æ§ä»¶çš„å±æ€§è®¾ç½®
 						endDateTextBox.datetimepicker({
-							maxDate : 0, //²»ÄÜÑ¡ÔñÎ´À´
-							controlType : 'select', //Ñ¡Ôñ·½Ê½Ñ¡Ê±¿Ì
-							dateFormat : "yy-mm-dd", //ÈÕÆÚ¸ñÊ½
-							//showSecond: true, //ÏÔÊ¾Ãë
-							timeFormat : 'HH:mm', //Ê±¿Ì¸ñÊ½
-							separator : ' ', //ÈÕÆÚÊ±¿Ì·Ö¸î×Ö·û(´®)
-							//showTimezone: true, //ÏÔÊ¾Ê±Çø
-							//timezone: '+0800',    //Ä¬ÈÏÊ±Çø
-							onClose : function(dateText, inst) {//¹Ø±ÕÊ±ºòÅĞ¶Ï
+							maxDate : 0, //ä¸èƒ½é€‰æ‹©æœªæ¥
+							controlType : 'select', //é€‰æ‹©æ–¹å¼é€‰æ—¶åˆ»
+							dateFormat : "yy-mm-dd", //æ—¥æœŸæ ¼å¼
+							//showSecond: true, //æ˜¾ç¤ºç§’
+							timeFormat : 'HH:mm', //æ—¶åˆ»æ ¼å¼
+							separator : ' ', //æ—¥æœŸæ—¶åˆ»åˆ†å‰²å­—ç¬¦(ä¸²)
+							//showTimezone: true, //æ˜¾ç¤ºæ—¶åŒº
+							//timezone: '+0800',    //é»˜è®¤æ—¶åŒº
+							onClose : function(dateText, inst) {//å…³é—­æ—¶å€™åˆ¤æ–­
 								if (startDateTextBox.val() != '') {
 									var testStartDate = startDateTextBox.datetimepicker('getDate');
 									var testEndDate = endDateTextBox.datetimepicker('getDate');
@@ -229,7 +229,7 @@
 								//stime_stamp.value=
 								//  Date.parse(startDateTextBox.datetimepicker('getDate'))/1000;
 							},
-							onSelect : function(selectedDateTime) {//Ñ¡ÔñÊ±ºò·ÀÖ¹ÎóÑ¡
+							onSelect : function(selectedDateTime) {//é€‰æ‹©æ—¶å€™é˜²æ­¢è¯¯é€‰
 								startDateTextBox.datetimepicker('option', 'maxDate', endDateTextBox.datetimepicker('getDate'));
 
 								var testEndDate = endDateTextBox.datetimepicker('getDate');
@@ -237,39 +237,39 @@
 								etime_stamp.value = testEndDate.getTime() / 1000;
 							}
 						});
-					</script><!-- <button class="ui-button" id="btn" title="²âÊÔÖĞ...">×ÓÒ³Ãæ¼ÓÔØ</button> --><!-- <button class="ui-button" id="showLog" title="´Ó·şÎñÆ÷¼ÓÔØÈÕÖ¾">²é¿´ÈÕÖ¾</button> -->
+					</script><!-- <button class="ui-button" id="btn" title="æµ‹è¯•ä¸­...">å­é¡µé¢åŠ è½½</button> --><!-- <button class="ui-button" id="showLog" title="ä»æœåŠ¡å™¨åŠ è½½æ—¥å¿—">æŸ¥çœ‹æ—¥å¿—</button> -->
 					<table class="sioplanTable" id="tbl_history_tou" border="1" cellspacing="1" cellpadding="1">
 						<thead>
 							<tr>
-								<th rowspan=2>±íºÅ</th>
-								<th rowspan=2>ĞòºÅ</th>
-								<th rowspan=2>Ê±¿Ì</th>
-								<th colspan=5>ÕıÏòÓĞ¹¦</th>
-								<th colspan=5>·´ÏòÓĞ¹¦</th>
-								<th colspan=5>ÕıÏòÎŞ¹¦</th>
-								<th colspan=5>·´ÏòÎŞ¹¦</th>
+								<th rowspan=2>è¡¨å·</th>
+								<th rowspan=2>åºå·</th>
+								<th rowspan=2>æ—¶åˆ»</th>
+								<th colspan=5>æ­£å‘æœ‰åŠŸ</th>
+								<th colspan=5>åå‘æœ‰åŠŸ</th>
+								<th colspan=5>æ­£å‘æ— åŠŸ</th>
+								<th colspan=5>åå‘æ— åŠŸ</th>
 							</tr>
 							<tr>
-								<th>×Ü</th>
-								<th>¼â</th>
-								<th>·å</th>
-								<th>Æ½</th>
-								<th>¹È</th>
-								<th>×Ü</th>
-								<th>¼â</th>
-								<th>·å</th>
-								<th>Æ½</th>
-								<th>¹È</th>
-								<th>×Ü</th>
-								<th>¼â</th>
-								<th>·å</th>
-								<th>Æ½</th>
-								<th>¹È</th>
-								<th>×Ü</th>
-								<th>¼â</th>
-								<th>·å</th>
-								<th>Æ½</th>
-								<th>¹È</th>
+								<th>æ€»</th>
+								<th>å°–</th>
+								<th>å³°</th>
+								<th>å¹³</th>
+								<th>è°·</th>
+								<th>æ€»</th>
+								<th>å°–</th>
+								<th>å³°</th>
+								<th>å¹³</th>
+								<th>è°·</th>
+								<th>æ€»</th>
+								<th>å°–</th>
+								<th>å³°</th>
+								<th>å¹³</th>
+								<th>è°·</th>
+								<th>æ€»</th>
+								<th>å°–</th>
+								<th>å³°</th>
+								<th>å¹³</th>
+								<th>è°·</th>
 							</tr>
 						</thead>
 						<tbody id="tr_dat"></tbody>

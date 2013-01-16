@@ -1,9 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<!-- »ªÁ¢µçÁ¦-±í¼Æ²ÎÊýÒ³Ãæ -->
+<!-- åŽç«‹ç”µåŠ›-è¡¨è®¡å‚æ•°é¡µé¢ -->
 <html>
 	<HEAD>
-		<title>±í¼Æ²ÎÊý</title>
-		<meta http-equiv="Pragma" content="no-cache" charset=gb2312>
+		<title>è¡¨è®¡å‚æ•°</title>
+		<meta http-equiv="Pragma" content="no-cache" charset=utf-8>
 		<link rel="stylesheet" href="/style/normal_ws.css" type="text/css" />
 		<link rel="stylesheet" href="/style/sys.css" type="text/css" />
 		<link href="../style/menuExpandable3.css" rel="stylesheet" type="text/css" />
@@ -11,19 +11,19 @@
 		<script type="text/javascript" src="/style/jquery-1.8.3.min.js"></script>
 		<script type="text/javascript" src="/style/clone_tableheader.js"></script>
 		<script type="text/javascript">
-			//Ò³Ãæ³õÊ¼»¯ ¼ÓÔØ JSº¯Êý
+			//é¡µé¢åˆå§‹åŒ– åŠ è½½ JSå‡½æ•°
 			$(document).ready(cloneTableHeader_Width);
-			//µ÷Õû ä¯ÀÀÆ÷ ±í¸ñµÄÏÔÊ¾¿í¶È  ÒÔ¼° µ÷ÓÃ  Ëø¶¨ ±íÍ·ºÍÁÐ  µÄJSº¯Êý¡£
+			//è°ƒæ•´ æµè§ˆå™¨ è¡¨æ ¼çš„æ˜¾ç¤ºå®½åº¦  ä»¥åŠ è°ƒç”¨  é”å®š è¡¨å¤´å’Œåˆ—  çš„JSå‡½æ•°ã€‚
 			function cloneTableHeader_Width() {
-				//document.body.clientWidth»ñµÃ¿Í»§ÇøÓò(ä¯ÀÀÆ÷´°¿Ú,²»°üÀ¨²Ëµ¥À¸ºÍ×´Ì¬À¸,¾ÍÊÇÄÚÈÝ´°¿Ú)µÄ¿í¶È - 35ÏñËØµÄ¹ö¶¯Ìõ¿í¶È¡£
+				//document.body.clientWidthèŽ·å¾—å®¢æˆ·åŒºåŸŸ(æµè§ˆå™¨çª—å£,ä¸åŒ…æ‹¬èœå•æ å’ŒçŠ¶æ€æ ,å°±æ˜¯å†…å®¹çª—å£)çš„å®½åº¦ - 35åƒç´ çš„æ»šåŠ¨æ¡å®½åº¦ã€‚
 				var myTable_Width = (document.body.clientWidth - 35);
 				var myTable_Heigh = (document.body.clientHeight - 100);
-				//alert(myTable_Width + "*" + myTable_Heigh);//²âÊÔÆÁÄ»¿í¶È
+				//alert(myTable_Width + "*" + myTable_Heigh);//æµ‹è¯•å±å¹•å®½åº¦
 				if ((document.body.clientWidth - 35) < 855) {
 					myTable_Width = 855;
-					//¿í¶È
+					//å®½åº¦
 				}
-				//µ÷ÓÃ Ëø¶¨±íÍ·ºÍ ÁÐ µÄJSº¯Êý
+				//è°ƒç”¨ é”å®šè¡¨å¤´å’Œ åˆ— çš„JSå‡½æ•°
 				$(document).ready(function() {
 					FixTable("MyTable", 3, myTable_Width, myTable_Heigh);
 				});
@@ -36,40 +36,40 @@
 			<table width="1200" border="1" cellpadding="0" cellspacing="0" id="MyTable" style="border-bottom-color: black; border-top-color: black; width: 1300px; color: #000000; border-right-color: black; font-size: medium; border-left-color: black">
 				<thead>
 					<tr style="background-color: #eeeeee; margin: 0px; line-height: 20px; font-weight: bold; padding: 0px 0px 0px 0px;">
-						<th width="31" class="mtrparamTableHead">±íºÅ</th>
-						<th width="48" class="mtrparamTableHead"> ÓÐÐ§ <br>
+						<th width="31" class="mtrparamTableHead">è¡¨å·</th>
+						<th width="48" class="mtrparamTableHead"> æœ‰æ•ˆ <br>
 						<input type="checkbox" name=iv_all value=iv_all onclick="iv_all_click(event);">
 						</th>
-						<th width="48" class="mtrparamTableHead">ÏßÂ·Ãû³Æ</th>
-						<th width="48" class="mtrparamTableHead">±í¼ÆµØÖ·</th>
-						<th width="48" class="mtrparamTableHead">±í¼Æ¿ÚÁî</th>
-						<th width="48" class="mtrparamTableHead">Ê¹ÓÃ¶Ë¿Ú</th>
-						<th width="74" class="mtrparamTableHead"> ´®¿Ú·½°¸ <br> <% sioplan(); %> </th>
-						<th width="74" class="mtrparamTableHead"> ±í¼Æ¹æÔ¼ <br> <% mtr_protocol(); %> </th>
-						<th width="74" class="mtrparamTableHead"> Éú²ú³§¼Ò <br> <% factory(); %> </th>
-						<th width="74" class="mtrparamTableHead"> µç±íÀàÐÍ <br> <% ph_wire2(); %> </th>
-						<th width="74" class="mtrparamTableHead"> µçÁ¿Ð¡Êý <br>
+						<th width="48" class="mtrparamTableHead">çº¿è·¯åç§°</th>
+						<th width="48" class="mtrparamTableHead">è¡¨è®¡åœ°å€</th>
+						<th width="48" class="mtrparamTableHead">è¡¨è®¡å£ä»¤</th>
+						<th width="48" class="mtrparamTableHead">ä½¿ç”¨ç«¯å£</th>
+						<th width="74" class="mtrparamTableHead"> ä¸²å£æ–¹æ¡ˆ <br> <% sioplan(); %> </th>
+						<th width="74" class="mtrparamTableHead"> è¡¨è®¡è§„çº¦ <br> <% mtr_protocol(); %> </th>
+						<th width="74" class="mtrparamTableHead"> ç”Ÿäº§åŽ‚å®¶ <br> <% factory(); %> </th>
+						<th width="74" class="mtrparamTableHead"> ç”µè¡¨ç±»åž‹ <br> <% ph_wire2(); %> </th>
+						<th width="74" class="mtrparamTableHead"> ç”µé‡å°æ•° <br>
 						<input class="ntx" type="text" size=1 maxlength=1 name=all_it_dot value="0" onchange="all_it_dot_changed(event);">
 						</th>
-						<th width="74" class="mtrparamTableHead"> ÐèÁ¿Ð¡Êý <br>
+						<th width="74" class="mtrparamTableHead"> éœ€é‡å°æ•° <br>
 						<input class="ntx" type="text" size=1 maxlength=1 name=all_xl_dot value="0" onchange="all_xl_dot_changed(event);">
 						</th>
-						<th width="74" class="mtrparamTableHead"> µçÑ¹Ð¡Êý <br>
+						<th width="74" class="mtrparamTableHead"> ç”µåŽ‹å°æ•° <br>
 						<input class="ntx" type="text" size=1 maxlength=1 name=all_v_dot value="0" onchange="all_v_dot_changed(event);">
 						</th>
-						<th width="74" class="mtrparamTableHead"> µçÁ÷Ð¡Êý <br>
+						<th width="74" class="mtrparamTableHead"> ç”µæµå°æ•° <br>
 						<input class="ntx" type="text" size=1 maxlength=1 name=all_i_dot value="0" onchange="all_i_dot_changed(event);">
 						</th>
-						<th width="74" class="mtrparamTableHead"> ÓÐ¹¦Ð¡Êý <br>
+						<th width="74" class="mtrparamTableHead"> æœ‰åŠŸå°æ•° <br>
 						<input class="ntx" type="text" size=1 maxlength=1 name=all_p_dot value="0" onchange="all_p_dot_changed(event);">
 						</th>
-						<th width="74" class="mtrparamTableHead"> ÎÞ¹¦Ð¡Êý <br>
+						<th width="74" class="mtrparamTableHead"> æ— åŠŸå°æ•° <br>
 						<input class="ntx" type="text" size=1 maxlength=1 name=all_q_dot value="0" onchange="all_q_dot_changed(event);">
 						</th>
-						<th width="74" class="mtrparamTableHead"> ¶î¶¨µçÑ¹ <br>
+						<th width="74" class="mtrparamTableHead"> é¢å®šç”µåŽ‹ <br>
 						<input class="ntx" type="text" size=1 name=all_ue value="0" onchange="all_ue_changed(event);">
 						</th>
-						<th width="74" class="mtrparamTableHead"> ¶î¶¨µçÁ÷ <br>
+						<th width="74" class="mtrparamTableHead"> é¢å®šç”µæµ <br>
 						<input class="ntx" type="text" size=1 name=all_ie value="0" onchange="all_ie_changed(event);">
 						</th>
 					</tr>
@@ -79,15 +79,15 @@
 				</tbody>
 			</table>
 			<p ALIGN="center" id=subbtns>
-				<input type="button" name="Update" value="ÉèÖÃ" ID="Update" OnClick="db_update();">
-				<!-- @TODO Ìí¼ÓÉ¾³ýÔÝÊ±×¢Ïú,µÈÍêÉÆºóÔÙ¿ª·Å
-				<input type=button name=bDelItem value="É¾³ý" ID="bDelItem" OnClick="db_del();">
-				<input type=button name=bAddItem value="Ìí¼Ó" ID="bAddItem" OnClick="db_add();" >
+				<input type="button" name="Update" value="è®¾ç½®" ID="Update" OnClick="db_update();">
+				<!-- @TODO æ·»åŠ åˆ é™¤æš‚æ—¶æ³¨é”€,ç­‰å®Œå–„åŽå†å¼€æ”¾
+				<input type=button name=bDelItem value="åˆ é™¤" ID="bDelItem" OnClick="db_del();">
+				<input type=button name=bAddItem value="æ·»åŠ " ID="bAddItem" OnClick="db_add();" >
 				-->
-				<input type="button" name=Refresh value="Ë¢ÐÂ" ID="Refresh" OnClick="return RefreshWin();">
-				<!-- Òþ²ØµÄÊäÈë,ÓÃÓÚÌá½»ÃüÁîÀàÐÍ -->
+				<input type="button" name=Refresh value="åˆ·æ–°" ID="Refresh" OnClick="return RefreshWin();">
+				<!-- éšè—çš„è¾“å…¥,ç”¨äºŽæäº¤å‘½ä»¤ç±»åž‹ -->
 				<input class="hideinp" type="text" name=OpType value="" id="optype">
-				<!-- Ìá½»²Ù×÷ÀàÐÍ ¸üÐÂ,»¹ÊÇÆäËû -->
+				<!-- æäº¤æ“ä½œç±»åž‹ æ›´æ–°,è¿˜æ˜¯å…¶ä»– -->
 				<input class="hideinp" type="text" name=RowNo value="" id="indexno">
 				<input class="hideinp" type="text" name="AllSelFlag" value="0" id="AllSelFlag">
 			</p>

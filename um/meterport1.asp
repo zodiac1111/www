@@ -2,7 +2,7 @@
 <html>
 <HEAD>
 <title>Arm Home</title><!- Copyright (c) Echon., 2006. All Rights Reserved. ->
-<meta http-equiv="Pragma" content="no-cache" charset=gb2312>
+<meta http-equiv="Pragma" content="no-cache" charset=utf-8>
 <link rel="stylesheet" href="/style/normal_ws.css" type="text/css"></link>
 <link rel="stylesheet" href="/style/sys.css" type="text/css"></link>
 <link href="/style/menuExpandable3.css" rel="stylesheet" type="text/css"></link>
@@ -24,7 +24,7 @@
 							<td class="sysTDHeadCLStyle">
 								<table width="100%" border="0" cellspacing="1" cellpadding="2" ID="Table3">
 									<tr>
-										<td  align="center"><p class=cx>���ƶ˿ڲ���</p></td>
+										<td  align="center"><p class=cx>控制端口参数</p></td>
 									</tr>
 								</table>
 							</td>
@@ -40,9 +40,9 @@
 					     <table width="100%" border="0" cellspacing="0" cellpadding="2" ID="Table2">
 						     <tr>
 							     <td>
-								   <a>�˿���Ŀ</a>
-								   <input type=text size=6  id="Text1" name="hao"  maxsize="5" datatype="number" namefs="������Ŀ" nullable="yesnoz"  value="">
-								   <a class=acs onclick="return  Search();">��ȡ</a>
+								   <a>端口数目</a>
+								   <input type=text size=6  id="Text1" name="hao"  maxsize="5" datatype="number" namefs="方案数目" nullable="yesnoz"  value="">
+								   <a class=acs onclick="return  Search();">读取</a>
 							     </td>
 						     </tr>
 					     </table>
@@ -58,22 +58,22 @@
 				  <td class="lb-bkg" valign="top">
 				   <table width="70%" cellspacing="1" cellpadding="2"  border="0" class="sysBgTable" ID="Table4">
 						<tr>
-							<td  colspan="19"  align=center class="sysTDHeadCCStyle">�����б�</td>
+							<td  colspan="19"  align=center class="sysTDHeadCCStyle">方案列表</td>
 						</tr>
 						<tr>  
-							<td width="5%" class="sysTDCLItemStyle">���ڷ���</td>
-							<td width="6%" class="sysTDCLItemStyle">У��λ</td>
-							<td width="4%" class="sysTDCLItemStyle">����λ</td>
-							<td width="6%" class="sysTDCLItemStyle">ֹͣλ</td>
-							<td width="6%" class="sysTDCLItemStyle">����λ</td>
-							<td width="5%" class="sysTDCLItemStyle">ͨѶ��ʽ</td>
+							<td width="5%" class="sysTDCLItemStyle">串口方案</td>
+							<td width="6%" class="sysTDCLItemStyle">校验位</td>
+							<td width="4%" class="sysTDCLItemStyle">数据位</td>
+							<td width="6%" class="sysTDCLItemStyle">停止位</td>
+							<td width="6%" class="sysTDCLItemStyle">波特位</td>
+							<td width="5%" class="sysTDCLItemStyle">通讯方式</td>
 						</tr>
 					  <tr>
 						  <td class=sysTDNcLItemStyle ><input  class=ntx type=text size=2 name=no0 value="0" ></td>
 						  <td class=sysTDNcLItemStyle><SELECT name=type0 >
-							  <OPTION selected value=0>��У��</OPTION>
-							  <OPTION selected value=1>żУ��</OPTION>
-							  <OPTION  value=2>��У��</OPTION>
+							  <OPTION selected value=0>无校验</OPTION>
+							  <OPTION selected value=1>偶校验</OPTION>
+							  <OPTION  value=2>奇校验</OPTION>
 							  </SELECT>
 							</td>
 							<td class=sysTDNcLItemStyle ><input class="ntx" type="text" size=5 name="v_iedNo0" id="v_iedNo0" value=0></td>
@@ -88,8 +88,8 @@
 							 	 </SELECT>
 							</td>
 							<td class=sysTDNcLItemStyle><SELECT name=type0 >
-							 	  <OPTION selected value=0>�첽</OPTION>
-							 	  <OPTION  value=1>ͬ��</OPTION>
+							 	  <OPTION selected value=0>异步</OPTION>
+							 	  <OPTION  value=1>同步</OPTION>
 							 	  </SELECT>
 							</td> 
 						</tr> 	 
@@ -105,10 +105,10 @@
 	    </tr>
  	    <tr>
 		    <td ALIGN="center" height=25> 
-			  <input type="button" name="Update" value="����" ID="Update" OnClick="UpdateTheSelect();">
-			  <input type="button" name="bDelItem" value="ɾ��" ID="bDelItem"  onclick="return DelSubmit();">
-			  <input type="button"  name="bAddItem" value="����" ID="bAddItem" OnClick="return Redirect('AddRoutePara.asp');" >
-			  <input type="button"  name="Refresh" value="ˢ��" ID="Refresh" OnClick="return RefreshWin();" > 
+			  <input type="button" name="Update" value="更新" ID="Update" OnClick="UpdateTheSelect();">
+			  <input type="button" name="bDelItem" value="删除" ID="bDelItem"  onclick="return DelSubmit();">
+			  <input type="button"  name="bAddItem" value="添加" ID="bAddItem" OnClick="return Redirect('AddRoutePara.asp');" >
+			  <input type="button"  name="Refresh" value="刷新" ID="Refresh" OnClick="return RefreshWin();" > 
 		    </td>
 	    </tr> 		
 		</table>

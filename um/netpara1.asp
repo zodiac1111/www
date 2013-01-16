@@ -1,9 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<!-- Copyright (c) Echon., 2006. All Rights Reserved. Íø¿Ú¼àÊÓ²ÎÊýÒ³Ãæ-->
+<!-- Copyright (c) Echon., 2006. All Rights Reserved. ç½‘å£ç›‘è§†å‚æ•°é¡µé¢-->
 <html>
 	<HEAD>
-		<title>ÍøÂç²ÎÊýÉèÖÃ</title>
-		<meta http-equiv="Pragma" content="no-cache" charset=gb2312>
+		<title>ç½‘ç»œå‚æ•°è®¾ç½®</title>
+		<meta http-equiv="Pragma" content="no-cache" charset=utf-8>
 		<link rel="stylesheet" href="/style/normal_ws.css" type="text/css">
 		</link>
 		<link rel="stylesheet" href="/style/sys.css" type="text/css">
@@ -13,7 +13,7 @@
 		<link href="/style/menuExpandable3.css" rel="stylesheet" type="text/css">
 		</link>
 		<script src="/style/wwyfunc.js"  type='text/javascript'></script>
-		<% init_sysparam(); //³õÊ¼»¯ÏµÍ³²ÎÊý,»ñµÃÀýÈç±í¼Æ¸öÊý,´®¿Ú¸öÊý,´®¿Ú·½°¸¸öÊýµÈ²ÎÊý %>
+		<% init_sysparam(); //åˆå§‹åŒ–ç³»ç»Ÿå‚æ•°,èŽ·å¾—ä¾‹å¦‚è¡¨è®¡ä¸ªæ•°,ä¸²å£ä¸ªæ•°,ä¸²å£æ–¹æ¡ˆä¸ªæ•°ç­‰å‚æ•° %>
 	</HEAD>
 	<body>
 		<br />
@@ -21,23 +21,23 @@
 		<form action="/goform/netpara" method="post" name="paraform">
 			<table class="sioplanTable" border="1">
 				<tr>
-					<th>Íø¿ÚºÅ</th>
-					<th>Ê¹ÓÃÍø¿Ú</th>
-					<th>IPµØÖ·</th>
-					<th>×ÓÍøÑÚÂë</th>
-					<th>Íø¹Ø</th>
+					<th>ç½‘å£å·</th>
+					<th>ä½¿ç”¨ç½‘å£</th>
+					<th>IPåœ°å€</th>
+					<th>å­ç½‘æŽ©ç </th>
+					<th>ç½‘å…³</th>
 				</tr>
 				<% get_netparams(); %>
 			</table>
 			<p ALIGN="center">
-				<input type="button" name="Update" value="ÉèÖÃ" ID="Update" OnClick="db_update();">
-				<!--<input type=button name=bDelItem value="É¾³ý" ID="bDelItem"  onclick="return
+				<input type="button" name="Update" value="è®¾ç½®" ID="Update" OnClick="db_update();">
+				<!--<input type=button name=bDelItem value="åˆ é™¤" ID="bDelItem"  onclick="return
 				DelSubmit();">
-				<input type="button"  name=bAddItem value="Ìí¼Ó" ID="bAddItem" OnClick="return
+				<input type="button"  name=bAddItem value="æ·»åŠ " ID="bAddItem" OnClick="return
 				Redirect('AddRoutePara.asp');" >
 				-->
-				<input type="button" name=Refresh value="¶ÁÈ¡" ID="Refresh" OnClick="return RefreshWin();">
-				<!-- Ìá½»²Ù×÷ÀàÐÍ ¸üÐÂ,»¹ÊÇÆäËû -->
+				<input type="button" name=Refresh value="è¯»å–" ID="Refresh" OnClick="return RefreshWin();">
+				<!-- æäº¤æ“ä½œç±»åž‹ æ›´æ–°,è¿˜æ˜¯å…¶ä»– -->
 				<input class="hideinp" type="text" name="OpType" value="" id="optype">
 			</p>
 		</form>

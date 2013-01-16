@@ -58,9 +58,9 @@ pre {
 td {
 	font-size: 9pt;
 	font-family: Arial, Helvetica, sans-serif;
-	color: #333333; /*°üÀ¨×ÖÌåÑÕÉ« */
+	color: #333333; /*åŒ…æ‹¬å­—ä½“é¢œè‰² */
 	/*border-color:#FF9933;*/
-	white-space: nowrap; /* ²»»»ĞĞ*/
+	white-space: nowrap; /* ä¸æ¢è¡Œ*/
 }
 
 ol {
@@ -109,7 +109,7 @@ input {
 }
 
 .innertab {
-	width: 780px; /*µ÷½ÚÓÒ±í ¿í¶È */
+	width: 780px; /*è°ƒèŠ‚å³è¡¨ å®½åº¦ */
 	background-color: #F5F5F5;
 	border-left-color: #FF9933;
 	border-bottom-color: #FF9933;
@@ -121,7 +121,7 @@ input {
 }
 
 .inertab_w700 {
-	width: 700px; /*µ÷½ÚÓÒ±í ¿í¶È */
+	width: 700px; /*è°ƒèŠ‚å³è¡¨ å®½åº¦ */
 	background-color: #F5F5F5;
 	border-left-color: #FF9933;
 	border-bottom-color: #FF9933;
@@ -136,7 +136,7 @@ input {
 	display: none;
 }
 
-.btnde /*ĞĞÉ¾³ı°´Å¥µÄCSSÑùÊ½*/ {
+.btnde /*è¡Œåˆ é™¤æŒ‰é’®çš„CSSæ ·å¼*/ {
 	height: 20;
 	border-width: thin;
 	border-color: #183EAD;
@@ -145,7 +145,7 @@ input {
 	background-color: White;
 }
 
-.btnup /*ĞĞ¸üĞÂ°´Å¥µÄCSSÑùÊ½*/ {
+.btnup /*è¡Œæ›´æ–°æŒ‰é’®çš„CSSæ ·å¼*/ {
 	height: 20;
 	border-width: thin;
 	border-color: #183EAD;
@@ -164,11 +164,11 @@ input {
 	background-color: Transparent;
 }
 
-.hedtr /* ÁĞÍ·CSS*/ {
+.hedtr /* åˆ—å¤´CSS*/ {
 	background-color: #6699FF; /*#C9C9C9:light gray --#6699FF*/
 }
 
-.ntx /*·ÅÔÚtdÀïµÄinputµÄCSSÑùÊ½*/ { /*margin:0px; 
+.ntx /*æ”¾åœ¨tdé‡Œçš„inputçš„CSSæ ·å¼*/ { /*margin:0px; 
 	*/
 	border-style: none;
 }
@@ -193,13 +193,13 @@ a:active
 	text-decoration: underline;
 	cursor: hand;
 }
-/*ÊµÊ±Êı¾İÖµ¸ñµÄÑùÊ½  */
+/*å®æ—¶æ•°æ®å€¼æ ¼çš„æ ·å¼  */
 .numbTd {
 	background-color: #ffffff;
 }
-/*------------×ÓÒ³µÄCSS------------*/
-/*---Ìí¼Ó»ò±à¼­×ÓÒ³ÃæµÄINPUTµÄÑùÊ½----*/
+/*------------å­é¡µçš„CSS------------*/
+/*---æ·»åŠ æˆ–ç¼–è¾‘å­é¡µé¢çš„INPUTçš„æ ·å¼----*/
 .hfont {
-	font-family: ¿¬Ìå_GB2312;
+	/*font-family: æ¥·ä½“_GB2312;*/
 	font-weight: bolder;
 }

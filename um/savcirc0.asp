@@ -1,9 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<!--  Copyright (c) Echon., 2006. All Rights Reserved. ´æ´¢ÖÜÆÚÒ³Ãæ-->
+<!--  Copyright (c) Echon., 2006. All Rights Reserved. å­˜å‚¨å‘¨æœŸé¡µé¢-->
 <html>
 	<head>
-		<title>´æ´¢ÖÜÆÚ</title>
-		<meta http-equiv="Pragma" content="no-cache" charset=gb2312>
+		<title>å­˜å‚¨å‘¨æœŸ</title>
+		<meta http-equiv="Pragma" content="no-cache" charset="utf-8">
 		<link rel="stylesheet" href="/style/normal_ws.css" type="text/css"/>
 		<link rel="stylesheet" href="/style/sys.css" type="text/css"/>
 		<link rel="stylesheet" href="/style/table.css" type="text/css"/>
@@ -12,7 +12,7 @@
 	</head>
 	<body>
 		<noscript>
-			Your browser does not support JavaScript. ÄãµÄä¯ÀÀÆ÷²»Ö§³ÖJavaScript.
+			Your browser does not support JavaScript. ä½ çš„æµè§ˆå™¨ä¸æ”¯æŒJavaScript.
 		</noscript>
 		<br />
 		<h1 align="center"><img src="/graphics/logo72.png" height="45"></h1>
@@ -20,13 +20,13 @@
 			<table id="Table1" class="sioplanTable" border="1" cellspacing="1" cellpadding="1">
 				<thead>
 					<tr>
-						<th>´æ´¢ÖÜÆÚ</th>
-						<th>×ÜµçÁ¿</th>
-						<th>·ÖÊ±µçÁ¿</th>
-						<th>ÏàÏßÎÞ¹¦µçÄÜ</th>
-						<th>×î´óÐèÁ¿</th>
-						<th>ÊµÊ±Ò£²âÁ¿</th>
-						<th>Ê§Ñ¹¶ÏÏà</th>
+						<th>å­˜å‚¨å‘¨æœŸ</th>
+						<th>æ€»ç”µé‡</th>
+						<th>åˆ†æ—¶ç”µé‡</th>
+						<th>ç›¸çº¿æ— åŠŸç”µèƒ½</th>
+						<th>æœ€å¤§éœ€é‡</th>
+						<th>å®žæ—¶é¥æµ‹é‡</th>
+						<th>å¤±åŽ‹æ–­ç›¸</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -34,9 +34,9 @@
 				</tbody>
 			</table>
 			<p align="center">
-				<input type="button" name="Update" value="ÉèÖÃ" id="Update" onclick="db_update();">
-				<input type="button" name=Refresh value="¶ÁÈ¡" id="Refresh" onclick="return RefreshWin();">
-				<!-- Ìá½»²Ù×÷ÀàÐÍ ¸üÐÂ,»¹ÊÇÆäËû-->
+				<input type="button" name="Update" value="è®¾ç½®" id="Update" onclick="db_update();">
+				<input type="button" name=Refresh value="è¯»å–" id="Refresh" onclick="return RefreshWin();">
+				<!-- æäº¤æ“ä½œç±»åž‹ æ›´æ–°,è¿˜æ˜¯å…¶ä»–-->
 				<input class="hideinp" type="text" name="optype" value="" id="optype">
 			</p>
 		</form>

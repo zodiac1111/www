@@ -1,7 +1,7 @@
 <html>
 <head>
-<title>Ê±¼äÏÔÊ¾</title>
-<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>æ—¶é—´æ˜¾ç¤º</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <script type="text/javascript" src="/style/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="/style/jquery-ui.min.js"></script>
 <script type="text/javascript" src="/style/jquery-ui-sliderAccess.js"></script>
@@ -20,18 +20,18 @@ function Year_Month(){
     var yy = now.getFullYear(); 
     var mm = now.getMonth(); 
     var mmm=new Array();
-    mmm[0]="1ÔÂ";
-    mmm[1]="2ÔÂ";
-    mmm[2]="3ÔÂ";
-    mmm[3]="4ÔÂ";
-    mmm[4]="5ÔÂ";
-    mmm[5]="6ÔÂ";
-    mmm[6]="7ÔÂ";
-    mmm[7]="8ÔÂ";
-    mmm[8]="9ÔÂ";
-    mmm[9]="10ÔÂ";
-    mmm[10]="11ÔÂ";
-    mmm[11]="12ÔÂ";
+    mmm[0]="1æœˆ";
+    mmm[1]="2æœˆ";
+    mmm[2]="3æœˆ";
+    mmm[3]="4æœˆ";
+    mmm[4]="5æœˆ";
+    mmm[5]="6æœˆ";
+    mmm[6]="7æœˆ";
+    mmm[7]="8æœˆ";
+    mmm[8]="9æœˆ";
+    mmm[9]="10æœˆ";
+    mmm[10]="11æœˆ";
+    mmm[11]="12æœˆ";
     mm=mmm[mm];
     return(mm ); 
 }
@@ -48,13 +48,13 @@ function Date_of_Today(){
 function Date_of_week(){
 	  var now=new Date(); 
 	  var w; 
-if(now.getDay()==0)  w="ĞÇÆÚÈÕ";
-if(now.getDay()==1)  w="ĞÇÆÚÒ»";
-if(now.getDay()==2)  w="ĞÇÆÚ¶ş";
-if(now.getDay()==3)  w="ĞÇÆÚÈı";
-if(now.getDay()==4)  w="ĞÇÆÚËÄ";
-if(now.getDay()==5)  w="ĞÇÆÚÎå";
-if(now.getDay()==6)  w="ĞÇÆÚÁù";  
+if(now.getDay()==0)  w="æ˜ŸæœŸæ—¥";
+if(now.getDay()==1)  w="æ˜ŸæœŸä¸€";
+if(now.getDay()==2)  w="æ˜ŸæœŸäºŒ";
+if(now.getDay()==3)  w="æ˜ŸæœŸä¸‰";
+if(now.getDay()==4)  w="æ˜ŸæœŸå››";
+if(now.getDay()==5)  w="æ˜ŸæœŸäº”";
+if(now.getDay()==6)  w="æ˜ŸæœŸå…­";  
 	  return(w);}    
     
 function CurentTime(){ 
@@ -76,7 +76,7 @@ function CurenDate(){
 	var month=Year_Month();
 	var Today=Date_of_Today();
 	var week=Date_of_week();
-	var day='µçÄÔÊ±¼ä£º'+year+'Äê'+month+Today+'ÈÕ  '+week;
+	var day='ç”µè„‘æ—¶é—´ï¼š'+year+'å¹´'+month+Today+'æ—¥  '+week;
 	return(day);	
 	}
     
@@ -89,7 +89,7 @@ document.write('<span id="calendarClock1" class="style1"> </span>&nbsp;');
 document.write('<span id="calendarClock2" class="style1"> </span>');
 setInterval('refreshCalendarClock()',1000);
 </script>
-<span class="style1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;·şÎñÆ÷Ê±¼ä:
+<span class="style1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;æœåŠ¡å™¨æ—¶é—´:
 <% server_time(); %></span>
 
 
