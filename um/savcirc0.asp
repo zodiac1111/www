@@ -1,8 +1,8 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--  Copyright (c) Echon., 2006. All Rights Reserved. 存储周期页面-->
 <html>
 	<head>
-		<title>Arm Home</title>
-		<!--  Copyright (c) Echon., 2006. All Rights Reserved. -->
+		<title>存储周期</title>
 		<meta http-equiv="Pragma" content="no-cache" charset=gb2312>
 		<link rel="stylesheet" href="/style/normal_ws.css" type="text/css"/>
 		<link rel="stylesheet" href="/style/sys.css" type="text/css"/>
@@ -11,7 +11,9 @@
 		<script src="/style/wwyfunc.js" type="text/JavaScript"></script>
 	</head>
 	<body>
-		<noscript> Your browser does not support JavaScript. </noscript>
+		<noscript>
+			Your browser does not support JavaScript. 你的浏览器不支持JavaScript.
+		</noscript>
 		<br />
 		<h1 align="center"><img src="/graphics/logo72.png" height="45"></h1>
 		<form action="/goform/savecycle" method="post" id="paraform" name="paraform">
@@ -26,10 +28,10 @@
 						<th>实时遥测量</th>
 						<th>失压断相</th>
 					</tr>
-				<thead>
-					<tbody>
-						<% savecycle(); %>
-					</tbody>
+				</thead>
+				<tbody>
+					<% savecycle(); %>
+				</tbody>
 			</table>
 			<p align="center">
 				<input type="button" name="Update" value="设置" id="Update" onclick="db_update();">

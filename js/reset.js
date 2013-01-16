@@ -68,20 +68,55 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 	 * 从服务器加载错误日志文件
 	 */
 	$("#load_log").click(function() {
+		$("#log_text").addClass("textarea_bgpic");
 		//$("#log_text").val("");
-		$("#log_text").attr("value","");
+		$("#log_text").attr("value", "");
 		// 显示
-		$("#log_wait").show("fade", {}, 1);
-		$("#log_wait").attr("disabled", "true");
-		//按钮不应该能按
-		$.post("/goform/load_log", "load", function(result) {
-			$("#log_wait").attr("disabled", "false");
-			$("#log_wait").hide("fade", {}, 1000);
-			$("#log_text").attr("value",result);
-			//$("#log_text").val(result);
-			//var b = document.getElementById("log_text");
-			//b.value = result;
+		//$("#log_wait").show();
+		//$("#log_wait").attr("disabled", "true");
+		$.ajax({
+			type : "post",
+			url : "/goform/load_log",
+			//contentType : "application/json; charset=utf-8",
+			dataType : "text",
+			data : "load",
+			beforeSend : function(XMLHttpRequest) {
+				//ShowLoading(); //发送前
+				//alert("发送前");
+				//$("#msg_text").addClass("textarea_bgpic_t");
+			},
+			//成功(先成功,后完成)
+			success : function(data, textStatus) {
+				console.log( data );
+				alert("ajax成功,状态:" + textStatus + ",数据:" + data);
+				//start();
+				$("#log_text").val(data);
+				//填充数据
+			},
+			//完成(成功/失败)
+			complete : function(XMLHttpRequest, textStatus) {
+				alert("ajax完成,接收:对象:" + XMLHttpRequest + ",状态:" + textStatus);
+				//HideLoading();
+				//$("#mon_msg").show();
+				//$("#mon_msg_stop").hide();
+				$("#log_text").removeClass("textarea_bgpic");
+			},
+			error : function() {
+				alert("ajax错误");
+				//$("#msg_text").html("Ajax错误");
+			}
 		});
+		//按钮不应该能按
+		// $.post("/goform/load_log", "load", function(result) {
+		// alert(result);
+		// $("#log_wait").attr("disabled", "false");
+		// $("#log_text").removeClass("textarea_bgpic");
+		// //$("#log_wait").hide();
+		// //$("#log_text").attr("value",result);
+		// //$("#log_text").val(result);
+		// //var b = document.getElementById("log_text");
+		// //b.value = result;
+		// });
 	});
 	/**
 	 * 将文本保存到服务器的错误日志文件
