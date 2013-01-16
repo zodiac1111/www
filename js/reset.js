@@ -188,10 +188,6 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 			$("#procotol_text").removeClass("textarea_bgpic");
 			//alert("结果1");
 			$("#procotol_text").val(result);
-			//alert("结果2");
-			$("#log_text").html("1231");
-			//$("#log_text").html(result);
-			// 完成之后隐藏
 		});
 	});
 	$("#save_procotol").click(function() {

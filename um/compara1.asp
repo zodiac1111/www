@@ -1,9 +1,9 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 	<HEAD>
-		<title>Arm Home</title>
+		<title>串口方案</title>
 		<!--  Copyright (c) Echon., 2006. All Rights Reserved. -->
-		<meta http-equiv="Pragma" content="no-cache" charset="utf-8">
+		<meta http-equiv="Pragma" content="no-cache" charset="utf-8" />
 		<link rel="stylesheet" href="/style/normal_ws.css" type="text/css"/>
 		<link rel="stylesheet" href="/style/sys.css" type="text/css"/>
 		<link href="/style/menuExpandable3.css" rel="stylesheet" type="text/css"/>
@@ -18,34 +18,33 @@
 		<!-- jquery的 -结束 -->
 		<% init_sysparam(); //初始化系统参数,获得例如表计个数,串口个数,串口方案个数等参数 %>
 		<script type="text/javascript">
-		//串口参数 post提交
+			// $("#tbody_dat tr").mouseover(function() {
+			// $(this).addClass("over");
+			// var rows = $(this).attr('relrow');
+			// });
+			// $("#tbody_dat tr").mouseout(function() {
+			// $(this).removeClass("over");
+			// });
+			//串口参数 post提交
 			$(document).ready(function() {
-				$.post('/goform/sioplan', $("#paraform").serialize() + "&init=1", function(result) {
-					$("#tbody_dat").html(result);
-					$("#tbody_dat tr").mouseover(function() {
-						$(this).addClass("over");
-						var rows = $(this).attr('relrow');
-					});
-					$("#tbody_dat tr").mouseout(function() {
-						$(this).removeClass("over");
-					});
-					//alert("OK");
-					//$("#tip").html("完成");
-				});
+				// $.post('/goform/sioplan', $("#paraform").serialize() + "&init=1", function(result) {
+				// $("#tbody_dat").html(result);
+				// $("#tbody_dat tr").mouseover(function() {
+				// $(this).addClass("over");
+				// });
+				// $("#tbody_dat tr").mouseout(function() {
+				// $(this).removeClass("over");
+				// });
+				// //alert("OK");
+				// });
 				$("#btnsio").click(function() {
 					$.post('/goform/sioplan',
 					//$.param($("#paraform")),
-					$("#paraform").serialize(), function(result) {
+					//$("#paraform").serialize(), 
+					"test",
+					function(result) {
 						$("#tbody_dat").html(result);
-						$("#tbody_dat tr").mouseover(function() {
-							$(this).addClass("over");
-							var rows = $(this).attr('relrow');
-						});
-						$("#tbody_dat tr").mouseout(function() {
-							$(this).removeClass("over");
-						});
 						alert("OK");
-						//$("#tip").html("完成");
 					});
 				});
 			});
@@ -66,8 +65,7 @@
 					</tr>
 				</thead>
 				<!-- 循环依次添加所有串口方案 一列一条  -->
-				<tbody id="tbody_dat" >
-				</tbody>
+				<tbody id="tbody_dat" > </tbody>
 			</table>
 		</form>
 		<p align="center" height=25>
@@ -81,9 +79,7 @@
 			<input type="button" name="Refresh" value="读取" id="Refresh" onclick="return RefreshWin();">
 			<!-- 提交操作类型 更新,还是其他 -->
 			<input class="hideinp" type="text" name="OpType" value="" id="optype">
-			<button id="btnsio">
-				更新
-			</button>
+			<button id="btnsio"> 更新 </button>
 		</p>
 	</body>
 </html>
