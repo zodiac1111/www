@@ -68,6 +68,8 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 	 * 从服务器加载错误日志文件
 	 */
 	$("#load_log").click(function() {
+		//$("#log_text").val("");
+		$("#log_text").attr("value","");
 		// 显示
 		$("#log_wait").show("fade", {}, 1);
 		$("#log_wait").attr("disabled", "true");
@@ -75,8 +77,10 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 		$.post("/goform/load_log", "load", function(result) {
 			$("#log_wait").attr("disabled", "false");
 			$("#log_wait").hide("fade", {}, 1000);
-			var b = document.getElementById("log_text");
-			b.value = result;
+			$("#log_text").attr("value",result);
+			//$("#log_text").val(result);
+			//var b = document.getElementById("log_text");
+			//b.value = result;
 		});
 	});
 	/**
@@ -117,12 +121,14 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 	$("#load_monport").click(function() {
 		//$("#load_monport").attr("disabled", "true");
 		$("#monport_text").addClass("textarea_bgpic");
-		monport_txt.value = "";
+		$("#monport_text").val("");
+		//monport_txt.value = "";
 		$("#monprot_wait").show();
 		$.post(form_load_monport, "load_monport", function(result) {
 			$("#monprot_wait").hide();
 			$("#monport_text").removeClass("textarea_bgpic");
-			monport_txt.value = result;
+			$("#monport_text").val(result);
+			//monport_txt.value = result;
 			//$("#load_monport").attr("disabled", "fasle");
 			//$("#log_text").html("1231");
 			//$("#log_text").html(result);
@@ -165,12 +171,15 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 	 * 加载规约配置文件
 	 */
 	$("#load_procotol").click(function() {
+		//var t = document.getElementById("procotol_text");
 		$("#procotol_text").addClass("textarea_bgpic");
 		$("#procotol_text").val("");
 		$.post(form_load_protocol, "load_monport", function(result) {
 			$("#procotol_text").removeClass("textarea_bgpic");
+			//alert("结果1");
 			$("#procotol_text").val(result);
-			//$("#log_text").html("1231");
+			//alert("结果2");
+			$("#log_text").html("1231");
 			//$("#log_text").html(result);
 			// 完成之后隐藏
 		});
