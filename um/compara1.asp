@@ -1,9 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html>
-	<HEAD>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
 		<title>串口方案</title>
-		<!--  Copyright (c) Echon., 2006. All Rights Reserved. -->
-		<meta http-equiv="Pragma" content="no-cache" charset="utf-8" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 		<link rel="stylesheet" href="/style/normal_ws.css" type="text/css"/>
 		<link rel="stylesheet" href="/style/sys.css" type="text/css"/>
 		<link href="/style/menuExpandable3.css" rel="stylesheet" type="text/css"/>
@@ -51,7 +51,7 @@
 		</script>
 	</head>
 	<body>
-		<h1 align="center"><img src="/graphics/logo32.png" height="45"></h1>
+		<h1 align="center"><img src="/graphics/logo32.png" height="45" /></h1>
 		<form action="/goform/sioplan" method="post" id="paraform" name="paraform">
 			<table id="Table1" border="1" cellspacing="1" cellpadding="1" class="sioplanTable">
 				<thead>
@@ -65,21 +65,21 @@
 					</tr>
 				</thead>
 				<!-- 循环依次添加所有串口方案 一列一条  -->
-				<tbody id="tbody_dat" > </tbody>
+				<tbody id="tbody_dat" ><tr><td>数据</td></tr> </tbody>
 			</table>
 		</form>
 		<p align="center" height=25>
-			<input type="button" name="Update" value="设置" id="Update" onclick="db_update();">
+			<input type="button" name="Update" value="设置" id="Update" onclick="db_update();" />
 			<!--
 			<input type=button name=bDelItem value="删除" ID="bDelItem"  onclick="return
 			DelSubmit();">
 			<input type=button  name=bAddItem value="添加" ID="bAddItem" OnClick="return
 			Redirect('AddRoutePara.asp');" >
 			-->
-			<input type="button" name="Refresh" value="读取" id="Refresh" onclick="return RefreshWin();">
+			<input type="button" name="Refresh" value="读取" id="Refresh" onclick="return RefreshWin();" />
 			<!-- 提交操作类型 更新,还是其他 -->
-			<input class="hideinp" type="text" name="OpType" value="" id="optype">
-			<button id="btnsio"> 更新 </button>
+			<input class="hideinp" type="text" name="OpType" value="" id="optype" />
+			<button id="btnsio">更新</button>
 		</p>
 	</body>
 </html>
