@@ -1547,6 +1547,7 @@ TD.lb-bkg-w {
 	display: block;
 	width: 80%;
 	height: 300px;
+	/*row: 20;*/
 	box-shadow: 0pt 1px 2px rgba(0, 0, 0, 0.18) inset;
 	overflow-y: auto;
 	margin: auto;
@@ -1558,11 +1559,15 @@ TD.lb-bkg-w {
 	float:left;
 	display: none;
 	border:0px;
-	width:16px;
-	height:16px;
-	background:  url('/style/images/ui-anim_basic_16x16.gif') right center no-repeat;
+	width:24px;
+	height:24px;
+	background:  url('/style/images/load_24x24.gif') right center no-repeat;
 	/*background:transparent url("./images/ui-anim_basic_16x16.gif") 0 0;*/
 	/*background: white url('images/ui-anim_basic_16x16.gif') right center no-repeat;*/
+}
+/*等待图标背景*/
+.waiticon_bgpic{ 
+	background: url('/style/images/load_r.gif') no-repeat 50% 50%;
 }
 .date {
 	size:20;
@@ -1573,9 +1578,9 @@ TD.lb-bkg-w {
 }
 /*浏览器发送数据的等待标志.*/
 .textarea_bgpic_t{ 
-	background: url('/style/images/350_t.gif') no-repeat 50% 50%;
+	background: url('/style/images/load_t.gif') no-repeat 50% 50%;
 }
 /*浏览器接收数据的等待.*/
 .textarea_bgpic{ 
-	background: url('/style/images/350_r.gif') no-repeat 50% 50%;
+	background: url('/style/images/load_r.gif') no-repeat 50% 50%;
 }

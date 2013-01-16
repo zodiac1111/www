@@ -51,6 +51,7 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 		// 显示
 		//$("#tr_dat").html("");
 		$("#msgbox_wait").show("fade", {}, 1);
+		//$("#msgbox_wait").addClass("waiticon");
 		$.post('/goform/get_tou', $("#history_tou").serialize() + "&mtr_no=" + $("#mtr_no").val(), function(result) {
 			$("#tr_dat").html(result);
 			// 动态加载完的页面才可以接收鼠标悬停等事件
@@ -62,6 +63,7 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 			});
 			// 完成之后隐藏
 			$("#msgbox_wait").hide("fade", {}, 1000);
+			//$("#msgbox_wait").removeClass("waiticon");
 		});
 	});
 	/**
@@ -73,7 +75,7 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 		$.ajax({
 			type : "post",
 			url : "/goform/load_log",
-			contentType: "application/x-www-form-urlencoded; charset=utf-8", ///TODO GB2312编码,必须和服务器对应.待UTF8
+			contentType: "application/x-www-form-urlencoded; charset=utf-8", 
 			dataType : "text",
 			data : "load",
 			beforeSend : function(XMLHttpRequest) {
@@ -113,10 +115,10 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 						"保存" : function() {
 							$(this).dialog("close");
 							//alert("确认保存");
-							$("#log_wait").show("fade", {}, 1);
+								$("#log_text").addClass("textarea_bgpic");
 							$.post("/goform/save_log", $("#log_text").val(), function(result) {
 								// 完成之后隐藏
-								$("#log_wait").hide("fade", {}, 1000);
+									$("#log_text").removeClass("textarea_bgpic");
 							});
 						},
 						"取消" : function() {
@@ -133,20 +135,16 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 	 * 从服务器加载 监视端口配置文件(端口文本描述)
 	 */
 	$("#load_monport").click(function() {
-		//$("#load_monport").attr("disabled", "true");
 		$("#monport_text").addClass("textarea_bgpic");
 		$("#monport_text").val("");
-		//monport_txt.value = "";
-		$("#monprot_wait").show();
 		$.post(form_load_monport, "load_monport", function(result) {
-			$("#monprot_wait").hide();
 			$("#monport_text").removeClass("textarea_bgpic");
 			$("#monport_text").val(result);
 			// 完成之后隐藏
 		});
 	});
 	/**
-	 * 将文本保存到服务器的监视端口配置文件
+	 * 将文本保存到服务器的 监视端口配置文件
 	 */
 	$("#save_monport").click(function() {
 		if (monport_txt.value == "") {
@@ -161,16 +159,15 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 						"保存" : function() {
 							$(this).dialog("close");
 							//alert("确认保存");
-							$("#monprot_wait").show("fade", {}, 1);
+							$("#monport_text").addClass("textarea_bgpic");
 							$.post(form_save_monport, $("#monport_text").val(), function(result) {
 								// 完成之后隐藏
-								$("#monprot_wait").hide("fade", {}, 1000);
+								$("#monport_text").removeClass("textarea_bgpic");
 							});
 						},
 						"取消" : function() {
 							$(this).dialog("close");
 							//alert("取消了");
-							//return;
 						}
 					}
 				});
@@ -181,15 +178,17 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 	 * 加载规约配置文件
 	 */
 	$("#load_procotol").click(function() {
-		//var t = document.getElementById("procotol_text");
 		$("#procotol_text").addClass("textarea_bgpic");
 		$("#procotol_text").val("");
 		$.post(form_load_protocol, "load_monport", function(result) {
+			//alert("ajax完成");
 			$("#procotol_text").removeClass("textarea_bgpic");
-			//alert("结果1");
 			$("#procotol_text").val(result);
 		});
 	});
+	/**
+	 * 保存规约配置文件
+	 */
 	$("#save_procotol").click(function() {
 		if (monport_txt.value == "") {
 			alert("文本不能为空");
@@ -203,16 +202,15 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 						"保存" : function() {
 							$(this).dialog("close");
 							//alert("确认保存");
-							//$("#monprot_wait").show("fade", {}, 1);
+							$("#procotol_text").addClass("textarea_bgpic");
 							$.post(form_save_protocol, $("#procotol_text").val(), function(result) {
-								// 完成之后隐藏
-								//$("#monprot_wait").hide("fade", {}, 1000);
+								// 完成
+								$("#procotol_text").removeClass("textarea_bgpic");
 							});
 						},
 						"取消" : function() {
 							$(this).dialog("close");
 							//alert("取消了");
-							//return;
 						}
 					}
 				});
