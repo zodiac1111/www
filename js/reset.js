@@ -69,15 +69,10 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 	 */
 	$("#load_log").click(function() {
 		$("#log_text").addClass("textarea_bgpic");
-		//$("#log_text").val("");
-		$("#log_text").attr("value", "");
-		// 显示
-		//$("#log_wait").show();
-		//$("#log_wait").attr("disabled", "true");
+		$("#log_text").val("");
 		$.ajax({
 			type : "post",
 			url : "/goform/load_log",
-			//contentType : "application/json; charset=utf-8",
 			dataType : "text",
 			data : "load",
 			beforeSend : function(XMLHttpRequest) {
@@ -87,18 +82,12 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 			},
 			//成功(先成功,后完成)
 			success : function(data, textStatus) {
-				console.log( data );
-				alert("ajax成功,状态:" + textStatus + ",数据:" + data);
-				//start();
-				$("#log_text").val(data);
-				//填充数据
+				//alert("ajax成功,状态:" + textStatus + ",数据:" + data);
+				$("#log_text").val(data);//填充数据
 			},
 			//完成(成功/失败)
 			complete : function(XMLHttpRequest, textStatus) {
-				alert("ajax完成,接收:对象:" + XMLHttpRequest + ",状态:" + textStatus);
-				//HideLoading();
-				//$("#mon_msg").show();
-				//$("#mon_msg_stop").hide();
+				//alert("ajax完成,接收:对象:" + XMLHttpRequest + ",状态:" + textStatus);
 				$("#log_text").removeClass("textarea_bgpic");
 			},
 			error : function() {
@@ -106,17 +95,6 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 				//$("#msg_text").html("Ajax错误");
 			}
 		});
-		//按钮不应该能按
-		// $.post("/goform/load_log", "load", function(result) {
-		// alert(result);
-		// $("#log_wait").attr("disabled", "false");
-		// $("#log_text").removeClass("textarea_bgpic");
-		// //$("#log_wait").hide();
-		// //$("#log_text").attr("value",result);
-		// //$("#log_text").val(result);
-		// //var b = document.getElementById("log_text");
-		// //b.value = result;
-		// });
 	});
 	/**
 	 * 将文本保存到服务器的错误日志文件
@@ -163,10 +141,6 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 			$("#monprot_wait").hide();
 			$("#monport_text").removeClass("textarea_bgpic");
 			$("#monport_text").val(result);
-			//monport_txt.value = result;
-			//$("#load_monport").attr("disabled", "fasle");
-			//$("#log_text").html("1231");
-			//$("#log_text").html(result);
 			// 完成之后隐藏
 		});
 	});

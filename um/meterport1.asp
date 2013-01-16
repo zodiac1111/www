@@ -6,16 +6,16 @@
 <link rel="stylesheet" href="/style/normal_ws.css" type="text/css"></link>
 <link rel="stylesheet" href="/style/sys.css" type="text/css"></link>
 <link href="/style/menuExpandable3.css" rel="stylesheet" type="text/css"></link>
-<script src="/style/wwyfunc.js" language='javascript' type='text/JavaScript' > </script>
+<script src="/style/wwyfunc.js"  type='text/javascript' > </script>
 </HEAD>
 <body> 
-	<form action="/goform/SetRoute"  method=post  ID="paraform" name="paraform">
-		<table width="60%" align=center ID="Table1" border="0" cellspacing="0" cellpadding="1" bgcolor=#ffffff >
+	<form action="/goform/SetRoute"  method="post"  id="paraform" name="paraform">
+		<table width="60%" align="center" id="Table1" border="0" cellspacing="0" cellpadding="1" bgcolor=#ffffff >
 			<tr>
-				<td>&nbsp</td>
+				<td>&nbsp;</td>
 			</tr>
 			<tr>
-				<td>&nbsp</td>
+				<td>&nbsp;</td>
 			</tr>
 			<tr>
         <td class="lb-top-head"  valign=top  align=center height="100%">
@@ -52,7 +52,7 @@
 	      </td>
       </tr>
       <tr >
-	     <td class="lb-body" valign=top  align=center>
+	     <td class="lb-body" valign="top"  align="center>
 		    <table border="0" width="99%" " style="margin-top:5" ID="Table3">
 			   <tr>
 				  <td class="lb-bkg" valign="top">
@@ -76,8 +76,8 @@
 							  <OPTION  value=2>奇校验</OPTION>
 							  </SELECT>
 							</td>
-							<td class=sysTDNcLItemStyle ><input class=ntx type=text size=5 name=v_iedNo0 id=v_iedNo0 value=0></td>
-							<td class=sysTDNcLItemStyle ><input class=ntx type=text size=5 name=v_iedNo0 id=v_iedNo0 value=0></td>
+							<td class=sysTDNcLItemStyle ><input class="ntx" type="text" size=5 name="v_iedNo0" id="v_iedNo0" value=0></td>
+							<td class=sysTDNcLItemStyle ><input class="ntx" type="text" size=5 name="v_iedNo0" id="v_iedNo1" value=0></td>
 							<td class=sysTDNcLItemStyle><SELECT name=type0 >
 							 	 <OPTION  value=0>300</OPTION>
 							 	 <OPTION  value=1>600</OPTION>
@@ -99,16 +99,16 @@
 		    </table>
 	     </td>
       </tr>
-	    <tr valign=top>
+	    <tr valign="top">
 		   <td>
 		   </td>
 	    </tr>
  	    <tr>
 		    <td ALIGN="center" height=25> 
-			  <input type=button name="Update" value="更新" ID="Update" OnClick="UpdateTheSelect();">
-			  <input type=button name=bDelItem value="删除" ID="bDelItem"  onclick="return DelSubmit();">
-			  <input type=button  name=bAddItem value="添加" ID="bAddItem" OnClick="return Redirect('AddRoutePara.asp');" >
-			  <input type=button  name=Refresh value="刷新" ID="Refresh" OnClick="return RefreshWin();" > 
+			  <input type="button" name="Update" value="更新" ID="Update" OnClick="UpdateTheSelect();">
+			  <input type="button" name="bDelItem" value="删除" ID="bDelItem"  onclick="return DelSubmit();">
+			  <input type="button"  name="bAddItem" value="添加" ID="bAddItem" OnClick="return Redirect('AddRoutePara.asp');" >
+			  <input type="button"  name="Refresh" value="刷新" ID="Refresh" OnClick="return RefreshWin();" > 
 		    </td>
 	    </tr> 		
 		</table>
