@@ -7,6 +7,7 @@
 		<link rel="stylesheet" href="/style/normal_ws.css" type="text/css" />
 		<link rel="stylesheet" href="/style/sys.css" type="text/css" />
 		<link href="../style/menuExpandable3.css" rel="stylesheet" type="text/css" />
+		<link href="/style/table.css" type="text/css" rel="stylesheet" />
 		<script src="../style/wwyfunc.js" type='text/javascript'></script>
 		<script type="text/javascript" src="/style/jquery-1.8.3.min.js"></script>
 		<script type="text/javascript" src="/style/clone_tableheader.js"></script>
@@ -41,9 +42,9 @@
 					// 显示
 					$("#optype").val = 4;
 					//$("#tr_dat").html("<tr><td colspan=\"999\" ></td></tr>");
-					$("#tr_dat tr td").addClass('load_bgpic_hight');
+					//$("#tr_dat tr td").addClass('load_bgpic_hight');
 					$.post('/goform/formTest', $("#mtrparaform").serialize(), function(result) {
-						$("#tr_dat tr td").removeClass('load_bgpic_hight');
+						//$("#tr_dat tr td").removeClass('load_bgpic_hight');
 						$("#tr_dat").html(result);
 						// 动态加载完的页面才可以接收鼠标悬停等事件
 						$("#MyTable").dataTable();
@@ -58,45 +59,45 @@
 	<body>
 		<h1 align="center"><img src="/graphics/logo32.png" height="45"></h1>
 		<form action="/goform/formTest" method="post" id="mtrparaform" name="mtrparaform">
-			<table  id="MyTable" width="100%">
+			<table  id="MyTable" class="mtrparaTable">
 				<!--<table width="1200" border="1" cellpadding="0" cellspacing="0" id="MyTable" style="border-bottom-color: black; border-top-color: black; width: 1300px; color: #000000; border-right-color: black; font-size: medium; border-left-color: black"> -->
 				<thead>
 					<tr >
 						<!--<tr style="background-color: #eeeeee; margin: 0px; line-height: 20px; font-weight: bold; padding: 0px 0px 0px 0px;"> -->
-						<th width="31" class="mtrparamTableHead">表号</th>
-						<th width="48" class="mtrparamTableHead"> 有效 <br>
+						<th  class="mtrparamTableHead">表号</th>
+						<th class="mtrparamTableHead"> 有效 <br>
 						<input type="checkbox" name=iv_all value=iv_all onclick="iv_all_click(event);">
 						</th>
-						<th width="48" class="mtrparamTableHead">线路名称</th>
-						<th width="48" class="mtrparamTableHead">表计地址</th>
-						<th width="48" class="mtrparamTableHead">表计口令</th>
-						<th width="48" class="mtrparamTableHead">使用端口</th>
-						<th width="74" class="mtrparamTableHead"> 串口方案 <br> <% sioplan(); %> </th>
-						<th width="74" class="mtrparamTableHead"> 表计规约 <br> <% mtr_protocol(); %> </th>
-						<th width="74" class="mtrparamTableHead"> 生产厂家 <br> <% factory(); %> </th>
-						<th width="74" class="mtrparamTableHead"> 电表类型 <br> <% ph_wire2(); %> </th>
-						<th width="74" class="mtrparamTableHead"> 电量小数 <br>
+						<th  class="mtrparamTableHead">线路名称</th>
+						<th  class="mtrparamTableHead">表计地址</th>
+						<th  class="mtrparamTableHead">表计口令</th>
+						<th  class="mtrparamTableHead">使用端口</th>
+						<th class="mtrparamTableHead"> 串口方案 <br> <% sioplan(); %> </th>
+						<th  class="mtrparamTableHead"> 表计规约 <br> <% mtr_protocol(); %> </th>
+						<th  class="mtrparamTableHead"> 生产厂家 <br> <% factory(); %> </th>
+						<th  class="mtrparamTableHead"> 电表类型 <br> <% ph_wire2(); %> </th>
+						<th  class="mtrparamTableHead"> 电量小数 <br>
 						<input class="ntx" type="text" size=1 maxlength=1 name=all_it_dot value="0" onchange="all_it_dot_changed(event);">
 						</th>
-						<th width="74" class="mtrparamTableHead"> 需量小数 <br>
+						<th  class="mtrparamTableHead"> 需量小数 <br>
 						<input class="ntx" type="text" size=1 maxlength=1 name=all_xl_dot value="0" onchange="all_xl_dot_changed(event);">
 						</th>
-						<th width="74" class="mtrparamTableHead"> 电压小数 <br>
+						<th  class="mtrparamTableHead"> 电压小数 <br>
 						<input class="ntx" type="text" size=1 maxlength=1 name=all_v_dot value="0" onchange="all_v_dot_changed(event);">
 						</th>
-						<th width="74" class="mtrparamTableHead"> 电流小数 <br>
+						<th  class="mtrparamTableHead"> 电流小数 <br>
 						<input class="ntx" type="text" size=1 maxlength=1 name=all_i_dot value="0" onchange="all_i_dot_changed(event);">
 						</th>
-						<th width="74" class="mtrparamTableHead"> 有功小数 <br>
+						<th  class="mtrparamTableHead"> 有功小数 <br>
 						<input class="ntx" type="text" size=1 maxlength=1 name=all_p_dot value="0" onchange="all_p_dot_changed(event);">
 						</th>
-						<th width="74" class="mtrparamTableHead"> 无功小数 <br>
+						<th class="mtrparamTableHead"> 无功小数 <br>
 						<input class="ntx" type="text" size=1 maxlength=1 name=all_q_dot value="0" onchange="all_q_dot_changed(event);">
 						</th>
-						<th width="74" class="mtrparamTableHead"> 额定电压 <br>
+						<th class="mtrparamTableHead"> 额定电压 <br>
 						<input class="ntx" type="text" size=1 name=all_ue value="0" onchange="all_ue_changed(event);">
 						</th>
-						<th width="74" class="mtrparamTableHead"> 额定电流 <br>
+						<th class="mtrparamTableHead"> 额定电流 <br>
 						<input class="ntx" type="text" size=1 name=all_ie value="0" onchange="all_ie_changed(event);">
 						</th>
 					</tr>

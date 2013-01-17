@@ -50,3 +50,29 @@
 	BACKGROUND-COLOR: #F7FAFF;
 	text-align: left;
 }
+/* #### 表计参数(mtrpara)表格样式 */
+.mtrparaTable {
+	BORDER-BOTTOM: #76A8D9 2px outset;
+	BORDER-LEFT: #76A8D9 2px outset;
+	BORDER-RIGHT: #76A8D9 2px outset;
+	BORDER-TOP: #76A8D9 2px outset;
+	text-align: center; /*表格内文本水平居中*/
+	margin: auto; /*整个表格居中*/
+}
+/* 表头 */
+.mtrparaTable thead {
+	
+}
+
+.mtrparaTable th {
+	BACKGROUND-COLOR: #76A8D9;
+	BORDER-BOTTOM: #ffffff 2px outset;
+	BORDER-LEFT: #ffffff 2px outset;
+	BORDER-RIGHT: #ffffff 2px outset;
+	BORDER-TOP: #ffffff 2px outset;
+}
+
+.infoTable td {
+	BACKGROUND-COLOR: #F7FAFF;
+	text-align: left;
+}

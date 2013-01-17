@@ -5,9 +5,9 @@
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 		<title>功能菜单</title>
 		<meta http-equiv="Pragma" content="no-cache" />
-		<link rel="stylesheet" href="/style/normal_ws.css" type="text/css"/>
-		<link rel="stylesheet" href="/style/sys.css" type="text/css"/>
-		<link rel="stylesheet" href="/style/table.css" type="text/css"/>
+		<link rel="stylesheet" href="/style/normal_ws.css" type="text/css" />
+		<link rel="stylesheet" href="/style/sys.css" type="text/css" />
+		<link href="/style/table.css" type="text/css" rel="stylesheet" />
 		<link href="/style/menuExpandable3.css" rel="stylesheet" type="text/css" />
 		<script src="/style/wwyfunc.js" type="text/javascript"></script>
 		<!-- 基于jquery的日期时间控件所需要的文件 -开始 -->
@@ -145,30 +145,30 @@
 						</tr>
 					</thead>
 					<tbody>
-					<tr>
-						<td>服务器程序</td>
-						<td id="info_webbin">/mnt/nor/bin/webs</td>
-					</tr>
-					<tr>
-						<td>服务器配置文件</td>
-						<td id="info_webconf">/mnt/nor/conf/goahead.conf</td>
-					</tr>
-					<tr>
-						<td>服务器日志</td>
-						<td id="info_weblog">/mnt/nor/wwwdemo/err.log</td>
-					</tr>
-					<tr>
-						<td>页面根目录</td>
-						<td id="info_wwwroot">/mnt/nor/wwwdemo</td>
-					</tr>
-					<tr>
-						<td>终端配置文件目录(conf)</td>
-						<td id="info_rtuconf">/mnt/nor/conf</td>
-					</tr>
-					<tr>
-						<td>终端参数文件目录(para)</td>
-						<td id="info_rtupara">/mnt/nor/para</td>
-					</tr>
+						<tr>
+							<td>服务器程序</td>
+							<td id="info_webbin">/mnt/nor/bin/webs</td>
+						</tr>
+						<tr>
+							<td>服务器配置文件</td>
+							<td id="info_webconf">/mnt/nor/conf/goahead.conf</td>
+						</tr>
+						<tr>
+							<td>服务器日志</td>
+							<td id="info_weblog">/mnt/nor/wwwdemo/err.log</td>
+						</tr>
+						<tr>
+							<td>页面根目录</td>
+							<td id="info_wwwroot">/mnt/nor/wwwdemo</td>
+						</tr>
+						<tr>
+							<td>终端配置文件目录(conf)</td>
+							<td id="info_rtuconf">/mnt/nor/conf</td>
+						</tr>
+						<tr>
+							<td>终端参数文件目录(para)</td>
+							<td id="info_rtupara">/mnt/nor/para</td>
+						</tr>
 					</tbody>
 				</table>
 			</div>
