@@ -73,11 +73,6 @@
 			<div id="tabs-log">
 				<textarea id="log_text" class="log_txt" rows="20" cols="80" > </textarea>
 				<p align="center">
-					<!--
-					<button id="import_log">导入</button>
-					<button id="export_log">导出</button>
-
-					_______-->
 					<button id="load_log" title="从终端读取日志文件."> 读取 </button>
 					<button id="save_log" title="将文本保存到终端日志文件中."> 保存 </button>
 				</p>
@@ -155,6 +150,10 @@
 					<tr>
 						<td>服务器配置文件</td>
 						<td id="info_webconf">/mnt/nor/conf/goahead.conf</td>
+					</tr>
+					<tr>
+						<td>服务器日志</td>
+						<td id="info_weblog">/mnt/nor/wwwdemo/err.log</td>
 					</tr>
 					<tr>
 						<td>页面根目录</td>

@@ -78,7 +78,7 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 		$.ajax({
 			type : "post",
 			url : "/goform/load_log",
-			contentType: "application/x-www-form-urlencoded; charset=utf-8", 
+			contentType : "application/x-www-form-urlencoded; charset=utf-8",
 			dataType : "text",
 			data : "load",
 			beforeSend : function(XMLHttpRequest) {
@@ -89,7 +89,8 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 			//成功(先成功,后完成)
 			success : function(data, textStatus) {
 				//alert("ajax成功,状态:" + textStatus + ",数据:" + data);
-				$("#log_text").val(data);//填充数据
+				$("#log_text").val(data);
+				//填充数据
 			},
 			//完成(成功/失败)
 			complete : function(XMLHttpRequest, textStatus) {
@@ -118,10 +119,10 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 						"保存" : function() {
 							$(this).dialog("close");
 							//alert("确认保存");
-								$("#log_text").addClass("textarea_bgpic");
+							$("#log_text").addClass("textarea_bgpic");
 							$.post("/goform/save_log", $("#log_text").val(), function(result) {
 								// 完成之后隐藏
-									$("#log_text").removeClass("textarea_bgpic");
+								$("#log_text").removeClass("textarea_bgpic");
 							});
 						},
 						"取消" : function() {
