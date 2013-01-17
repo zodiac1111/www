@@ -9,9 +9,15 @@
 		<link href="../style/menuExpandable3.css" rel="stylesheet" type="text/css" />
 		<link href="/style/table.css" type="text/css" rel="stylesheet" />
 		<script src="../style/wwyfunc.js" type='text/javascript'></script>
-		<script type="text/javascript" src="/style/jquery-1.8.3.min.js"></script>
-		<script type="text/javascript" src="/style/clone_tableheader.js"></script>
-		<link href="/style/jquery.dataTables.css" rel="stylesheet" type="text/css" />
+		<script  src="/style/jquery-1.8.3.min.js" type="text/javascript"></script>
+		<script src="/style/clone_tableheader.js"  type="text/javascript"></script>
+		<!--jquery ui -->
+		<link rel="stylesheet" media="all" type="text/css" href="/style/jquery-ui.css" />
+		<script type="text/javascript" src="/style/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="/style/jquery-ui.min-zh-CN.js"></script>
+		<!-- jquery plugin:datatable-->
+		<link type="text/css" href="/style/jquery.dataTables.css" rel="stylesheet"  />
+		 <link type="text/css" href="/style/jquery.dataTables_themeroller.css" rel="stylesheet"  /> 
 		<script type="text/javascript" src="/js/jquery.dataTables.js"></script>
 		<script type="text/javascript">
 			//页面初始化 加载 JS函数
@@ -34,7 +40,26 @@
 
 
 			$(document).ready(function() {
-				$("#MyTable").dataTable();
+				$('#MyTable').dataTable({
+					//"bPaginate" : true, //分页
+					//"bLengthChange" : true, //每页显示多少相
+					//"bFilter" : true, //搜索
+					"bSort" : false, //排序
+					//"bInfo" : true, //显示一共多少相,现在时第几项
+					//"bAutoWidth" : true,
+					//"sScrollY": 200,
+					//"sScrollX": "100%",
+					//"sScrollXInner": "105%",
+					//"bJQueryUI" : true,
+					//"sPaginationType" : "full_numbers",
+					// "oLanguage" : {
+					// "sLengthMenu" : "每页显示 _MENU_ 条记录",
+					// "sZeroRecords" : "Nothing found - sorry",
+					// "sInfo" : "显示第 _START_ 到第 _END_ 条,共 _TOTAL_ 条",
+					// "sInfoEmpty" : "Showing 0 to 0 of 0 records",
+					// "sInfoFiltered" : "(filtered from _MAX_ total records)"
+					// }
+				});
 				/**
 				 * post方法刷新标记参数
 				 */
@@ -59,45 +84,45 @@
 	<body>
 		<h1 align="center"><img src="/graphics/logo32.png" height="45"></h1>
 		<form action="/goform/formTest" method="post" id="mtrparaform" name="mtrparaform">
-			<table  id="MyTable" class="mtrparaTable">
+			<table  id="MyTable"  class="sioplanTable" width="100%" >
 				<!--<table width="1200" border="1" cellpadding="0" cellspacing="0" id="MyTable" style="border-bottom-color: black; border-top-color: black; width: 1300px; color: #000000; border-right-color: black; font-size: medium; border-left-color: black"> -->
 				<thead>
 					<tr >
 						<!--<tr style="background-color: #eeeeee; margin: 0px; line-height: 20px; font-weight: bold; padding: 0px 0px 0px 0px;"> -->
-						<th  class="mtrparamTableHead">表号</th>
-						<th class="mtrparamTableHead"> 有效 <br>
+						<th  >表号</th>
+						<th > 有效 <br>
 						<input type="checkbox" name=iv_all value=iv_all onclick="iv_all_click(event);">
 						</th>
-						<th  class="mtrparamTableHead">线路名称</th>
-						<th  class="mtrparamTableHead">表计地址</th>
-						<th  class="mtrparamTableHead">表计口令</th>
-						<th  class="mtrparamTableHead">使用端口</th>
-						<th class="mtrparamTableHead"> 串口方案 <br> <% sioplan(); %> </th>
-						<th  class="mtrparamTableHead"> 表计规约 <br> <% mtr_protocol(); %> </th>
-						<th  class="mtrparamTableHead"> 生产厂家 <br> <% factory(); %> </th>
-						<th  class="mtrparamTableHead"> 电表类型 <br> <% ph_wire2(); %> </th>
-						<th  class="mtrparamTableHead"> 电量小数 <br>
+						<th  >线路名称</th>
+						<th  >表计地址</th>
+						<th  >表计口令</th>
+						<th  >使用端口</th>
+						<th > 串口方案 <br> <% sioplan(); %> </th>
+						<th  > 表计规约 <br> <% mtr_protocol(); %> </th>
+						<th  > 生产厂家 <br> <% factory(); %> </th>
+						<th  > 电表类型 <br> <% ph_wire2(); %> </th>
+						<th  > 电量小数 <br>
 						<input class="ntx" type="text" size=1 maxlength=1 name=all_it_dot value="0" onchange="all_it_dot_changed(event);">
 						</th>
-						<th  class="mtrparamTableHead"> 需量小数 <br>
+						<th  > 需量小数 <br>
 						<input class="ntx" type="text" size=1 maxlength=1 name=all_xl_dot value="0" onchange="all_xl_dot_changed(event);">
 						</th>
-						<th  class="mtrparamTableHead"> 电压小数 <br>
+						<th  > 电压小数 <br>
 						<input class="ntx" type="text" size=1 maxlength=1 name=all_v_dot value="0" onchange="all_v_dot_changed(event);">
 						</th>
-						<th  class="mtrparamTableHead"> 电流小数 <br>
+						<th  > 电流小数 <br>
 						<input class="ntx" type="text" size=1 maxlength=1 name=all_i_dot value="0" onchange="all_i_dot_changed(event);">
 						</th>
-						<th  class="mtrparamTableHead"> 有功小数 <br>
+						<th  > 有功小数 <br>
 						<input class="ntx" type="text" size=1 maxlength=1 name=all_p_dot value="0" onchange="all_p_dot_changed(event);">
 						</th>
-						<th class="mtrparamTableHead"> 无功小数 <br>
+						<th > 无功小数 <br>
 						<input class="ntx" type="text" size=1 maxlength=1 name=all_q_dot value="0" onchange="all_q_dot_changed(event);">
 						</th>
-						<th class="mtrparamTableHead"> 额定电压 <br>
+						<th > 额定电压 <br>
 						<input class="ntx" type="text" size=1 name=all_ue value="0" onchange="all_ue_changed(event);">
 						</th>
-						<th class="mtrparamTableHead"> 额定电流 <br>
+						<th > 额定电流 <br>
 						<input class="ntx" type="text" size=1 name=all_ie value="0" onchange="all_ie_changed(event);">
 						</th>
 					</tr>

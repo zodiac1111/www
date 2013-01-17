@@ -32,6 +32,7 @@
 	BORDER-TOP: #76A8D9 2px outset;
 	text-align: center; /*表格内文本水平居中*/
 	margin: auto; /*整个表格居中*/
+	/*width: 1000;*/
 }
 /* 表头 */
 .infoTable thead {
