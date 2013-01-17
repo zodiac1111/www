@@ -10,6 +10,8 @@
 		<script src="../style/wwyfunc.js" type='text/javascript'></script>
 		<script type="text/javascript" src="/style/jquery-1.8.3.min.js"></script>
 		<script type="text/javascript" src="/style/clone_tableheader.js"></script>
+		<link href="/style/jquery.dataTables.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="/js/jquery.dataTables.js"></script>
 		<script type="text/javascript">
 			//页面初始化 加载 JS函数
 			$(document).ready(cloneTableHeader_Width);
@@ -25,43 +27,42 @@
 				}
 				//调用 锁定表头和 列 的JS函数
 				$(document).ready(function() {
-					FixTable("MyTable", 3, myTable_Width, myTable_Heigh);
+					//FixTable("MyTable", 3, myTable_Width, myTable_Heigh);
 				});
+			}
+
+
+			$(document).ready(function() {
+				$("#MyTable").dataTable();
 				/**
 				 * post方法刷新标记参数
 				 */
 				$("#btnPost").click(function() {
 					// 显示
-					//$("#tr_dat").html("");
-					//$("#msgbox_wait").show("fade", {}, 1);
-					//$("#msgbox_wait").addClass("waiticon");
-					$("#tr_dat").html("<tr><td colspan=\"999\" ></td></tr>");
+					$("#optype").val = 4;
+					//$("#tr_dat").html("<tr><td colspan=\"999\" ></td></tr>");
 					$("#tr_dat tr td").addClass('load_bgpic_hight');
 					$.post('/goform/formTest', $("#mtrparaform").serialize(), function(result) {
 						$("#tr_dat tr td").removeClass('load_bgpic_hight');
 						$("#tr_dat").html(result);
 						// 动态加载完的页面才可以接收鼠标悬停等事件
-						$("#tr_dat tr").mouseover(function() {
-							$(this).addClass("over");
-						});
-						$("#tr_dat tr").mouseout(function() {
-							$(this).removeClass("over");
-						});
-						$('#MyTable').dataTable();
+						$("#MyTable").dataTable();
 						// 完成之后隐藏
 						//$("#msgbox_wait").hide("fade", {}, 1000);
 						//$("#msgbox_wait").removeClass("waiticon");
 					});
 				});
-			}
+			});
 		</script>
 	</HEAD>
 	<body>
 		<h1 align="center"><img src="/graphics/logo32.png" height="45"></h1>
 		<form action="/goform/formTest" method="post" id="mtrparaform" name="mtrparaform">
-			<table width="1200" border="1" cellpadding="0" cellspacing="0" id="MyTable" style="border-bottom-color: black; border-top-color: black; width: 1300px; color: #000000; border-right-color: black; font-size: medium; border-left-color: black">
+			<table  id="MyTable" width="100%">
+				<!--<table width="1200" border="1" cellpadding="0" cellspacing="0" id="MyTable" style="border-bottom-color: black; border-top-color: black; width: 1300px; color: #000000; border-right-color: black; font-size: medium; border-left-color: black"> -->
 				<thead>
-					<tr style="background-color: #eeeeee; margin: 0px; line-height: 20px; font-weight: bold; padding: 0px 0px 0px 0px;">
+					<tr >
+						<!--<tr style="background-color: #eeeeee; margin: 0px; line-height: 20px; font-weight: bold; padding: 0px 0px 0px 0px;"> -->
 						<th width="31" class="mtrparamTableHead">表号</th>
 						<th width="48" class="mtrparamTableHead"> 有效 <br>
 						<input type="checkbox" name=iv_all value=iv_all onclick="iv_all_click(event);">
@@ -106,7 +107,7 @@
 			</table>
 			<p ALIGN="center" id=subbtns>
 				<input type="button" name="Update" value="设置" ID="Update" OnClick="db_update();">
-				<input type="button" name="Update" value="设置" id="btnPost">
+
 				<!-- @TODO 添加删除暂时注销,等完善后再开放
 				<input type=button name=bDelItem value="删除" ID="bDelItem" OnClick="db_del();">
 				<input type=button name=bAddItem value="添加" ID="bAddItem" OnClick="db_add();" >
@@ -119,5 +120,6 @@
 				<input class="hideinp" type="text" name="AllSelFlag" value="0" id="AllSelFlag">
 			</p>
 		</form>
+		<button class="ui-button" id="btnPost" title="修改所有表计参数"> 更新 </button>
 	</body>
 </html>
