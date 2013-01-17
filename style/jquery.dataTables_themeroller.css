@@ -16,11 +16,9 @@ table.dataTable thead th {
 }
 
 table.dataTable tfoot th {
-	padding: 3px 10px;
 }
 
 table.dataTable td {
-	padding: 3px 10px;
 }
 
 table.dataTable td.center,
