@@ -21,6 +21,8 @@
 		<script type="text/javascript" src="/style/jquery-ui-sliderAccess.js"></script>
 		<script type="text/javascript" src="/js/reset.js"></script>
 		<!-- 基于jquery的日期时间控件所需要的文件 -结束 -->
+		<link href="/style/jquery.dataTables.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="/js/jquery.dataTables.js"></script>
 		<% init_sysparam(); //加载系统参数 %>
 	</head>
 	<body>

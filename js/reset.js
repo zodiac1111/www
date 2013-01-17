@@ -64,6 +64,7 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 			$("#tr_dat tr").mouseout(function() {
 				$(this).removeClass("over");
 			});
+			$('#tbl_history_tou').dataTable();
 			// 完成之后隐藏
 			//$("#msgbox_wait").hide("fade", {}, 1000);
 			//$("#msgbox_wait").removeClass("waiticon");
