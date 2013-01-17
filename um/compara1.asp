@@ -34,7 +34,7 @@
 				// $("#tbody_dat").html(result);
 				// alert("OK");
 				// });
-				$("#tbody_dat tr td").addClass('load_bgpic_hight');
+				//$("#tbody_dat tr td").addClass('load_bgpic_hight');
 				$("#btnsio").click(function() {
 					$("#tbody_dat").html("<tr><td colspan=\"6\" ></td></tr>");
 					$("#tbody_dat tr td").addClass('load_bgpic_hight');

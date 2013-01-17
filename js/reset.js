@@ -58,10 +58,10 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 			$("#tr_dat tr td").removeClass('load_bgpic_hight');
 			$("#tr_dat").html(result);
 			// 动态加载完的页面才可以接收鼠标悬停等事件
-			$("#history_tou tr").mouseover(function() {
+			$("#tr_dat tr").mouseover(function() {
 				$(this).addClass("over");
 			});
-			$("#history_tou tr").mouseout(function() {
+			$("#tr_dat tr").mouseout(function() {
 				$(this).removeClass("over");
 			});
 			// 完成之后隐藏
