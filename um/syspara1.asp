@@ -93,31 +93,31 @@
 								<tr align="center">
 									<td align="center">表计总数目:</td>
 									<td align="left">
-									<input id="mtr_num" type="text" name="meter_num" size=12 value="<% meter_num(); %>" maxlength=3 onchange="lessthan1byte(event);">
+									<input id="mtr_num" type="text" name="meter_num" size=12  maxlength=3 onchange="lessthan1byte(event);">
 									</td>
 									<td align="center">串口方案数:</td>
 									<td align="left">
-									<input id="sioplan_num"type="text" name="sioplan_num" size=12 value="<% sioplan_num(); %>" maxlength=3 onchange="lessthan1byte(event);">
+									<input id="sioplan_num"type="text" name="sioplan_num" size=12  maxlength=3 onchange="lessthan1byte(event);">
 									</td>
 								</tr>
 								<tr align="left">
 									<td align="center">监视参数:</td>
 									<td align="left">
-									<input id="monitor_ports" type="text" name="monitor_ports" size=12 value="<% monitor_ports(); %>" maxlength=3 onchange="lessthan1byte(event);">
+									<input id="monitor_ports" type="text" name="monitor_ports" size=12  maxlength=3 onchange="lessthan1byte(event);">
 									</td>
 									<td align="center">网口数目:</td>
 									<td align="left">
-									<input id="netports_num" type="text" name="netports_num" size=12 value="<% netports_num(); %>" maxlength=3 onchange="lessthan1byte(event);">
+									<input id="netports_num" type="text" name="netports_num" size=12  maxlength=3 onchange="lessthan1byte(event);">
 									</td>
 								</tr>
 								<tr align="left">
 									<td align="center">串口总数目:</td>
 									<td align="left">
-									<input id="sioports_num" type="text" name="sioports_num" size=12 value="<% sioports_num(); %>" maxlength=3 onchange="lessthan1byte(event);">
+									<input id="sioports_num" type="text" name="sioports_num" size=12  maxlength=3 onchange="lessthan1byte(event);">
 									</td>
 									<td align="center">控制端口数:</td>
 									<td align="left">
-									<input id="control_ports" type="text" name="control_ports" size=12 value="<% control_ports(); %>" maxlength=3 onchange="lessthan1byte(event);">
+									<input id="control_ports" type="text" name="control_ports" size=12  maxlength=3 onchange="lessthan1byte(event);">
 									</td>
 								</tr>
 							</table></td>
@@ -125,16 +125,12 @@
 					</table></td>
 				</tr>
 			</table>
-			<p ALIGN="CENTER">
-				<input type="button"accept="" name="Update" value="设置" ID="Update" OnClick="db_update();">
-				<input type="button" name=ok value="读取" OnClick="return RefreshWin();">
-				<!- 隐藏的输入框,用于提交form命令类型 ->
-				<input class="hideinp" type="text" name="OpType" value="" id="optype">
-			</p>
 		</form>
-		<button id="init" class="hideinp" >初始化</button>
-		<button id="btnUpdate" class="btn_update">更新</button>
-		<input type="text" id="icon_init" class="wait_icon_24x24_load" />
-		<input type="text" id="icon_ok" class="wait_icon_24x24 ok_24x24" />
+		<p align="center">
+			<button id="init" class="hideinp" >初始化</button>
+			<button id="btnUpdate" class="btn_update">更新</button>
+			<input type="text" id="icon_init" class="wait_icon_24x24_load" />
+			<input type="text" id="icon_ok" class="wait_icon_24x24 ok_24x24" />
+		</p>
 	</body>
 </html>
