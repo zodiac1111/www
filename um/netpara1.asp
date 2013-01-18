@@ -42,7 +42,7 @@
 					//$("#tbody_dat tr td").addClass('load_bgpic_hight');
 					$.post('/goform/netpara', $("#netpara").serialize(), function(result) {
 						//$("#tbody_dat tr td").removeClass('load_bgpic_hight');
-						$("#tbody_dat").html(result);
+						//$("#tbody_dat").html(result);
 						$("#icon_init").hide();
 						$("#icon_ok").show();
 						$("#icon_ok").hide("fade", 1000);
@@ -66,7 +66,7 @@
 	<body>
 		<br />
 		<h1 align="center"><img src="/graphics/logo42.png" height="45"></h1>
-		<form id="netpara" action="/goform/netpara" method="post" name="netpara">
+		<form id="netpara"  name="netpara">
 			<table class="sioplanTable" border="1">
 				<thead>
 					<tr>
@@ -78,7 +78,6 @@
 					</tr>
 				</thead>
 				<tbody id="tbody_dat">
-					<!-- <% get_netparams(); %> -->
 				</tbody>
 			</table>
 		</form>

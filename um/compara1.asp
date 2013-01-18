@@ -42,7 +42,7 @@
 					//$("#tbody_dat tr td").addClass('load_bgpic_hight');
 					$.post('/goform/sioplan', $("#paraform").serialize(), function(result) {
 						//$("#tbody_dat tr td").removeClass('load_bgpic_hight');
-						$("#tbody_dat").html(result);
+						//$("#tbody_dat").html(result);
 						$("#icon_init").hide();
 						$("#icon_ok").show();
 						$("#icon_ok").hide("fade", 1000);
