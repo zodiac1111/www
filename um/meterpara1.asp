@@ -38,6 +38,7 @@
 			// });
 			// }
 			$(document).ready(function() {
+				//$("#wait").hide();
 				/* 按鈕 */
 				$(function() {
 					$("#btnPost").button({
@@ -58,14 +59,15 @@
 				});
 				var oTable = $('#MyTable').dataTable();
 				$("#btnPost").click(function() {
+					$("#wait").addClass('wait_icon_24x24_load');
 					$("#optype").val = 4;// 操作类型,更新
 					//$("#tr_dat").html("<tr><td colspan=\"999\" ></td></tr>");
-					//$("#tr_dat tr td").addClass('load_bgpic_hight');
 					/*oTable.$('input').serialize()*/
 					/* formTest  get_tou */
 					$.post('/goform/formTest', $("#mtrparaform").serialize(), function(result) {
 						//$("#tr_dat tr td").removeClass('load_bgpic_hight');
 						$("#tr_dat").html(result);
+						$("#wait").removeClass('wait_icon_24x24_load');
 						oTable.fnDraw();//重绘表格
 					});
 				});
@@ -136,7 +138,7 @@
 			<input type=button name=bAddItem value="添加" ID="bAddItem" OnClick="db_add();" >
 			
 			<input type="button" name=Refresh value="刷新" ID="Refresh" OnClick="return RefreshWin();"> -->
-			<button class="ui-button" id="btnPost" title="修改所有表计参数"> 更新 </button>
+			<button class="ui-button" id="btnPost" title="修改所有表计参数"> 更新 </button><input type="text" id="wait" class="wait_icon_24x24" />
 		</div>
 	</body>
 </html>

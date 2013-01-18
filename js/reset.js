@@ -38,11 +38,6 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 	 */
 	var monport_txt = document.getElementById("monport_text");
 	$(".dialog").hide();
-	$("#btn").click(function() {
-		$.get("/um/compara1.asp", function(result) {
-			$("#log").html(result);
-		});
-	});
 	$("#mon_msg_stop").hide();
 	/**
 	 * 历史电量查询post
@@ -95,6 +90,10 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 				$("#dialog-confirm").dialog({
 					modal : true,
 					buttons : {
+						"取消" : function() {
+							$(this).dialog("close");
+							//alert("取消了");
+						},
 						"保存" : function() {
 							$(this).dialog("close");
 							//alert("确认保存");
@@ -103,10 +102,6 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 								// 完成之后隐藏
 								$("#log_text").removeClass("textarea_bgpic");
 							});
-						},
-						"取消" : function() {
-							$(this).dialog("close");
-							//alert("取消了");
 						}
 					}
 				});
@@ -139,6 +134,10 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 					modal : true,
 					//position: { my: "center", at: "center", of: window },
 					buttons : {
+						"取消" : function() {
+							$(this).dialog("close");
+							//alert("取消了");
+						},
 						"保存" : function() {
 							$(this).dialog("close");
 							//alert("确认保存");
@@ -147,10 +146,6 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 								// 完成之后隐藏
 								$("#monport_text").removeClass("textarea_bgpic");
 							});
-						},
-						"取消" : function() {
-							$(this).dialog("close");
-							//alert("取消了");
 						}
 					}
 				});
@@ -173,15 +168,20 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 	 * 保存规约配置文件
 	 */
 	$("#save_procotol").click(function() {
-		if (monport_txt.value == "") {
+		var t = document.getElementById("procotol_text");
+		if (t.value== "") {
 			alert("文本不能为空");
 		} else {
 			//确认信息框
 			$(function() {
-				$("#dialog-confirm-monport").dialog({
+				$("#dialog-confirm-procotol").dialog({
 					modal : true,
 					//position: { my: "center", at: "center", of: window },
 					buttons : {
+						"取消" : function() {
+							$(this).dialog("close");
+							//alert("取消了");
+						},
 						"保存" : function() {
 							$(this).dialog("close");
 							//alert("确认保存");
@@ -190,10 +190,6 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 								// 完成
 								$("#procotol_text").removeClass("textarea_bgpic");
 							});
-						},
-						"取消" : function() {
-							$(this).dialog("close");
-							//alert("取消了");
 						}
 					}
 				});

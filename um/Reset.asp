@@ -86,7 +86,8 @@
 			</div>
 			<!-- ###标签: 日志 ### -->
 			<div id="tabs-log">
-				<textarea id="log_text" class="log_txt" rows="20" cols="80" > </textarea>
+				<textarea id="log_text" class="log_txt" rows="20" cols="80" >
+				</textarea>
 				<p align="center">
 					<button id="load_log" title="从终端读取日志文件."> 读取 </button>
 					<button id="save_log" title="将文本保存到终端日志文件中."> 保存 </button>
@@ -99,7 +100,7 @@
 			</div>
 			<!-- ###标签: 监视端口描述配置文件 ### -->
 			<div id="tabs-monport-cfg" >
-				<textarea id="monport_text" class="log_txt" rows="20" cols="80" > </textarea>
+				<textarea id="monport_text" class="log_txt" rows="20" cols="80" ></textarea>
 				<p align="center">
 					<button id="import_monprot" title="调试中..."> 导入 </button>
 					<button id="export_monprot" title="调试中..."> 导出 </button>
@@ -120,7 +121,7 @@
 			</div>
 			<!-- ###标签: 规约描述配置文件 ### -->
 			<div id="tabs-procotol-cfg" >
-				<textarea id="procotol_text" class="log_txt" rows="20" cols="80"> </textarea>
+				<textarea id="procotol_text" class="log_txt" rows="20" cols="80"></textarea>
 				<p align="center">
 					<button id="import_procotolt" title="调试中..."> 导入 </button>
 					<button id="export_procotol" title="调试中..."> 导出 </button>
