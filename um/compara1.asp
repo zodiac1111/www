@@ -18,35 +18,49 @@
 		<!-- jquery的 -结束 -->
 		<% init_sysparam(); //初始化系统参数,获得例如表计个数,串口个数,串口方案个数等参数 %>
 		<script type="text/javascript">
-			// $("#tbody_dat tr").mouseover(function() {
-			// $(this).addClass("over");
-			// var rows = $(this).attr('relrow');
-			// });
-			// $("#tbody_dat tr").mouseout(function() {
-			// $(this).removeClass("over");
-			// });
-			//串口参数 post提交
 			$(document).ready(function() {
-				// $.post('/goform/sioplan',
-				// //$.param($("#paraform")),
-				// //$("#paraform").serialize(),
-				// "test", function(result) {
-				// $("#tbody_dat").html(result);
-				// alert("OK");
-				// });
-				//$("#tbody_dat tr td").addClass('load_bgpic_hight');
+				/* 按钮 */
+				$(function() {
+					$(".btn_update").button({
+						icons : {
+							primary : "ui-icon-power"
+						}
+					});
+				});
+				$("#icon_init").hide();
+				$("#icon_ok").hide();
+				//串口参数 post提交
+				/* 定义按钮 post函数 */
 				$("#btnsio").click(function() {
-					$("#tbody_dat").html("<tr><td colspan=\"6\" ></td></tr>");
-					$("#tbody_dat tr td").addClass('load_bgpic_hight');
-					$.post('/goform/sioplan',
-					//$.param($("#paraform")),
-					//$("#paraform").serialize(),
-					"test", function(result) {
-						$("#tbody_dat tr td").removeClass('load_bgpic_hight');
+					var errobj = document.getElementById("errobj");
+					if (errobj != null) {
+						alert("非法参数");
+						return;
+					}
+					$("#icon_init").show();
+					//$("#tbody_dat").html("<tr><td colspan=\"6\" ></td></tr>");
+					//$("#tbody_dat tr td").addClass('load_bgpic_hight');
+					$.post('/goform/sioplan', $("#paraform").serialize(), function(result) {
+						//$("#tbody_dat tr td").removeClass('load_bgpic_hight');
 						$("#tbody_dat").html(result);
+						$("#icon_init").hide();
+						$("#icon_ok").show();
+						$("#icon_ok").hide("fade", 1000);
 						//alert("OK");
 					});
 				});
+				/* 隐藏的按钮用于初始化,应为post的form只能使用按钮触发*/
+				$("#init").click(function() {
+					$("#icon_init").show();
+					$.post('/goform/sioplan', "init=1", function(result) {
+						$("#tbody_dat").html(result);
+						$("#icon_init").hide("fade", 2000);
+						//alert("OK");
+					});
+				});
+				/* 首次加载串口参数 */
+				$("#init").click();
+				//第一次显示页面,直接刷新以显示数据.
 				//$("#btnsio").click();
 			});
 		</script>
@@ -67,24 +81,21 @@
 				</thead>
 				<!-- 循环依次添加所有串口方案 一列一条  -->
 				<tbody id="tbody_dat" >
-					<tr>
-						<td colspan="6" ></td>
-					</tr>
+					<!-- <% load_all_sioplan(); %> -->
 				</tbody>
 			</table>
 		</form>
 		<p align="center" height=25>
-			<input type="button" name="Update" value="设置" id="Update" onclick="db_update();" />
-			<!--
-			<input type=button name=bDelItem value="删除" ID="bDelItem"  onclick="return
-			DelSubmit();">
-			<input type=button  name=bAddItem value="添加" ID="bAddItem" OnClick="return
-			Redirect('AddRoutePara.asp');" >
-			-->
-			<input type="button" name="Refresh" value="读取" id="Refresh" onclick="return RefreshWin();" />
+			<!-- <input type="button" name="Update" value="设置" id="Update" onclick="db_update();" /> -->
+			<!-- <input type="button" name="Refresh" value="读取" id="Refresh" onclick="return RefreshWin();" /> -->
 			<!-- 提交操作类型 更新,还是其他 -->
 			<input class="hideinp" type="text" name="OpType" value="" id="optype" />
-			<button id="btnsio">更新</button>
+
+			<button  class="hideinp" id="init">初始化</button>
+			<button id="btnsio" class="btn_update">更新</button>
+			<input type="text" id="icon_init" class="wait_icon_24x24_load" />
+			<input type="text" id="icon_ok" class="wait_icon_24x24 ok_24x24" />
+
 		</p>
 	</body>
 </html>

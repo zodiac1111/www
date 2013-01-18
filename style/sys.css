@@ -155,7 +155,6 @@
 	align: center;
 }
 
-
 .msnbox {
 	BACKGROUND-COLOR: #76A8D9;
 }
@@ -173,9 +172,9 @@ tr.over td {
 .monparamTableHead {
 	BACKGROUND-COLOR: #76A8D9;
 	/*BORDER-BOTTOM:#76A8D9 0px solid;
-	BORDER-LEFT: #76A8D9 0px solid;
-	BORDER-RIGHT: #76A8D9 0px solid;
-	BORDER-TOP: #76A8D9 0px solid; */
+	 BORDER-LEFT: #76A8D9 0px solid;
+	 BORDER-RIGHT: #76A8D9 0px solid;
+	 BORDER-TOP: #76A8D9 0px solid; */
 	/*align:center; */
 	BORDER-RIGHT: #ffffff 2px outset;
 	PADDING-RIGHT: 0px;
@@ -195,9 +194,9 @@ tr.over td {
 .mtrparamTableHead {
 	BACKGROUND-COLOR: #76A8D9;
 	/*BORDER-BOTTOM:#76A8D9 0px solid;
-	BORDER-LEFT: #76A8D9 0px solid;
-	BORDER-RIGHT: #76A8D9 0px solid;
-	BORDER-TOP: #76A8D9 0px solid; */
+	 BORDER-LEFT: #76A8D9 0px solid;
+	 BORDER-RIGHT: #76A8D9 0px solid;
+	 BORDER-TOP: #76A8D9 0px solid; */
 	align: left;
 	BORDER-RIGHT: #ffffff 2px outset;
 	PADDING-RIGHT: 0px;
@@ -1555,36 +1554,48 @@ TD.lb-bkg-w {
 }
 /*等待图标*/
 .wait_icon_24x24_load {
-	background:  url('/style/images/load_24x24.gif') right center no-repeat;
+	/*position: fixed;*/
+	/*float: left;*/
+	/*display: none;*/
+	border: 0px;
+	width: 24px;
+	height: 24px;
+	background: url('/style/images/load_24x24.gif') right center no-repeat;
 }
-.wait_icon_24x24{
-	position:fixed;
-	float:left;
-/*	display: none;*/
-	border:0px;
-	width:24px;
-	height:24px;
+.wait_icon_24x24 {
+	/*position: fixed;
+	float: left;*/
+	/*	display: none;*/
+	border: 0px;
+	width: 24px;
+	height: 24px;
+}
+.ok_24x24 {
+	border: 0px;
+	width: 24px;
+	height: 24px;
+	background: url('/style/images/icon_ok.png') right center no-repeat;
 }
 /*等待图标背景*/
-.waiticon_bgpic{ 
+.waiticon_bgpic {
 	background: url('/style/images/load_r.gif') no-repeat 50% 50%;
 }
 .date {
-	size:20;
-	background:  url('/style/images/calendar.gif') right center no-repeat;
+	size: 20;
+	background: url('/style/images/calendar.gif') right center no-repeat;
 }
-.hide{
+.hide {
 	display: none;
 }
 /*浏览器发送数据的等待标志.*/
-.textarea_bgpic_t{ 
+.textarea_bgpic_t {
 	background: url('/style/images/load_t.gif') no-repeat 50% 50%;
 }
 /*浏览器接收数据的等待.*/
-.textarea_bgpic{ 
+.textarea_bgpic {
 	background: url('/style/images/load_r.gif') no-repeat 50% 50%;
 }
-.load_bgpic_hight{ 
+.load_bgpic_hight {
 	background: url('/style/images/load_r.gif') no-repeat 50% 50%;
 	height: 86px;
 }
