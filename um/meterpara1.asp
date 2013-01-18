@@ -42,12 +42,13 @@
 				$(function() {
 					$("#btnPost").button({
 						icons : {
-							primary : "ui-icon-search"
+							primary : "ui-icon-refresh"
 						}
 					});
 				});
 				/* post方法刷新标记参数 */
 				$.extend($.fn.dataTable.defaults, {//设置表格属性
+					"bInfo": false,
 					"bFilter" : false,//不要搜索
 					"bSort" : false,//不要排序
 					"sScrollY" : "200px",//固定高度
@@ -127,7 +128,7 @@
 			<input class="hideinp" type="text" name=RowNo value="" id="indexno">
 			<input class="hideinp" type="text" name="AllSelFlag" value="0" id="AllSelFlag">
 		</form>
-		<p ALIGN="center" id=subbtns>
+		<div align="center" id=subbtns>
 		<!--
 			<input type="button" name="Update" value="设置" ID="Update" OnClick="db_update();">
 			// @TODO 添加删除暂时注销,等完善后再开放
@@ -136,6 +137,6 @@
 			
 			<input type="button" name=Refresh value="刷新" ID="Refresh" OnClick="return RefreshWin();"> -->
 			<button class="ui-button" id="btnPost" title="修改所有表计参数"> 更新 </button>
-		</p>
+		</div>
 	</body>
 </html>
