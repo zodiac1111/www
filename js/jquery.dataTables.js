@@ -8295,7 +8295,7 @@
 		 *      } );
 		 *    } );
 		 */
-		"bScrollCollapse": false,
+		"bScrollCollapse": true,
 	
 	
 		/**
@@ -9182,7 +9182,7 @@
 				 *      } );
 				 *    } );
 				 */
-				"sFirst": "First",
+				"sFirst": "首页",
 			
 			
 				/**
@@ -9203,7 +9203,7 @@
 				 *      } );
 				 *    } );
 				 */
-				"sLast": "Last",
+				"sLast": "尾页",
 			
 			
 				/**
@@ -9224,7 +9224,7 @@
 				 *      } );
 				 *    } );
 				 */
-				"sNext": "Next",
+				"sNext": "下一页",
 			
 			
 				/**
@@ -9245,7 +9245,7 @@
 				 *      } );
 				 *    } );
 				 */
-				"sPrevious": "Previous"
+				"sPrevious": "上一页"
 			},
 		
 			/**
@@ -9266,7 +9266,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sEmptyTable": "No data available in table",
+			"sEmptyTable": "没有数据",
 		
 		
 			/**
@@ -9287,7 +9287,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfo": "Showing _START_ to _END_ of _TOTAL_ entries",
+			"sInfo": "显示第 _START_ 到第 _END_ 条,共 _TOTAL_ 条",
 		
 		
 			/**
@@ -9306,7 +9306,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfoEmpty": "Showing 0 to 0 of 0 entries",
+			"sInfoEmpty": "显示第 0 到第 0 条,共 0 条",
 		
 		
 			/**
@@ -9407,7 +9407,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sLengthMenu": "Show _MENU_ entries",
+			"sLengthMenu": "显示 _MENU_ 项",
 		
 		
 			/**
@@ -9429,7 +9429,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sLoadingRecords": "Loading...",
+			"sLoadingRecords": "加载中...",
 		
 		
 			/**
@@ -9448,7 +9448,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sProcessing": "Processing...",
+			"sProcessing": "处理中...",
 		
 		
 			/**
@@ -9481,7 +9481,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sSearch": "Search:",
+			"sSearch": "搜索:",
 		
 		
 			/**
@@ -9524,7 +9524,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sZeroRecords": "No matching records found"
+			"sZeroRecords": "找不到任何记录"
 		},
 	
 	
@@ -9750,7 +9750,7 @@
 		 *      } );
 		 *    } );
 		 */
-		"sScrollY": "",
+		"sScrollY": "200px",
 	
 	
 		/**
@@ -10618,7 +10618,7 @@
 			 * set a default use {@link DataTable.defaults}.
 			 *  @type boolean
 			 */
-			"bPaginate": null,
+			"bPaginate": false,
 			
 			/**
 			 * Processing indicator enable flag whenever DataTables is enacting a
@@ -10645,7 +10645,7 @@
 			 * set a default use {@link DataTable.defaults}.
 			 *  @type boolean
 			 */
-			"bSort": null,
+			"bSort": false,
 			
 			/**
 			 * Apply a class to the columns which are being sorted to provide a

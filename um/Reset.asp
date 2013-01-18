@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <!--   华立电力2013 -->
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 		<title>功能菜单</title>
@@ -21,8 +21,32 @@
 		<script type="text/javascript" src="/style/jquery-ui-sliderAccess.js"></script>
 		<script type="text/javascript" src="/js/reset.js"></script>
 		<!-- 基于jquery的日期时间控件所需要的文件 -结束 -->
-		<link href="/style/jquery.dataTables.css" rel="stylesheet" type="text/css" />
+		<link type="text/css" href="/style/jquery.dataTables.css" rel="stylesheet"  />
+		<link type="text/css" href="/style/jquery.dataTables_themeroller.css" rel="stylesheet"  />
 		<script type="text/javascript" src="/js/jquery.dataTables.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$.extend($.fn.dataTable.defaults, {
+					"bSort" : false,
+					"sPaginationType" : "full_numbers"
+				});
+				//var oTable = $("#tbl_history_tou").dataTable();
+				$("#btnPost").click(function() {
+					$("#tr_dat").html("<tr><td colspan=\"999\" ></td></tr>");
+					$("#tr_dat tr td").addClass('load_bgpic_hight');
+					$.post('/goform/get_tou', $("#history_tou").serialize() + "&mtr_no=" + $("#mtr_no").val(), function(result) {
+						$("#tr_dat tr td").removeClass('load_bgpic_hight');
+						//alert("1");
+						$("#tr_dat").html(result);
+						//alert("2");
+						//$("#tbl_history_tou").dataTable();
+						//oTable.fnDraw();
+						//$("#tbl_history_tou").dataTable();
+						//var oTable = $('#tbl_history_tou').dataTable();
+					});
+				});
+			});
+		</script>
 		<% init_sysparam(); //加载系统参数 %>
 	</head>
 	<body>
@@ -183,7 +207,6 @@
 						<input type="text"
 						name="etime" id="etime" readonly class="date " title="选择截止时刻">
 					</label>
-					<button class="ui-button" id="btnPost" title="查询选中时段和指定表计的电量数据"> 查询 </button>
 					<div class=hide>
 						<form id="history_tou" name="history_tou">
 							<label> 时间戳(秒):
@@ -198,6 +221,7 @@
 							</label>
 						</form>
 					</div>
+					<button class="ui-button" id="btnPost" title="查询选中时段和指定表计的电量数据"> 查询 </button>
 				</p>
 				<script type="text/javascript">
 					var startDateTextBox = $('#stime');
@@ -276,17 +300,17 @@
 							etime_stamp.value = testEndDate.getTime() / 1000;
 						}
 					});
-				</script><!-- <button class="ui-button" id="btn" title="测试中...">子页面加载</button> --><!-- <button class="ui-button" id="showLog" title="从服务器加载日志">查看日志</button> -->
-				<table class="sioplanTable" id="tbl_history_tou" border="1" cellspacing="1" cellpadding="1">
+				</script>
+				<table id="tbl_history_tou" class="sioplanTable" width="100%"   border="1" cellspacing="1" cellpadding="1">
 					<thead>
 						<tr>
-							<th rowspan=2>表号</th>
-							<th rowspan=2>序号</th>
-							<th rowspan=2>时刻</th>
-							<th colspan=5>正向有功</th>
-							<th colspan=5>反向有功</th>
-							<th colspan=5>正向无功</th>
-							<th colspan=5>反向无功</th>
+							<th rowspan="2">表号</th>
+							<th rowspan="2">序号</th>
+							<th rowspan="2">时刻</th>
+							<th colspan="5">正向有功</th>
+							<th colspan="5">反向有功</th>
+							<th colspan="5">正向无功</th>
+							<th colspan="5">反向无功</th>
 						</tr>
 						<tr>
 							<th>总</th>

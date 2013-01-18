@@ -22,7 +22,7 @@
 }
 
 .sioplanTable td {
-	BACKGROUND-COLOR: #F7FAFF;
+	/*BACKGROUND-COLOR: #F7FAFF;*/
 }
 /* #### 终端信息(info)表格样式 */
 .infoTable {
@@ -74,6 +74,6 @@
 }
 
 .infoTable td {
-	BACKGROUND-COLOR: #F7FAFF;
+	/*BACKGROUND-COLOR: #F7FAFF;*/
 	text-align: left;
 }
