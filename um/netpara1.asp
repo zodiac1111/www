@@ -78,7 +78,7 @@
 					</tr>
 				</thead>
 				<tbody id="tbody_dat">
-					<% get_netparams(); %>
+					<!-- <% get_netparams(); %> -->
 				</tbody>
 			</table>
 		</form>
