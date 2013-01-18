@@ -24,7 +24,6 @@
 		<link type="text/css" href="/style/jquery.dataTables.css" rel="stylesheet"  />
 		<link type="text/css" href="/style/jquery.dataTables_themeroller.css" rel="stylesheet"  />
 		<script type="text/javascript" src="/js/jquery.dataTables.js"></script>
-		<% init_sysparam(); //加载系统参数 %>
 		<script type="text/javascript">
 			$(document).ready(function() {
 				$("#btnPost").click(function() {

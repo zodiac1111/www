@@ -16,7 +16,6 @@
 		<script type="text/javascript" src="/style/jquery-ui.min.js"></script>
 		<script type="text/javascript" src="/style/jquery-ui.min-zh-CN.js"></script>
 		<!-- jquery的 -结束 -->
-		<% init_sysparam(); //初始化系统参数,获得例如表计个数,串口个数,串口方案个数等参数 %>
 		<script type="text/javascript">
 			$(document).ready(function() {
 				/* 按钮 */

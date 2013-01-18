@@ -1,8 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
-	<HEAD>
-		<title>Arm Home</title>
-		<!- Copyright (c) Echon., 2006. All Rights Reserved. ->
+	<head>
+		<title>系统参数</title>
+		<!-- Copyright (c) Echon., 2006. All Rights Reserved. -->
 		<meta http-equiv="Pragma" content="no-cache" charset="utf-8">
 		<link rel="stylesheet" href="/style/normal_ws.css" type="text/css" />
 		<link rel="stylesheet" href="/style/sys.css" type="text/css" />
@@ -71,8 +71,7 @@
 				$("#init").click();
 			});
 		</script>
-		<% init_sysparam(); //加载系统参数 %>
-	</HEAD>
+	</head>
 	<body>
 		<form action="/goform/sysparam" method="post" id="sysparam" name="sysparam">
 			<table width="60%"  align="center" id="Table1" border="0" cellspacing="0" cellpadding="1">
