@@ -81,7 +81,7 @@
 					<tr>
 						<!--<tr style="background-color: #eeeeee; margin: 0px; line-height: 20px; font-weight: bold; padding: 0px 0px 0px 0px;"> -->
 						<th>表号</th>
-						<th> 有效 <br>c
+						<th> 有效 <br>
 						<input type="checkbox" name=iv_all value=iv_all onclick="iv_all_click(event);">
 						</th>
 						<th>线路名称</th>
@@ -95,25 +95,25 @@
 						<th> 电量小数 <br>
 						<input class="ntx" type="text" size=1 maxlength=1 name=all_it_dot value="0" onchange="all_it_dot_changed(event);">
 						</th>
-						<th  > 需量小数 <br>
+						<th> 需量小数 <br>
 						<input class="ntx" type="text" size=1 maxlength=1 name=all_xl_dot value="0" onchange="all_xl_dot_changed(event);">
 						</th>
-						<th  > 电压小数 <br>
+						<th> 电压小数 <br>
 						<input class="ntx" type="text" size=1 maxlength=1 name=all_v_dot value="0" onchange="all_v_dot_changed(event);">
 						</th>
-						<th  > 电流小数 <br>
+						<th> 电流小数 <br>
 						<input class="ntx" type="text" size=1 maxlength=1 name=all_i_dot value="0" onchange="all_i_dot_changed(event);">
 						</th>
-						<th  > 有功小数 <br>
+						<th> 有功小数 <br>
 						<input class="ntx" type="text" size=1 maxlength=1 name=all_p_dot value="0" onchange="all_p_dot_changed(event);">
 						</th>
-						<th > 无功小数 <br>
+						<th> 无功小数 <br>
 						<input class="ntx" type="text" size=1 maxlength=1 name=all_q_dot value="0" onchange="all_q_dot_changed(event);">
 						</th>
-						<th > 额定电压 <br>
+						<th> 额定电压 <br>
 						<input class="ntx" type="text" size=1 name=all_ue value="0" onchange="all_ue_changed(event);">
 						</th>
-						<th > 额定电流 <br>
+						<th> 额定电流 <br>
 						<input class="ntx" type="text" size=1 name=all_ie value="0" onchange="all_ie_changed(event);">
 						</th>
 					</tr>

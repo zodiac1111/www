@@ -24,30 +24,19 @@
 		<link type="text/css" href="/style/jquery.dataTables.css" rel="stylesheet"  />
 		<link type="text/css" href="/style/jquery.dataTables_themeroller.css" rel="stylesheet"  />
 		<script type="text/javascript" src="/js/jquery.dataTables.js"></script>
+		<% init_sysparam(); //加载系统参数 %>
 		<script type="text/javascript">
 			$(document).ready(function() {
-				$.extend($.fn.dataTable.defaults, {
-					"bSort" : false,
-					"sPaginationType" : "full_numbers"
-				});
-				//var oTable = $("#tbl_history_tou").dataTable();
 				$("#btnPost").click(function() {
 					$("#tr_dat").html("<tr><td colspan=\"999\" ></td></tr>");
 					$("#tr_dat tr td").addClass('load_bgpic_hight');
 					$.post('/goform/get_tou', $("#history_tou").serialize() + "&mtr_no=" + $("#mtr_no").val(), function(result) {
 						$("#tr_dat tr td").removeClass('load_bgpic_hight');
-						//alert("1");
 						$("#tr_dat").html(result);
-						//alert("2");
-						//$("#tbl_history_tou").dataTable();
-						//oTable.fnDraw();
-						//$("#tbl_history_tou").dataTable();
-						//var oTable = $('#tbl_history_tou').dataTable();
 					});
 				});
 			});
 		</script>
-		<% init_sysparam(); //加载系统参数 %>
 	</head>
 	<body>
 		<h1>功能操作</h1>
@@ -294,7 +283,6 @@
 						},
 						onSelect : function(selectedDateTime) {//选择时候防止误选
 							startDateTextBox.datetimepicker('option', 'maxDate', endDateTextBox.datetimepicker('getDate'));
-
 							var testEndDate = endDateTextBox.datetimepicker('getDate');
 							tz2.value = testEndDate.getTimezoneOffset();
 							etime_stamp.value = testEndDate.getTime() / 1000;

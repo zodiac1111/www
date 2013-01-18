@@ -363,11 +363,11 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 	//标签页 标签id tabs
 	$(function() {
 		var tabs = $("#tabs").tabs();
-		tabs.find(".ui-tabs-nav").sortable({
-			axis : "x",
-			stop : function() {
-				tabs.tabs("refresh");
-			}
-		});
+		// tabs.find(".ui-tabs-nav").sortable({
+		// axis : "x",
+		// stop : function() {
+		// tabs.tabs("refresh");
+		// }
+		// });
 	});
 });
