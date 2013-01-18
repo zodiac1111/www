@@ -4,12 +4,9 @@
 		<title>Arm Home</title>
 		<!- Copyright (c) Echon., 2006. All Rights Reserved. ->
 		<meta http-equiv="Pragma" content="no-cache" charset="utf-8">
-		<link rel="stylesheet" href="/style/normal_ws.css" type="text/css">
-		</link>
-		<link rel="stylesheet" href="/style/sys.css" type="text/css">
-		</link>
-		<link href="/style/menuExpandable3.css" rel="stylesheet" type="text/css">
-		</link>
+		<link rel="stylesheet" href="/style/normal_ws.css" type="text/css" />
+		<link rel="stylesheet" href="/style/sys.css" type="text/css" />
+		<link href="/style/menuExpandable3.css" rel="stylesheet" type="text/css" />
 		<!-- 基于jquery的日期时间控件所需要的文件 -开始 -->
 		<link rel="stylesheet" media="all" type="text/css" href="/style/jquery-ui.css" />
 		<script type="text/javascript" src="/style/jquery-1.8.3.min.js"></script>
@@ -18,7 +15,7 @@
 		<!-- 基于jquery的日期时间控件所需要的文件 -结束 -->
 		<script src="/style/wwyfunc.js" type='text/javascript'></script>
 		<script type="text/javascript">
-		$(document).ready(function() {
+			$(document).ready(function() {
 				/* 按钮 */
 				$(function() {
 					$(".btn_update").button({
@@ -53,7 +50,19 @@
 				$("#init").click(function() {
 					$("#icon_init").show();
 					$.post('/goform/sysparam', "init=1", function(result) {
-						$("#tbody_dat").html(result);
+						//alert(result);
+						var asys = result.split(",");
+						if (asys.length != 6) {
+							alert("服务器返回错误: " + result);
+						} else {
+							//document.getElementById("mtr_num").value= asys[0];
+							$("#mtr_num").val(asys[0]);
+							$("#sioplan_num").val(asys[1]);
+							$("#monitor_ports").val(asys[2]);
+							$("#netports_num").val(asys[3]);
+							$("#sioports_num").val(asys[4]);
+							$("#control_ports").val(asys[5]);
+						}
 						$("#icon_init").hide("fade", 2000);
 						//alert("OK");
 					});
@@ -88,27 +97,27 @@
 									</td>
 									<td align="center">串口方案数:</td>
 									<td align="left">
-									<input type="text" name="sioplan_num" size=12 value="<% sioplan_num(); %>" maxlength=3 onchange="lessthan1byte(event);">
+									<input id="sioplan_num"type="text" name="sioplan_num" size=12 value="<% sioplan_num(); %>" maxlength=3 onchange="lessthan1byte(event);">
 									</td>
 								</tr>
 								<tr align="left">
 									<td align="center">监视参数:</td>
 									<td align="left">
-									<input type="text" name="monitor_ports" size=12 value="<% monitor_ports(); %>" maxlength=3 onchange="lessthan1byte(event);">
+									<input id="monitor_ports" type="text" name="monitor_ports" size=12 value="<% monitor_ports(); %>" maxlength=3 onchange="lessthan1byte(event);">
 									</td>
 									<td align="center">网口数目:</td>
 									<td align="left">
-									<input id="netport" type="text" name="netports_num" size=12 value="<% netports_num(); %>" maxlength=3 onchange="lessthan1byte(event);">
+									<input id="netports_num" type="text" name="netports_num" size=12 value="<% netports_num(); %>" maxlength=3 onchange="lessthan1byte(event);">
 									</td>
 								</tr>
 								<tr align="left">
 									<td align="center">串口总数目:</td>
 									<td align="left">
-									<input type="text" name="sioports_num" size=12 value="<% sioports_num(); %>" maxlength=3 onchange="lessthan1byte(event);">
+									<input id="sioports_num" type="text" name="sioports_num" size=12 value="<% sioports_num(); %>" maxlength=3 onchange="lessthan1byte(event);">
 									</td>
 									<td align="center">控制端口数:</td>
 									<td align="left">
-									<input type="text" name="control_ports" size=12 value="<% control_ports(); %>" maxlength=3 onchange="lessthan1byte(event);">
+									<input id="control_ports" type="text" name="control_ports" size=12 value="<% control_ports(); %>" maxlength=3 onchange="lessthan1byte(event);">
 									</td>
 								</tr>
 							</table></td>
