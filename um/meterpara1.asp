@@ -49,26 +49,33 @@
 				});
 				/* post方法刷新标记参数 */
 				$.extend($.fn.dataTable.defaults, {//设置表格属性
-					"bInfo": false,
-					"bFilter" : false,//不要搜索
-					"bSort" : false,//不要排序
-					"sScrollY" : "200px",//固定高度
-					"bPaginate" : false,//不分页
-					"bScrollCollapse" : true,//显示滚动条
+					"bInfo" : false,
+					"bFilter" : false, //不要搜索
+					"bSort" : false, //不要排序
+					"sScrollY" : "200px", //固定高度
+					"bPaginate" : false, //不分页
+					"bScrollCollapse" : true, //显示滚动条
 					"sPaginationType" : "full_numbers",//翻页按钮类型
 				});
 				var oTable = $('#MyTable').dataTable();
 				$("#btnPost").click(function() {
+					var errobj = document.getElementById("errobj");
+					if (errobj != null) {
+						alert("非法参数");
+						return;
+					}
 					$("#wait").addClass('wait_icon_24x24_load');
-					$("#optype").val = 4;// 操作类型,更新
+					$("#optype").val = 4;
+					// 操作类型,更新
 					//$("#tr_dat").html("<tr><td colspan=\"999\" ></td></tr>");
 					/*oTable.$('input').serialize()*/
 					/* formTest  get_tou */
 					$.post('/goform/formTest', $("#mtrparaform").serialize(), function(result) {
 						//$("#tr_dat tr td").removeClass('load_bgpic_hight');
 						$("#tr_dat").html(result);
-						$("#wait").removeClass('wait_icon_24x24_load');
-						oTable.fnDraw();//重绘表格
+						$("#wait").removeClass('wait_icon_24x24_load',1000);
+						oTable.fnDraw();
+						//重绘表格
 					});
 				});
 			});
@@ -90,32 +97,32 @@
 						<th>表计地址</th>
 						<th>表计口令</th>
 						<th>使用端口</th>
-						<th> 串口方案 <br> <% sioplan(); %> </th>
-						<th> 表计规约 <br> <% mtr_protocol(); %> </th>
-						<th> 生产厂家 <br> <% factory(); %> </th>
-						<th> 电表类型 <br> <% ph_wire2(); %> </th>
-						<th> 电量小数 <br>
+						<th>串口方案<br><% sioplan(); %></th>
+						<th>表计规约<br><% mtr_protocol(); %></th>
+						<th>生产厂家<br><% factory(); %></th>
+						<th>电表类型<br><% ph_wire2(); %></th>
+						<th>电量小数<br>
 						<input class="ntx" type="text" size=1 maxlength=1 name=all_it_dot value="0" onchange="all_it_dot_changed(event);">
 						</th>
-						<th> 需量小数 <br>
+						<th>需量小数<br>
 						<input class="ntx" type="text" size=1 maxlength=1 name=all_xl_dot value="0" onchange="all_xl_dot_changed(event);">
 						</th>
-						<th> 电压小数 <br>
+						<th>电压小数<br>
 						<input class="ntx" type="text" size=1 maxlength=1 name=all_v_dot value="0" onchange="all_v_dot_changed(event);">
 						</th>
-						<th> 电流小数 <br>
+						<th>电流小数<br>
 						<input class="ntx" type="text" size=1 maxlength=1 name=all_i_dot value="0" onchange="all_i_dot_changed(event);">
 						</th>
-						<th> 有功小数 <br>
+						<th>有功小数<br>
 						<input class="ntx" type="text" size=1 maxlength=1 name=all_p_dot value="0" onchange="all_p_dot_changed(event);">
 						</th>
-						<th> 无功小数 <br>
+						<th>无功小数<br>
 						<input class="ntx" type="text" size=1 maxlength=1 name=all_q_dot value="0" onchange="all_q_dot_changed(event);">
 						</th>
-						<th> 额定电压 <br>
+						<th>额定电压<br>
 						<input class="ntx" type="text" size=1 name=all_ue value="0" onchange="all_ue_changed(event);">
 						</th>
-						<th> 额定电流 <br>
+						<th>额定电流<br>
 						<input class="ntx" type="text" size=1 name=all_ie value="0" onchange="all_ie_changed(event);">
 						</th>
 					</tr>
@@ -131,14 +138,15 @@
 			<input class="hideinp" type="text" name="AllSelFlag" value="0" id="AllSelFlag">
 		</form>
 		<div align="center" id=subbtns>
-		<!--
+			<!--
 			<input type="button" name="Update" value="设置" ID="Update" OnClick="db_update();">
 			// @TODO 添加删除暂时注销,等完善后再开放
 			<input type=button name=bDelItem value="删除" ID="bDelItem" OnClick="db_del();">
 			<input type=button name=bAddItem value="添加" ID="bAddItem" OnClick="db_add();" >
-			
+
 			<input type="button" name=Refresh value="刷新" ID="Refresh" OnClick="return RefreshWin();"> -->
-			<button class="ui-button" id="btnPost" title="修改所有表计参数"> 更新 </button><input type="text" id="wait" class="wait_icon_24x24" />
+			<button class="ui-button" id="btnPost" title="修改所有表计参数"> 更新 </button>
+			<input type="text" id="wait" class="wait_icon_24x24" />
 		</div>
 	</body>
 </html>
