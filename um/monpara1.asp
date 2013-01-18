@@ -65,7 +65,7 @@
 		<br/>
 		<h1  align="center"><img src="/graphics/logo52.png" height="45"></h1>
 		<form action="/goform/monparas"  method="post"  id="monparas" name="monparas">
-			<table class="monparamTable"  border="1" cellspacing="1" cellpadding="1" >
+			<table width="60%" class="monparamTable"  border="1" cellspacing="1" cellpadding="1" >
 				<thead>
 					<tr>
 						<th width="5%" class="monparamTableHead">序号</th>
@@ -77,6 +77,7 @@
 						<th width="6%" class="monparamTableHead">对时有效</th>
 						<th width="6%" class="monparamTableHead">转发有效</th>
 						<th width="5%" class="monparamTableHead">转发数目</th>
+						<!--
 						<th width="5%" class="monparamTableHead">序号1</th>
 						<th width="6%" class="monparamTableHead">序号2</th>
 						<th width="5%" class="monparamTableHead">序号3</th>
@@ -85,24 +86,13 @@
 						<th width="5%" class="monparamTableHead">序号6</th>
 						<th width="4%" class="monparamTableHead">序号7</th>
 						<th width="5%" class="monparamTableHead">序号8</th>
-						<th width="5%" class="monparamTableHead">序号9</th>
+						<th width="5%" class="monparamTableHead">序号9</th> -->
 					</tr>
 				</thead>
 				<tbody id="tbody_dat">
-					<% load_monparams(); %>
 				</tbody>
 			</table>
 		</form>
-		<p ALIGN="center" height=25>
-			<input type="button" name="Update" value="设置" ID="Update" OnClick="db_update();">
-			<!--
-			<input type=button name=bDelItem value="删除" ID="bDelItem"  onclick="return DelSubmit();">
-			<input type=button  name=bAddItem value="添加" ID="bAddItem" OnClick="return Redirect('AddRoutePara.asp');" >
-			-->
-			<input type="button"  name=Refresh value="读取" ID="Refresh" OnClick="return RefreshWin();" >
-			<!-- 隐藏的文本框:用于提交操作类型 更新,还是其他 -->
-			<input class="hideinp"  type="text" name=OpType value=""  id="optype" >
-		</p>
 		<p align="center">
 			<button id="init" class="hideinp" >初始化</button>
 			<button id="btnUpdate" class="btn_update">更新</button>
