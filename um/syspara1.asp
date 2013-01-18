@@ -13,7 +13,7 @@
 <script type="text/javascript" src="/style/jquery-ui.min.js"></script>
 <script type="text/javascript" src="/style/jquery-ui.min-zh-CN.js"></script>
 <!-- 基于jquery的日期时间控件所需要的文件 -结束 -->
-<script src="/style/wwyfunc.js" language='javascript' type='text/JavaScript'></script>
+<script src="/style/wwyfunc.js" type='text/javascript'></script>
 <script type="text/javascript">
 	$(document).ready(
 		function() {
@@ -21,8 +21,6 @@
 				alert("click");
 			});
 		});
-
-	
 </script>
 <% init_sysparam(); //加载系统参数 %>
 </HEAD>

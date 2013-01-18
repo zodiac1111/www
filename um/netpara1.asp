@@ -31,7 +31,7 @@
 				$("#icon_ok").hide();
 				//串口参数 post提交
 				/* 定义按钮 post函数 */
-				$("#btnsio").click(function() {
+				$("#btnUpdate").click(function() {
 					var errobj = document.getElementById("errobj");
 					if (errobj != null) {
 						alert("非法参数");
@@ -92,7 +92,7 @@
 			<!-- 提交操作类型 更新,还是其他 -->
 			<input class="hideinp" type="text" name="OpType" value="" id="optype">
 			<button id="init" class="hideinp" >初始化</button>
-			<button id="btnsio" class="btn_update">更新</button>
+			<button id="btnUpdate" class="btn_update">更新</button>
 			<input type="text" id="icon_init" class="wait_icon_24x24_load" />
 			<input type="text" id="icon_ok" class="wait_icon_24x24 ok_24x24" />
 		</p>
