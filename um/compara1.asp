@@ -23,7 +23,7 @@
 				$(function() {
 					$(".btn_update").button({
 						icons : {
-							primary : "ui-icon-power"
+							primary : "ui-icon-refresh"
 						}
 					});
 				});
@@ -81,7 +81,7 @@
 				</thead>
 				<!-- 循环依次添加所有串口方案 一列一条  -->
 				<tbody id="tbody_dat" >
-					<!-- <% load_all_sioplan(); %> -->
+				
 				</tbody>
 			</table>
 		</form>
