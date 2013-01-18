@@ -77,21 +77,21 @@
 			<table  id="MyTable"  class="sioplanTable" width="100%" border="1" cellspacing="1" cellpadding="1" >
 				<!--<table width="1200" border="1" cellpadding="0" cellspacing="0" id="MyTable" style="border-bottom-color: black; border-top-color: black; width: 1300px; color: #000000; border-right-color: black; font-size: medium; border-left-color: black"> -->
 				<thead>
-					<tr >
+					<tr>
 						<!--<tr style="background-color: #eeeeee; margin: 0px; line-height: 20px; font-weight: bold; padding: 0px 0px 0px 0px;"> -->
-						<th  >表号</th>
-						<th > 有效 <br>
+						<th>表号</th>
+						<th> 有效 <br>c
 						<input type="checkbox" name=iv_all value=iv_all onclick="iv_all_click(event);">
 						</th>
-						<th  >线路名称</th>
-						<th  >表计地址</th>
-						<th  >表计口令</th>
-						<th  >使用端口</th>
-						<th > 串口方案 <br> <% sioplan(); %> </th>
-						<th  > 表计规约 <br> <% mtr_protocol(); %> </th>
-						<th  > 生产厂家 <br> <% factory(); %> </th>
-						<th  > 电表类型 <br> <% ph_wire2(); %> </th>
-						<th  > 电量小数 <br>
+						<th>线路名称</th>
+						<th>表计地址</th>
+						<th>表计口令</th>
+						<th>使用端口</th>
+						<th> 串口方案 <br> <% sioplan(); %> </th>
+						<th> 表计规约 <br> <% mtr_protocol(); %> </th>
+						<th> 生产厂家 <br> <% factory(); %> </th>
+						<th> 电表类型 <br> <% ph_wire2(); %> </th>
+						<th> 电量小数 <br>
 						<input class="ntx" type="text" size=1 maxlength=1 name=all_it_dot value="0" onchange="all_it_dot_changed(event);">
 						</th>
 						<th  > 需量小数 <br>
@@ -128,12 +128,13 @@
 			<input class="hideinp" type="text" name="AllSelFlag" value="0" id="AllSelFlag">
 		</form>
 		<p ALIGN="center" id=subbtns>
+		<!--
 			<input type="button" name="Update" value="设置" ID="Update" OnClick="db_update();">
-			<!-- @TODO 添加删除暂时注销,等完善后再开放
+			// @TODO 添加删除暂时注销,等完善后再开放
 			<input type=button name=bDelItem value="删除" ID="bDelItem" OnClick="db_del();">
 			<input type=button name=bAddItem value="添加" ID="bAddItem" OnClick="db_add();" >
-			-->
-			<input type="button" name=Refresh value="刷新" ID="Refresh" OnClick="return RefreshWin();">
+			
+			<input type="button" name=Refresh value="刷新" ID="Refresh" OnClick="return RefreshWin();"> -->
 			<button class="ui-button" id="btnPost" title="修改所有表计参数"> 更新 </button>
 		</p>
 	</body>
