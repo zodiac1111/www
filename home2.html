@@ -14,7 +14,7 @@
 		<style type="text/css">
 			.time {
 				color: #00FFFF;
-				font-size:160%;
+				font-size: 160%;
 			}
 			body {
 				background-color: gray;
@@ -106,7 +106,7 @@
 			}
 
 			/**
-			 *服务器时间
+			 *服务器日期
 			 */
 			function srvDate(val) {
 				var now = new Date(val);
@@ -118,6 +118,7 @@
 				return (day);
 			}
 
+			//服务器时间
 			function srvTime(val) {
 				var now = new Date(val);
 				var hh = now.getHours();
@@ -167,18 +168,8 @@
 				//每隔一段时间同步一次,消除累计误差.
 			});
 		</script>
-		<span style="float:left"> 
-			<label class="time">&emsp;&emsp;&emsp;</label> 
-			<label class="time">本地时间:</label> 
-			<label id="calendarClock1" class="time" > 获取中...</label> 
-			<label id="calendarClock2" class="time" > 获取中...</label>
-		</span>
-		<span style="float:right"> 
-			<label class="time">终端时间:</label>
-			<label id="srvDate" class="time"> 获取中...</label> 	
-			<label id="srvTime" class="time"> 获取中...</label>
-			<label class="time">&emsp;&emsp;&emsp;</label> 		
-		</span>
+		<span style="float:left"> <label class="time">&emsp;&emsp;&emsp;</label> <label class="time">本地时间:</label> <label id="calendarClock1" class="time" > 获取中...</label> <label id="calendarClock2" class="time" > 获取中...</label> </span>
+		<span style="float:right"> <label class="time">终端时间:</label> <label id="srvDate" class="time"> 获取中...</label> <label id="srvTime" class="time"> 获取中...</label> <label class="time">&emsp;&emsp;&emsp;</label> </span>
 
 		<button  class="hideinp" id="init">获取服务器时间</button>
 	</body>
