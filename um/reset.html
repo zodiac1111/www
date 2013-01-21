@@ -26,12 +26,24 @@
 		<script type="text/javascript" src="/js/jquery.dataTables.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function() {
+				$.extend($.fn.dataTable.defaults, {//设置表格属性
+					"bInfo" : true,//显示一共几条这种信息
+					"bFilter" : false, //不要搜索
+					"bSort" : false, //不要排序
+					"sScrollY" : "400px" , //固定高度
+					"bPaginate" : false, //不分页
+					"bScrollCollapse" : true, //显示滚动条
+					"sPaginationType" : "full_numbers",//翻页按钮类型
+				});
+				//var oTable = $('#tbl_history_tou').dataTable();
 				$("#btnPost").click(function() {
 					$("#tr_dat").html("<tr><td colspan=\"999\" ></td></tr>");
 					$("#tr_dat tr td").addClass('load_bgpic_hight');
 					$.post('/goform/get_tou', $("#history_tou").serialize() + "&mtr_no=" + $("#mtr_no").val(), function(result) {
 						$("#tr_dat tr td").removeClass('load_bgpic_hight');
 						$("#tr_dat").html(result);
+						$('#tbl_history_tou').dataTable();
+						//oTable.fnDraw();
 					});
 				});
 			});
