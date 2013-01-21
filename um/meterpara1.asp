@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <!-- 华立电力-表计参数页面 -->
 <html>
-	<HEAD>
+	<head>
 		<title>表计参数</title>
 		<meta http-equiv="Pragma" content="no-cache" charset=utf-8>
 		<link rel="stylesheet" href="/style/normal_ws.css" type="text/css" />
@@ -25,22 +25,22 @@
 			// //调整 浏览器 表格的显示宽度  以及 调用  锁定 表头和列  的JS函数。
 			// function cloneTableHeader_Width() {
 			// //document.body.clientWidth获得客户区域(浏览器窗口,不包括菜单栏和状态栏,就是内容窗口)的宽度 - 35像素的滚动条宽度。
-			// var myTable_Width = (document.body.clientWidth - 35);
-			// var myTable_Heigh = (document.body.clientHeight - 100);
-			// //alert(myTable_Width + "*" + myTable_Heigh);//测试屏幕宽度
+			// var tbl_mtrparams_Width = (document.body.clientWidth - 35);
+			// var tbl_mtrparams_Heigh = (document.body.clientHeight - 100);
+			// //alert(tbl_mtrparams_Width + "*" + tbl_mtrparams_Heigh);//测试屏幕宽度
 			// if ((document.body.clientWidth - 35) < 855) {
-			// myTable_Width = 855;
+			// tbl_mtrparams_Width = 855;
 			// //宽度
 			// }
 			// //调用 锁定表头和 列 的JS函数
 			// $(document).ready(function() {
-			// //FixTable("MyTable", 3, myTable_Width, myTable_Heigh);
+			// //FixTable("tbl_mtrparams", 3, tbl_mtrparams_Width, tbl_mtrparams_Heigh);
 			// });
 			// }
 			$(document).ready(function() {
 				/* 按鈕 */
 				$(function() {
-					$("#btnPost").button({
+					$("#btn_update").button({
 						icons : {
 							primary : "ui-icon-refresh"
 						}
@@ -56,6 +56,8 @@
 					"bScrollCollapse" : true, //显示滚动条
 					"sPaginationType" : "full_numbers",//翻页按钮类型
 				});
+				$("#icon_init").hide();
+				$("#icon_ok").hide();
 				/* post方法刷新标记参数 */
 				$("#btn_update").click(function() {
 					var errobj = document.getElementById("errobj");
@@ -64,39 +66,37 @@
 						return;
 					}
 					$("#icon_init").show();
-					$("#optype").val = 4;
-					// 操作类型,更新
 					/* formTest  get_tou */
 					$.post('/goform/mtrparams', $("#mtrparaform").serialize(), function(result) {
-						$("#tr_dat").val("");
-						$("#tr_dat").val(result);
-						$('#MyTable').dataTable();
+						//$('#tbl_mtrparams').dataTable();
 						$("#icon_init").hide();
 						$("#icon_ok").show();
 						$("#icon_ok").hide("fade", 1000);
-						//oTable.fnDraw();
-						//重绘表格
+						
 					});
 				});
-				/* 隐藏的按钮用于初始化,应为post的form只能使用按钮触发*/
+				/* 隐藏的按钮用于初始化,应为post的form只能使用按钮触发 */
 				$("#init").click(function() {
+					$("#tbl_mtrparams tbody").html("");
+					//清空
 					$("#icon_init").show();
 					$.post('/goform/mtrparams', "init=1", function(result) {
-						$("#tbody_dat").html(result);
+						$("#tbl_mtrparams tbody").html(result);
+						$('#tbl_mtrparams').dataTable();
 						$("#icon_init").hide("fade", 2000);
-						//alert("OK");
+						//alert(result);
 					});
 				});
 				/* 首次加载串口参数 */
 				$("#init").click();
 			});
 		</script>
-	</HEAD>
+	</head>
 	<body>
 		<h1 align="center"><img src="/graphics/logo32.png" height="45"></h1>
 		<form action="/goform/formTest" method="post" id="mtrparaform" name="mtrparaform">
-			<table  id="MyTable"  class="sioplanTable" width="100%" border="1" cellspacing="1" cellpadding="1" >
-				<!--<table width="1200" border="1" cellpadding="0" cellspacing="0" id="MyTable" style="border-bottom-color: black; border-top-color: black; width: 1300px; color: #000000; border-right-color: black; font-size: medium; border-left-color: black"> -->
+			<table  id="tbl_mtrparams"  class="sioplanTable" width="100%" border="1" cellspacing="1" cellpadding="1" >
+				<!--<table width="1200" border="1" cellpadding="0" cellspacing="0" id="tbl_mtrparams" style="border-bottom-color: black; border-top-color: black; width: 1300px; color: #000000; border-right-color: black; font-size: medium; border-left-color: black"> -->
 				<thead>
 					<tr>
 						<!--<tr style="background-color: #eeeeee; margin: 0px; line-height: 20px; font-weight: bold; padding: 0px 0px 0px 0px;"> -->
@@ -138,9 +138,7 @@
 						</th>
 					</tr>
 				</thead>
-				<tbody id="tr_dat">
-					<% load_all_mtr_param(); %>
-				</tbody>
+				<tbody id="tbody_dat"> </tbody>
 			</table>
 			<!-- 隐藏的输入,用于提交命令类型 -->
 			<input class="hideinp" type="text" name=OpType value="" id="optype">
@@ -148,9 +146,9 @@
 			<input class="hideinp" type="text" name=RowNo value="" id="indexno">
 			<input class="hideinp" type="text" name="AllSelFlag" value="0" id="AllSelFlag">
 		</form>
-		<p align="center" id=subbtns>
-			<button  class="hideinp" id="init">初始化</button>
-			<button id="btnsio" class="btn_update">更新</button>
+		<p align="center">
+			<button id="init" class="hideinp" >初始化</button>
+			<button id="btn_update" class="btn_update">更新</button>
 			<input type="text" id="icon_init" class="wait_icon_24x24_load" />
 			<input type="text" id="icon_ok" class="wait_icon_24x24 ok_24x24" />
 		</p>
