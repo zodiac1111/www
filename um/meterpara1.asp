@@ -77,7 +77,7 @@
 				});
 				/* 隐藏的按钮用于初始化,应为post的form只能使用按钮触发 */
 				$("#init").click(function() {
-					//串口方案项目名
+					//加载表计参数的各种项目头:串口方案项目名
 					$.post('/goform/mtr_items', "item=sioplan", function(result) {
 						$("#sioplan").html(result);
 						//alert(result);
@@ -92,13 +92,13 @@
 						$("#factory").html(result);
 						//alert(result);
 					});
+					//表计类型
 					$.post('/goform/mtr_items', "item=type", function(result) {
 						$("#type").html(result);
 						//alert(result);
 					});
-
-					$("#tbl_mtrparams tbody").html("");
 					//清空
+					$("#tbl_mtrparams tbody").html("");
 					$("#icon_init").show();
 					$.post('/goform/mtrparams', "init=1", function(result) {
 						$("#tbl_mtrparams tbody").html(result);
