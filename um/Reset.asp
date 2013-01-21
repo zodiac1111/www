@@ -292,8 +292,8 @@
 				<table id="tbl_history_tou" class="sioplanTable" width="100%"   border="1" cellspacing="1" cellpadding="1">
 					<thead>
 						<tr>
-							<th rowspan="2">表号</th>
 							<th rowspan="2">序号</th>
+							<th rowspan="2">表号</th>
 							<th rowspan="2">时刻</th>
 							<th colspan="5">正向有功</th>
 							<th colspan="5">反向有功</th>
