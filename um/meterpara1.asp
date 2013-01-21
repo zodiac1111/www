@@ -72,11 +72,30 @@
 						$("#icon_init").hide();
 						$("#icon_ok").show();
 						$("#icon_ok").hide("fade", 1000);
-						
+
 					});
 				});
 				/* 隐藏的按钮用于初始化,应为post的form只能使用按钮触发 */
 				$("#init").click(function() {
+					//串口方案项目名
+					$.post('/goform/mtr_items', "item=sioplan", function(result) {
+						$("#sioplan").html(result);
+						//alert(result);
+					});
+					//表计规约项目名
+					$.post('/goform/mtr_items', "item=procotol", function(result) {
+						$("#sioplan").html(result);
+						//alert(result);
+					});
+					$.post('/goform/mtr_items', "item=sioplan", function(result) {
+						$("#sioplan").html(result);
+						//alert(result);
+					});
+					$.post('/goform/mtr_items', "item=sioplan", function(result) {
+						$("#sioplan").html(result);
+						//alert(result);
+					});
+
 					$("#tbl_mtrparams tbody").html("");
 					//清空
 					$("#icon_init").show();
@@ -96,22 +115,20 @@
 		<h1 align="center"><img src="/graphics/logo32.png" height="45"></h1>
 		<form action="/goform/formTest" method="post" id="mtrparaform" name="mtrparaform">
 			<table  id="tbl_mtrparams"  class="sioplanTable" width="100%" border="1" cellspacing="1" cellpadding="1" >
-				<!--<table width="1200" border="1" cellpadding="0" cellspacing="0" id="tbl_mtrparams" style="border-bottom-color: black; border-top-color: black; width: 1300px; color: #000000; border-right-color: black; font-size: medium; border-left-color: black"> -->
 				<thead>
 					<tr>
-						<!--<tr style="background-color: #eeeeee; margin: 0px; line-height: 20px; font-weight: bold; padding: 0px 0px 0px 0px;"> -->
 						<th>表号</th>
-						<th> 有效 <br>
+						<th>有效<br>
 						<input type="checkbox" name=iv_all value=iv_all onclick="iv_all_click(event);">
 						</th>
 						<th>线路名称</th>
 						<th>表计地址</th>
 						<th>表计口令</th>
 						<th>使用端口</th>
-						<th>串口方案<br><% sioplan(); %></th>
-						<th>表计规约<br><% mtr_protocol(); %></th>
-						<th>生产厂家<br><% factory(); %></th>
-						<th>电表类型<br><% ph_wire2(); %></th>
+						<th>串口方案<br><div id="sioplan"> </div></th>
+						<th>表计规约<br><div id="procotol"> </div></th>
+						<th>生产厂家<br><div id="sioplan"> </div></th>
+						<th>电表类型<br><div id="sioplan"> </div></th>
 						<th>电量小数<br>
 						<input class="ntx" type="text" size=1 maxlength=1 name=all_it_dot value="0" onchange="all_it_dot_changed(event);">
 						</th>
@@ -138,7 +155,7 @@
 						</th>
 					</tr>
 				</thead>
-				<tbody id="tbody_dat"> </tbody>
+				<tbody id="tbody_dat"></tbody>
 			</table>
 			<!-- 隐藏的输入,用于提交命令类型 -->
 			<input class="hideinp" type="text" name=OpType value="" id="optype">
