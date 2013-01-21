@@ -8,7 +8,7 @@
 
 <body>
 <h1>Permanently save the user configuration</h1>
-<form action=/goform/SaveUserManagement method=POST>
+<form action=/goform/SaveUserManagement method="post">
 
 <table>
 <tr>
