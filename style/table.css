@@ -77,3 +77,10 @@
 	/*BACKGROUND-COLOR: #F7FAFF;*/
 	text-align: left;
 }
+/*数据有效无效类型样式*/
+.iv { /*无效的*/
+	color:#f8121e;
+}
+.valid{ /*有效的*/
+	color:#047c2b;
+}
