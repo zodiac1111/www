@@ -38,7 +38,6 @@
 			// });
 			// }
 			$(document).ready(function() {
-				//$("#wait").hide();
 				/* 按鈕 */
 				$(function() {
 					$("#btnPost").button({
@@ -47,37 +46,49 @@
 						}
 					});
 				});
-				/* post方法刷新标记参数 */
+				//定义默认的表格样式
 				$.extend($.fn.dataTable.defaults, {//设置表格属性
 					"bInfo" : false,
 					"bFilter" : false, //不要搜索
 					"bSort" : false, //不要排序
-					"sScrollY" : "200px", //固定高度
+					"sScrollY" : "300px", //固定高度
 					"bPaginate" : false, //不分页
 					"bScrollCollapse" : true, //显示滚动条
 					"sPaginationType" : "full_numbers",//翻页按钮类型
 				});
-				var oTable = $('#MyTable').dataTable();
-				$("#btnPost").click(function() {
+				/* post方法刷新标记参数 */
+				$("#btn_update").click(function() {
 					var errobj = document.getElementById("errobj");
 					if (errobj != null) {
 						alert("非法参数");
 						return;
 					}
-					$("#wait").addClass('wait_icon_24x24_load');
+					$("#icon_init").show();
 					$("#optype").val = 4;
 					// 操作类型,更新
-					//$("#tr_dat").html("<tr><td colspan=\"999\" ></td></tr>");
-					/*oTable.$('input').serialize()*/
 					/* formTest  get_tou */
-					$.post('/goform/formTest', $("#mtrparaform").serialize(), function(result) {
-						//$("#tr_dat tr td").removeClass('load_bgpic_hight');
-						$("#tr_dat").html(result);
-						$("#wait").removeClass('wait_icon_24x24_load',1000);
-						oTable.fnDraw();
+					$.post('/goform/mtrparams', $("#mtrparaform").serialize(), function(result) {
+						$("#tr_dat").val("");
+						$("#tr_dat").val(result);
+						$('#MyTable').dataTable();
+						$("#icon_init").hide();
+						$("#icon_ok").show();
+						$("#icon_ok").hide("fade", 1000);
+						//oTable.fnDraw();
 						//重绘表格
 					});
 				});
+				/* 隐藏的按钮用于初始化,应为post的form只能使用按钮触发*/
+				$("#init").click(function() {
+					$("#icon_init").show();
+					$.post('/goform/mtrparams', "init=1", function(result) {
+						$("#tbody_dat").html(result);
+						$("#icon_init").hide("fade", 2000);
+						//alert("OK");
+					});
+				});
+				/* 首次加载串口参数 */
+				$("#init").click();
 			});
 		</script>
 	</HEAD>
@@ -137,16 +148,11 @@
 			<input class="hideinp" type="text" name=RowNo value="" id="indexno">
 			<input class="hideinp" type="text" name="AllSelFlag" value="0" id="AllSelFlag">
 		</form>
-		<div align="center" id=subbtns>
-			<!--
-			<input type="button" name="Update" value="设置" ID="Update" OnClick="db_update();">
-			// @TODO 添加删除暂时注销,等完善后再开放
-			<input type=button name=bDelItem value="删除" ID="bDelItem" OnClick="db_del();">
-			<input type=button name=bAddItem value="添加" ID="bAddItem" OnClick="db_add();" >
-
-			<input type="button" name=Refresh value="刷新" ID="Refresh" OnClick="return RefreshWin();"> -->
-			<button class="ui-button" id="btnPost" title="修改所有表计参数"> 更新 </button>
-			<input type="text" id="wait" class="wait_icon_24x24" />
-		</div>
+		<p align="center" id=subbtns>
+			<button  class="hideinp" id="init">初始化</button>
+			<button id="btnsio" class="btn_update">更新</button>
+			<input type="text" id="icon_init" class="wait_icon_24x24_load" />
+			<input type="text" id="icon_ok" class="wait_icon_24x24 ok_24x24" />
+		</p>
 	</body>
 </html>
