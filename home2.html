@@ -109,7 +109,7 @@
 			 *服务器日期
 			 */
 			function srvDate(val) {
-				var now = new Date(val);
+				var now = new Date(val*1000);
 				var year = thisYear();
 				var month = Year_Month();
 				var Today = Date_of_Today();
@@ -120,7 +120,7 @@
 
 			//服务器时间
 			function srvTime(val) {
-				var now = new Date(val);
+				var now = new Date(val*1000);
 				var hh = now.getHours();
 				var mm = now.getMinutes();
 				var ss = now.getTime() % 60000;
@@ -164,7 +164,7 @@
 				//
 				setInterval(refreshCalendarClock, 1000);
 				//刷新显示.
-				setInterval(syn_server_time, 1 * 60 * 1000);
+				setInterval(syn_server_time, 5 * 60 * 1000);
 				//每隔一段时间同步一次,消除累计误差.
 			});
 		</script>
