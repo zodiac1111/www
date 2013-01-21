@@ -129,7 +129,7 @@
 						<th>串口方案<br><div id="sioplan"> </div></th>
 						<th>表计规约<br><div id="procotol"> </div></th>
 						<th>生产厂家<br><div id="factory"> </div></th>
-						<th>电表类型<br><div id="sioplan"> </div></th>
+						<th>电表类型<br><div id="type"> </div></th>
 						<th>电量小数<br>
 						<input class="ntx" type="text" size=1 maxlength=1 name=all_it_dot value="0" onchange="all_it_dot_changed(event);">
 						</th>
