@@ -92,8 +92,8 @@
 						$("#factory").html(result);
 						//alert(result);
 					});
-					$.post('/goform/mtr_items', "item=sioplan", function(result) {
-						$("#sioplan").html(result);
+					$.post('/goform/mtr_items', "item=type", function(result) {
+						$("#type").html(result);
 						//alert(result);
 					});
 
