@@ -271,8 +271,7 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 		$(".reboot").button({
 			icons : {
 				primary : "ui-icon-power"
-			},
-			text : true
+			}
 		});
 	});
 	///加载日志按钮
@@ -280,8 +279,7 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 		$("#load_log").button({
 			icons : {
 				primary : "ui-icon-arrowstop-1-s"
-			},
-			text : true
+			}
 		});
 	});
 	///保存日志按钮
@@ -289,8 +287,7 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 		$("#save_log").button({
 			icons : {
 				primary : "ui-icon-arrowstop-1-n"
-			},
-			text : true
+			}
 		});
 	});
 	///加载监视端口按钮
@@ -298,8 +295,7 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 		$("#load_monport").button({
 			icons : {
 				primary : "ui-icon-arrowstop-1-s"
-			},
-			text : true
+			}
 		});
 	});
 	///保存监视端口参数按钮
@@ -307,8 +303,7 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 		$("#save_monport").button({
 			icons : {
 				primary : "ui-icon-arrowstop-1-n"
-			},
-			text : true
+			}
 		});
 	});
 	///加载规约配置文件
@@ -316,8 +311,7 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 		$("#load_procotol").button({
 			icons : {
 				primary : "ui-icon-arrowstop-1-s"
-			},
-			text : true
+			}
 		});
 	});
 	///保存规约配置文件
@@ -325,8 +319,7 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 		$("#save_procotol").button({
 			icons : {
 				primary : "ui-icon-arrowstop-1-n"
-			},
-			text : true
+			}
 		});
 	});
 	///报文监视按钮-开始
@@ -334,8 +327,7 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 		$("#mon_msg").button({
 			icons : {
 				primary : "ui-icon-play"
-			},
-			text : true
+			}
 		});
 	});
 	///报文监视按钮-停止
@@ -343,8 +335,7 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 		$("#mon_msg_stop").button({
 			icons : {
 				primary : "ui-icon-pause"
-			},
-			text : true
+			}
 		});
 	});
 	///按钮,查询历史数据
@@ -352,8 +343,7 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 		$("#btnPost").button({
 			icons : {
 				primary : "ui-icon-search"
-			},
-			text : true
+			}
 		});
 	});
 	//标签页 标签id tabs
