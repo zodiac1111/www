@@ -14,7 +14,7 @@
 		<style type="text/css">
 			.time {
 				color: #00FFFF;
-				font-size: 160%;
+				font-size: 120%;
 			}
 			body {
 				background-color: gray;
@@ -130,6 +130,7 @@
 				mm = mmm[mm];
 				return (mm );
 			}
+
 			function UTC_Date_of_week() {
 				var now = new Date();
 				var w;
@@ -149,12 +150,13 @@
 					w = "星期六";
 				return (w);
 			}
+
 			//服务器日期
 			function srvDate(t) {
 				var now = new Date(t * 1000);
 				var year = now.getUTCFullYear();
 				var month = UTCYear_Month();
-				var Today =now.getUTCDate();
+				var Today = now.getUTCDate();
 				var week = UTC_Date_of_week();
 				var day = year + '年' + month + Today + '日  ' + week;
 				return (day);
@@ -199,11 +201,10 @@
 				});
 				/* 首次加载,获取一次服务器时间戳 */
 				$("#init").click();
-				//
-				setInterval(refreshCalendarClock, 1000);
 				//刷新显示.
+				setInterval(refreshCalendarClock, 1000);
+				//每隔一段时间(5分钟)与服务器同步一次,消除累计误差.
 				setInterval(syn_server_time, 5 * 60 * 1000);
-				//每隔一段时间同步一次,消除累计误差.
 				//同步/过去服务器时间=点一下获取
 				function syn_server_time() {
 					$("#init").click();
