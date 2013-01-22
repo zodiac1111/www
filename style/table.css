@@ -10,7 +10,7 @@
 }
 /* 表头 */
 .sioplanTable thead {
-	
+
 }
 
 .sioplanTable th {
@@ -36,7 +36,7 @@
 }
 /* 表头 */
 .infoTable thead {
-	
+
 }
 
 .infoTable th {
@@ -46,11 +46,11 @@
 	BORDER-RIGHT: #ffffff 2px outset;
 	BORDER-TOP: #ffffff 2px outset;
 }
-
 .infoTable td {
-	BACKGROUND-COLOR: #F7FAFF;
+	/*BACKGROUND-COLOR: #F7FAFF;*/
 	text-align: left;
 }
+
 /* #### 表计参数(mtrpara)表格样式 */
 .mtrparaTable {
 	BORDER-BOTTOM: #76A8D9 2px outset;
@@ -60,11 +60,9 @@
 	text-align: center; /*表格内文本水平居中*/
 	margin: auto; /*整个表格居中*/
 }
-/* 表头 */
 .mtrparaTable thead {
-	
-}
 
+}
 .mtrparaTable th {
 	BACKGROUND-COLOR: #76A8D9;
 	BORDER-BOTTOM: #ffffff 2px outset;
@@ -72,15 +70,24 @@
 	BORDER-RIGHT: #ffffff 2px outset;
 	BORDER-TOP: #ffffff 2px outset;
 }
+/* #### 历史电量(tou)表格样式 */
+.touTable {
+	/*text-align: center;*/
+	margin: auto;
+}
+.touTable thead {
 
-.infoTable td {
-	/*BACKGROUND-COLOR: #F7FAFF;*/
-	text-align: left;
 }
+.touTable th {
+	/*text-align: center;*/
+	margin: auto;
+}
+
 /*数据有效无效类型样式*/
-.iv { /*无效的*/
-	color:#f8121e;
+.iv {/*无效的*/
+	color: #f8121e;
 }
-.valid{ /*有效的*/
-	color:#047c2b;
+.valid {/*有效的*/
+	color: #047c2b;
 }
+
