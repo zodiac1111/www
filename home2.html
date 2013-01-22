@@ -121,7 +121,7 @@
 
 			//服务器时间
 			function srvTime( t) {
-				var now = new Date(t)*1000;
+				var now = new Date(t*1000);
 				var hh = now.getHours();
 				var mm = now.getMinutes();
 				var ss = now.getTime() % 60000;
@@ -143,7 +143,7 @@
 				$("#calendarClock2").html(CurentTime());
 				$("#srvDate").html(srvDate(srvTimestarmp));
 				$("#srvTime").html(CurentTime(srvTimestarmp));
-				srvTimestarmp += 1000;
+				srvTimestarmp += 1;
 				//以后的服务器时间时在首次的基础上累加,不涉及服务端通讯
 			};
 			//仅开始刷新完成后读取一次服务器时间.
