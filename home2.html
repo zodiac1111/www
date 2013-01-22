@@ -23,7 +23,7 @@
 	</head>
 	<body>
 		<script type="text/javascript">
-			var srvTimestarmp;
+			var srvTimestarmp=0;
 			function Year_Month() {
 				var now = new Date();
 				var yy = now.getFullYear();
@@ -108,8 +108,9 @@
 			/**
 			 *服务器日期
 			 */
-			function srvDate(val) {
-				var now = new Date(val*1000);
+			function srvDate( t) {
+				
+				var now = new Date(t*1000);
 				var year = thisYear();
 				var month = Year_Month();
 				var Today = Date_of_Today();
@@ -119,8 +120,8 @@
 			}
 
 			//服务器时间
-			function srvTime(val) {
-				var now = new Date(val*1000);
+			function srvTime( t) {
+				var now = new Date(t)*1000;
 				var hh = now.getHours();
 				var mm = now.getMinutes();
 				var ss = now.getTime() % 60000;
@@ -140,8 +141,8 @@
 				//document.all.calendarClock2.innerHTML = CurentTime();
 				$("#calendarClock1").html(CurenDate());
 				$("#calendarClock2").html(CurentTime());
-				$("#srvDate").html(srvDate(srvTime));
-				$("#srvTime").html(CurentTime(srvTime));
+				$("#srvDate").html(srvDate(srvTimestarmp));
+				$("#srvTime").html(CurentTime(srvTimestarmp));
 				srvTimestarmp += 1000;
 				//以后的服务器时间时在首次的基础上累加,不涉及服务端通讯
 			};
@@ -151,26 +152,25 @@
 				$("#init").click(function() {
 					$.post('/goform/srv_time', "init=init", function(result) {
 						//$("#tbody_dat").html(result);
-						srvTimestarmp = result
+						srvTimestarmp =  Number(result);
 						//alert(result);
 					});
 				});
 				/* 首次加载,获取一次服务器时间戳 */
 				$("#init").click();
-				//同步/过去服务器时间=点一下获取
-				function syn_server_time() {
-					$("#init").click();
-				};
 				//
 				setInterval(refreshCalendarClock, 1000);
 				//刷新显示.
 				setInterval(syn_server_time, 5 * 60 * 1000);
 				//每隔一段时间同步一次,消除累计误差.
+				//同步/过去服务器时间=点一下获取
+				function syn_server_time() {
+					$("#init").click();
+				};
 			});
 		</script>
 		<span style="float:left"> <label class="time">&emsp;&emsp;&emsp;</label> <label class="time">本地时间:</label> <label id="calendarClock1" class="time" > 获取中...</label> <label id="calendarClock2" class="time" > 获取中...</label> </span>
 		<span style="float:right"> <label class="time">终端时间:</label> <label id="srvDate" class="time"> 获取中...</label> <label id="srvTime" class="time"> 获取中...</label> <label class="time">&emsp;&emsp;&emsp;</label> </span>
-
 		<button  class="hideinp" id="init">获取服务器时间</button>
 	</body>
 </html>
