@@ -23,7 +23,7 @@
 	</head>
 	<body>
 		<script type="text/javascript">
-			var srvTimestarmp=0;
+			var srvTimestarmp = 0;
 			function Year_Month() {
 				var now = new Date();
 				var yy = now.getFullYear();
@@ -79,6 +79,7 @@
 			/**
 			 *本地时间
 			 */
+
 			function CurentTime() {
 				var now = new Date();
 				var hh = now.getHours();
@@ -106,24 +107,64 @@
 			}
 
 			/**
-			 *服务器日期
+			 *服务器日期 **服务器目前全部使用标准时间,不考虑时区,
+			 * 所以与服务器交互都统一使用UTC时间,不管读还是写.
 			 */
-			function srvDate( t) {
-				
-				var now = new Date(t*1000);
-				var year = thisYear();
-				var month = Year_Month();
-				var Today = Date_of_Today();
-				var week = Date_of_week();
+			function UTCYear_Month() {
+				var now = new Date();
+				var yy = now.getUTCFullYear();
+				var mm = now.getUTCMonth();
+				var mmm = new Array();
+				mmm[0] = "1月";
+				mmm[1] = "2月";
+				mmm[2] = "3月";
+				mmm[3] = "4月";
+				mmm[4] = "5月";
+				mmm[5] = "6月";
+				mmm[6] = "7月";
+				mmm[7] = "8月";
+				mmm[8] = "9月";
+				mmm[9] = "10月";
+				mmm[10] = "11月";
+				mmm[11] = "12月";
+				mm = mmm[mm];
+				return (mm );
+			}
+			function UTC_Date_of_week() {
+				var now = new Date();
+				var w;
+				if (now.getUTCDay() == 0)
+					w = "星期日";
+				if (now.getUTCDay() == 1)
+					w = "星期一";
+				if (now.getUTCDay() == 2)
+					w = "星期二";
+				if (now.getUTCDay() == 3)
+					w = "星期三";
+				if (now.getUTCDay() == 4)
+					w = "星期四";
+				if (now.getUTCDay() == 5)
+					w = "星期五";
+				if (now.getUTCDay() == 6)
+					w = "星期六";
+				return (w);
+			}
+			//服务器日期
+			function srvDate(t) {
+				var now = new Date(t * 1000);
+				var year = now.getUTCFullYear();
+				var month = UTCYear_Month();
+				var Today =now.getUTCDate();
+				var week = UTC_Date_of_week();
 				var day = year + '年' + month + Today + '日  ' + week;
 				return (day);
 			}
 
 			//服务器时间
-			function srvTime( t) {
-				var now = new Date(t*1000);
-				var hh = now.getHours();
-				var mm = now.getMinutes();
+			function srvTime(t) {
+				var now = new Date(t * 1000);
+				var hh = now.getUTCHours();
+				var mm = now.getUTCMinutes();
 				var ss = now.getTime() % 60000;
 				ss = (ss - (ss % 1000)) / 1000;
 				var clock = hh + ':';
@@ -152,7 +193,7 @@
 				$("#init").click(function() {
 					$.post('/goform/srv_time', "init=init", function(result) {
 						//$("#tbody_dat").html(result);
-						srvTimestarmp =  Number(result);
+						srvTimestarmp = Number(result);
 						//alert(result);
 					});
 				});
@@ -170,7 +211,7 @@
 			});
 		</script>
 		<span style="float:left"> <label class="time">&emsp;&emsp;&emsp;</label> <label class="time">本地时间:</label> <label id="calendarClock1" class="time" > 获取中...</label> <label id="calendarClock2" class="time" > 获取中...</label> </span>
-		<span style="float:right"> <label class="time">终端时间:</label> <label id="srvDate" class="time"> 获取中...</label> <label id="srvTime" class="time"> 获取中...</label> <label class="time">&emsp;&emsp;&emsp;</label> </span>
+		<span style="float:right"> <label class="time">终端时间(UTC):</label> <label id="srvDate" class="time"> 获取中...</label> <label id="srvTime" class="time"> 获取中...</label> <label class="time">&emsp;&emsp;&emsp;</label> </span>
 		<button  class="hideinp" id="init">获取服务器时间</button>
 	</body>
 </html>
