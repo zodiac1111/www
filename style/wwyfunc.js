@@ -338,11 +338,9 @@ function all_it_dot_changed(e) {
 	curobj.style.color = "green";// 数值改变了,字体变绿色
 	if (!rNums.test(curobj.value)) {// 数值错误:
 		curobj.style.backgroundColor = "red";
-		curobj.id = "errobj";
 		return;
 	} else {// 正确则恢复
 		curobj.style.backgroundColor = "";
-		curobj.id = "";
 	}
 	var i = 0;
 	var n = it_dotlist.length;
@@ -359,11 +357,9 @@ function all_xl_dot_changed(e) {
 	curobj.style.color = "green";// 数值改变了,字体变绿色
 	if (!rNums.test(curobj.value)) {// 数值错误:
 		curobj.style.backgroundColor = "red";
-		curobj.id = "errobj";
 		return;
 	} else {// 正确则恢复
 		curobj.style.backgroundColor = "";
-		curobj.id = "";
 	}
 	var i = 0;
 	var n = xl_dotlist.length;
@@ -379,11 +375,9 @@ function all_v_dot_changed(e) {
 	curobj.style.color = "green";// 数值改变了,字体变绿色
 	if (!rNums.test(curobj.value)) {// 数值错误:
 		curobj.style.backgroundColor = "red";
-		curobj.id = "errobj";
 		return;
 	} else {// 正确则恢复
 		curobj.style.backgroundColor = "";
-		curobj.id = "";
 	}
 	var i = 0;
 	var n = xl_dotlist.length;
@@ -399,11 +393,9 @@ function all_i_dot_changed(e) {
 	curobj.style.color = "green";// 数值改变了,字体变绿色
 	if (!rNums.test(curobj.value)) {// 数值错误:
 		curobj.style.backgroundColor = "red";
-		curobj.id = "errobj";
 		return;
 	} else {// 正确则恢复
 		curobj.style.backgroundColor = "";
-		curobj.id = "";
 	}
 	var i = 0;
 	var n = xl_dotlist.length;
@@ -418,11 +410,9 @@ function all_p_dot_changed(e) {
 	curobj.style.color = "green";// 数值改变了,字体变绿色
 	if (!rNums.test(curobj.value)) {// 数值错误:
 		curobj.style.backgroundColor = "red";
-		curobj.id = "errobj";
 		return;
 	} else {// 正确则恢复
 		curobj.style.backgroundColor = "";
-		curobj.id = "";
 	}
 	var i = 0;
 	var n = xl_dotlist.length;
@@ -437,11 +427,9 @@ function all_q_dot_changed(e) {
 	curobj.style.color = "green";// 数值改变了,字体变绿色
 	if (!rNums.test(curobj.value)) {// 数值错误:
 		curobj.style.backgroundColor = "red";
-		curobj.id = "errobj";
 		return;
 	} else {// 正确则恢复
 		curobj.style.backgroundColor = "";
-		curobj.id = "";
 	}
 	var i = 0;
 	var n = xl_dotlist.length;
@@ -456,11 +444,9 @@ function all_ue_changed(e) {
 	curobj.style.color = "green";// 数值改变了,字体变绿色
 	if (!rNums.test(curobj.value)) {// 数值错误:
 		curobj.style.backgroundColor = "red";
-		curobj.id = "errobj";
 		return;
 	} else {// 正确则恢复
 		curobj.style.backgroundColor = "";
-		curobj.id = "";
 	}
 	var i = 0;
 	var n = xl_dotlist.length;
@@ -475,11 +461,9 @@ function all_ie_changed(e) {
 	curobj.style.color = "green";// 数值改变了,字体变绿色
 	if (!rNums.test(curobj.value)) {// 数值错误:
 		curobj.style.backgroundColor = "red";
-		curobj.id = "errobj";
 		return;
 	} else {// 正确则恢复
 		curobj.style.backgroundColor = "";
-		curobj.id = "";
 	}
 	var i = 0;
 	var n = xl_dotlist.length;
