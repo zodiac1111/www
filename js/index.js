@@ -53,7 +53,9 @@ $(document).ready(function() {
 	});
 	$(function() {
 		$("#accordion").accordion({
-			heightStyle : "content"
+			 heightStyle : "content",
+			// heightStyle: "fill",
+			collapsible: true
 		});
 	});
 	$(function() {
