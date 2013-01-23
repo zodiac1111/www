@@ -4,11 +4,12 @@
 $(document).ready(function() {
 	$("#btnSysParam").click(function() {
 		//$("#inter_page").html("");
-		$("#inter_page").addClass('load_bgpic_hight');
-		$.get("/um/syspara1.html", function(result) {
-			$("#inter_page").removeClass('load_bgpic_hight');
-			$("#inter_page").html(result);
-		});
+		//$("#inter_page").addClass('load_bgpic_hight');
+		// $.get("/um/syspara1.html", function(result) {
+			// $("#inter_page").removeClass('load_bgpic_hight');
+			// $("#inter_page").html(result);
+		// });
+		$("#inter_page").load("/um/syspara1.html");
 	});
 	$("#btnSioParam").click(function() {
 		$("#inter_page").html("");
