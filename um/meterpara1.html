@@ -108,9 +108,9 @@
 					$.post('/goform/mtrparams', "init=1", function(result) {
 						$("#tbl_mtrparams tbody").html(result);
 						$('input[name="mtrno"]').width("2em");
-						$('input[name="line"]').width("3em");
-						$('input[name="addr"]').width("6em");
-						$('input[name="pwd"]').width("4em");
+						$('input[name="line"]').width("3.1em");
+						$('input[name="addr"]').width("6.4em");
+						$('input[name="pwd"]').width("4.1em");
 						$('input[name$="dot"]').width("0.5em");
 						$('input[name$="ue"]').width("2.2em");
 						$('input[name$="ie"]').width("2.2em");
@@ -126,7 +126,11 @@
 		<style type="text/css">
 			input {
 				background-color: transparent;
-				border: none;
+				border: hidden;
+			}
+			th input{
+				background-color: white;
+				border: double;
 			}
 		</style>
 	</head>
@@ -145,14 +149,14 @@
 						<th>表计地址</th>
 						<th>表计口令</th>
 						<th>使用端口</th>
-						<th>串口方案<div id="sioplan"></div></th>
-						<th>表计规约<div id="procotol"></div></th>
-						<th>生产厂家<div id="factory"></div></th>
-						<th>电表类型<div id="type"></div></th>
-						<th>电量小数
+						<th>串口方案<br><div id="sioplan"></div></th>
+						<th>表计规约<br><div id="procotol"></div></th>
+						<th>生产厂家<br><div id="factory"></div></th>
+						<th>电表类型<br><div id="type"></div></th>
+						<th>电量小数<br>
 						<input  type="text"  maxlength=1 name=all_it_dot value="0" onchange="all_it_dot_changed(event);">
 						</th>
-						<th>需量小数
+						<th>需量小数<br>
 						<input  type="text"  maxlength=1 name=all_xl_dot value="0" onchange="all_xl_dot_changed(event);">
 						</th>
 						<th>电压小数<br>
