@@ -2,19 +2,22 @@
  * @author leepeigang
  */
 $(document).ready(function() {
+	$.ajaxSetup({
+		async:false
+	});
 	$("#btnSysParam").click(function() {
 		//$("#inter_page").html("");
 		//$("#inter_page").addClass('load_bgpic_hight');
 		// $.get("/um/syspara1.html", function(result) {
-			// $("#inter_page").removeClass('load_bgpic_hight');
-			// $("#inter_page").html(result);
+		// $("#inter_page").removeClass('load_bgpic_hight');
+		// $("#inter_page").html(result);
 		// });
-		$("#inter_page").load("/um/syspara1.html");
+		$("#inter_page").load("um/syspara1.html");
 	});
 	$("#btnSioParam").click(function() {
 		$("#inter_page").html("");
 		$("#inter_page").addClass('load_bgpic_hight');
-		$.get("/um/compara1.html", function(result) {
+		$.get("um/compara1.html", function(result) {
 			$("#inter_page").removeClass('load_bgpic_hight');
 			$("#inter_page").html(result);
 		});
@@ -35,7 +38,7 @@ $(document).ready(function() {
 			$("#inter_page").html(result);
 		});
 	});
-		$("#btnMtrParam").click(function() {
+	$("#btnMtrParam").click(function() {
 		$("#inter_page").html("");
 		$("#inter_page").addClass('load_bgpic_hight');
 		$.get("/um/meterpara1.html", function(result) {
@@ -43,7 +46,7 @@ $(document).ready(function() {
 			$("#inter_page").html(result);
 		});
 	});
-		$("#btnSaveCycle").click(function() {
+	$("#btnSaveCycle").click(function() {
 		$("#inter_page").html("");
 		$("#inter_page").addClass('load_bgpic_hight');
 		$.get("/um/saveCycle.html", function(result) {
@@ -53,9 +56,9 @@ $(document).ready(function() {
 	});
 	$(function() {
 		$("#accordion").accordion({
-			 heightStyle : "content",
+			heightStyle : "content",
 			// heightStyle: "fill",
-			collapsible: true
+			collapsible : true
 		});
 	});
 	$(function() {
