@@ -53,8 +53,7 @@
 					"bSort" : false, //不要排序
 					"sScrollY" : "300px", //固定高度
 					"bPaginate" : false, //不分页
-					"bScrollCollapse" : true, //显示滚动条
-					"sPaginationType" : "full_numbers",//翻页按钮类型
+					"bScrollCollapse" : false, //显示滚动条
 				});
 				$("#icon_init").hide();
 				$("#icon_ok").hide();
@@ -75,6 +74,7 @@
 
 					});
 				});
+				var t = $('#tbl_mtrparams').dataTable();
 				/* 隐藏的按钮用于初始化,应为post的form只能使用按钮触发 */
 				$("#init").click(function() {
 					//加载表计参数的各种项目头:串口方案项目名
@@ -100,9 +100,10 @@
 					//清空
 					$("#tbl_mtrparams tbody").html("");
 					$("#icon_init").show();
+					t.fnDestroy(false);
 					$.post('/goform/mtrparams', "init=1", function(result) {
 						$("#tbl_mtrparams tbody").html(result);
-						$('#tbl_mtrparams').dataTable();
+						t = $('#tbl_mtrparams').dataTable();
 						$("#icon_init").hide("fade", 2000);
 						//alert(result);
 					});
@@ -115,7 +116,7 @@
 	<body>
 		<h1 align="center"><img src="/graphics/logo32.png" height="45"></h1>
 		<form action="/goform/formTest" method="post" id="mtrparaform" name="mtrparaform">
-			<table  id="tbl_mtrparams"  class="sioplanTable" width="100%" border="1" cellspacing="1" cellpadding="1" >
+			<table  width="80%" id="tbl_mtrparams"  class="sioplanTable" border="1" cellspacing="1" cellpadding="1" >
 				<thead>
 					<tr>
 						<th>表号</th>
@@ -126,10 +127,10 @@
 						<th>表计地址</th>
 						<th>表计口令</th>
 						<th>使用端口</th>
-						<th>串口方案<br><div id="sioplan"> </div></th>
-						<th>表计规约<br><div id="procotol"> </div></th>
-						<th>生产厂家<br><div id="factory"> </div></th>
-						<th>电表类型<br><div id="type"> </div></th>
+						<th>串口方案<br><div id="sioplan"></div></th>
+						<th>表计规约<br><div id="procotol"></div></th>
+						<th>生产厂家<br><div id="factory"></div></th>
+						<th>电表类型<br><div id="type"></div></th>
 						<th>电量小数<br>
 						<input class="ntx" type="text" size=1 maxlength=1 name=all_it_dot value="0" onchange="all_it_dot_changed(event);">
 						</th>
