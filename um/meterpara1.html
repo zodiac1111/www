@@ -38,6 +38,9 @@
 			// });
 			// }
 			$(document).ready(function() {
+				$.ajaxSetup({
+					async : false
+				});
 				/* 按鈕 */
 				$(function() {
 					$("#btn_update").button({
@@ -103,6 +106,13 @@
 					t.fnDestroy(false);
 					$.post('/goform/mtrparams', "init=1", function(result) {
 						$("#tbl_mtrparams tbody").html(result);
+						$('input[name="mtrno"]').width(this.maxlength());
+						$('input[name="line"]').width("3em");
+						$('input[name="addr"]').width("6em");
+						$('input[name="pwd"]').width("4em");
+						$('input[name$="dot"]').width("0.5em");
+						$('input[name="ue"]').width("2.2em");
+						$('input[name="ui"]').width("2.2em");
 						t = $('#tbl_mtrparams').dataTable();
 						$("#icon_init").hide("fade", 2000);
 						//alert(result);
@@ -112,19 +122,26 @@
 				$("#init").click();
 			});
 		</script>
+		<style type="text/css">
+			input {
+				background-color: transparent;
+				border: none;
+			}
+		</style>
 	</head>
 	<body>
 		<h1 align="center"><img src="/graphics/logo32.png" height="45"></h1>
 		<form action="/goform/formTest" method="post" id="mtrparaform" name="mtrparaform">
-			<table  width="80%" id="tbl_mtrparams"  class="sioplanTable" border="1" cellspacing="1" cellpadding="1" >
+			<table  width="100%" id="tbl_mtrparams"  class="sioplanTable" border="1" cellspacing="1" cellpadding="1" >
+				<!-- <table width="80%" id="tbl_mtrparams" class="sioplanTable"> -->
 				<thead>
 					<tr>
-						<th>表号</th>
-						<th>有效<br>
+						<th width=0px >表号</th>
+						<th width=0px >有效<br>
 						<input type="checkbox" name=iv_all value=iv_all onclick="iv_all_click(event);">
 						</th>
-						<th>线路名称</th>
-						<th>表计地址</th>
+						<th width=0px >线路名称</th>
+						<th width=0px >表计地址</th>
 						<th>表计口令</th>
 						<th>使用端口</th>
 						<th>串口方案<br><div id="sioplan"></div></th>
@@ -132,28 +149,28 @@
 						<th>生产厂家<br><div id="factory"></div></th>
 						<th>电表类型<br><div id="type"></div></th>
 						<th>电量小数<br>
-						<input class="ntx" type="text" size=1 maxlength=1 name=all_it_dot value="0" onchange="all_it_dot_changed(event);">
+						<input  type="text"  maxlength=1 name=all_it_dot value="0" onchange="all_it_dot_changed(event);">
 						</th>
 						<th>需量小数<br>
-						<input class="ntx" type="text" size=1 maxlength=1 name=all_xl_dot value="0" onchange="all_xl_dot_changed(event);">
+						<input  type="text"  maxlength=1 name=all_xl_dot value="0" onchange="all_xl_dot_changed(event);">
 						</th>
 						<th>电压小数<br>
-						<input class="ntx" type="text" size=1 maxlength=1 name=all_v_dot value="0" onchange="all_v_dot_changed(event);">
+						<input  type="text" maxlength=1 name=all_v_dot value="0" onchange="all_v_dot_changed(event);">
 						</th>
 						<th>电流小数<br>
-						<input class="ntx" type="text" size=1 maxlength=1 name=all_i_dot value="0" onchange="all_i_dot_changed(event);">
+						<input  type="text"  maxlength=1 name=all_i_dot value="0" onchange="all_i_dot_changed(event);">
 						</th>
 						<th>有功小数<br>
-						<input class="ntx" type="text" size=1 maxlength=1 name=all_p_dot value="0" onchange="all_p_dot_changed(event);">
+						<input  type="text"  maxlength=1 name=all_p_dot value="0" onchange="all_p_dot_changed(event);">
 						</th>
 						<th>无功小数<br>
-						<input class="ntx" type="text" size=1 maxlength=1 name=all_q_dot value="0" onchange="all_q_dot_changed(event);">
+						<input  type="text"  maxlength=1 name=all_q_dot value="0" onchange="all_q_dot_changed(event);">
 						</th>
 						<th>额定电压<br>
-						<input class="ntx" type="text" size=1 name=all_ue value="0" onchange="all_ue_changed(event);">
+						<input  type="text" maxlength=4 name=all_ue value="0" onchange="all_ue_changed(event);">
 						</th>
 						<th>额定电流<br>
-						<input class="ntx" type="text" size=1 name=all_ie value="0" onchange="all_ie_changed(event);">
+						<input  type="text"  maxlength=4 name=all_ie value="0" onchange="all_ie_changed(event);">
 						</th>
 					</tr>
 				</thead>
