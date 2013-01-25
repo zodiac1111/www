@@ -50,7 +50,7 @@
 				$("#init").click(function() {
 					$("#icon_init").show();
 					$.post('/goform/sysparam', "init=1", function(result) {
-						alert(result);
+						//alert(result);
 						/*var asys = result.split(",");
 						if (asys.length != 6) {
 							alert("服务器返回错误: " + result);
@@ -74,6 +74,7 @@
 						$("#netports_num").val(oSysPara.netports_num);
 						$("#sioports_num").val(oSysPara.sioports_num);
 						$("#control_ports").val(oSysPara.control_ports);
+						$("#icon_init").hide("fade", 2000);
 					});
 				});
 				/* 首次加载串口参数 */
