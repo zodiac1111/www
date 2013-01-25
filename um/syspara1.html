@@ -50,8 +50,8 @@
 				$("#init").click(function() {
 					$("#icon_init").show();
 					$.post('/goform/sysparam', "init=1", function(result) {
-						//alert(result);
-						var asys = result.split(",");
+						alert(result);
+						/*var asys = result.split(",");
 						if (asys.length != 6) {
 							alert("服务器返回错误: " + result);
 						} else {
@@ -65,6 +65,15 @@
 						}
 						$("#icon_init").hide("fade", 2000);
 						//alert("OK");
+						*/
+						/*使用JSON解析 与后台系统参数结构体[stSysParam]相同*/
+						var oSysPara=JSON.parse(result);
+						$("#meter_num").val(oSysPara.meter_num);
+						$("#sioplan_num").val(oSysPara.sioplan_num);
+						$("#monitor_ports").val(oSysPara.monitor_ports);
+						$("#netports_num").val(oSysPara.netports_num);
+						$("#sioports_num").val(oSysPara.sioports_num);
+						$("#control_ports").val(oSysPara.control_ports);
 					});
 				});
 				/* 首次加载串口参数 */
@@ -92,7 +101,7 @@
 								<tr align="center">
 									<td align="center">表计总数目:</td>
 									<td align="left">
-									<input id="mtr_num" type="text" name="meter_num" size=12  maxlength=3 onchange="lessthan1byte(event);">
+									<input id="meter_num" type="text" name="meter_num" size=12  maxlength=3 onchange="lessthan1byte(event);">
 									</td>
 									<td align="center">串口方案数:</td>
 									<td align="left">
