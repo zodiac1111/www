@@ -56,18 +56,16 @@
 							alert("服务器返回错误: " + result);
 						} else {
 							//document.getElementById("mtr_num").value= asys[0];
-							$("#mtr_num").val(asys[0]);
+							$("#meter_num").val(asys[0]);
 							$("#sioplan_num").val(asys[1]);
 							$("#monitor_ports").val(asys[2]);
 							$("#netports_num").val(asys[3]);
 							$("#sioports_num").val(asys[4]);
 							$("#control_ports").val(asys[5]);
 						}
-						$("#icon_init").hide("fade", 2000);
-						//alert("OK");
 						*/
 						/*使用JSON解析 与后台系统参数结构体[stSysParam]相同*/
-						var oSysPara=JSON.parse(result);
+						var oSysPara=JSON.parse(result); 
 						$("#meter_num").val(oSysPara.meter_num);
 						$("#sioplan_num").val(oSysPara.sioplan_num);
 						$("#monitor_ports").val(oSysPara.monitor_ports);
@@ -75,6 +73,7 @@
 						$("#sioports_num").val(oSysPara.sioports_num);
 						$("#control_ports").val(oSysPara.control_ports);
 						$("#icon_init").hide("fade", 2000);
+						//alert("OK");
 					});
 				});
 				/* 首次加载串口参数 */
