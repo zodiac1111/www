@@ -48,11 +48,30 @@
 						//alert("OK");
 					});
 				});
-				/* 隐藏的按钮用于初始化,应为post的form只能使用按钮触发*/
+				/* 隐藏的按钮用于初始化,应为post的form只能使用按钮触发 */
 				$("#init").click(function() {
 					$("#icon_init").show();
 					$.post('/goform/netpara', "init=1", function(result) {
+						//alert(result);
 						$("#tbody_dat").html(result);
+						//todo 使用json传递数据 从数据中分解出对象数组.
+						/*
+						var aNetParas = JSON.parse(result);
+						$("#tbody_dat").html();
+						
+						for (var i in aNetParas.item) {
+							var t=$("#tbody_dat").append("<tr>");
+							t.append("<td>"+aNetParas.item[i].no +"</td>");
+							$("#tbody_dat").append("<td>"+aNetParas.item[i].eth +"</td>");
+							$("#tbody_dat").append("<td>"+aNetParas.item[i].ip +"</td>");
+							$("#tbody_dat").append("<td>"+aNetParas.item[i].mask +"</td>");
+							$("#tbody_dat").append("<td>"+aNetParas.item[i].gateway +"</td>");
+							//$("#tbody_dat").append("</tr>");
+							//(aNetParas[i].no);
+							//document.write(aa[i] + ",");
+						}
+						*/
+						//alert(result);
 						$("#icon_init").hide("fade", 2000);
 						//alert("OK");
 					});
@@ -75,8 +94,7 @@
 						<th>网关</th>
 					</tr>
 				</thead>
-				<tbody id="tbody_dat">
-				</tbody>
+				<tbody id="tbody_dat"></tbody>
 			</table>
 		</form>
 		<p ALIGN="center">
