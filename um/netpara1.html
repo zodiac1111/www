@@ -28,7 +28,7 @@
 				});
 				$("#icon_init").hide();
 				$("#icon_ok").hide();
-				//串口参数 post提交
+				// post提交
 				/* 定义按钮 post函数 */
 				$("#btnUpdate").click(function() {
 					var errobj = document.getElementById("errobj");
@@ -53,30 +53,35 @@
 					$("#icon_init").show();
 					$.post('/goform/netpara', "init=1", function(result) {
 						//alert(result);
-						$("#tbody_dat").html(result);
-						//todo 使用json传递数据 从数据中分解出对象数组.
-						/*
+						//$("#tbody_dat").html(result); //待删除,无用的代码,之前使用html传输数据
+						//使用json传递数据 从数据中分解出对象数组.
 						var aNetParas = JSON.parse(result);
-						$("#tbody_dat").html();
-						
+						$("#tbody_dat").html("");
 						for (var i in aNetParas.item) {
-							var t=$("#tbody_dat").append("<tr>");
-							t.append("<td>"+aNetParas.item[i].no +"</td>");
-							$("#tbody_dat").append("<td>"+aNetParas.item[i].eth +"</td>");
-							$("#tbody_dat").append("<td>"+aNetParas.item[i].ip +"</td>");
-							$("#tbody_dat").append("<td>"+aNetParas.item[i].mask +"</td>");
-							$("#tbody_dat").append("<td>"+aNetParas.item[i].gateway +"</td>");
-							//$("#tbody_dat").append("</tr>");
-							//(aNetParas[i].no);
-							//document.write(aa[i] + ",");
+							var str = "<tr>";
+							//
+							str += "<td><input name=net_no type=text readonly size=1 value=" + aNetParas.item[i].no + "></td>";
+							str += "<td><select name=eth >";
+							for (var j = 0; j < aNetParas.eth_num; j++) {
+								str += "<option value=" + j;
+								if (j == aNetParas.item[i].eth)
+									str += " selected";
+								str += ">ETH";
+								str += j + 1;
+								str += "</option>"
+							}
+							str += "</select></td>"
+							str += "<td><input name=ip type=text size=15 maxlength=15 onchange=\"isIPv4(event);\" value=\"" + aNetParas.item[i].ip + "\"></td>";
+							str += "<td><input name=mask type=text size=15 maxlength=15 onchange=\"isIPv4(event);\" value=\"" + aNetParas.item[i].mask + "\"></td>";
+							str += "<td><input name=gateway type=text size=15 maxlength=15 onchange=\"isIPv4(event);\" value=\"" + aNetParas.item[i].gateway + "\"></td>";
+							str += "</tr>"
+							$("#tbody_dat").append(str);
 						}
-						*/
-						//alert(result);
 						$("#icon_init").hide("fade", 2000);
-						//alert("OK");
+						//alert("debug: Ajax ok");
 					});
 				});
-				/* 首次加载串口参数 */
+				/* 页面载入,读取一次(点击) */
 				$("#init").click();
 			});
 		</script>
@@ -94,20 +99,13 @@
 						<th>网关</th>
 					</tr>
 				</thead>
-				<tbody id="tbody_dat"></tbody>
+				<tbody id="tbody_dat"><tr><td>载入数据...</td></tr></tbody>
 			</table>
 		</form>
 		<p ALIGN="center">
-			<!-- <input type="button" name="Update" value="设置" ID="Update" OnClick="db_update();"> -->
-			<!--<input type=button name=bDelItem value="删除" ID="bDelItem"  onclick="return
-			DelSubmit();">
-			<input type="button"  name=bAddItem value="添加" ID="bAddItem" OnClick="return
-			Redirect('AddRoutePara.asp');" >
-			-->
-			<!-- <input type="button" name=Refresh value="读取" ID="Refresh" OnClick="return RefreshWin();"> -->
 			<!-- 提交操作类型 更新,还是其他 -->
 			<input class="hideinp" type="text" name="OpType" value="" id="optype">
-			<button id="init" class="hideinp" >初始化</button>
+			<button id="init" class="hideinp">读取</button><!-- 隐藏，仅载入时读取一次　-->
 			<button id="btnUpdate" class="btn_update">更新</button>
 			<input type="text" id="icon_init" class="wait_icon_24x24_load" />
 			<input type="text" id="icon_ok" class="wait_icon_24x24 ok_24x24" />
