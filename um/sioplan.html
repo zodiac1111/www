@@ -57,24 +57,46 @@
 				/* 首次加载串口参数 */
 				$("#init").click();
 			});
-			
-				/* 函数:将数据插入到表格中 */
-				function full(obj, result) {
-					obj.html("");//清除是有必要的.
-					var oSioPlan = JSON.parse(result);
-					for (var row = 0; row < oSioPlan.item.length; row++) {
-						var str = "<tr>";
-						str += "<td>" + oSioPlan.item[row].no + "</td>";
-						str += "<td>" + oSioPlan.item[row].parity + "</td>";
-						str += "<td>" + oSioPlan.item[row].dat_bit + "</td>";
-						str += "<td>" + oSioPlan.item[row].stop_bit + "</td>";
-						str += "<td>" + oSioPlan.item[row].baud + "</td>";
-						str += "<td>" + oSioPlan.item[row].commtype + "</td>";
-						str += "</tr>";
-						//alert(str);
-						obj.append(str);
-					}//end for (一行完成)
+
+			/* 函数:将所有数据行一行一行的插入到表格中 */
+			function full(obj, result) {
+				obj.html("");
+				//清除是有必要的.
+				var oSioPlan = JSON.parse(result);
+				for (var row = 0; row < oSioPlan.item.length; row++) {
+					var str = "<tr>";
+					str += add_no_td(oSioPlan.item[row].no);
+					str += appendItem("parity", oSioPlan.parity, oSioPlan.item[row].parity);
+					str += appendItem("data", oSioPlan.data, oSioPlan.item[row].data);
+					str += appendItem("stop", oSioPlan.stop, oSioPlan.item[row].stop);
+					str += appendItem("baud", oSioPlan.baud, oSioPlan.item[row].baud);
+					str += appendItem("comm_type", oSioPlan.commtype, oSioPlan.item[row].commtype);
+					str += "</tr>";
+					//alert(str);
+					obj.append(str);
+				}//end for (一行完成)
+			}
+
+			function add_no_td(number) {
+				return "<td><input type=text name=sioplanno readonly size=1 value=" + number + "></td>";
+			}
+
+			function appendItem(strname, obj, index) {
+				var str = "<td>";
+				var indexbase = (strname == "dat" ? 7 : 0);
+				//对于数据位是7开始索引的
+				str += "<select name=" + strname + " >";
+				for (var i = 0; i < obj.length; i++) {
+					str += "<option value=" + i + " ";
+					if (i == index - indexbase) {
+						str += "selected"
+					}
+					str += ">" + obj[i] + "</option>"
+					str += obj[i];
 				}
+				str += "</selected></td>";
+				return str;
+			}
 		</script>
 	</head>
 	<body>
