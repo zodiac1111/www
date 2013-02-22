@@ -70,11 +70,11 @@
 					str += appendCommPort(oMonPara.commport, oMonPara.item[row].commport);
 					str += appendPort(oMonPara.item[row].listenport);
 					str += appendSioPlan(oMonPara.sioplan_num, oMonPara.item[row].sioplan);
-					str += appendProtocol(oMonPara.protocol, oMonPara.item[row].protocol) ;
-					str += "<td>" + oMonPara.item[row].rtu_addr + "</td>";
-					str += "<td>" + oMonPara.item[row].time_syn_chk + "</td>";
-					str += "<td>" + oMonPara.item[row].forward_chk + "</td>";
-					str += "<td>" + oMonPara.item[row].forward_mtr_num + "</td>";
+					str += appendProtocol(oMonPara.protocol, oMonPara.item[row].protocol);
+					str += appendRtuAddr(oMonPara.item[row].rtu_addr);
+					str += appendTimeSyn(oMonPara.item[row].time_syn_chk);
+					str += appendForward(oMonPara.item[row].forward_chk);
+					str += appendForwardNum(oMonPara.item[row].forward_mtr_num);
 					obj.append(str);
 				}
 			}
@@ -117,6 +117,7 @@
 				str += "</selected></td>";
 				return str;
 			}
+
 			function appendProtocol(objProtocolList, index) {
 				var str = "<td><select name=protocol>";
 				for (var i = 0; i < objProtocolList.length; i++) {
@@ -129,6 +130,43 @@
 				str += "</selected></td>";
 				return str;
 			}
+
+			function appendRtuAddr(addr) {
+				var str = "<td><input type=text name=rtu_addr ";
+				str += "onchange=\"verify_rtu_addr(event);\""
+				str += " size=3  maxlength=4 value=" + addr + "></td>";
+				return str;
+			}
+
+			function appendTimeSyn(chk) {
+				var str = "<td><input type=checkbox name=time_syn_chk ";
+				str += "value=" + chk + " ";
+				str += (chk == "1") ? "checked " : " ";
+				str += "onclick=\"chk_change(event);\">";
+				str += "<input type=text size=1 readonly name=time_syn ";
+				str += "value=" + chk + ">";
+				str += "</td>";
+				return str;
+			}
+
+			function appendForward(chk) {
+				var str = "<td><input type=checkbox name=forward_chk ";
+				str += "value=" + chk + " ";
+				str += (chk == "1") ? "checked " : " ";
+				str += "onclick=\"chk_change(event);\">";
+				str += "<input type=text size=1 readonly name=forward ";
+				str += "value=" + chk + ">";
+				str += "</td>";
+				return str;
+			}
+
+			function appendForwardNum(num) {
+				var str = "<td><input type=text name=forward_mtr_num ";
+				str += "onchange=\"verify_forward_mtr_num(event);\" "
+				str += "size=1  maxlength=5 value=" + num + "></td>";
+				return str;
+			}
+
 		</script>
 	</head>
 	<body>
