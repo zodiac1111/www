@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<!-- Copyright (c) Echon., 2006. All Rights Reserved. 网口监视参数页面-->
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<!-- Copyright (c) Echon., 2006. All Rights Reserved. 网口监视参数页面-->
 	<head>
 		<title>网络参数设置</title>
 		<meta http-equiv="Pragma" content="no-cache" charset=utf-8>
@@ -53,8 +53,6 @@
 					$("#icon_init").show();
 					$.post('/goform/netpara', "init=1", function(result) {
 						//alert(result);
-						//$("#tbody_dat").html(result); //待删除,无用的代码,之前使用html传输数据
-						//使用json传递数据 从数据中分解出对象数组.
 						fillData($("#tbody_dat"), result);
 						$("#icon_init").hide("fade", 2000);
 						//alert("debug: Ajax ok");
