@@ -51,7 +51,9 @@
 				$("#init").click(function() {
 					$("#icon_init").show();
 					$.post('/goform/monparas', "init=1", function(result) {
-						$("#tbody_dat").html(result);
+						//$("#tbody_dat").html(result);
+						//alert("result");
+						fillData($("#tbody_dat"), result);
 						$("#icon_init").hide("fade", 2000);
 						//alert("OK");
 					});
@@ -59,6 +61,74 @@
 				/* 首次加载串口参数 */
 				$("#init").click();
 			});
+			function fillData(obj, str) {
+				obj.html("");
+				var oMonPara = JSON.parse(str);
+				for (var row = 0; row < oMonPara.item.length; row++) {
+					var str = "<tr>";
+					str += appendNo(oMonPara.item[row].mon_no);
+					str += appendCommPort(oMonPara.commport, oMonPara.item[row].commport);
+					str += appendPort(oMonPara.item[row].listenport);
+					str += appendSioPlan(oMonPara.sioplan_num, oMonPara.item[row].sioplan);
+					str += appendProtocol(oMonPara.protocol, oMonPara.item[row].protocol) ;
+					str += "<td>" + oMonPara.item[row].rtu_addr + "</td>";
+					str += "<td>" + oMonPara.item[row].time_syn_chk + "</td>";
+					str += "<td>" + oMonPara.item[row].forward_chk + "</td>";
+					str += "<td>" + oMonPara.item[row].forward_mtr_num + "</td>";
+					obj.append(str);
+				}
+			}
+
+			function appendNo(number) {
+				var str = "<td><input type=text name=mon_no class=\"ntx\"";
+				str += " readonly size=1 value=" + number + "></td>";
+				return str;
+			}
+
+			function appendCommPort(objCommPortList, index) {
+				var str = "<td><select name=commport>";
+				for (var i = 0; i < objCommPortList.length; i++) {
+					str += "<option value=" + i + " ";
+					if (i == index) {
+						str += "selected"
+					}
+					str += ">" + objCommPortList[i] + "</option>"
+				}
+				str += "</selected></td>";
+				return str;
+			}
+
+			function appendPort(port) {
+				var str = "<td><input type=text name=listenport ";
+				str += "onchange=\"verify_port(event);\""
+				str += " size=3  maxlength=5 value=" + port + "></td>";
+				return str;
+			}
+
+			function appendSioPlan(sioplan_num, index) {
+				var str = "<td><select name=sioplan>";
+				for (var i = 0; i < sioplan_num; i++) {
+					str += "<option value=" + i + " ";
+					if (i == index) {
+						str += "selected"
+					}
+					str += ">方案" + (i) + "</option>"
+				}
+				str += "</selected></td>";
+				return str;
+			}
+			function appendProtocol(objProtocolList, index) {
+				var str = "<td><select name=protocol>";
+				for (var i = 0; i < objProtocolList.length; i++) {
+					str += "<option value=" + i + " ";
+					if (i == index) {
+						str += "selected"
+					}
+					str += ">" + objProtocolList[i] + "</option>"
+				}
+				str += "</selected></td>";
+				return str;
+			}
 		</script>
 	</head>
 	<body>
@@ -88,12 +158,11 @@
 						<th width="5%" class="monparamTableHead">序号9</th> -->
 					</tr>
 				</thead>
-				<tbody id="tbody_dat">
-				</tbody>
+				<tbody id="tbody_dat"></tbody>
 			</table>
 		</form>
 		<p align="center">
-			<button id="init" class="hideinp" >初始化</button>
+			<button id="init" class="" >读取</button>
 			<button id="btnUpdate" class="btn_update">更新</button>
 			<input type="text" id="icon_init" class="wait_icon_24x24_load" />
 			<input type="text" id="icon_ok" class="wait_icon_24x24 ok_24x24" />
