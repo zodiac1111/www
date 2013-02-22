@@ -195,9 +195,9 @@
 				/* 隐藏的按钮用于初始化,应为post的form只能使用按钮触发*/
 				$("#init").click(function() {
 					$.post('/goform/srv_time', "init=init", function(result) {
-						//$("#tbody_dat").html(result);
-						srvTimestarmp = Number(result);
 						//alert(result);
+						var oTime=JSON.parse(result);
+						srvTimestarmp = Number(oTime.timestamp);
 					});
 				});
 				/* 首次加载,获取一次服务器时间戳 */
@@ -205,7 +205,7 @@
 				//刷新显示.
 				setInterval(refreshCalendarClock, 1000);
 				//每隔一段时间(5分钟)与服务器同步一次,消除累计误差.
-				setInterval(syn_server_time, 10 * 60 * 1000);
+				setInterval(syn_server_time, 5 * 60 * 1000);
 				//同步/过去服务器时间=点一下获取
 				function syn_server_time() {
 					$("#init").click();
