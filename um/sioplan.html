@@ -48,16 +48,33 @@
 				$("#init").click(function() {
 					$("#icon_init").show();
 					$.post('/goform/sioplan', "init=1", function(result) {
-						$("#tbody_dat").html(result);
+						//$("#tbody_dat").html(result);
+						full($("#tbody_dat"), result);
 						$("#icon_init").hide("fade", 2000);
 						//alert("OK");
 					});
 				});
 				/* 首次加载串口参数 */
 				$("#init").click();
-				//第一次显示页面,直接刷新以显示数据.
-				//$("#btnsio").click();
 			});
+			
+				/* 函数:将数据插入到表格中 */
+				function full(obj, result) {
+					obj.html("");//清除是有必要的.
+					var oSioPlan = JSON.parse(result);
+					for (var row = 0; row < oSioPlan.item.length; row++) {
+						var str = "<tr>";
+						str += "<td>" + oSioPlan.item[row].no + "</td>";
+						str += "<td>" + oSioPlan.item[row].parity + "</td>";
+						str += "<td>" + oSioPlan.item[row].dat_bit + "</td>";
+						str += "<td>" + oSioPlan.item[row].stop_bit + "</td>";
+						str += "<td>" + oSioPlan.item[row].baud + "</td>";
+						str += "<td>" + oSioPlan.item[row].commtype + "</td>";
+						str += "</tr>";
+						//alert(str);
+						obj.append(str);
+					}//end for (一行完成)
+				}
 		</script>
 	</head>
 	<body>
@@ -76,17 +93,17 @@
 				</thead>
 				<!-- 循环依次添加所有串口方案 一列一条  -->
 				<tbody id="tbody_dat" >
-				
+
 				</tbody>
 			</table>
 		</form>
 		<p align="center" height=25>
 			<!-- <input type="button" name="Update" value="设置" id="Update" onclick="db_update();" /> -->
 			<!-- <input type="button" name="Refresh" value="读取" id="Refresh" onclick="return RefreshWin();" /> -->
-			<!-- 提交操作类型 更新,还是其他 -->
+			<!-- 提交操作类型 更新,还是其他 hideinp -->
 			<input class="hideinp" type="text" name="OpType" value="" id="optype" />
 
-			<button  class="hideinp" id="init">初始化</button>
+			<button  class="" id="init">读取</button>
 			<button id="btnsio" class="btn_update">更新</button>
 			<input type="text" id="icon_init" class="wait_icon_24x24_load" />
 			<input type="text" id="icon_ok" class="wait_icon_24x24 ok_24x24" />
