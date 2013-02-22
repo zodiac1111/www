@@ -8,11 +8,11 @@ $(document).ready(function() {
 	$("#btnSysParam").click(function() {
 		//$("#inter_page").html("");
 		//$("#inter_page").addClass('load_bgpic_hight');
-		// $.get("/um/syspara1.html", function(result) {
+		// $.get("/um/syspara.html", function(result) {
 		// $("#inter_page").removeClass('load_bgpic_hight');
 		// $("#inter_page").html(result);
 		// });
-		$("#inter_page").load("um/syspara1.html");
+		$("#inter_page").load("um/syspara.html");
 	});
 	$("#btnSioParam").click(function() {
 		$("#inter_page").html("");
@@ -25,7 +25,7 @@ $(document).ready(function() {
 	$("#btnNetParam").click(function() {
 		$("#inter_page").html("");
 		$("#inter_page").addClass('load_bgpic_hight');
-		$.get("/um/netpara1.html", function(result) {
+		$.get("/um/netpara.html", function(result) {
 			$("#inter_page").removeClass('load_bgpic_hight');
 			$("#inter_page").html(result);
 		});
@@ -33,7 +33,7 @@ $(document).ready(function() {
 	$("#btnMonParam").click(function() {
 		$("#inter_page").html("");
 		$("#inter_page").addClass('load_bgpic_hight');
-		$.get("/um/monpara1.html", function(result) {
+		$.get("/um/monpara.html", function(result) {
 			$("#inter_page").removeClass('load_bgpic_hight');
 			$("#inter_page").html(result);
 		});
@@ -41,7 +41,7 @@ $(document).ready(function() {
 	$("#btnMtrParam").click(function() {
 		$("#inter_page").html("");
 		$("#inter_page").addClass('load_bgpic_hight');
-		$.get("/um/meterpara1.html", function(result) {
+		$.get("/um/meterpara.html", function(result) {
 			$("#inter_page").removeClass('load_bgpic_hight');
 			$("#inter_page").html(result);
 		});
