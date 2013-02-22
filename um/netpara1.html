@@ -55,28 +55,7 @@
 						//alert(result);
 						//$("#tbody_dat").html(result); //待删除,无用的代码,之前使用html传输数据
 						//使用json传递数据 从数据中分解出对象数组.
-						var aNetParas = JSON.parse(result);
-						$("#tbody_dat").html("");
-						for (var i in aNetParas.item) {
-							var str = "<tr>";
-							//
-							str += "<td><input name=net_no type=text readonly size=1 value=" + aNetParas.item[i].no + "></td>";
-							str += "<td><select name=eth >";
-							for (var j = 0; j < aNetParas.eth_num; j++) {
-								str += "<option value=" + j;
-								if (j == aNetParas.item[i].eth)
-									str += " selected";
-								str += ">ETH";
-								str += j + 1;
-								str += "</option>"
-							}
-							str += "</select></td>"
-							str += "<td><input name=ip type=text size=15 maxlength=15 onchange=\"isIPv4(event);\" value=\"" + aNetParas.item[i].ip + "\"></td>";
-							str += "<td><input name=mask type=text size=15 maxlength=15 onchange=\"isIPv4(event);\" value=\"" + aNetParas.item[i].mask + "\"></td>";
-							str += "<td><input name=gateway type=text size=15 maxlength=15 onchange=\"isIPv4(event);\" value=\"" + aNetParas.item[i].gateway + "\"></td>";
-							str += "</tr>"
-							$("#tbody_dat").append(str);
-						}//end for 一行
+						fillData($("#tbody_dat"), result);
 						$("#icon_init").hide("fade", 2000);
 						//alert("debug: Ajax ok");
 					});
@@ -84,6 +63,46 @@
 				/* 页面载入,读取一次(点击) */
 				$("#init").click();
 			});
+			/*填充表格数据*/
+			function fillData(obj, str) {
+				var aNetParas = JSON.parse(str);
+				obj.html("");
+				for (var i in aNetParas.item) {
+					var str = "<tr>";
+					str += "<td><input class=\"ntx\" name=net_no type=text readonly size=1 value=";
+					str += aNetParas.item[i].no + "></td>";
+					str += appendEth(aNetParas.eth_num, aNetParas.item[i].eth);
+					str += appendIpStruct("ip", aNetParas.item[i].ip);
+					str += appendIpStruct("mask", aNetParas.item[i].mask);
+					str += appendIpStruct("gateway", aNetParas.item[i].gateway);
+					str += "</tr>"
+					obj.append(str);
+				}//end for 一行
+			}
+
+			/*  添加eth网口单元格 */
+			function appendEth(item, index) {
+				var str = "<td><select name=eth >";
+				for (var j = 0; j < item; j++) {
+					str += "<option value=" + j;
+					if (j == index)
+						str += " selected";
+					str += ">ETH";
+					str += j + 1;
+					str += "</option>"
+				}
+				str += "</select></td>"
+				return str;
+			}
+
+			/* 添加一种ip结构的单元格,包括ip地址,子网掩码,网关三种类型的数据单元格*/
+			function appendIpStruct(name, val) {
+				var str = "<td><input name=" + name;
+				str += " type=text size=15 maxlength=15 ";
+				str += "onchange=\"isIPv4(event);\" ";
+				str += "value=\"" + val + "\"></td>";
+				return str;
+			}
 		</script>
 	</head>
 	<body>
@@ -99,7 +118,11 @@
 						<th>网关</th>
 					</tr>
 				</thead>
-				<tbody id="tbody_dat"><tr><td>载入数据...</td></tr></tbody>
+				<tbody id="tbody_dat">
+					<tr>
+						<td>载入数据...</td>
+					</tr>
+				</tbody>
 			</table>
 		</form>
 		<p ALIGN="center">
