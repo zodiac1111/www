@@ -17,7 +17,7 @@ $(document).ready(function() {
 	$("#btnSioParam").click(function() {
 		$("#inter_page").html("");
 		$("#inter_page").addClass('load_bgpic_hight');
-		$.get("um/compara1.html", function(result) {
+		$.get("um/sioplan.html", function(result) {
 			$("#inter_page").removeClass('load_bgpic_hight');
 			$("#inter_page").html(result);
 		});
