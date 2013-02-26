@@ -4,7 +4,7 @@
 <head>
 <title>1</title>
 <meta http-equiv="Content-Type" content="text/html"> 
-<BASE TARGET="view"><base>
+<base TARGET="view"><base>
 <link href="/style/menuExpandable3.css" rel="stylesheet" type="text/css"></link>
 <SCRIPT src="/style/menuExpandable3.js" type=text/javascript></SCRIPT>
 <style type="text/css">
@@ -28,11 +28,11 @@ img {border-width: 0px 0px 0px 0px}
 		<tr>
 			<td>
 				<DIV id=mainMenu onclick="">
-					<ul id=menuList>
+					<ul id="menuList">
 						<li class=menubar><a href="#" class=actuator
-							id=products1Actuator><img src="/graphics/logo11.png"
+							id="products1Actuator"><img src="/graphics/logo11.png"
 								height="45" /></a>
-							<ul class=menu id=products1Menu>
+							<ul class=menu id="products1Menu">
 								<li style="BACKGROUND-IMAGE: url(/graphics/minus.gif)"><a
 									class=actuator id="a1" href="um/syspara.html"><img
 										src="/graphics/logo20.png"
@@ -56,12 +56,12 @@ img {border-width: 0px 0px 0px 0px}
 							</ul></li>
 					</ul>
 				</div>
-				<DIV id=mainMenu onclick="">
-					<ul id=menuList>
-						<li class=menubar><a href="#" class=actuator
-							id=productsActuator><img src="/graphics/logo12.png"
+				<DIV id="mainMenu" onclick="">
+					<ul id="menuList">
+						<li class=menubar><a href="#" class="actuator"
+							id="productsActuator"><img src="/graphics/logo12.png"
 								height="45"></a>
-							<ul class=menu id=productsMenu>
+							<ul class=menu id="productsMenu">
 								<li style="BACKGROUND-IMAGE: url(/graphics/minus.gif)"><a
 									class=actuator id="a7" href="um/meterpara.html"><img
 										src="/graphics/logo60.png"
@@ -75,13 +75,17 @@ img {border-width: 0px 0px 0px 0px}
 							</ul></li>
 					</ul>
 				</div>
-				<DIV id=mainMenu onclick="">
-					<ul id=menuList>
-						<li class=menubar><a class=actuator id=programParaActuator
+				<!--  数据查看类页面暂时不放在这里.整合进功能菜单中.
+					今后若陆续增加各种数据查看,如 历史电量,实时电量,月统计等数据,
+					可以考虑再将他们归类放到这个页面.
+				<div id="mainMenu" onclick="">
+					<ul id="menuList">
+						<li class=menubar><a class=actuator id="programParaActuator"
 							href="um/data1.asp"><img src="/graphics/logo13.png"
 								height="45"></a></li>
 					</ul>
 				</div>
+				-->
 			</td>
 		</tr>
 	</table>
