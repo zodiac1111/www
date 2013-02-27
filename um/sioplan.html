@@ -37,7 +37,7 @@
 						return;
 					}
 					$("#icon_init").show();
-					$.post('/goform/sioplan', $("#paraform").serialize(), function(result) {
+					$.post('/goform/sioplan', "action=set&"+$("#paraform").serialize(), function(result) {
 						$("#icon_init").hide();
 						$("#icon_ok").show();
 						$("#icon_ok").hide("fade", 1000);
@@ -47,7 +47,7 @@
 				/* 隐藏的按钮用于初始化,应为post的form只能使用按钮触发*/
 				$("#init").click(function() {
 					$("#icon_init").show();
-					$.post('/goform/sioplan', "init=1", function(result) {
+					$.post('/goform/sioplan', "action=init", function(result) {
 						//$("#tbody_dat").html(result);
 						full($("#tbody_dat"), result);
 						$("#icon_init").hide("fade", 2000);
