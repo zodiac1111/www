@@ -38,12 +38,18 @@
 					//$("#tbody_dat").html("<tr><td colspan=\"6\" ></td></tr>");
 					//$("#tbody_dat tr td").addClass('load_bgpic_hight');
 					$.post('/goform/sysparam', $("#sysparam").serialize(), function(result) {
+						//alert(result);
 						//$("#tbody_dat tr td").removeClass('load_bgpic_hight');
 						//$("#tbody_dat").html(result);
 						$("#icon_init").hide();
 						$("#icon_ok").show();
 						$("#icon_ok").hide("fade", 1000);
-						alert(result);
+						var oRet=JSON.parse(result); 
+						if(oRet.ret=="ok"){
+							//alert("ok");
+						}else{
+							alert("更新错误.");
+						}
 					});
 				});
 				/* 隐藏的按钮用于初始化,应为post的form只能使用按钮触发*/
