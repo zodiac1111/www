@@ -169,7 +169,7 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 	 */
 	$("#save_procotol").click(function() {
 		var t = document.getElementById("procotol_text");
-		if (t.value== "") {
+		if (t.value == "") {
 			alert("文本不能为空");
 		} else {
 			//确认信息框

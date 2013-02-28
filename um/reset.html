@@ -36,7 +36,7 @@
 					"bRetrieve" : true,
 					"bJQueryUI" : true,
 					"bDestroy" : true,
-					"bAutoWidth":true
+					"bAutoWidth" : true
 				});
 				var oTable = $('#tbl_history_tou').dataTable();
 				//$('#tbl_sysReset').dataTable();
@@ -58,6 +58,7 @@
 						//oTable.fnDraw(false);
 					});
 				});
+
 			});
 		</script>
 	</head>
@@ -104,6 +105,13 @@
 							<td>重启终端操作系统</td>
 							<td><button id="btnResetRtu" class="reboot"> 重启 </button></td>
 						</tr>
+						<!--
+						<tr>
+							<td>5</td>
+							<td>测试</td>
+							<td><button id="btnTest" class="reboot" onclick="checkboxClickNotify( this, '/myun/instance/1578/edit?item=webssh_toggle', 'Toggle webssh status success')"> 测试 </button></td>
+						</tr>
+						-->
 					</tbody>
 				</table>
 			</div>
