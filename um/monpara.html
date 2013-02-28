@@ -36,11 +36,7 @@
 						return;
 					}
 					$("#icon_init").show();
-					//$("#tbody_dat").html("<tr><td colspan=\"6\" ></td></tr>");
-					//$("#tbody_dat tr td").addClass('load_bgpic_hight');
-					$.post('/goform/monparas', $("#monparas").serialize(), function(result) {
-						//$("#tbody_dat tr td").removeClass('load_bgpic_hight');
-						//$("#tbody_dat").html(result);
+					$.post('/goform/monparas', "action=set&"+$("#monparas").serialize(), function(result) {
 						$("#icon_init").hide();
 						$("#icon_ok").show();
 						$("#icon_ok").hide("fade", 1000);
@@ -50,7 +46,7 @@
 				/* 隐藏的按钮用于初始化,应为post的form只能使用按钮触发*/
 				$("#init").click(function() {
 					$("#icon_init").show();
-					$.post('/goform/monparas', "init=1", function(result) {
+					$.post('/goform/monparas', "action=get", function(result) {
 						//$("#tbody_dat").html(result);
 						//alert("result");
 						fillData($("#tbody_dat"), result);
