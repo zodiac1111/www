@@ -15,40 +15,40 @@
 		<script type="text/javascript" src="/style/jquery-ui.min-zh-CN.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function() {
+				var oBtnLoad=$("#btnLoad");
+				var oBtnUpdate=$("#btnUpdate");
+				var oIconLoad=$("#icon_init");
+				var oIconOk=$("#icon_ok");
 				/* 按钮 */
 				$(function() {
-					$("#btnUpdate").button({
+					oBtnUpdate.button({
 						icons : {
 							primary : "ui-icon-refresh"
 						}
 					});
-					$("#btnLoad").button();
+					oBtnLoad.button();
 				});
-
-				$("#icon_init").hide();
-				$("#icon_ok").hide();
-				//串口参数 post提交
-				/* 定义按钮 post函数 */
-				$("#btnUpdate").click(function() {
+				
+				oIconLoad.hide();
+				oIconOk.hide();
+				/* 定义更新按钮事件 1.检查;2.更新 */
+				oBtnUpdate.click(function() {
 					var errobj = document.getElementById("errobj");
 					if (errobj != null) {
 						alert("非法参数");
 						return;
 					}
-					$("#icon_init").show();
-					//$("#tbody_dat").html("<tr><td colspan=\"6\" ></td></tr>");
-					//$("#tbody_dat tr td").addClass('load_bgpic_hight');
+					oIconLoad.show();
 					$.post('/goform/savecycle', "action=set&" + $("#savecycle").serialize(), function(result) {
 						//alert(result);
-						$("#icon_init").hide();
-						$("#icon_ok").show();
-						$("#icon_ok").hide("fade", 1000);
-						//alert("OK");
+						oIconLoad.hide();
+						oIconOk.show();
+						oIconOk.hide("fade", 1000);
 					});
 				});
-				/* 隐藏的按钮用于初始化,应为post的form只能使用按钮触发*/
-				$("#init").click(function() {
-					$("#icon_init").show();
+				/* 定义加载按钮点击事件,因为post的form只能使用按钮触发 */
+				oBtnLoad.click(function() {
+					oIconLoad.show();
 					//post 过程
 					$.post('/goform/savecycle', "action=get", function(result) {
 						//alert(result);
@@ -62,12 +62,13 @@
 						}
 						str += "<td>储存周期(分钟)</td>";
 						for ( i = 0; i < 6; i++) {
+							console.log(oSavCycle.item[i].t);
 							str += "<td>";
 							str += "<select name=\"cycle\">";
 							for (var j in oSavCycle.cycle) {
 								str += "<option value=";
 								str += j + " ";
-								str += (j == oSavCycle.item[i].t ? "" : "");
+								str += (j == oSavCycle.item[i].t ? "selected" : "");
 								str += ">" + oSavCycle.cycle[j] + "</option>";
 							}
 							str += "</td>";
@@ -76,11 +77,11 @@
 						$("#select").html(str);
 						//alert(str);
 						//alert(chk[0]);
-						$("#icon_init").hide("fade", 2000);
+						oIconLoad.hide("fade", 2000);
 					});
 				});
-				/* 首次加载串口参数 */
-				$("#init").click();
+				/* 点击加载按钮 */
+				oBtnLoad.click();
 			});
 		</script>
 	</head>
