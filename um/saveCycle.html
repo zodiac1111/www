@@ -17,12 +17,14 @@
 			$(document).ready(function() {
 				/* 按钮 */
 				$(function() {
-					$(".btn_update").button({
+					$("#btnUpdate").button({
 						icons : {
 							primary : "ui-icon-refresh"
 						}
 					});
+					$("#btnLoad").button();
 				});
+
 				$("#icon_init").hide();
 				$("#icon_ok").hide();
 				//串口参数 post提交
@@ -37,7 +39,7 @@
 					//$("#tbody_dat").html("<tr><td colspan=\"6\" ></td></tr>");
 					//$("#tbody_dat tr td").addClass('load_bgpic_hight');
 					$.post('/goform/savecycle', "action=set&" + $("#savecycle").serialize(), function(result) {
-						alert(result);
+						//alert(result);
 						$("#icon_init").hide();
 						$("#icon_ok").show();
 						$("#icon_ok").hide("fade", 1000);
@@ -47,13 +49,17 @@
 				/* 隐藏的按钮用于初始化,应为post的form只能使用按钮触发*/
 				$("#init").click(function() {
 					$("#icon_init").show();
+					//post 过程
 					$.post('/goform/savecycle', "action=get", function(result) {
-						alert(result);
+						//alert(result);
 						var oSavCycle = JSON.parse(result);
 						var chk = $("input[name=chk_save_enable]");
 						var t = $("input[name=flag]");
-						var list = $("#select");
 						var str = "";
+						for ( i = 0; i < 6; i++) {
+							chk.eq(i).attr('checked', oSavCycle.item[i].en == "1" ? true : false);
+							t[i].value = oSavCycle.item[i].en;
+						}
 						str += "<td>储存周期(分钟)</td>";
 						for ( i = 0; i < 6; i++) {
 							str += "<td>";
@@ -67,15 +73,9 @@
 							str += "</td>";
 						}
 						str += "";
-						list.html(str);
-						alert(oSavCycle.cycle.lenth + str);
-						//chk.eq(0).attr("checked", oSavCycle.it.en==1?"ckecked":"");
-						for ( i = 0; i < 6; i++) {
-							chk.eq(i).attr('checked', oSavCycle.item[i].en == "1" ? true : false);
-							t[i].value = oSavCycle.item[i].en;
-						}
+						$("#select").html(str);
+						//alert(str);
 						//alert(chk[0]);
-						//$("#tbody_dat").html(result);
 						$("#icon_init").hide("fade", 2000);
 					});
 				});
@@ -105,27 +105,27 @@
 						<td> 有效 </td>
 						<td>
 						<input type="checkbox" name="chk_save_enable" onclick="chk_change(event);">
-						<input type="text" size=1 name="flag" >
+						<input type="text" class="hideinp" size=1 name="flag" >
 						</td>
 						<td>
 						<input type="checkbox" name="chk_save_enable" onclick="chk_change(event);">
-						<input type="text" size=1 name="flag" >
+						<input type="text" class="hideinp" size=1 name="flag" >
 						</td>
 						<td>
 						<input type="checkbox" name="chk_save_enable" onclick="chk_change(event);">
-						<input type="text" size=1 name="flag" >
+						<input type="text" class="hideinp" size=1 name="flag" >
 						</td>
 						<td>
 						<input type="checkbox" name="chk_save_enable" onclick="chk_change(event);">
-						<input type="text" size=1 name="flag" >
+						<input type="text" class="hideinp" size=1 name="flag" >
 						</td>
 						<td>
 						<input type="checkbox" name="chk_save_enable" onclick="chk_change(event);">
-						<input type="text" size=1 name="flag" >
+						<input type="text" class="hideinp" size=1 name="flag" >
 						</td>
 						<td>
 						<input type="checkbox" name="chk_save_enable" onclick="chk_change(event);">
-						<input type="text" size=1 name="flag" >
+						<input type="text" class="hideinp" size=1 name="flag" >
 						</td>
 					</tr>
 					<tr id="select">
@@ -136,7 +136,7 @@
 		</form>
 		<p align="center">
 			<!--<button id="init" class="hideinp" >初始化</button>-->
-			<button id="init" class="" >读取</button>
+			<button id="btnLoad" class="" >读取</button>
 			<button id="btnUpdate" class="btn_update">更新</button>
 			<input type="text" id="icon_init" class="wait_icon_24x24_load" />
 			<input type="text" id="icon_ok" class="wait_icon_24x24 ok_24x24" />

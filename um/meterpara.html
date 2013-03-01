@@ -38,16 +38,17 @@
 			// });
 			// }
 			$(document).ready(function() {
-				$.ajaxSetup({
-					async : false
-				});
+				// $.ajaxSetup({
+					// async : false
+				// });
 				/* 按鈕 */
 				$(function() {
-					$("#btn_update").button({
+					$("#btnUpdate").button({
 						icons : {
 							primary : "ui-icon-refresh"
 						}
 					});
+						$("#btnLoad").button();
 				});
 				//定义默认的表格样式
 				$.extend($.fn.dataTable.defaults, {//设置表格属性
@@ -62,7 +63,7 @@
 				$("#icon_init").hide();
 				$("#icon_ok").hide();
 				/* post方法刷新标记参数 */
-				$("#btn_update").click(function() {
+				$("#btnUpdate").click(function() {
 					var errobj = document.getElementById("errobj");
 					if (errobj != null) {
 						alert("非法参数");
@@ -70,7 +71,7 @@
 					}
 					$("#icon_init").show();
 					/* formTest  get_tou */
-					$.post('/goform/mtrparams', $("#mtrparaform").serialize(), function(result) {
+					$.post('/goform/mtrparams', "action=set&"+$("#mtrparaform").serialize(), function(result) {
 						//$('#tbl_mtrparams').dataTable();
 						$("#icon_init").hide();
 						$("#icon_ok").show();
@@ -80,7 +81,7 @@
 				});
 				var t = $('#tbl_mtrparams').dataTable();
 				/* 隐藏的按钮用于初始化,应为post的form只能使用按钮触发 */
-				$("#init").click(function() {
+				$("#btnLoad").click(function() {
 					//加载表计参数的各种项目头:串口方案项目名
 					$.post('/goform/mtr_items', "item=sioplan", function(result) {
 						$("#sioplan").html(result);
@@ -105,7 +106,7 @@
 					$("#tbl_mtrparams tbody").html("");
 					$("#icon_init").show();
 					t.fnDestroy(false);
-					$.post('/goform/mtrparams', "init=1", function(result) {
+					$.post('/goform/mtrparams', "action=get", function(result) {
 						$("#tbl_mtrparams tbody").html(result);
 						$('input[name="mtrno"]').width("2em");
 						$('input[name="line"]').width("3.3em");
@@ -120,7 +121,7 @@
 					});
 				});
 				/* 首次加载串口参数 */
-				$("#init").click();
+				$("#btnLoad").click();
 			});
 		</script>
 		<style type="text/css">
@@ -188,8 +189,8 @@
 			<input class="hideinp" type="text" name="AllSelFlag" value="0" id="AllSelFlag">
 		</form>
 		<p align="center">
-			<button id="init" class="hideinp" >初始化</button>
-			<button id="btn_update" class="btn_update">更新</button>
+			<button id="btnLoad" class="" >读取</button>
+			<button id="btnUpdate" class="btn_update">更新</button>
 			<input type="text" id="icon_init" class="wait_icon_24x24_load" />
 			<input type="text" id="icon_ok" class="wait_icon_24x24 ok_24x24" />
 		</p>
