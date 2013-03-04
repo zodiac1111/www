@@ -17,26 +17,28 @@
 		<!-- 基于jquery的日期时间控件所需要的文件 -结束 -->
 		<script type="text/javascript">
 			$(document).ready(function() {
+				var oBtnRead = $("#init");
+				var oBtnUpdate = $("#btnUpdate");
 				/* 按钮 */
-				$(function() {
-					$(".btn_update").button({
-						icons : {
-							primary : "ui-icon-refresh"
-						}
-					});
+				oBtnRead.button();
+				oBtnUpdate.button({
+					icons : {
+						primary : "ui-icon-refresh"
+					}
 				});
+				//oBtnRead.hide();
 				$("#icon_init").hide();
 				$("#icon_ok").hide();
 				//串口参数 post提交
 				/* 定义按钮 post函数 */
-				$("#btnUpdate").click(function() {
+				oBtnUpdate.click(function() {
 					var errobj = document.getElementById("errobj");
 					if (errobj != null) {
 						alert("非法参数");
 						return;
 					}
 					$("#icon_init").show();
-					$.post('/goform/monparas', "action=set&"+$("#monparas").serialize(), function(result) {
+					$.post('/goform/monparas', "action=set&" + $("#monparas").serialize(), function(result) {
 						$("#icon_init").hide();
 						$("#icon_ok").show();
 						$("#icon_ok").hide("fade", 1000);
@@ -44,7 +46,7 @@
 					});
 				});
 				/* 隐藏的按钮用于初始化,应为post的form只能使用按钮触发*/
-				$("#init").click(function() {
+				oBtnRead.click(function() {
 					$("#icon_init").show();
 					$.post('/goform/monparas', "action=get", function(result) {
 						//$("#tbody_dat").html(result);
@@ -55,8 +57,9 @@
 					});
 				});
 				/* 首次加载串口参数 */
-				$("#init").click();
+				oBtnRead.click();
 			});
+
 			function fillData(obj, str) {
 				obj.html("");
 				var oMonPara = JSON.parse(str);
@@ -71,6 +74,7 @@
 					str += appendTimeSyn(oMonPara.item[row].time_syn_chk);
 					str += appendForward(oMonPara.item[row].forward_chk);
 					str += appendForwardNum(oMonPara.item[row].forward_mtr_num);
+					str += "</tr>";
 					obj.append(str);
 				}
 			}
@@ -192,11 +196,15 @@
 						<th width="5%" class="monparamTableHead">序号9</th> -->
 					</tr>
 				</thead>
-				<tbody id="tbody_dat"><tr><td colspan="99">载入数据...</td></tr></tbody>
+				<tbody id="tbody_dat">
+					<tr>
+						<td colspan="99">载入数据...</td>
+					</tr>
+				</tbody>
 			</table>
 		</form>
 		<p align="center">
-			<button id="init" class="hideinp" >读取</button>
+			<button id="init">读取</button>
 			<button id="btnUpdate" class="btn_update">更新</button>
 			<input type="text" id="icon_init" class="wait_icon_24x24_load" />
 			<input type="text" id="icon_ok" class="wait_icon_24x24 ok_24x24" />
