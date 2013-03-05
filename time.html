@@ -196,7 +196,8 @@
 				$("#init").click(function() {
 					$.post('/goform/srv_time', "init=init", function(result) {
 						//alert(result);
-						var oTime=JSON.parse(result);
+						//var oTime=JSON.parse(result); //非ie都支持这种方式
+						var oTime = eval("(" + result + ")"); //ie支持这种方式
 						srvTimestarmp = Number(oTime.timestamp);
 					});
 				});

@@ -60,9 +60,10 @@
 				oBtnRead.click();
 			});
 
-			function fillData(obj, str) {
+			function fillData(obj, strJSON) {
 				obj.html("");
-				var oMonPara = JSON.parse(str);
+				//var oMonPara = JSON.parse(strJSON);
+				var oMonPara = eval("(" + strJSON + ")");
 				for (var row = 0; row < oMonPara.item.length; row++) {
 					var str = "<tr>";
 					str += appendNo(oMonPara.item[row].mon_no);

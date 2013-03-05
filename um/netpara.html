@@ -63,8 +63,9 @@
 				$("#init").click();
 			});
 			/*填充表格数据*/
-			function fillData(obj, str) {
-				var aNetParas = JSON.parse(str);
+			function fillData(obj, strJSON) {
+				//var aNetParas = JSON.parse(strJSON);
+				var aNetParas = eval("(" + strJSON + ")");
 				obj.html("");
 				for (var i in aNetParas.item) {
 					var str = "<tr>";

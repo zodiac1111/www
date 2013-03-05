@@ -17,15 +17,18 @@
 		<script type="text/javascript" src="/style/jquery-ui.min-zh-CN.js"></script>
 		<!-- jquery的 -结束 -->
 		<script type="text/javascript">
+			// 页面加载完成后执行的函数
 			$(document).ready(function() {
+				var obtnUpdate = $("#btn_update");
+				var obtnLoad = $("#init");
 				/* 按钮 */
-				$(function() {
-					$(".btn_update").button({
-						icons : {
-							primary : "ui-icon-refresh"
-						}
-					});
+				obtnUpdate.button({
+					icons : {
+						primary : "ui-icon-refresh"
+					}
 				});
+				obtnLoad.button();
+				// obtnLoad.hide();
 				$("#icon_init").hide();
 				$("#icon_ok").hide();
 				//串口参数 post提交
@@ -37,7 +40,7 @@
 						return;
 					}
 					$("#icon_init").show();
-					$.post('/goform/sioplan', "action=set&"+$("#paraform").serialize(), function(result) {
+					$.post('/goform/sioplan', "action=set&" + $("#paraform").serialize(), function(result) {
 						$("#icon_init").hide();
 						$("#icon_ok").show();
 						$("#icon_ok").hide("fade", 1000);
@@ -45,7 +48,7 @@
 					});
 				});
 				/* 隐藏的按钮用于初始化,应为post的form只能使用按钮触发*/
-				$("#init").click(function() {
+				obtnLoad.click(function() {
 					$("#icon_init").show();
 					$.post('/goform/sioplan', "action=init", function(result) {
 						//$("#tbody_dat").html(result);
@@ -55,14 +58,15 @@
 					});
 				});
 				/* 首次加载串口参数 */
-				$("#init").click();
+				obtnLoad.click();
 			});
 
 			/* 函数:将所有数据行一行一行的插入到表格中 */
 			function full(obj, result) {
 				obj.html("");
 				//清除是有必要的.
-				var oSioPlan = JSON.parse(result);
+				//var oSioPlan = JSON.parse(result);
+				var oSioPlan = eval("(" + result + ")");
 				for (var row = 0; row < oSioPlan.item.length; row++) {
 					var str = "<tr>";
 					str += add_no_td(oSioPlan.item[row].no);
@@ -125,8 +129,8 @@
 			<!-- 提交操作类型 更新,还是其他 hideinp -->
 			<input class="hideinp" type="text" name="OpType" value="" id="optype" />
 
-			<button  class="hideinp" id="init">读取</button>
-			<button id="btnsio" class="btn_update">更新</button>
+			<button  class="" id="init">读取</button>
+			<button id="btn_update" class="btn_update">更新</button>
 			<input type="text" id="icon_init" class="wait_icon_24x24_load" />
 			<input type="text" id="icon_ok" class="wait_icon_24x24 ok_24x24" />
 
