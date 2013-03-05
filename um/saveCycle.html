@@ -55,11 +55,12 @@
 						var oSavCycle = JSON.parse(result);
 						var chk = $("input[name=chk_save_enable]");
 						var t = $("input[name=flag]");
-						var str = "";
+						
 						for ( i = 0; i < 6; i++) {
 							chk.eq(i).attr('checked', oSavCycle.item[i].en == "1" ? true : false);
 							t[i].value = oSavCycle.item[i].en;
 						}
+						var str = "";
 						str += "<td>储存周期(分钟)</td>";
 						for ( i = 0; i < 6; i++) {
 							console.log(oSavCycle.item[i].t);
@@ -74,7 +75,7 @@
 							str += "</td>";
 						}
 						str += "";
-						$("#select").html(str);
+						$("#select").append(str);
 						//alert(str);
 						//alert(chk[0]);
 						oIconLoad.hide("fade", 2000);

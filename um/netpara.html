@@ -19,13 +19,14 @@
 		<script type="text/javascript">
 			$(document).ready(function() {
 				/* 按钮 */
-				$(function() {
+
 					$(".btn_update").button({
 						icons : {
 							primary : "ui-icon-refresh"
 						}
 					});
-				});
+					$("#init").button();
+		
 				$("#icon_init").hide();
 				$("#icon_ok").hide();
 				// post提交
@@ -126,7 +127,7 @@
 		<p ALIGN="center">
 			<!-- 提交操作类型 更新,还是其他 -->
 			<input class="hideinp" type="text" name="OpType" value="" id="optype">
-			<button id="init" class="hideinp">读取</button><!-- 隐藏，仅载入时读取一次　-->
+			<button id="init" class="">读取</button><!-- 隐藏，仅载入时读取一次　-->
 			<button id="btnUpdate" class="btn_update">更新</button>
 			<input type="text" id="icon_init" class="wait_icon_24x24_load" />
 			<input type="text" id="icon_ok" class="wait_icon_24x24 ok_24x24" />
