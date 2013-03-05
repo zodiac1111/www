@@ -53,16 +53,17 @@
 					$.post('/goform/savecycle', "action=get", function(result) {
 						//alert(result);
 						//var oSavCycle = JSON.parse(result);
-							var oSavCycle = eval("(" + result + ")");
+						var oSavCycle = eval("(" + result + ")");
 						var chk = $("input[name=chk_save_enable]");
 						var t = $("input[name=flag]");
-						
+						var ocycle=	$("#select");
+						ocycle.html("");
 						for ( i = 0; i < 6; i++) {
 							chk.eq(i).attr('checked', oSavCycle.item[i].en == "1" ? true : false);
 							t[i].value = oSavCycle.item[i].en;
 						}
 						var str = "";
-						str += "<td>储存周期(分钟)</td>";
+						str += "<td>储存周期</td>";
 						for ( i = 0; i < 6; i++) {
 							//console.log(oSavCycle.item[i].t); //ie不支持console:( 
 							str += "<td>";
@@ -76,7 +77,7 @@
 							str += "</td>";
 						}
 						str += "";
-						$("#select").append(str);
+						ocycle.html(str);
 						//alert(str);
 						//alert(chk[0]);
 						oIconLoad.hide("fade", 2000);

@@ -62,6 +62,7 @@
 
 			function fillData(obj, strJSON) {
 				obj.html("");
+				//alert("json:"+strJSON);
 				//var oMonPara = JSON.parse(strJSON);
 				var oMonPara = eval("(" + strJSON + ")");
 				for (var row = 0; row < oMonPara.item.length; row++) {
