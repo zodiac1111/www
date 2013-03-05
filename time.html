@@ -113,8 +113,10 @@
 			 */
 			function UTCYear_Month() {
 				var now = new Date();
-				var yy = now.getUTCFullYear();
-				var mm = now.getUTCMonth();
+				//var yy = now.getUTCFullYear();
+				//var mm = now.getUTCMonth();
+				var yy = now.getFullYear();
+				var mm = now.getMonth();
 				var mmm = new Array();
 				mmm[0] = "1月";
 				mmm[1] = "2月";
@@ -166,8 +168,12 @@
 			//服务器时间
 			function srvTime(t) {
 				var now = new Date(t * 1000);
-				var hh = now.getUTCHours();
-				var mm = now.getUTCMinutes();
+
+				//	var hh = now.getUTCHours();
+				//var mm = now.getUTCMinutes();
+				var hh = now.getHours();
+				var mm = now.getMinutes();
+
 				var ss = now.getTime() % 60000;
 				ss = (ss - (ss % 1000)) / 1000;
 				var clock = hh + ':';
@@ -192,29 +198,49 @@
 			};
 			//仅开始刷新完成后读取一次服务器时间.
 			$(document).ready(function() {
+				//读取服务器时间按钮,不显示
+				var oSynTime = $("#init");
+				var oUpdateTime = $("#update");
+				oSynTime.button();
+				oUpdateTime.button();
+				//oSynTime.hide();
+				/* 更新终端(update)时间函数 */
+				oUpdateTime.click(function() {
+					//linux 只支持时间戳到秒,所以毫秒部分直接除掉
+				var timestamp = Date.parse(new Date())/1000;     
+					$.post('/goform/srv_time', "action=set"+"&"+"timestamp="+timestamp+"&timezone=8", function(result) {
+						alert(result);
+						//var oTime=JSON.parse(result); //非ie都支持这种方式
+						//var oTime = eval("(" + result + ")");
+						//ie支持这种方式
+						//srvTimestarmp = Number(oTime.timestamp);
+					});
+				});
 				/* 隐藏的按钮用于初始化,应为post的form只能使用按钮触发*/
-				$("#init").click(function() {
-					$.post('/goform/srv_time', "init=init", function(result) {
+				oSynTime.click(function() {
+					$.post('/goform/srv_time', "action=get", function(result) {
 						//alert(result);
 						//var oTime=JSON.parse(result); //非ie都支持这种方式
-						var oTime = eval("(" + result + ")"); //ie支持这种方式
+						var oTime = eval("(" + result + ")");
+						//ie支持这种方式
 						srvTimestarmp = Number(oTime.timestamp);
 					});
 				});
 				/* 首次加载,获取一次服务器时间戳 */
-				$("#init").click();
+				oSynTime.click();
 				//刷新显示.
 				setInterval(refreshCalendarClock, 1000);
 				//每隔一段时间(5分钟)与服务器同步一次,消除累计误差.
 				setInterval(syn_server_time, 5 * 60 * 1000);
 				//同步/过去服务器时间=点一下获取
 				function syn_server_time() {
-					$("#init").click();
+					oSynTime.click();
 				};
 			});
 		</script>
 		<span> <label class="time">&emsp;&emsp;&emsp;</label> <label class="time">本地时间:</label> <label id="calendarClock1" class="time" > 获取中...</label> <label id="calendarClock2" class="time" > 获取中...</label> </span>
-		<span> <label class="time">&emsp;&emsp;&emsp; 终端时间(UTC):</label> <label id="srvDate" class="time"> 获取中...</label> <label id="srvTime" class="time"> 获取中...</label> <label class="time">&emsp;&emsp;&emsp;</label> </span>
-		<button  class="hideinp" id="init">获取服务器时间</button>
+		<span> <label class="time">&emsp;&emsp;&emsp; 终端时间:</label> <label id="srvDate" class="time"> 获取中...</label> <label id="srvTime" class="time"> 获取中...</label> <label class="time">&emsp;&emsp;&emsp;</label> </span>
+		<button  id="init">读取</button>
+		<button  id="update">更新</button>
 	</body>
 </html>
