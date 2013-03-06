@@ -207,13 +207,20 @@
 				/* 更新终端(update)时间函数 */
 				oUpdateTime.click(function() {
 					//linux 只支持时间戳到秒,所以毫秒部分直接除掉
-				var timestamp = Date.parse(new Date())/1000;     
-					$.post('/goform/srv_time', "action=set"+"&"+"timestamp="+timestamp+"&timezone="+8*60, function(result) {
-						alert(result);
-						//var oTime=JSON.parse(result); //非ie都支持这种方式
-						//var oTime = eval("(" + result + ")");
-						//ie支持这种方式
-						//srvTimestarmp = Number(oTime.timestamp);
+					var timestamp = Date.parse(new Date()) / 1000;
+					$.ajax({
+						type : "post",
+						url : "/goform/srv_time",
+						contentType : "application/x-www-form-urlencoded; charset=utf-8",
+						dataType : "text",
+						data : "action=set" + "&" + "timestamp=" + timestamp + "&timezone=" + 8 * 60,
+						success : function(result, textStatus) {
+							alert("更新终端时间成功.");
+						},
+						error : function() {//失败
+							//	oIconLoad.hide();
+							alert("服务器通讯错误.");
+						}
 					});
 				});
 				/* 隐藏的按钮用于初始化,应为post的form只能使用按钮触发*/
