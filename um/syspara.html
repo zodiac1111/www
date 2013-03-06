@@ -18,36 +18,35 @@
 			$(document).ready(function() {
 				var oLoad = $("#init");
 				var oUpdate = $("#btnUpdate");
+				var oIconLoad=$("#icon_init");
+				var oIconOK=$("#icon_ok");
 				//oLoad.hide();
-				/* 按钮 */
-				$(function() {
-					oUpdate.button({
-						icons : {
-							primary : "ui-icon-refresh"
-						}
-					});
-					oLoad.button();
+				oUpdate.button({
+					icons : {
+						primary : "ui-icon-refresh"
+					}
 				});
-				$("#icon_init").hide();
-				$("#icon_ok").hide();
+				oLoad.button();
+				oIconLoad.hide();
+				oIconOK.hide();
 				//串口参数 post提交
 				/* 定义按钮 post函数 */
-				$("#btnUpdate").click(function() {
+				oUpdate.click(function() {
 					var errobj = document.getElementById("errobj");
 					if (errobj != null) {
 						alert("非法参数");
 						return;
 					}
-					$("#icon_init").show();
+					oIconLoad.show();
 					//$("#tbody_dat").html("<tr><td colspan=\"6\" ></td></tr>");
 					//$("#tbody_dat tr td").addClass('load_bgpic_hight');
 					$.post('/goform/sysparam', $("#sysparam").serialize(), function(result) {
 						//alert(result);
 						//$("#tbody_dat tr td").removeClass('load_bgpic_hight');
 						//$("#tbody_dat").html(result);
-						$("#icon_init").hide();
-						$("#icon_ok").show();
-						$("#icon_ok").hide("fade", 1000);
+						oIconLoad.hide();
+						oIconOK.show();
+						oIconOK.hide("fade", 1000);
 						//var oRet = JSON.parse(result);
 						var oRet = eval("(" + result + ")");
 						if (oRet.ret == "ok") {
@@ -59,7 +58,9 @@
 				});
 				/* 隐藏的按钮用于初始化,应为post的form只能使用按钮触发*/
 				oLoad.click(function() {
-					$("#icon_init").show();
+					oIconLoad.show();
+					
+					
 					$.post('/goform/sysparam', "action=get", function(result) {
 						//alert(result);
 						//alert("test");
@@ -79,7 +80,7 @@
 						$("[name='control_ports']").val(oSysPara.control_ports);
 						//$("#icon_init").hide();
 						//	$("#icon_ok").show();
-						$("#icon_init").hide("fade", 1000);
+						oIconLoad.hide("fade", 1000);
 						//alert("OK");
 					});
 				});

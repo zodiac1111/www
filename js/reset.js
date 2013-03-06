@@ -72,7 +72,7 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 				$("#log_text").removeClass("textarea_bgpic");
 			},
 			error : function() {
-				alert("ajax错误");
+				alert("服务器通讯错误");
 				//$("#msg_text").html("Ajax错误");
 			}
 		});
