@@ -215,7 +215,9 @@
 						dataType : "text",
 						data : "action=set" + "&" + "timestamp=" + timestamp + "&timezone=" + 8 * 60,
 						success : function(result, textStatus) {
+							//更新完立即读取一次	
 							alert("更新终端时间成功.");
+							oSynTime.click();
 						},
 						error : function() {//失败
 							//	oIconLoad.hide();
@@ -248,6 +250,6 @@
 		<span> <label class="time">&emsp;&emsp;&emsp;</label> <label class="time">本地时间:</label> <label id="calendarClock1" class="time" > 获取中...</label> <label id="calendarClock2" class="time" > 获取中...</label> </span>
 		<span> <label class="time">&emsp;&emsp;&emsp; 终端时间:</label> <label id="srvDate" class="time"> 获取中...</label> <label id="srvTime" class="time"> 获取中...</label> <label class="time">&emsp;&emsp;&emsp;</label> </span>
 		<button  id="init">读取</button>
-		<button  id="update">更新</button>
+		<button  id="update" title="设置终端时间为本机时间">更新</button>
 	</body>
 </html>

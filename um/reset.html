@@ -24,6 +24,15 @@
 		<!-- 基于jquery的日期时间控件所需要的文件 -结束 -->
 		<link type="text/css" href="/style/jquery.dataTables.css" rel="stylesheet"  />
 		<link type="text/css" href="/style/jquery.dataTables_themeroller.css" rel="stylesheet"  />
+		<style>
+			.progress-label {
+				float: left;
+				margin-left: 45%;
+				margin-top: 5px;
+				font-weight: bold;
+				text-shadow: 1px 1px 0 #fff;
+			}
+		</style>
 		<script type="text/javascript" src="/js/jquery.dataTables.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function() {
@@ -109,13 +118,20 @@
 						</tr>
 						<!--
 						<tr>
-							<td>5</td>
-							<td>测试</td>
-							<td><button id="btnTest" class="reboot" onclick="checkboxClickNotify( this, '/myun/instance/1578/edit?item=webssh_toggle', 'Toggle webssh status success')"> 测试 </button></td>
+						<td>5</td>
+						<td>测试</td>
+						<td><button id="btnTest" class="reboot" onclick="checkboxClickNotify( this, '/myun/instance/1578/edit?item=webssh_toggle', 'Toggle webssh status success')"> 测试 </button></td>
 						</tr>
 						-->
 					</tbody>
 				</table>
+				<!-- 进度条 -->
+				<p> </p>
+				<div id="divProgressbar">
+					<div class="progress-label">
+						Loading...
+					</div>
+				</div>
 			</div>
 			<!-- ###标签: 日志 ### -->
 			<div id="tabs-log">
@@ -218,8 +234,7 @@
 						</tr>
 						<tr>
 							<td>网页前端版本号</td>
-							<td><label id="major">0</label>.<label id="mimor">0</label>.<label id="patchlevel">0</label>
-								[<label id="git_version">0</label>]</td>
+							<td><label id="major">0</label>.<label id="mimor">0</label>.<label id="patchlevel">0</label> [<label id="git_version">0</label>]</td>
 						</tr>
 					</tbody>
 				</table>
