@@ -19,6 +19,8 @@
 			$(document).ready(function() {
 				var oBtnRead = $("#init");
 				var oBtnUpdate = $("#btnUpdate");
+				var oIconLoad = $("#icon_init");
+				var oIconOK = $("#icon_ok");
 				/* 按钮 */
 				oBtnRead.button();
 				oBtnUpdate.button({
@@ -27,8 +29,8 @@
 					}
 				});
 				//oBtnRead.hide();
-				$("#icon_init").hide();
-				$("#icon_ok").hide();
+				oIconLoad.hide();
+				oIconOK.hide();
 				//串口参数 post提交
 				/* 定义按钮 post函数 */
 				oBtnUpdate.click(function() {
@@ -37,23 +39,41 @@
 						alert("非法参数");
 						return;
 					}
-					$("#icon_init").show();
-					$.post('/goform/monparas', "action=set&" + $("#monparas").serialize(), function(result) {
-						$("#icon_init").hide();
-						$("#icon_ok").show();
-						$("#icon_ok").hide("fade", 1000);
-						//alert("OK");
+					oIconLoad.show();
+					$.ajax({
+						type : "post",
+						url : "/goform/monparas",
+						contentType : "application/x-www-form-urlencoded; charset=utf-8",
+						dataType : "text",
+						data : "action=set&" + $("#monparas").serialize(),
+						success : function(result, textStatus) {
+							oIconLoad.hide();
+							oIconOK.show();
+							oIconOK.hide("fade", 1000);
+						},
+						error : function() {//失败
+							oIconLoad.hide();
+							alert("服务器通讯错误");
+						}
 					});
 				});
 				/* 隐藏的按钮用于初始化,应为post的form只能使用按钮触发*/
 				oBtnRead.click(function() {
-					$("#icon_init").show();
-					$.post('/goform/monparas', "action=get", function(result) {
-						//$("#tbody_dat").html(result);
-						//alert("result");
-						fillData($("#tbody_dat"), result);
-						$("#icon_init").hide("fade", 2000);
-						//alert("OK");
+					oIconLoad.show();
+					$.ajax({
+						type : "post",
+						url : "/goform/monparas",
+						contentType : "application/x-www-form-urlencoded; charset=utf-8",
+						dataType : "text",
+						data : "action=get",
+						success : function(result, textStatus) {
+							fillData($("#tbody_dat"), result);
+							oIconLoad.hide("fade", 2000);
+						},
+						error : function() {//失败
+							oIconLoad.hide();
+							alert("服务器通讯错误");
+						}
 					});
 				});
 				/* 首次加载串口参数 */

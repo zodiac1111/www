@@ -21,6 +21,7 @@
 			$(document).ready(function() {
 				var obtnUpdate = $("#btn_update");
 				var obtnLoad = $("#init");
+				var oIconLoad=$("#icon_init");
 				/* 按钮 */
 				obtnUpdate.button({
 					icons : {
@@ -29,7 +30,7 @@
 				});
 				obtnLoad.button();
 				// obtnLoad.hide();
-				$("#icon_init").hide();
+				oIconLoad.hide();
 				$("#icon_ok").hide();
 				//串口参数 post提交
 				/* 定义按钮 post函数 */
@@ -39,23 +40,55 @@
 						alert("非法参数");
 						return;
 					}
-					$("#icon_init").show();
-					$.post('/goform/sioplan', "action=set&" + $("#paraform").serialize(), function(result) {
-						$("#icon_init").hide();
-						$("#icon_ok").show();
-						$("#icon_ok").hide("fade", 1000);
-						//alert("OK");
+					oIconLoad.show();
+					$.ajax({
+						type : "post",
+						url : "/goform/sioplan",
+						contentType : "application/x-www-form-urlencoded; charset=utf-8",
+						dataType : "text",
+						data : "action=set&" + $("#paraform").serialize(),
+						success : function(result, textStatus) {
+							oIconLoad.hide();
+							$("#icon_ok").show();
+							$("#icon_ok").hide("fade", 1000);
+						},
+						error : function() {//失败
+							alert("服务器通讯错误");
+							oIconLoad.hide();
+						}
 					});
+					/*	$.post('/goform/sioplan', "action=set&" + $("#paraform").serialize(), function(result) {
+					 oIconLoad.hide();
+					 $("#icon_ok").show();
+					 $("#icon_ok").hide("fade", 1000);
+					 //alert("OK");
+					 }); */
 				});
 				/* 隐藏的按钮用于初始化,应为post的form只能使用按钮触发*/
 				obtnLoad.click(function() {
-					$("#icon_init").show();
-					$.post('/goform/sioplan', "action=init", function(result) {
-						//$("#tbody_dat").html(result);
-						full($("#tbody_dat"), result);
-						$("#icon_init").hide("fade", 2000);
-						//alert("OK");
+					oIconLoad.show();
+					$.ajax({
+						type : "post",
+						url : "/goform/sioplan",
+						contentType : "application/x-www-form-urlencoded; charset=utf-8",
+						dataType : "text",
+						data : "action=init",
+						success : function(result, textStatus) {
+							//alert(result);
+							full($("#tbody_dat"), result);
+							oIconLoad.hide("fade", 2000);
+						},
+						error : function() {//失败
+							alert("服务器通讯错误");
+							oIconLoad.hide();
+						}
 					});
+					/*$.post('/goform/sioplan', "action=init", function(result) {
+					 //$("#tbody_dat").html(result);
+					 full($("#tbody_dat"), result);
+					 oIconLoad.hide("fade", 2000);
+					 //alert("OK");
+					 });*/
 				});
 				/* 首次加载串口参数 */
 				obtnLoad.click();
@@ -133,7 +166,6 @@
 			<button id="btn_update" class="btn_update">更新</button>
 			<input type="text" id="icon_init" class="wait_icon_24x24_load" />
 			<input type="text" id="icon_ok" class="wait_icon_24x24 icon_ok" />
-
 		</p>
 	</body>
 </html>

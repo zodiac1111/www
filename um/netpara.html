@@ -19,48 +19,67 @@
 		<script type="text/javascript">
 			$(document).ready(function() {
 				/* 按钮 */
+				var obtnUpdate = $("#btn_update");
+				var obtnLoad = $("#init");
+				var oIconLoad = $("#icon_init");
+				obtnUpdate.button({
+					icons : {
+						primary : "ui-icon-refresh"
+					}
+				});
+				obtnLoad.button();
 
-					$(".btn_update").button({
-						icons : {
-							primary : "ui-icon-refresh"
-						}
-					});
-					$("#init").button();
-		
-				$("#icon_init").hide();
+				oIconLoad.hide();
 				$("#icon_ok").hide();
 				// post提交
 				/* 定义按钮 post函数 */
-				$("#btnUpdate").click(function() {
+				obtnUpdate.click(function() {
 					var errobj = document.getElementById("errobj");
 					if (errobj != null) {
 						alert("非法参数");
 						return;
 					}
-					$("#icon_init").show();
-					//$("#tbody_dat").html("<tr><td colspan=\"6\" ></td></tr>");
-					//$("#tbody_dat tr td").addClass('load_bgpic_hight');
-					$.post('/goform/netpara', $("#netpara").serialize(), function(result) {
-						//$("#tbody_dat tr td").removeClass('load_bgpic_hight');
-						//$("#tbody_dat").html(result);
-						$("#icon_init").hide();
-						$("#icon_ok").show();
-						$("#icon_ok").hide("fade", 1000);
-						//alert("OK");
+					oIconLoad.show();
+					$.ajax({
+						type : "post",
+						url : "/goform/netpara",
+						contentType : "application/x-www-form-urlencoded; charset=utf-8",
+						dataType : "text",
+						data : "action=set&" + $("#netpara").serialize(),
+						success : function(result, textStatus) {
+							oIconLoad.hide();
+							$("#icon_ok").show();
+							$("#icon_ok").hide("fade", 1000);
+						},
+						error : function() {//失败
+							alert("服务器通讯错误");
+							oIconLoad.hide();
+						}
 					});
 				});
 				/* 隐藏的按钮用于初始化,应为post的form只能使用按钮触发 */
-				$("#init").click(function() {
-					$("#icon_init").show();
-					$.post('/goform/netpara', "init=1", function(result) {
-						//alert(result);
-						fillData($("#tbody_dat"), result);
-						$("#icon_init").hide("fade", 2000);
-						//alert("debug: Ajax ok");
+				obtnLoad.click(function() {
+					oIconLoad.show();
+					$.ajax({
+						type : "post",
+						url : "/goform/netpara",
+						contentType : "application/x-www-form-urlencoded; charset=utf-8",
+						dataType : "text",
+						data : "init=1",
+						success : function(result, textStatus) {
+							oIconLoad.hide();
+							fillData($("#tbody_dat"), result);
+							$("#icon_ok").show();
+							$("#icon_ok").hide("fade", 1000);
+						},
+						error : function() {//失败
+							alert("服务器通讯错误");
+							oIconLoad.hide();
+						}
 					});
 				});
 				/* 页面载入,读取一次(点击) */
-				$("#init").click();
+				obtnLoad.click();
 			});
 			/*填充表格数据*/
 			function fillData(obj, strJSON) {
@@ -128,8 +147,8 @@
 		<p ALIGN="center">
 			<!-- 提交操作类型 更新,还是其他 -->
 			<input class="hideinp" type="text" name="OpType" value="" id="optype">
-			<button id="init" class="">读取</button><!-- 隐藏，仅载入时读取一次　-->
-			<button id="btnUpdate" class="btn_update">更新</button>
+			<button id="init" >读取</button><!-- 隐藏，仅载入时读取一次　-->
+			<button id="btn_update" >更新</button>
 			<input type="text" id="icon_init" class="wait_icon_24x24_load" />
 			<input type="text" id="icon_ok" class="wait_icon_24x24 icon_ok" />
 		</p>
