@@ -20,6 +20,7 @@
 				var oUpdate = $("#btnUpdate");
 				var oIconLoad = $("#icon_init");
 				var oIconOK = $("#icon_ok");
+				var oIconErr = $("#icon_err");
 				var oForm = $("#sysparam");
 				//oLoad.hide();
 				oUpdate.button({
@@ -30,6 +31,7 @@
 				oLoad.button();
 				oIconLoad.hide();
 				oIconOK.hide();
+				oIconErr.hide();
 				//串口参数 post提交
 				/* 定义按钮 post函数 */
 				oUpdate.click(function() {
@@ -60,7 +62,9 @@
 						},
 						error : function() {//失败
 							alert("服务器通讯错误");
-							oIconOK.
+							oIconLoad.hide();
+							oIconErr.show();
+							oIconErr.hide("fade", 5000);
 						},
 						complete : function(XMLHttpRequest, textStatus) {//完成(发生在失败或成功之后)
 							//alert("ajax完成,接收:对象:" + XMLHttpRequest + ",状态:" + textStatus);
@@ -94,7 +98,10 @@
 							//alert("OK");
 						},
 						error : function() {//失败
+							oIconLoad.hide();
 							alert("服务器通讯错误");
+							oIconErr.show();
+							oIconErr.hide("fade", 5000);
 						},
 						complete : function(XMLHttpRequest, textStatus) {//完成(发生在失败或成功之后)
 							//alert("ajax完成,接收:对象:" + XMLHttpRequest + ",状态:" + textStatus);
@@ -164,6 +171,7 @@
 			<button id="btnUpdate" class="btn_update">更新</button>
 			<input type="text" id="icon_init" class="wait_icon_24x24_load" />
 			<input type="text" id="icon_ok" class="wait_icon_24x24 icon_ok" />
+			<input type="text" id="icon_err" class="wait_icon_24x24 icon_err" />
 		</p>
 	</body>
 </html>

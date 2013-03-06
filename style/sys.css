@@ -1574,7 +1574,7 @@ TD.lb-bkg-w {
 	background: url('/style/images/icon_ok.png') right center no-repeat;
 }
 .icon_err {
-	background: url('/style/images/icon_ok.png') right center no-repeat;
+	background: url('/style/images/icon_err.png') right center no-repeat;
 }
 /*等待图标背景*/
 .waiticon_bgpic {
