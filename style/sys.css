@@ -1570,10 +1570,10 @@ TD.lb-bkg-w {
 	width: 24px;
 	height: 24px;
 }
-.ok_24x24 {
-	border: 0px;
-	width: 24px;
-	height: 24px;
+.icon_ok {
+	background: url('/style/images/icon_ok.png') right center no-repeat;
+}
+.icon_err {
 	background: url('/style/images/icon_ok.png') right center no-repeat;
 }
 /*等待图标背景*/

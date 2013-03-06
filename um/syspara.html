@@ -18,8 +18,9 @@
 			$(document).ready(function() {
 				var oLoad = $("#init");
 				var oUpdate = $("#btnUpdate");
-				var oIconLoad=$("#icon_init");
-				var oIconOK=$("#icon_ok");
+				var oIconLoad = $("#icon_init");
+				var oIconOK = $("#icon_ok");
+				var oForm = $("#sysparam");
 				//oLoad.hide();
 				oUpdate.button({
 					icons : {
@@ -38,50 +39,66 @@
 						return;
 					}
 					oIconLoad.show();
-					//$("#tbody_dat").html("<tr><td colspan=\"6\" ></td></tr>");
-					//$("#tbody_dat tr td").addClass('load_bgpic_hight');
-					$.post('/goform/sysparam', $("#sysparam").serialize(), function(result) {
-						//alert(result);
-						//$("#tbody_dat tr td").removeClass('load_bgpic_hight');
-						//$("#tbody_dat").html(result);
-						oIconLoad.hide();
-						oIconOK.show();
-						oIconOK.hide("fade", 1000);
-						//var oRet = JSON.parse(result);
-						var oRet = eval("(" + result + ")");
-						if (oRet.ret == "ok") {
-							//alert("ok");
-						} else {
-							alert("更新错误.");
+					$.ajax({
+						type : "post",
+						url : "/goform/sysparam",
+						contentType : "application/x-www-form-urlencoded; charset=utf-8",
+						dataType : "text",
+						data : oForm.serialize(),
+						success : function(result, textStatus) {//成功
+							//alert(result);
+							oIconLoad.hide();
+							oIconOK.show();
+							oIconOK.hide("fade", 1000);
+							//var oRet = JSON.parse(result);
+							var oRet = eval("(" + result + ")");
+							if (oRet.ret == "ok") {
+								//alert("ok");
+							} else {
+								alert("更新错误.");
+							}
+						},
+						error : function() {//失败
+							alert("服务器通讯错误");
+							oIconOK.
+						},
+						complete : function(XMLHttpRequest, textStatus) {//完成(发生在失败或成功之后)
+							//alert("ajax完成,接收:对象:" + XMLHttpRequest + ",状态:" + textStatus);
 						}
 					});
 				});
 				/* 隐藏的按钮用于初始化,应为post的form只能使用按钮触发*/
 				oLoad.click(function() {
 					oIconLoad.show();
-					
-					
-					$.post('/goform/sysparam', "action=get", function(result) {
-						//alert(result);
-						//alert("test");
-						/*使用JSON解析 与后台系统参数结构体[stSysParam]相同*/
-						//var oSysPara = JSON.parse(result);
-						var oSysPara = eval("(" + result + ")");
-						//alert("json:"+oSysPara);
-						//console.log(oSysPara);//ie6不支持控制太输出：（
-						//$("[name='meter_num']")
-						$("[name='meter_num']").val(oSysPara.meter_num);
-						//console.log($("#meter_num"));
-						//$("#meter_num").value=oSysPara.meter_num;
-						$("[name='sioplan_num']").val(oSysPara.sioplan_num);
-						$("[name='monitor_ports']").val(oSysPara.monitor_ports);
-						$("[name='netports_num']").val(oSysPara.netports_num);
-						$("[name='sioports_num']").val(oSysPara.sioports_num);
-						$("[name='control_ports']").val(oSysPara.control_ports);
-						//$("#icon_init").hide();
-						//	$("#icon_ok").show();
-						oIconLoad.hide("fade", 1000);
-						//alert("OK");
+					$.ajax({
+						type : "post",
+						url : "/goform/sysparam",
+						contentType : "application/x-www-form-urlencoded; charset=utf-8",
+						dataType : "text",
+						data : "action=get",
+						success : function(data, textStatus) {//成功
+							//alert(data);
+							//alert("test");
+							//使用JSON解析 与后台系统参数结构体[stSysParam]相同
+							//var oSysPara = JSON.parse(data);
+							var oSysPara = eval("(" + data + ")");
+							//alert("json:"+oSysPara);
+							//console.log(oSysPara);//ie6不支持控制台输出：（
+							$("[name='meter_num']").val(oSysPara.meter_num);
+							$("[name='sioplan_num']").val(oSysPara.sioplan_num);
+							$("[name='monitor_ports']").val(oSysPara.monitor_ports);
+							$("[name='netports_num']").val(oSysPara.netports_num);
+							$("[name='sioports_num']").val(oSysPara.sioports_num);
+							$("[name='control_ports']").val(oSysPara.control_ports);
+							oIconLoad.hide("fade", 1000);
+							//alert("OK");
+						},
+						error : function() {//失败
+							alert("服务器通讯错误");
+						},
+						complete : function(XMLHttpRequest, textStatus) {//完成(发生在失败或成功之后)
+							//alert("ajax完成,接收:对象:" + XMLHttpRequest + ",状态:" + textStatus);
+						}
 					});
 				});
 				/* 首次加载串口参数 */
@@ -146,7 +163,7 @@
 			<button id="init">读取</button>
 			<button id="btnUpdate" class="btn_update">更新</button>
 			<input type="text" id="icon_init" class="wait_icon_24x24_load" />
-			<input type="text" id="icon_ok" class="wait_icon_24x24 ok_24x24" />
+			<input type="text" id="icon_ok" class="wait_icon_24x24 icon_ok" />
 		</p>
 	</body>
 </html>
