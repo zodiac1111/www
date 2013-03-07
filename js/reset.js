@@ -155,7 +155,6 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 				oBtnResetRtu.removeAttr('disabled');
 			}
 		});
-		//
 	});
 	/**
 	 * 对话框
@@ -197,7 +196,6 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 			},
 			error : function() {
 				alert("服务器通讯错误");
-				//$("#msg_text").html("Ajax错误");
 			}
 		});
 	});
@@ -387,91 +385,67 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 		$("#msg_text").append();
 	});
 	//文本提示信息,鼠标移上 显示提示信息
-	$(function() {
-		$(document).tooltip();
-	});
+	$(document).tooltip();
 	//重启按钮
-	$(function() {
-		$(".reboot").button({
-			icons : {
-				primary : "ui-icon-power"
-			}
-		});
+	$(".reboot").button({
+		icons : {
+			primary : "ui-icon-power"
+		}
 	});
 	///加载日志按钮
-	$(function() {
-		$("#load_log").button({
-			icons : {
-				primary : "ui-icon-arrowstop-1-s"
-			}
-		});
+	$("#load_log").button({
+		icons : {
+			primary : "ui-icon-arrowstop-1-s"
+		}
 	});
 	///保存日志按钮
-	$(function() {
-		$("#save_log").button({
-			icons : {
-				primary : "ui-icon-arrowstop-1-n"
-			}
-		});
+	$("#save_log").button({
+		icons : {
+			primary : "ui-icon-arrowstop-1-n"
+		}
 	});
 	///加载监视端口按钮
-	$(function() {
-		$("#load_monport").button({
-			icons : {
-				primary : "ui-icon-arrowstop-1-s"
-			}
-		});
+	$("#load_monport").button({
+		icons : {
+			primary : "ui-icon-arrowstop-1-s"
+		}
 	});
 	///保存监视端口参数按钮
-	$(function() {
-		$("#save_monport").button({
-			icons : {
-				primary : "ui-icon-arrowstop-1-n"
-			}
-		});
+	$("#save_monport").button({
+		icons : {
+			primary : "ui-icon-arrowstop-1-n"
+		}
 	});
-	///加载规约配置文件
-	$(function() {
-		$("#load_procotol").button({
-			icons : {
-				primary : "ui-icon-arrowstop-1-s"
-			}
-		});
+	//加载规约配置文件
+	$("#load_procotol").button({
+		icons : {
+			primary : "ui-icon-arrowstop-1-s"
+		}
 	});
 	///保存规约配置文件
-	$(function() {
-		$("#save_procotol").button({
-			icons : {
-				primary : "ui-icon-arrowstop-1-n"
-			}
-		});
+	$("#save_procotol").button({
+		icons : {
+			primary : "ui-icon-arrowstop-1-n"
+		}
 	});
 	///报文监视按钮-开始
-	$(function() {
-		$("#mon_msg").button({
-			icons : {
-				primary : "ui-icon-play"
-			}
-		});
+	$("#mon_msg").button({
+		icons : {
+			primary : "ui-icon-play"
+		}
 	});
 	///报文监视按钮-停止
-	$(function() {
-		$("#mon_msg_stop").button({
-			icons : {
-				primary : "ui-icon-pause"
-			}
-		});
+	$("#mon_msg_stop").button({
+		icons : {
+			primary : "ui-icon-pause"
+		}
 	});
 	///按钮,查询历史数据
-	$(function() {
-		$("#btnPost").button({
-			icons : {
-				primary : "ui-icon-search"
-			}
-		});
+	$("#btnPost").button({
+		icons : {
+			primary : "ui-icon-search"
+		}
 	});
 	//标签页 标签id tabs
-	$(function() {
-		var tabs = $("#tabs").tabs();
-	});
+	var tabs = $("#tabs").tabs();
 });

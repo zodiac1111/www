@@ -39,17 +39,18 @@
 			// }
 			$(document).ready(function() {
 				// $.ajaxSetup({
-					// async : false
+				// async : false
 				// });
 				/* 按鈕 */
-				$(function() {
-					$("#btnUpdate").button({
-						icons : {
-							primary : "ui-icon-refresh"
-						}
-					});
-						$("#btnLoad").button();
+				$("#btnUpdate").button({
+					icons : {
+						primary : "ui-icon-refresh"
+					}
 				});
+				var g_index = 0;
+				var g_copy = false;
+				var oT;
+				$("#btnLoad").button();
 				//定义默认的表格样式
 				$.extend($.fn.dataTable.defaults, {//设置表格属性
 					"bInfo" : false,
@@ -58,7 +59,7 @@
 					"sScrollY" : "300px", //固定高度
 					"bPaginate" : false, //不分页
 					//"bScrollCollapse" : false, //显示滚动条
-					"bAutoWidth": true
+					"bAutoWidth" : true
 				});
 				$("#icon_init").hide();
 				$("#icon_ok").hide();
@@ -71,12 +72,11 @@
 					}
 					$("#icon_init").show();
 					/* formTest  get_tou */
-					$.post('/goform/mtrparams', "action=set&"+$("#mtrparaform").serialize(), function(result) {
+					$.post('/goform/mtrparams', "action=set&" + $("#mtrparaform").serialize(), function(result) {
 						//$('#tbl_mtrparams').dataTable();
 						$("#icon_init").hide();
 						$("#icon_ok").show();
 						$("#icon_ok").hide("fade", 1000);
-
 					});
 				});
 				var t = $('#tbl_mtrparams').dataTable();
@@ -118,6 +118,24 @@
 						t = $('#tbl_mtrparams').dataTable();
 						$("#icon_init").hide("fade", 2000);
 						//alert(result);
+						$('td').mousedown(function() {
+							g_copy = true;
+							g_index = this.children[0].value;
+						});
+						$("td").mouseenter(function() {
+							if (g_copy) {
+								this.children[0].value = g_index;
+							}
+						});
+						$('td').mouseup(function() {
+							g_copy = false;
+						});
+						$('p').mouseup(function() {
+							g_copy = false;
+						});
+						$('body').mouseup(function() {
+							g_copy = false;
+						});
 					});
 				});
 				/* 首次加载串口参数 */
@@ -129,7 +147,7 @@
 				background-color: transparent;
 				border: hidden;
 			}
-			th input{
+			th input {
 				background-color: white;
 				border: double;
 			}
