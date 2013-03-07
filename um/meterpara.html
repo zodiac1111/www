@@ -83,15 +83,15 @@
 				/* 隐藏的按钮用于初始化,应为post的form只能使用按钮触发 */
 				$("#btnLoad").click(function() {
 					//加载表计参数的各种项目头:串口方案项目名
-					$.post('/goform/mtr_items', "item=sioplan", function(result) {
-						$("#sioplan").html(result);
-						//alert(result);
+					/*	$.post('/goform/mtr_items', "item=sioplan", function(result) {
+					$("#sioplan").html(result);
+					//alert(result);
 					});
 					//表计规约项目名
 					$.post('/goform/mtr_items', "item=procotol", function(result) {
-						$("#procotol").html(result);
-						//alert(result);
-					});
+					$("#procotol").html(result);
+					//alert(result);
+					});*/
 					//表计厂商
 					$.post('/goform/mtr_items', "item=factory", function(result) {
 						$("#factory").html(result);
@@ -107,6 +107,12 @@
 					$("#icon_init").show();
 					t.fnDestroy(false);
 					$.post('/goform/mtrparams', "action=get", function(result) {
+						//alert(result);
+						var oMtrParas = eval("(" + result + ")");
+						listUartPlan($("#sioplanlist"), oMtrParas.portplan);
+						listPort($("#portlist"), oMtrParas.port);
+						listProcotol($("#procotollist"), oMtrParas.procotol);
+						listFactory($("#factorylist"), oMtrParas.factory);
 						$("#tbl_mtrparams tbody").html(result);
 						$('input[name="mtrno"]').width("2em");
 						$('input[name="line"]').width("3.3em");
@@ -141,6 +147,38 @@
 				/* 首次加载串口参数 */
 				$("#btnLoad").click();
 			});
+			//列举串口方案,填写到串口方案一栏中
+			function listUartPlan(div, oList) {
+				var str = "<select name=all_portplan onchange=\"changeall_sioplan(event);\">";
+				for ( i = 0; i < oList.length; i++) {
+					str += "<option value=" + i + ">" + "方案" + oList[i] + "</option>";
+				}
+				div.html(str);
+			}
+
+			//列举端口名称
+			function listPort(div, oList) {
+				var str = "<select name=all_port onchange=\"changeall_sioplan(event);\">";
+				for ( i = 0; i < oList.length; i++) {
+					str += "<option value=" + i + ">" + oList[i] + "</option>";
+				}
+				div.html(str);
+			}
+
+			function listProcotol(div, oList) {
+				var str = "<select name=all_protocol onchange=\"changeall_mtr_protocol(event);\">";
+				for ( i = 0; i < oList.length; i++) {
+					str += "<option value=" + i + ">" + oList[i] + "</option>";
+				}
+				div.html(str);
+			}
+			function listFactory(div, oList) {
+				var str = "<select name=all_factory onchange=\"setall_factory(event);\">";
+				for ( i = 0; i < oList.length; i++) {
+					str += "<option value=" + i + ">" + oList[i] + "</option>";
+				}
+				div.html(str);
+			}
 		</script>
 		<style type="text/css">
 			input {
@@ -167,9 +205,9 @@
 						<th>线路名称</th>
 						<th>表计地址</th>
 						<th>表计口令</th>
-						<th>使用端口</th>
-						<th>串口方案<br><div id="sioplan"></div></th>
-						<th>表计规约<br><div id="procotol"></div></th>
+						<th>使用端口<div id="portlist"></div></th>
+						<th>串口方案<br><div id="sioplanlist"></div></th>
+						<th>表计规约<br><div id="procotollist"></div></th>
 						<th>生产厂家<br><div id="factory"></div></th>
 						<th>电表类型<br><div id="type"></div></th>
 						<th>电量小数<br>
