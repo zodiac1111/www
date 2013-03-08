@@ -300,6 +300,16 @@ function type_all_changed(e) {
 		typelist[i].value = curobj.value;
 	}
 }
+// 表计参数,使用端口,所有表计联动.
+function changeall_port(e) {
+	var curobj = e.srcElement || e.target;
+	var typelist = document.getElementsByName("port");
+	var i = 0;
+	var n = typelist.length;
+	for (i = 0; i < n; i++) {
+		typelist[i].value = curobj.value;
+	}
+}
 // 串口方案,所有表计联动.
 function changeall_sioplan(e) {
 	var curobj = e.srcElement || e.target;
