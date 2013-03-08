@@ -38,17 +38,19 @@
 			// });
 			// }
 			$(document).ready(function() {
-				// $.ajaxSetup({
-				// async : false
-				// });
-				/* 按鈕 */
 				$("#btnUpdate").button({
 					icons : {
 						primary : "ui-icon-refresh"
 					}
 				});
-				var g_index = 0;
+				var oIconLoad = $("#icon_init");
+				//3个全局变量用于滑动复制中传递信息
+				var g_value = 0;
+				//待复制的值
 				var g_copy = false;
+				//是否在复制过程中,不在这个过程划过无反应
+				var g_name = "";
+				//滑动的类型,在不同类被参数上滑动不会复制
 				var oT;
 				$("#btnLoad").button();
 				//定义默认的表格样式
@@ -61,7 +63,7 @@
 					//"bScrollCollapse" : false, //显示滚动条
 					"bAutoWidth" : true
 				});
-				$("#icon_init").hide();
+				oIconLoad.hide();
 				$("#icon_ok").hide();
 				/* post方法刷新标记参数 */
 				$("#btnUpdate").click(function() {
@@ -70,11 +72,11 @@
 						alert("非法参数");
 						return;
 					}
-					$("#icon_init").show();
+					oIconLoad.show();
 					/* formTest  get_tou */
 					$.post('/goform/mtrparams', "action=set&" + $("#mtrparaform").serialize(), function(result) {
 						//$('#tbl_mtrparams').dataTable();
-						$("#icon_init").hide();
+						oIconLoad.hide();
 						$("#icon_ok").show();
 						$("#icon_ok").hide("fade", 1000);
 					});
@@ -91,93 +93,212 @@
 					$.post('/goform/mtr_items', "item=procotol", function(result) {
 					$("#procotol").html(result);
 					//alert(result);
-					});*/
+					});
 					//表计厂商
 					$.post('/goform/mtr_items', "item=factory", function(result) {
-						$("#factory").html(result);
-						//alert(result);
+					$("#factory").html(result);
+					//alert(result);
 					});
 					//表计类型
 					$.post('/goform/mtr_items', "item=type", function(result) {
-						$("#type").html(result);
-						//alert(result);
-					});
+					$("#type").html(result);
+					//alert(result);
+					});*/
 					//清空
 					$("#tbl_mtrparams tbody").html("");
-					$("#icon_init").show();
+					oIconLoad.show();
 					t.fnDestroy(false);
-					$.post('/goform/mtrparams', "action=get", function(result) {
-						//alert(result);
-						var oMtrParas = eval("(" + result + ")");
-						listUartPlan($("#sioplanlist"), oMtrParas.portplan);
-						listPort($("#portlist"), oMtrParas.port);
-						listProcotol($("#procotollist"), oMtrParas.procotol);
-						listFactory($("#factorylist"), oMtrParas.factory);
-						$("#tbl_mtrparams tbody").html(result);
-						$('input[name="mtrno"]').width("2em");
-						$('input[name="line"]').width("3.3em");
-						$('input[name="addr"]').width("6.5em");
-						$('input[name="pwd"]').width("4.4em");
-						$('input[name$="dot"]').width("1.1em");
-						$('input[name$="ue"]').width("2.2em");
-						$('input[name$="ie"]').width("2.2em");
-						t = $('#tbl_mtrparams').dataTable();
-						$("#icon_init").hide("fade", 2000);
-						//alert(result);
-						$('td').mousedown(function() {
-							g_copy = true;
-							g_index = this.children[0].value;
-						});
-						$("td").mouseenter(function() {
-							if (g_copy) {
-								this.children[0].value = g_index;
-							}
-						});
-						$('td').mouseup(function() {
-							g_copy = false;
-						});
-						$('p').mouseup(function() {
-							g_copy = false;
-						});
-						$('body').mouseup(function() {
-							g_copy = false;
-						});
+					$.ajax({
+						type : "post",
+						url : "/goform/mtrparams",
+						contentType : "application/x-www-form-urlencoded; charset=utf-8",
+						dataType : "text",
+						data : "action=get",
+						success : function(result, textStatus) {
+							//alert(result);
+							var oMtrParas = eval("(" + result + ")");
+							$("#portlist").html(listPort(oMtrParas.port, null));
+							$("#sioplanlist").html(listUartPlan(oMtrParas.portplan, null));
+							$("#procotollist").html(listProcotol(oMtrParas.procotol, null));
+							$("#factorylist").html(listFactory(oMtrParas.factory, null));
+							$("#typelist").html(listType(oMtrParas.type, null));
+							$("#tbody_dat").html(addTr(oMtrParas, oMtrParas.items));
+							/*	$("#tbl_mtrparams tbody").html(result);*/
+							$('input[name="mtrno"]').width("2em");
+							$('input[name="line"]').width("3.3em");
+							$('input[name="addr"]').width("6.5em");
+							$('input[name="pwd"]').width("4.4em");
+							$('input[name$="dot"]').width("1.1em");
+							$('input[name$="ue"]').width("2.2em");
+							$('input[name$="ie"]').width("2.2em");
+							t = $('#tbl_mtrparams').dataTable();
+							oIconLoad.hide("fade", 2000);
+							//alert(result);
+							$('td').mousedown(function() {
+								g_copy = true;
+								g_value = this.children[0].value;
+								g_name = this.children[0].name;
+							});
+							$("td").mouseenter(function() {
+								if (g_copy && this.children[0].name == g_name) {
+									this.children[0].value = g_value;
+								}
+							});
+							$('td').mouseup(function() {
+								g_copy = false;
+							});
+							$('p').mouseup(function() {
+								g_copy = false;
+							});
+							$('body').mouseup(function() {
+								g_copy = false;
+							});
+						},
+						error : function() {//失败
+							oIconLoad.hide();
+							alert("服务器通讯错误");
+						}
 					});
+					// $.post('/goform/mtrparams', "action=get", function(result) {
+					//
+					// });
 				});
 				/* 首次加载串口参数 */
 				$("#btnLoad").click();
 			});
 			//列举串口方案,填写到串口方案一栏中
-			function listUartPlan(div, oList) {
-				var str = "<select name=all_portplan onchange=\"changeall_sioplan(event);\">";
-				for ( i = 0; i < oList.length; i++) {
-					str += "<option value=" + i + ">" + "方案" + oList[i] + "</option>";
+			function listUartPlan(oList, index) {
+				if (index == null) {
+					var str = "<select name=all_portplan onchange=\"changeall_sioplan(event);\">";
+				} else {
+					var str = "<select name=portplan>";
 				}
-				div.html(str);
+				for ( i = 0; i < oList.length; i++) {
+					str += "<option value=" + i;
+					str += (i == index ? " selected" : "");
+					str += ">" + "方案" + oList[i] + "</option>";
+				}
+				return str;
 			}
 
 			//列举端口名称
-			function listPort(div, oList) {
-				var str = "<select name=all_port onchange=\"changeall_sioplan(event);\">";
-				for ( i = 0; i < oList.length; i++) {
-					str += "<option value=" + i + ">" + oList[i] + "</option>";
+			function listPort(oList, index) {
+				if (index == null) {
+					var str = "<select name=all_port onchange=\"changeall_port(event);\">";
+				} else {
+					var str = "<select name=port >";
 				}
-				div.html(str);
+				for ( i = 0; i < oList.length; i++) {
+					str += "<option value=" + i;
+					str += (i == index ? " selected" : "");
+					str += ">" + oList[i] + "</option>";
+				}
+				return str;
 			}
 
-			function listProcotol(div, oList) {
-				var str = "<select name=all_protocol onchange=\"changeall_mtr_protocol(event);\">";
-				for ( i = 0; i < oList.length; i++) {
-					str += "<option value=" + i + ">" + oList[i] + "</option>";
+			function listProcotol(oList, index) {
+				if (index == null) {
+					var str = "<select name=all_protocol onchange=\"changeall_mtr_protocol(event);\">";
+				} else {
+					var str = "<select name=protocol >";
 				}
-				div.html(str);
+				for ( i = 0; i < oList.length; i++) {
+					str += "<option value=" + i;
+					str += (i == index ? " selected" : "");
+					str += ">" + oList[i] + "</option>";
+				}
+				return str;
 			}
-			function listFactory(div, oList) {
-				var str = "<select name=all_factory onchange=\"setall_factory(event);\">";
-				for ( i = 0; i < oList.length; i++) {
-					str += "<option value=" + i + ">" + oList[i] + "</option>";
+
+			function listFactory(oList, index) {
+				if (index == null) {
+					var str = "<select name=all_factory onchange=\"setall_factory(event);\">";
+				} else {
+					var str = "<select name=factory>";
 				}
-				div.html(str);
+
+				for (var i = 0; i < oList.length; i++) {
+					str += "<option value=" + i;
+					str += (i == index ? " selected" : "");
+					str += ">" + oList[i] + "</option>";
+				}
+				return str;
+			}
+
+			function listType(oList, index) {
+				if (index == null) {
+					var str = "<select name=ph_wire_all onchange=\"type_all_changed(event);\">";
+				} else {
+					var str = "<select name=ph_wire>";
+				}
+
+				for (var i = 0; i < oList.length; i++) {
+					str += "<option value=" + i;
+					str += (i == index ? " selected" : "");
+					str += ">" + oList[i] + "</option>";
+				}
+				return str;
+			}
+
+			function addTr(oMtrParas, aItems) {
+				var str = "";
+				for (var i = 0; i < aItems.length; i++) {
+					str += "<tr>"
+					str += appendMtrno(aItems[i].mtrno);
+					str += appendChk(aItems[i].iv);
+					str += appendLine(aItems[i].line);
+					str += appendAddr(aItems[i].addr)
+					str += appendPwd(aItems[i].pwd);
+					str += "<td>" + listPort(oMtrParas.port, aItems[i].port) + "</td>";
+					str += "<td>" + listUartPlan(oMtrParas.portplan, aItems[i].portplan) + "</td>";
+					str += "<td>" + listProcotol(oMtrParas.procotol, aItems[i].protocol) + "</td>";
+					str += "<td>" + listFactory(oMtrParas.factory, aItems[i].factory) + "</td>";
+					str += "<td>" + listType(oMtrParas.type, aItems[i].ph_wire) + "</td>";
+					str += append_dot("it_dot", aItems[i].it_dot);
+					str += append_dot("xl_dot", aItems[i].xl_dot);
+					str += append_dot("v_dot", aItems[i].v_dot);
+					str += append_dot("i_dot", aItems[i].i_dot);
+					str += append_dot("p_dot", aItems[i].p_dot);
+					str += append_dot("q_dot", aItems[i].q_dot);
+					str += append_dot("ue", aItems[i].ue);
+					str += append_IEdot("ie", aItems[i].ie);
+					str += "</tr>";
+				}
+				return str;
+			}
+
+			function append_IEdot(name, it_dot) {
+				return "<td><input type=text maxlength=1" + " onchange=\"dot_changed(event);\"" + "name=" + name + " value=" + it_dot + ">\n</td>\n";
+			}
+
+			function append_dot(name, it_dot) {
+				return "<td><input type=text maxlength=1 " + "onchange=\"dot_changed(event);\"" + "name=" + name + " value=" + it_dot + ">\n</td>\n";
+			}
+
+			function appendPwd(pwd) {
+				return "<td><input type=text maxlength=8 " + "onchange=\"pwd_changed(event);\"" + "name=pwd value=\"" + pwd + "\" >\n</td>\n";
+			}
+
+			function appendAddr(addr) {
+				return "<td><input type=text  maxlength=12 " + "onchange=\"addr_changed(event);\"" + "name=addr value=\"" + addr + "\" >\n</td>\n";
+			}
+
+			function appendLine(line) {
+				return "<td><input type=text name=line" + " maxlength=6 onchange=\"line_changed(event);\" value=" + line + "></td>";
+			}
+
+			function appendMtrno(mtrno) {
+				return "<td><input type=text name=mtrno readonly=readonly value=" + mtrno + "></td>";
+			}
+
+			function appendChk(iv) {
+				var str = "";
+				str += "<td><input type=checkbox name=iv_check value=";
+				str += iv & 0x01 + ((iv & 0x01) ? "checked" : "");
+				str += " id=ivchk onclick=\"chk_change(event);\" >";
+				str += "<input class=hideinp type=text size=1 name=iv value=" + (iv & 0x01);
+				str += "></td>";
+				return str;
 			}
 		</script>
 		<style type="text/css">
@@ -192,46 +313,63 @@
 		</style>
 	</head>
 	<body>
-		<h1 align="center"><img src="/graphics/logo32.png" height="45"></h1>
+	<!--	<h1 align="center"><img src="/graphics/logo32.png" height="45"></h1> -->
 		<form action="/goform/formTest" method="post" id="mtrparaform" name="mtrparaform">
 			<table  width="100%" id="tbl_mtrparams"  class="sioplanTable" border="1" cellspacing="1" cellpadding="1" >
 				<!-- <table width="80%" id="tbl_mtrparams" class="sioplanTable"> -->
 				<thead>
 					<tr>
 						<th>表号</th>
-						<th>有效<br>
+						<th>有效
+						<br>
 						<input type="checkbox" name=iv_all value=iv_all onclick="iv_all_click(event);">
 						</th>
 						<th>线路名称</th>
 						<th>表计地址</th>
 						<th>表计口令</th>
 						<th>使用端口<div id="portlist"></div></th>
-						<th>串口方案<br><div id="sioplanlist"></div></th>
-						<th>表计规约<br><div id="procotollist"></div></th>
-						<th>生产厂家<br><div id="factory"></div></th>
-						<th>电表类型<br><div id="type"></div></th>
-						<th>电量小数<br>
+						<th>串口方案
+						<br>
+						<div id="sioplanlist"></div></th>
+						<th>表计规约
+						<br>
+						<div id="procotollist"></div></th>
+						<th>生产厂家
+						<br>
+						<div id="factorylist"></div></th>
+						<th>电表类型
+						<br>
+						<div id="typelist"></div></th>
+						<th>电量小数
+						<br>
 						<input  type="text"  maxlength=1 name=all_it_dot value="0" onchange="all_it_dot_changed(event);">
 						</th>
-						<th>需量小数<br>
+						<th>需量小数
+						<br>
 						<input  type="text"  maxlength=1 name=all_xl_dot value="0" onchange="all_xl_dot_changed(event);">
 						</th>
-						<th>电压小数<br>
+						<th>电压小数
+						<br>
 						<input  type="text" maxlength=1 name=all_v_dot value="0" onchange="all_v_dot_changed(event);">
 						</th>
-						<th>电流小数<br>
+						<th>电流小数
+						<br>
 						<input  type="text"  maxlength=1 name=all_i_dot value="0" onchange="all_i_dot_changed(event);">
 						</th>
-						<th>有功小数<br>
+						<th>有功小数
+						<br>
 						<input  type="text"  maxlength=1 name=all_p_dot value="0" onchange="all_p_dot_changed(event);">
 						</th>
-						<th>无功小数<br>
+						<th>无功小数
+						<br>
 						<input  type="text"  maxlength=1 name=all_q_dot value="0" onchange="all_q_dot_changed(event);">
 						</th>
-						<th>额定电压<br>
+						<th>额定电压
+						<br>
 						<input  type="text" maxlength=4 name=all_ue value="0" onchange="all_ue_changed(event);">
 						</th>
-						<th>额定电流<br>
+						<th>额定电流
+						<br>
 						<input  type="text"  maxlength=4 name=all_ie value="0" onchange="all_ie_changed(event);">
 						</th>
 					</tr>
@@ -245,8 +383,12 @@
 			<input class="hideinp" type="text" name="AllSelFlag" value="0" id="AllSelFlag">
 		</form>
 		<p align="center">
-			<button id="btnLoad" class="" >读取</button>
-			<button id="btnUpdate" class="btn_update">更新</button>
+			<button id="btnLoad" class="" >
+				读取
+			</button>
+			<button id="btnUpdate" class="btn_update">
+				更新
+			</button>
 			<input type="text" id="icon_init" class="wait_icon_24x24_load" />
 			<input type="text" id="icon_ok" class="wait_icon_24x24 icon_ok" />
 		</p>
