@@ -24,6 +24,7 @@
 	</head>
 	<body>
 		<script type="text/javascript">
+			var timeZoneMs=8*60*60;//时区的秒
 			var srvTimestarmp = 0;
 			function Year_Month() {
 				var now = new Date();
@@ -201,6 +202,7 @@
 				//读取服务器时间按钮,不显示
 				var oSynTime = $("#init");
 				var oUpdateTime = $("#update");
+
 				oSynTime.button();
 				oUpdateTime.button();
 				//oSynTime.hide();
@@ -208,6 +210,7 @@
 				oUpdateTime.click(function() {
 					//linux 只支持时间戳到秒,所以毫秒部分直接除掉
 					var timestamp = Date.parse(new Date()) / 1000;
+					timestamp=timestamp+timeZoneMs;//转化为标准时间
 					$.ajax({
 						type : "post",
 						url : "/goform/srv_time",
@@ -215,7 +218,7 @@
 						dataType : "text",
 						data : "action=set" + "&" + "timestamp=" + timestamp + "&timezone=" + 8 * 60,
 						success : function(result, textStatus) {
-							//更新完立即读取一次	
+							//更新完立即读取一次
 							alert("更新终端时间成功.");
 							oSynTime.click();
 						},
@@ -232,7 +235,7 @@
 						//var oTime=JSON.parse(result); //非ie都支持这种方式
 						var oTime = eval("(" + result + ")");
 						//ie支持这种方式
-						srvTimestarmp = Number(oTime.timestamp);
+						srvTimestarmp = Number(oTime.timestamp-timeZoneMs);
 					});
 				});
 				/* 首次加载,获取一次服务器时间戳 */
