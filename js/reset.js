@@ -22,7 +22,27 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 	var obtnResetWeb = $("#btnResetWeb");
 	var obtnResetSample = $("#btnResetSample");
 	var oBtnResetRtu = $("#btnResetRtu");
+	var oBtnClearData = $("#btnClearData");
 	oProbar.hide();
+	///@todo TODO 传递的参数名称有意义,易于人类阅读
+	oBtnClearData.click(function() {
+		oBtnClearData.attr("disabled", "disabled");
+		$.ajax({
+			type : "post",
+			url : "/goform/reset",
+			contentType : "application/x-www-form-urlencoded; charset=utf-8",
+			dataType : "text",
+			data : "OpType=5",
+			success : function(result, textStatus) {
+				alert("操作完成");
+				oBtnClearData.removeAttr('disabled');
+			},
+			error : function() {//失败
+				alert("服务器通讯错误");
+				oBtnClearData.removeAttr('disabled');
+			}
+		});
+	});
 	obtnResetPro.click(function() {
 		obtnResetPro.attr("disabled", "disabled");
 		$.ajax({
@@ -156,6 +176,7 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 			}
 		});
 	});
+
 	/**
 	 * 对话框
 	 */

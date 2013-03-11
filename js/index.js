@@ -62,6 +62,12 @@ $(document).ready(function() {
 			$("#inter_page").html(result);
 		});
 	});
+	////------------test
+		//var oTable=$('#example').dataTable();
+	$("#btnTest1_1").click(function() {
+		$("#inter_page").html("");
+		$("#inter_page").append = "/meterpara.html";
+	});
 	$("#accordion").accordion({
 		heightStyle : "content",
 		// heightStyle: "fill",
@@ -74,10 +80,10 @@ $(document).ready(function() {
 	});
 	//起始动作,加载到系统参数页面
 	//$("#btnSysParam").click();
-	$("#inter_page").html("");
-	$("#inter_page").addClass('load_bgpic_hight');
-	$.get("/um/meterpara.html", function(result) {
-		$("#inter_page").removeClass('load_bgpic_hight');
-		$("#inter_page").html(result);
-	});
+	//$("#inter_page").html("");
+	//$("#inter_page").addClass('load_bgpic_hight');
+	//$.get("/um/meterpara.html", function(result) {
+	//	$("#inter_page").removeClass('load_bgpic_hight');
+	//	$("#inter_page").html(result);
+	//});
 });

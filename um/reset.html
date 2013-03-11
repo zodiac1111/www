@@ -68,12 +68,13 @@
 						alert("请选择截止时刻")
 						return false;
 					}
-					oTable.fnDestroy(false);
+					//oTable.fnDestroy(false);
+
 					$.post('/goform/get_tou', $("#history_tou").serialize() + "&mtr_no=" + $("#mtr_no").val(), function(result) {
 						//$("#tr_dat tr td").removeClass('load_bgpic_hight');
 						//$('#tbl_history_tou').dataTable();
 						$("#tr_dat").html(result);
-						//oTable.fnDestroy();
+						oTable.fnDestroy();
 						oTable = $('#tbl_history_tou').dataTable();
 						//oTable.fnAdjustColumnSizing();
 						//oTable.fnAdjustColumnSizing();
@@ -126,6 +127,11 @@
 							<td>4</td>
 							<td>重启终端操作系统</td>
 							<td><button id="btnResetRtu" class="reboot"> 执行 </button></td>
+						</tr>
+						<tr>
+							<td>5</td>
+							<td>清空终端数据</td>
+							<td><button id="btnClearData" class="reboot"> 执行 </button></td>
 						</tr>
 						<!--
 						<tr>

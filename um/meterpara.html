@@ -57,12 +57,13 @@
 				$("#btnLoad").button();
 				//定义默认的表格样式
 				$.extend($.fn.dataTable.defaults, {//设置表格属性
+					//"bJQueryUI":"true",
 					"bInfo" : false,
 					"bFilter" : false, //不要搜索
 					"bSort" : false, //不要排序
-					//"sScrollY" : "300px", //固定高度
+					"sScrollY" : "300px", //固定高度
 					"bPaginate" : false, //不分页
-					//"bScrollCollapse" : false, //显示滚动条
+					"bScrollCollapse" : false, //显示滚动条
 					"bAutoWidth" : false
 				});
 				t = tb.dataTable();
@@ -159,9 +160,9 @@
 					str += (i == index ? " selected" : "");
 					str += ">" + "方案" + oList[i] + "</option>";
 				}
+				str+="</select>";
 				return str;
 			}
-
 			//列举端口名称
 			function listPort(oList, index) {
 				if (index == null) {
@@ -174,6 +175,7 @@
 					str += (i == index ? " selected" : "");
 					str += ">" + oList[i] + "</option>";
 				}
+				str+="</select>";
 				return str;
 			}
 
@@ -188,6 +190,7 @@
 					str += (i == index ? " selected" : "");
 					str += ">" + oList[i] + "</option>";
 				}
+				str+="</select>";
 				return str;
 			}
 
@@ -197,12 +200,12 @@
 				} else {
 					var str = "<select name=factory>";
 				}
-
 				for (var i = 0; i < oList.length; i++) {
 					str += "<option value=" + i;
 					str += (i == index ? " selected" : "");
 					str += ">" + oList[i] + "</option>";
 				}
+				str+="</select>";
 				return str;
 			}
 
@@ -212,12 +215,12 @@
 				} else {
 					var str = "<select name=ph_wire>";
 				}
-
 				for (var i = 0; i < oList.length; i++) {
 					str += "<option value=" + i;
 					str += (i == index ? " selected" : "");
 					str += ">" + oList[i] + "</option>";
 				}
+				str+="</select>";
 				return str;
 			}
 
@@ -230,11 +233,11 @@
 					str += appendLine(aItems[i].line);
 					str += appendAddr(aItems[i].addr)
 					str += appendPwd(aItems[i].pwd);
-					str += "<td>" + listPort(oMtrParas.port, aItems[i].port) + "</td>";
-					str += "<td>" + listUartPlan(oMtrParas.portplan, aItems[i].portplan) + "</td>";
-					str += "<td>" + listProcotol(oMtrParas.procotol, aItems[i].protocol) + "</td>";
-					str += "<td>" + listFactory(oMtrParas.factory, aItems[i].factory) + "</td>";
-					str += "<td>" + listType(oMtrParas.type, aItems[i].ph_wire) + "</td>";
+					str += "<td>" + listPort(oMtrParas.port, aItems[i].port) + "●</td>";
+					str += "<td>" + listUartPlan(oMtrParas.portplan, aItems[i].portplan) + "●</td>";
+					str += "<td>" + listProcotol(oMtrParas.procotol, aItems[i].protocol) + "●</td>";
+					str += "<td>" + listFactory(oMtrParas.factory, aItems[i].factory) + "●</td>";
+					str += "<td>" + listType(oMtrParas.type, aItems[i].ph_wire) + "●</td>";
 					str += append_dot("it_dot", aItems[i].it_dot);
 					str += append_dot("xl_dot", aItems[i].xl_dot);
 					str += append_dot("v_dot", aItems[i].v_dot);
@@ -249,15 +252,15 @@
 			}
 
 			function append_IEdot(name, it_dot) {
-				return "<td><input type=text maxlength=1" + " onchange=\"dot_changed(event);\"" + "name=" + name + " value=" + it_dot + ">\n</td>\n";
+				return "<td><input type=text maxlength=1 onchange=\"dot_changed(event);\"" + "name=" + name + " value=" + it_dot + ">\n</td>\n";
 			}
 
 			function append_dot(name, it_dot) {
-				return "<td><input type=text maxlength=1 " + "onchange=\"dot_changed(event);\"" + "name=" + name + " value=" + it_dot + ">\n</td>\n";
+				return "<td><input type=text maxlength=1 onchange=\"dot_changed(event);\"" + "name=" + name + " value=" + it_dot + ">\n</td>\n";
 			}
 
 			function appendPwd(pwd) {
-				return "<td><input type=text maxlength=8 " + "onchange=\"pwd_changed(event);\"" + "name=pwd value=\"" + pwd + "\" >\n</td>\n";
+				return "<td><input type=text maxlength=8 onchange=\"pwd_changed(event);\"" + "name=pwd value=\"" + pwd + "\" >\n</td>\n";
 			}
 
 			function appendAddr(addr) {
