@@ -114,6 +114,7 @@
 							$('input[name$="dot"]').width("1.1em");
 							$('input[name$="ue"]').width("2.2em");
 							$('input[name$="ie"]').width("2.2em");
+							//$('input[name$="iv"]').hide();
 							oIconLoad.hide("fade", 2000);
 							//alert(result);
 							$('td').mousedown(function() {
@@ -244,15 +245,18 @@
 					str += append_dot("i_dot", aItems[i].i_dot);
 					str += append_dot("p_dot", aItems[i].p_dot);
 					str += append_dot("q_dot", aItems[i].q_dot);
-					str += append_dot("ue", aItems[i].ue);
+					str += append_ue_dot("ue", aItems[i].ue);
 					str += append_IEdot("ie", aItems[i].ie);
 					str += "</tr>";
 				}
 				return str;
 			}
 
+			function append_ue_dot(name, it_dot) {
+				return "<td><input type=text maxlength=10 onchange=\"ue_changed(event);\"" + "name=" + name + " value=" + it_dot + ">\n</td>\n";
+			}
 			function append_IEdot(name, it_dot) {
-				return "<td><input type=text maxlength=1 onchange=\"dot_changed(event);\"" + "name=" + name + " value=" + it_dot + ">\n</td>\n";
+				return "<td><input type=text maxlength=10 onchange=\"ie_changed(event);\"" + "name=" + name + " value=" + it_dot + ">\n</td>\n";
 			}
 
 			function append_dot(name, it_dot) {
@@ -278,9 +282,10 @@
 			function appendChk(iv) {
 				var str = "";
 				str += "<td><input type=checkbox name=iv_check value=";
-				str += iv & 0x01 + ((iv & 0x01) ? "checked" : "");
+				str += iv & 0x01 ;
+				str	+= ((iv & 0x01) ? " checked" : " ");
 				str += " id=ivchk onclick=\"chk_change(event);\" >";
-				str += "<input class=hideinp type=text size=1 name=iv value=" + (iv & 0x01);
+				str += "<input type=text size=1 name=iv value=" + (iv & 0x01);
 				str += "></td>";
 				return str;
 			}
