@@ -38,6 +38,7 @@
 			// });
 			// }
 			$(document).ready(function() {
+
 				$("#btnUpdate").button({
 					icons : {
 						primary : "ui-icon-refresh"
@@ -52,17 +53,19 @@
 				var g_name = "";
 				//滑动的类型,在不同类被参数上滑动不会复制
 				var oT;
+				var tb = $("#tbl_mtrparams");
 				$("#btnLoad").button();
 				//定义默认的表格样式
 				$.extend($.fn.dataTable.defaults, {//设置表格属性
 					"bInfo" : false,
 					"bFilter" : false, //不要搜索
 					"bSort" : false, //不要排序
-					"sScrollY" : "300px", //固定高度
+					//"sScrollY" : "300px", //固定高度
 					"bPaginate" : false, //不分页
 					//"bScrollCollapse" : false, //显示滚动条
-					"bAutoWidth" : true
+					"bAutoWidth" : false
 				});
+				t = tb.dataTable();
 				oIconLoad.hide();
 				$("#icon_ok").hide();
 				/* post方法刷新标记参数 */
@@ -81,29 +84,8 @@
 						$("#icon_ok").hide("fade", 1000);
 					});
 				});
-				var t = $('#tbl_mtrparams').dataTable();
 				/* 隐藏的按钮用于初始化,应为post的form只能使用按钮触发 */
 				$("#btnLoad").click(function() {
-					//加载表计参数的各种项目头:串口方案项目名
-					/*	$.post('/goform/mtr_items', "item=sioplan", function(result) {
-					$("#sioplan").html(result);
-					//alert(result);
-					});
-					//表计规约项目名
-					$.post('/goform/mtr_items', "item=procotol", function(result) {
-					$("#procotol").html(result);
-					//alert(result);
-					});
-					//表计厂商
-					$.post('/goform/mtr_items', "item=factory", function(result) {
-					$("#factory").html(result);
-					//alert(result);
-					});
-					//表计类型
-					$.post('/goform/mtr_items', "item=type", function(result) {
-					$("#type").html(result);
-					//alert(result);
-					});*/
 					//清空
 					$("#tbl_mtrparams tbody").html("");
 					oIconLoad.show();
@@ -131,7 +113,6 @@
 							$('input[name$="dot"]').width("1.1em");
 							$('input[name$="ue"]').width("2.2em");
 							$('input[name$="ie"]').width("2.2em");
-							t = $('#tbl_mtrparams').dataTable();
 							oIconLoad.hide("fade", 2000);
 							//alert(result);
 							$('td').mousedown(function() {
@@ -154,14 +135,14 @@
 								g_copy = false;
 							});
 						},
+						complete : function(XMLHttpRequest, textStatus) {
+							t = tb.dataTable();
+						},
 						error : function() {//失败
 							oIconLoad.hide();
 							alert("服务器通讯错误");
 						}
 					});
-					// $.post('/goform/mtrparams', "action=get", function(result) {
-					//
-					// });
 				});
 				/* 首次加载串口参数 */
 				$("#btnLoad").click();
@@ -313,7 +294,7 @@
 		</style>
 	</head>
 	<body>
-	<!--	<h1 align="center"><img src="/graphics/logo32.png" height="45"></h1> -->
+		<!--	<h1 align="center"><img src="/graphics/logo32.png" height="45"></h1> -->
 		<form action="/goform/formTest" method="post" id="mtrparaform" name="mtrparaform">
 			<table  width="100%" id="tbl_mtrparams"  class="sioplanTable" border="1" cellspacing="1" cellpadding="1" >
 				<!-- <table width="80%" id="tbl_mtrparams" class="sioplanTable"> -->
@@ -374,13 +355,36 @@
 						</th>
 					</tr>
 				</thead>
-				<tbody id="tbody_dat"></tbody>
+				<tbody id="tbody_dat">
+					<tr>
+						<td>载入数据</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</tbody>
 			</table>
-			<!-- 隐藏的输入,用于提交命令类型 -->
-			<input class="hideinp" type="text" name=OpType value="" id="optype">
-			<!-- 提交操作类型 更新,还是其他 -->
-			<input class="hideinp" type="text" name=RowNo value="" id="indexno">
-			<input class="hideinp" type="text" name="AllSelFlag" value="0" id="AllSelFlag">
+			<p align="center">
+				<!-- 隐藏的输入,用于提交命令类型 -->
+				<input class="hideinp" type="text" name=OpType value="" id="optype">
+				<!-- 提交操作类型 更新,还是其他 -->
+				<input class="hideinp" type="text" name=RowNo value="" id="indexno">
+				<input class="hideinp" type="text" name="AllSelFlag" value="0" id="AllSelFlag">
+			</p>
 		</form>
 		<p align="center">
 			<button id="btnLoad" class="" >

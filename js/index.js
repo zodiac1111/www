@@ -3,7 +3,7 @@
  */
 $(document).ready(function() {
 	$.ajaxSetup({
-		async:false
+		async : false
 	});
 	$("#btnSysParam").click(function() {
 		//$("#inter_page").html("");
@@ -54,20 +54,30 @@ $(document).ready(function() {
 			$("#inter_page").html(result);
 		});
 	});
-	$(function() {
-		$("#accordion").accordion({
-			heightStyle : "content",
-			// heightStyle: "fill",
-			collapsible : true
+	$("#btnFunction").click(function() {
+		$("#inter_page").html("");
+		$("#inter_page").addClass('load_bgpic_hight');
+		$.get("/um/reset.html", function(result) {
+			$("#inter_page").removeClass('load_bgpic_hight');
+			$("#inter_page").html(result);
 		});
 	});
-	$(function() {
-		$(".btn").button({
-			icons : {
-				primary : "ui-icon-power"
-			}
-		});
+	$("#accordion").accordion({
+		heightStyle : "content",
+		// heightStyle: "fill",
+		collapsible : true
+	});
+	$(".btn").button({
+		icons : {
+			primary : "ui-icon-power"
+		}
 	});
 	//起始动作,加载到系统参数页面
-	$("#btnSysParam").click();
+	//$("#btnSysParam").click();
+	$("#inter_page").html("");
+	$("#inter_page").addClass('load_bgpic_hight');
+	$.get("/um/meterpara.html", function(result) {
+		$("#inter_page").removeClass('load_bgpic_hight');
+		$("#inter_page").html(result);
+	});
 });
