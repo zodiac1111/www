@@ -20,8 +20,12 @@
 		<link type="text/css" href="/style/jquery.dataTables.css" rel="stylesheet"  />
 		<link type="text/css" href="/style/jquery.dataTables_themeroller.css" rel="stylesheet"  />
 		<script type="text/javascript" src="/js/jquery.dataTables.js"></script>
-		<script type="text/javascript" src="/js/jquery.dataTables.js"></script>
 		<style type="text/css">
+			/*整个页面的容器 */
+			#container {
+				margin: 0 auto;
+				width: 100%;
+			}
 			/*head*/
 			#headpic {
 				/*float: center;*/
@@ -30,93 +34,126 @@
 				margin: auto;
 				background-color: #4682B4;
 			}
+			/*容器*/
+			#content {
+
+			}
+			#sidebar {
+				float: left;
+				width: 200px;
+				background: #cf9;
+			}
+			/*#accordion {
+			 float: left;
+			 width: 200px;
+			 background: #cf9;
+			 }*/
+			#inter_page {
+				margin-left: 205px !important;
+				margin-left: 202px;
+				height: auto !important;
+				height: 100px;
+				background: #ffa;
+			}
+			/*	#inter_page {
+			 margin-left: 200px;
+			 padding: 5px 5px 5px 5px;
+			 } */
+			#footer {
+				height: 60px;
+				background: #9c6;
+			}
+			.clearfloat {
+				clear: both;
+				height: 0;
+				font-size: 1px;
+				line-height: 0px;
+			}
 			.btn {
 				width: 90%;
 			}
-			/*容器*/
-			#content {
-				padding: 0px 0px 0 0;
-				margin: 0 auto;
-			}
-			#accordion {
-				width: 200px;
-				float: left;
-				padding: 0 0 0 0px;
-			}
-			#inter_page {
-				margin-left: 200px;
-				/*margin:auto;*/
-				/*max-width: 600px;*/
-				/*margin: 0 auto;*/
-				padding: 5px 5px 5px 5px;
-			}
-			#foot {
-				clear: both;
-				background: #ccc;
-				text-align: right;
-				padding: 5px;
-				height: 10px;
-			}
-
 		</style>
 	</head>
 	<body>
-		<!-- head -->
-		<div id="headpic" align="center" >
-			<h1>页头图片占位符 width=100% height=60px </h1>
-		</div>
-		<!-- body -->
-		<div id="content">
-			<div id="accordion">
-				<h3>终端参数</h3>
-				<div>
-					<ul>
-						<li>
-						<button id="btnSysParam" class="btn">系统参数</button><br>
-						</li>
-					</ul>
-					<button id="btnSioParam" class="btn">串口参数</button><br>
-					<button id="btnNetParam" class="btn">网口参数</button><br>
-					<button id="btnMonParam" class="btn">监视参数</button>
-					<button id="btnSaveCycle" class="btn">储存参数</button>
-				</div>
-				<h3>电表参数 </h3>
-				<div>
-					<button id="btnMtrParam" class="btn">表计参数</button><br>
-				</div>
-				<h3>数据浏览</h3>
-				<div>
-					<p>
-						Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis.
-						Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero
-						ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis
-						lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.
-					</p>
-					<ul>
-						<li>List item one</li>
-						<li>List item two</li>
-						<li>List item three</li>
-					</ul>
-				</div>
-				<h3>功能设置</h3>
-				<div>
-					<p>
-						Cras dictum. Pellentesque habitant morbi tristique senectus et netus
-						et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in
-						faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia
-						mauris vel est.
-					</p>
-					<p>
-						Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus.
-						Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
-						inceptos himenaeos.
-					</p>
+		<div id="container">
+			<!-- 头 -->
+			<div id="headpic" align="center" >
+				<h1>Head 页头图片占位符 width=100% height=60px </h1>
+			</div>
+			<!-- 主体容器 -->
+			<div id="sidebar">
+				<div id="accordion">
+					<h3>终端参数</h3>
+					<div>
+						<button id="btnSysParam" class="btn">
+							系统参数
+						</button>
+						<br>
+						<button id="btnSioParam" class="btn">
+							串口参数
+						</button>
+						<br>
+						<button id="btnNetParam" class="btn">
+							网口参数
+						</button>
+						<br>
+						<button id="btnMonParam" class="btn">
+							监视参数
+						</button>
+						<br>
+						<button id="btnSaveCycle" class="btn">
+							储存参数
+						</button>
+						<br>
+					</div>
+					<h3>电表参数</h3>
+					<div>
+						<button id="btnMtrParam" class="btn">
+							表计参数
+						</button>
+						<br>
+					</div>
+					<h3>数据浏览</h3>
+					<div title="调试中...">
+						<button id="btnTest1_1" class="btn">
+							实时数据
+						</button>
+						<br>
+						------------------
+						<button id="btnTest1" class="btn">
+							历史需量
+						</button>
+						<br>
+						<button id="btnTest2" class="btn">
+							历史电量
+						</button>
+						<br>
+						<button id="btnTest3" class="btn">
+							象限无功
+						</button>
+						<br>
+						<button id="btnTest4" class="btn">
+							瞬时量
+						</button>
+						<br>
+					</div>
+					<h3>功能设置</h3>
+					<div>
+						<button id="btnFunction" class="btn">
+							功能设置
+						</button>
+						<br>
+					</div>
 				</div>
 			</div>
-
-			<div id="inter_page"></div>
-
-			<div id="foot">华立电力(R) 版权所有</div>
+			<div id="inter_page">
+				body 内容页面
+			</div>
+			<!-- 页脚 -->
+			<br class="clearfloat" />
+			<div id="footer">
+				Foot 华立电力(R) 版权所有
+			</div>
 		</div>
 	</body>
 </html>
