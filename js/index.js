@@ -63,10 +63,13 @@ $(document).ready(function() {
 		});
 	});
 	////------------test
-		//var oTable=$('#example').dataTable();
-	$("#btnTest1_1").click(function() {
+	$("#btnTou").click(function() {
 		$("#inter_page").html("");
-		$("#inter_page").append = "/meterpara.html";
+		$("#inter_page").addClass('load_bgpic_hight');
+		$.get("/um/tou.html", function(result) {
+			$("#inter_page").removeClass('load_bgpic_hight');
+			$("#inter_page").html(result);
+		});
 	});
 	$("#accordion").accordion({
 		heightStyle : "content",

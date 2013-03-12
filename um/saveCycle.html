@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <!--  Copyright (c) Echon., 2006. All Rights Reserved. 存储周期页面-->
-<html>
+<html  xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<title>存储周期</title>
 		<meta http-equiv="Pragma" content="no-cache" charset="utf-8">
@@ -28,7 +28,7 @@
 					});
 					oBtnLoad.button();
 				});
-				
+
 				oIconLoad.hide();
 				oIconOk.hide();
 				/* 定义更新按钮事件 1.检查;2.更新 */
@@ -65,7 +65,7 @@
 						var str = "";
 						str += "<td>储存周期</td>";
 						for ( i = 0; i < 6; i++) {
-							//console.log(oSavCycle.item[i].t); //ie不支持console:( 
+							//console.log(oSavCycle.item[i].t); //ie不支持console:(
 							str += "<td>";
 							str += "<select name=\"cycle\">";
 							for (var j in oSavCycle.cycle) {

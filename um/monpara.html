@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <!-- Copyright (c) Echon., 2006. All Rights Reserved. 监视端口参数页面-->
-<html>
+<html  xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<title>监视参数</title>
 		<meta http-equiv="Pragma" content="no-cache" charset=utf-8>
@@ -68,6 +68,8 @@
 						data : "action=get",
 						success : function(result, textStatus) {
 							fillData($("#tbody_dat"), result);
+							$(".time_syn").hide();
+							$(".forward").hide();
 							oIconLoad.hide("fade", 2000);
 						},
 						error : function() {//失败
@@ -165,7 +167,7 @@
 				str += "value=" + chk + " ";
 				str += (chk == "1") ? "checked " : " ";
 				str += "onclick=\"chk_change(event);\">";
-				str += "<input type=text size=1 readonly name=time_syn ";
+				str += "<input type=text size=1 readonly class=time_syn name=time_syn ";
 				str += "value=" + chk + ">";
 				str += "</td>";
 				return str;
@@ -176,7 +178,7 @@
 				str += "value=" + chk + " ";
 				str += (chk == "1") ? "checked " : " ";
 				str += "onclick=\"chk_change(event);\">";
-				str += "<input type=text size=1 readonly name=forward ";
+				str += "<input type=text size=1 readonly class=forward name=forward ";
 				str += "value=" + chk + ">";
 				str += "</td>";
 				return str;
