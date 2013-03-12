@@ -5,17 +5,21 @@
 		<link rel="stylesheet" href="/style/emx_nav_left1.css" type="text/css">
 		<link rel="stylesheet" href="/style/normal_ws.css" type="text/css" />
 		<link rel="stylesheet" href="/style/sys.css" type="text/css" />
+			<link rel="stylesheet" href="/style/table.css" type="text/css" />
 		<link href="/style/table.css" type="text/css" rel="stylesheet" />
 		<link href="/style/menuExpandable3.css" rel="stylesheet" type="text/css" />
 		<script src="/style/wwyfunc.js" type="text/javascript"></script>
 		<!-- 基于jquery的日期时间控件所需要的文件 --开始-->
-		<link rel="stylesheet" media="all" type="text/css" href="/style/jquery-ui.css"/>
-		<link rel="stylesheet" media="all" type="text/css" href="/style/jquery-ui-timepicker-addon.css"/>
-		<script type="text/javascript" src="/style/jquery-1.8.3.min.js"></script>
+		<link rel="stylesheet" media="all" type="text/css" href="/style/jquery-ui.css" />
+		<link rel="stylesheet" media="all" type="text/css" href="/style/jquery-ui-timepicker-addon.css" />
+		<script type="text/javascript" src="/js/jquery-1.8.3.js"></script>
 		<script type="text/javascript" src="/style/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="/style/jquery-ui.min-zh-CN.js"></script>
 		<script type="text/javascript" src="/style/jquery-ui-timepicker-addon.js"></script>
 		<script type="text/javascript" src="/style/jquery-ui-timepicker-zh-CN.js"></script>
 		<script type="text/javascript" src="/style/jquery-ui-sliderAccess.js"></script>
+		<script type="text/javascript" src="/js/reset.js"></script>
+		<script type="text/javascript" src="/version.js"></script>
 		<!-- 基于jquery的日期时间控件所需要的文件 --结束-->
 		<link type="text/css" href="/style/jquery.dataTables.css" rel="stylesheet"  />
 		<link type="text/css" href="/style/jquery.dataTables_themeroller.css" rel="stylesheet"  />
@@ -34,13 +38,13 @@
 				$("#tou_update").hide();
 				$.extend($.fn.dataTable.defaults, {//设置表格属性
 					"bInfo" : true, //显示一共几条这种信息
-					"bFilter" : true, //不要搜索
+					"bFilter" : false, //不要搜索
 					"bSort" : false, //不要排序
 					"sScrollY" : "320px", //固定高度
 					"bPaginate" : false, //不分页
 					"bScrollCollapse" : true, //显示滚动条
-					"bRetrieve" : true,
-					"bJQueryUI" : true,
+					//"bRetrieve" : true,
+					//"bJQueryUI" : true,
 					"bDestroy" : true,
 					"bAutoWidth" : true
 				});
@@ -60,13 +64,14 @@
 						alert("请选择截止时刻")
 						return false;
 					}
-					//oTable.fnDestroy(false);
+					oTable.fnDestroy(false);
 					$.post('/goform/get_tou', $("#history_tou").serialize() + "&mtr_no=" + $("#mtr_no").val(), function(result) {
 						//$("#tr_dat tr td").removeClass('load_bgpic_hight');
 						//$('#tbl_history_tou').dataTable();
 						$("#tr_dat").html(result);
-						oTable.fnDestroy();
+						//oTable.fnDestroy();
 						oTable = $('#tbl_history_tou').dataTable();
+						//$('#tbl_history_tou').dataTable();
 						//oTable.fnAdjustColumnSizing();
 						//oTable.fnAdjustColumnSizing();
 						//oTable.fnUpdate();
@@ -105,7 +110,7 @@
 					查询
 				</button>
 			</p>
-			<table id="tbl_history_tou" class="touTable"  border="1">
+			<table id="tbl_history_tou" class="mtrparaTable" border="1">
 				<thead>
 					<tr>
 						<th rowspan="2">序号</th>

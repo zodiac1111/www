@@ -41,7 +41,6 @@
 		</script>
 	</head>
 	<body>
-		<h1>功能操作</h1>
 		<div id="tabs">
 			<ul>
 				<li>
@@ -57,7 +56,7 @@
 					<a href="#tabs-procotol-cfg">规约配置</a>
 				</li>
 				<li>
-					<a href="#tabs-msg">报文监视</a>
+					<a href="#tabs-msg">web shell</a>
 				</li>
 				<li>
 					<a href="#tabs-info">配置信息</a>
@@ -124,7 +123,9 @@
 					</tbody>
 				</table>
 				<!-- 进度条 -->
-				<p></p>
+				<p>
+					<br>
+				</p>
 				<div id="divProgressbar">
 					<div class="progress-label">
 						Loading...
@@ -210,22 +211,24 @@
 			<!-- ###标签 报文监视(调试中) ### -->
 			<div id="tabs-msg" title="调试中">
 				<textarea id="msg_text" class="log_txt" readonly> </textarea>
-				<input type="text" name="cmd" id="cmd"  value="ping 127.0.0.1 -c 4">
-				<button id="mon_msg" title="开始监视报文">
-					开始
-				</button>
-				<button id="mon_msg_stop" title="停止监视报文">
-					停止
-				</button>
-				<button id="mon_test" title="调试中">
-					test
-				</button>
+				<p align="center">
+					<input type="text" name="cmd" id="cmd" style="width：3000px;" value="ping 127.0.0.1 -c 4">
+					<button id="mon_msg" title="开始监视报文">
+						执行
+					</button>
+					<button id="mon_msg_stop" title="停止监视报文">
+						停止
+					</button>
+					<button id="mon_test" title="调试中">
+						调试中
+					</button>
+				</p>
 			</div>
 			<!-- ###标签 web配置 ### -->
 			<div id="tabs-info" title="调试中">
-				<button id="info" title="显示配置">
+				<!--<button id="info" title="显示配置">
 					显示
-				</button>
+				</button> -->
 				<table class="infoTable">
 					<thead>
 						<tr>
@@ -244,11 +247,11 @@
 						</tr>
 						<tr>
 							<td>服务器日志</td>
-							<td id="info_weblog">/mnt/nor/wwwdemo/err.log</td>
+							<td id="info_weblog">/mnt/nor/goahead.log</td>
 						</tr>
 						<tr>
 							<td>页面根目录</td>
-							<td id="info_wwwroot">/mnt/nor/wwwdemo</td>
+							<td id="info_wwwroot">/mnt/nor/www</td>
 						</tr>
 						<tr>
 							<td>终端配置文件目录(conf)</td>
