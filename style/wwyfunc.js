@@ -486,7 +486,7 @@ function all_ue_changed(e) {
 	var rNums = /^[0-9.]{1,}$/;
 	curobj.style.color = "green";
 	// 数值改变了,字体变绿色
-	if (rNums.test(curobj.value) && curobj.value >= 0 && curobj.value <= 255) {
+	if (rNums.test(curobj.value) && curobj.value >= 0 && curobj.value <= 999) {
 		curobj.style.backgroundColor = "";
 	} else {// 正确则恢复
 		curobj.style.backgroundColor = "red";
@@ -585,7 +585,7 @@ function ue_changed(e) {
 	var rNums = /^[0-9]{1,}$/;
 	curobj.style.color = "green";
 	// 数值改变了,字体变绿色
-	if (rNums.test(curobj.value) && curobj.value >= 0 && curobj.value <= 255) {
+	if (rNums.test(curobj.value) && curobj.value >= 0 && curobj.value <= 999) {
 		curobj.style.backgroundColor = "";
 		curobj.id = "";
 	} else {// 正确则恢复

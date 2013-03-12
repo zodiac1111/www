@@ -36,52 +36,7 @@
 		<script type="text/javascript" src="/js/jquery.dataTables.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function() {
-				var stime_stamp = $("#stime_stamp");
-				var etime_stamp = $("#etime_stamp");
-			  var obtnQurey=$("#btnQuery");
-			  $("#tou_update").hide();
-				$.extend($.fn.dataTable.defaults, {//设置表格属性
-					"bInfo" : true, //显示一共几条这种信息
-					"bFilter" : true, //不要搜索
-					"bSort" : false, //不要排序
-					"sScrollY" : "320px", //固定高度
-					"bPaginate" : false, //不分页
-					"bScrollCollapse" : true, //显示滚动条
-					"bRetrieve" : true,
-					"bJQueryUI" : true,
-					"bDestroy" : true,
-					"bAutoWidth" : true
-				});
 				$("#save_log").hide();
-				var oTable = $('#tbl_history_tou').dataTable();
-				//$('#tbl_sysReset').dataTable();
-				//$('#tbl_history_tou').dataTable();
-				obtnQurey.click(function() {
-					//$('#tbl_history_tou').dataTable();
-					//$("#tr_dat").html("<tr><td colspan=\"23\" ></td></tr>");
-					//$("#tr_dat tr td").addClass('load_bgpic_hight');
-					if(stime_stamp.val()=="0"||stime_stamp.val()==""){
-						alert("请选择开始时刻")
-						return false;
-					}
-					if(etime_stamp.val()=="0" ||etime_stamp.val()==""){
-						alert("请选择截止时刻")
-						return false;
-					}
-					//oTable.fnDestroy(false);
-
-					$.post('/goform/get_tou', $("#history_tou").serialize() + "&mtr_no=" + $("#mtr_no").val(), function(result) {
-						//$("#tr_dat tr td").removeClass('load_bgpic_hight');
-						//$('#tbl_history_tou').dataTable();
-						$("#tr_dat").html(result);
-						oTable.fnDestroy();
-						oTable = $('#tbl_history_tou').dataTable();
-						//oTable.fnAdjustColumnSizing();
-						//oTable.fnAdjustColumnSizing();
-						//oTable.fnUpdate();
-						//oTable.fnDraw(false);
-					});
-				});
 			});
 		</script>
 	</head>
@@ -89,13 +44,24 @@
 		<h1>功能操作</h1>
 		<div id="tabs">
 			<ul>
-				<li><a href="#tabs_func">系统操作</a></li>
-				<li><a href="#tabs-log">日志</a></li>
-				<li><a href="#tabs-monport-cfg">监视端口配置</a></li>
-				<li><a href="#tabs-procotol-cfg">规约配置</a></li>
-				<li><a href="#tabs-msg">报文监视</a></li>
-				<li><a href="#tabs-info">配置信息</a></li>
-				<li><a href="#tabs-tou">历史电量</a></li>
+				<li>
+					<a href="#tabs_func">系统操作</a>
+				</li>
+				<li>
+					<a href="#tabs-log">日志</a>
+				</li>
+				<li>
+					<a href="#tabs-monport-cfg">监视端口配置</a>
+				</li>
+				<li>
+					<a href="#tabs-procotol-cfg">规约配置</a>
+				</li>
+				<li>
+					<a href="#tabs-msg">报文监视</a>
+				</li>
+				<li>
+					<a href="#tabs-info">配置信息</a>
+				</li>
 			</ul>
 			<!-- ###标签1 功能 ### -->
 			<div id="tabs_func">
@@ -111,27 +77,42 @@
 						<tr>
 							<td>1</td>
 							<td>重新加载规约文本.</td>
-							<td><button id="btnResetPro" class="reboot"> 执行 </button></td>
+							<td>
+							<button id="btnResetPro" class="reboot">
+								执行
+							</button></td>
 						</tr>
 						<tr>
 							<td>2</td>
 							<td>重启web服务器.</td>
-							<td><button id="btnResetWeb" class="reboot"> 执行 </button></td>
+							<td>
+							<button id="btnResetWeb" class="reboot">
+								执行
+							</button></td>
 						</tr>
 						<tr>
 							<td>3</td>
 							<td>重启抄表程序</td>
-							<td><button id="btnResetSample" class="reboot"> 执行 </button></td>
+							<td>
+							<button id="btnResetSample" class="reboot">
+								执行
+							</button></td>
 						</tr>
 						<tr>
 							<td>4</td>
 							<td>重启终端操作系统</td>
-							<td><button id="btnResetRtu" class="reboot"> 执行 </button></td>
+							<td>
+							<button id="btnResetRtu" class="reboot">
+								执行
+							</button></td>
 						</tr>
 						<tr>
 							<td>5</td>
 							<td>清空终端数据</td>
-							<td><button id="btnClearData" class="reboot"> 执行 </button></td>
+							<td>
+							<button id="btnClearData" class="reboot">
+								执行
+							</button></td>
 						</tr>
 						<!--
 						<tr>
@@ -143,7 +124,7 @@
 					</tbody>
 				</table>
 				<!-- 进度条 -->
-				<p> </p>
+				<p></p>
 				<div id="divProgressbar">
 					<div class="progress-label">
 						Loading...
@@ -155,8 +136,12 @@
 				<textarea id="log_text" class="log_txt" rows="20" cols="80" >
 				</textarea>
 				<p align="center">
-					<button id="load_log" title="从终端读取日志文件."> 读取 </button>
-					<button id="save_log" title="将文本保存到终端日志文件中."> 保存 </button>
+					<button id="load_log" title="从终端读取日志文件.">
+						读取
+					</button>
+					<button id="save_log" title="将文本保存到终端日志文件中.">
+						保存
+					</button>
 				</p>
 				<!-- 保存确认对话框1 -->
 				<div id="dialog-confirm" class="dialog" title="确认将修改保存到终端中?">
@@ -168,10 +153,18 @@
 			<div id="tabs-monport-cfg" >
 				<textarea id="monport_text" class="log_txt" rows="20" cols="80" > </textarea>
 				<p align="center">
-					<button id="import_monprot" title="调试中..."> 导入 </button>
-					<button id="export_monprot" title="调试中..."> 导出 </button>
-					<button id="load_monport" title="从终端读取监视端口配置文件(文本格式)"> 读取 </button>
-					<button id="save_monport" title="将文本保存到终端监视端口文件"> 保存 </button>
+					<button id="import_monprot" title="调试中...">
+						导入
+					</button>
+					<button id="export_monprot" title="调试中...">
+						导出
+					</button>
+					<button id="load_monport" title="从终端读取监视端口配置文件(文本格式)">
+						读取
+					</button>
+					<button id="save_monport" title="将文本保存到终端监视端口文件">
+						保存
+					</button>
 				</p>
 				<!-- 保存确认对话框1 -->
 				<div id="dialog-confirm-monport" class="dialog" title="确认将修改保存到终端中?">
@@ -189,10 +182,18 @@
 			<div id="tabs-procotol-cfg" >
 				<textarea id="procotol_text" class="log_txt" rows="20" cols="80"> </textarea>
 				<p align="center">
-					<button id="import_procotolt" title="调试中..."> 导入 </button>
-					<button id="export_procotol" title="调试中..."> 导出 </button>
-					<button id="load_procotol" title="从终端读取规约配置文件(文本格式)"> 读取 </button>
-					<button id="save_procotol" title="将文本保存到终端规约配置文件"> 保存 </button><!-- <img class="waiticon" id="monprot_wait" />-->
+					<button id="import_procotolt" title="调试中...">
+						导入
+					</button>
+					<button id="export_procotol" title="调试中...">
+						导出
+					</button>
+					<button id="load_procotol" title="从终端读取规约配置文件(文本格式)">
+						读取
+					</button>
+					<button id="save_procotol" title="将文本保存到终端规约配置文件">
+						保存
+					</button><!-- <img class="waiticon" id="monprot_wait" />-->
 				</p>
 				<!-- 保存确认对话框1 -->
 				<div id="dialog-confirm-procotol" class=dialog title="确认将修改保存到终端中?">
@@ -210,13 +211,21 @@
 			<div id="tabs-msg" title="调试中">
 				<textarea id="msg_text" class="log_txt" readonly> </textarea>
 				<input type="text" name="cmd" id="cmd"  value="ping 127.0.0.1 -c 4">
-				<button id="mon_msg" title="开始监视报文"> 开始 </button>
-				<button id="mon_msg_stop" title="停止监视报文"> 停止 </button>
-				<button id="mon_test" title="调试中"> test </button>
+				<button id="mon_msg" title="开始监视报文">
+					开始
+				</button>
+				<button id="mon_msg_stop" title="停止监视报文">
+					停止
+				</button>
+				<button id="mon_test" title="调试中">
+					test
+				</button>
 			</div>
 			<!-- ###标签 web配置 ### -->
 			<div id="tabs-info" title="调试中">
-				<button id="info" title="显示配置"> 显示 </button>
+				<button id="info" title="显示配置">
+					显示
+				</button>
 				<table class="infoTable">
 					<thead>
 						<tr>
@@ -255,156 +264,6 @@
 						</tr>
 					</tbody>
 				</table>
-			</div>
-			<!-- ###标签 历史电量数据标签 ### -->
-			<div id="tabs-tou">
-				<p>
-					<h1>获取和设置日期时间:</h1><label> 表号:
-						<input type="text" name="mtr_no" id="mtr_no" size=3 value="0">
-					</label><label> 时间范围:
-						<input type="text" name="stime" id="stime" readonly class="date">
-					</label><label> ~
-						<input type="text"
-						name="etime" id="etime" readonly class="date">
-					</label>
-					<div id="tou_update">
-						<form id="history_tou" name="history_tou">
-							<label> 时间戳(秒):
-								<input type="text" name="stime_stamp" id="stime_stamp" value="0" readonly>
-							</label><label> ~
-								<input type="text" name="etime_stamp" id="etime_stamp" value="0" readonly>
-							</label>
-							<br>
-							<label> 时区偏移(分钟)
-								<input type="text" name="timezone" id="timezone" value="0" readonly>
-								<input type="text" name="timezone2" id="timezone2" value="0" readonly>
-							</label>
-						</form>
-					</div>
-					<button class="ui-button" id="btnQuery" title="查询选中时段和指定表计的电量数据"> 查询 </button>
-				</p>
-				<table id="tbl_history_tou" class="touTable"  border="1">
-					<thead>
-						<tr>
-							<th rowspan="2">序号</th>
-							<th rowspan="2">表号</th>
-							<th rowspan="2">时刻</th>
-							<th colspan="5">正向有功</th>
-							<th colspan="5">反向有功</th>
-							<th colspan="5">正向无功</th>
-							<th colspan="5">反向无功</th>
-						</tr>
-						<tr>
-							<th>总</th>
-							<th>尖</th>
-							<th>峰</th>
-							<th>平</th>
-							<th>谷</th>
-							<th>总</th>
-							<th>尖</th>
-							<th>峰</th>
-							<th>平</th>
-							<th>谷</th>
-							<th>总</th>
-							<th>尖</th>
-							<th>峰</th>
-							<th>平</th>
-							<th>谷</th>
-							<th>总</th>
-							<th>尖</th>
-							<th>峰</th>
-							<th>平</th>
-							<th>谷</th>
-						</tr>
-					</thead>
-					<tbody id="tr_dat">
-
-					</tbody>
-				</table>
-				<script type="text/javascript">
-					$(document).ready(function() {
-						var timeZone=8*60;//时区(分钟)东8区
-						var startDateTextBox = $('#stime');
-						var endDateTextBox = $('#etime');
-						var stime_stamp = document.getElementById("stime_stamp");
-						var etime_stamp = document.getElementById("etime_stamp");
-						var tz = document.getElementById("timezone");
-						var tz2 = document.getElementById("timezone2");
-						//开始时间控件的属性设置
-						startDateTextBox.datetimepicker({
-							maxDate : 0,
-							controlType : 'select', //选择方式选时刻
-							dateFormat : "yy-mm-dd", //日期格式
-							//showSecond: true, //显示秒
-							timeFormat : 'HH:mm', //时刻格式
-							separator : ' ', //日期时刻分割字符(串)
-							//showTimezone: true, //显示时区
-							//timezone: '-0800',    //默认时区
-							//点击关闭(完成)按钮事件
-							//如果开始时间晚于结束时间,则将开始时间设置为结束时间
-							onClose : function(dateText, inst) {
-								if (endDateTextBox.val() != '') {
-									var testStartDate = startDateTextBox.datetimepicker('getDate');
-									var testEndDate = endDateTextBox.datetimepicker('getDate');
-									if (testStartDate > testEndDate)
-										endDateTextBox.datetimepicker('setDate', testStartDate);
-								} else {
-									//endDateTextBox.val(dateText);
-									//stime_stamp.value = etime_stamp.value;
-								}
-								var testStartDate = startDateTextBox.datetimepicker('getDate');
-								if (testStartDate != null)
-									stime_stamp.value = testStartDate.getTime() / 1000;
-								//Date.parse(endDateTextBox.datetimepicker('getDate'))/1000;
-							},
-							onSelect : function(selectedDateTime) {//选择时限定开始时间必须早于结束时间
-								endDateTextBox.datetimepicker('option', 'minDate', startDateTextBox.datetimepicker('getDate'));
-								//tz.value=startDateTextBox.datetimepicker.timezone;
-								var testStartDate = startDateTextBox.datetimepicker('getDate');
-								tz.value =timeZone;//testStartDate.getTimezoneOffset();
-								//这里转换成位标准时间,没有时区信息了.
-								stime_stamp.value = testStartDate.getTime() / 1000;
-								//Date.parse(startDateTextBox.datetimepicker('getDate'))/1000;
-							}
-						});
-						//结束时间控件的属性设置
-						endDateTextBox.datetimepicker({
-							maxDate : 0, //不能选择未来
-							controlType : 'select', //选择方式选时刻
-							dateFormat : "yy-mm-dd", //日期格式
-							//showSecond: true, //显示秒
-							timeFormat : 'HH:mm', //时刻格式
-							separator : ' ', //日期时刻分割字符(串)
-							//showTimezone: true, //显示时区
-							//timezone: '-0800',    //默认时区
-							onClose : function(dateText, inst) {//关闭时候判断
-								if (startDateTextBox.val() != '') {
-									var testStartDate = startDateTextBox.datetimepicker('getDate');
-									var testEndDate = endDateTextBox.datetimepicker('getDate');
-									if (testStartDate > testEndDate){
-										startDateTextBox.datetimepicker('setDate', testEndDate);
-										//stime_stamp.value = testEndDate.getTime() / 1000;
-									}
-								} else {
-									//startDateTextBox.val(dateText);
-									//stime_stamp.value = etime_stamp.value;
-								}
-								var testEndDate = endDateTextBox.datetimepicker('getDate');
-								if (testStartDate != null)
-									etime_stamp.value = testEndDate.getTime() / 1000;
-								//毫秒转化为秒
-								//stime_stamp.value=
-								//  Date.parse(startDateTextBox.datetimepicker('getDate'))/1000;
-							},
-							onSelect : function(selectedDateTime) {//选择时候防止误选
-								startDateTextBox.datetimepicker('option', 'maxDate', endDateTextBox.datetimepicker('getDate'));
-								var testEndDate = endDateTextBox.datetimepicker('getDate');
-								tz2.value =timeZone;// testEndDate.getTimezoneOffset();
-								etime_stamp.value = testEndDate.getTime() / 1000;
-							}
-						});
-					});
-				</script>
 			</div>
 		</div>
 	</body>

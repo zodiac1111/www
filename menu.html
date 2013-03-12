@@ -1,9 +1,11 @@
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 	<!--  Copyright (c) Go Ahead Software Inc., 1994-2000. All Rights Reserved. -->
 	<head>
-		<title>1</title>
+		<title>菜单</title>
 		<meta http-equiv="Content-Type" content="text/html">
-		<base TARGET="view">
+		<base target="view">
 		<base>
 		<link href="/style/menuExpandable3.css" rel="stylesheet" type="text/css">
 		</link>
@@ -18,6 +20,7 @@
 				//alert('refresh');
 				initializeMenu("productsMenu", "productsActuator");
 				initializeMenu("products1Menu", "products1Actuator");
+				initializeMenu("products2Menu", "products2Actuator");
 				initializeMenu("programParaMenu", "programParaActuator");
 				initializeMenu("resendParaMenu", "resParaActuator");
 			}
@@ -29,7 +32,7 @@
 		<table>
 			<tr>
 				<td>
-				<div id=mainMenu onclick="">
+				<div id="mainMenu" onclick="">
 					<ul id="menuList">
 						<li class=menubar>
 							<a href="#" class=actuator
@@ -61,7 +64,7 @@
 									onmouseout="this.src='/graphics/logo51.png';" height="40" /></a>
 								</li>
 								<li style="BACKGROUND-IMAGE: url(/graphics/minus.gif)">
-									<a class=actuator id="a8" href="um/saveCycle.html"><img
+									<a class=actuator id="a5" href="um/saveCycle.html"><img
 									src="/graphics/logo70.png"
 									onmouseover="this.src='/graphics/logo71.png';"
 									onmouseout="this.src='/graphics/logo70.png';" height="40" /></a>
@@ -78,23 +81,34 @@
 							height="45"></a>
 							<ul class=menu id="productsMenu">
 								<li style="BACKGROUND-IMAGE: url(/graphics/minus.gif)">
-									<a class=actuator id="a7" href="um/meterpara.html"><img
+									<a class=actuator id="a6" href="um/meterpara.html"><img
 									src="/graphics/logo60.png"
 									onmouseover="this.src='/graphics/logo61.png';"
 									onmouseout="this.src='/graphics/logo60.png';" height="40" /></a>
 								</li>
 							</ul>
+						</li>
+					</ul>
 				</div><!--  数据查看类页面暂时不放在这里.整合进功能菜单中.
 				今后若陆续增加各种数据查看,如 历史电量,实时电量,月统计等数据,
-				可以考虑再将他们归类放到这个页面.
+				可以考虑再将他们归类放到这个页面. -->
 				<div id="mainMenu" onclick="">
-				<ul id="menuList">
-				<li class=menubar><a class=actuator id="programParaActuator"
-				href="um/data1.asp"><img src="/graphics/logo13.png"
-				height="45"></a></li>
-				</ul>
-				</div>
-				--></td>
+					<ul id="menuList">
+						<li class=menubar>
+							<a href="#" class="actuator"
+							id="products2Actuator"><img src="/graphics/logo13.png"
+							height="45"></a>
+							<ul class=menu id="products2Menu">
+								<li style="BACKGROUND-IMAGE: url(/graphics/minus.gif)">
+									<a class=actuator id="a7" href="um/itdate.html"><img
+									src="/graphics/logo80.png"
+									onmouseover="this.src='/graphics/logo81.png';"
+									onmouseout="this.src='/graphics/logo80.png';" height="40" /></a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div></td>
 			</tr>
 		</table>
 	</body>

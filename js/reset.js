@@ -24,6 +24,8 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 	var oBtnResetRtu = $("#btnResetRtu");
 	var oBtnClearData = $("#btnClearData");
 	oProbar.hide();
+		//标签页 标签id tabs
+	var tabs = $("#tabs").tabs();
 	///@todo TODO 传递的参数名称有意义,易于人类阅读
 	oBtnClearData.click(function() {
 		oBtnClearData.attr("disabled", "disabled");
@@ -467,6 +469,5 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 			primary : "ui-icon-search"
 		}
 	});
-	//标签页 标签id tabs
-	var tabs = $("#tabs").tabs();
+
 });
