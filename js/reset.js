@@ -423,6 +423,7 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 		});
 	});
 	$("#info").click();
+	$("#info").hide();
 	$("#mon_test").click(function() {
 		//alert("显示测试");
 		$("#msg_text").append();
