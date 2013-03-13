@@ -219,9 +219,6 @@
 			</div>
 			<!-- ###标签 web配置 ### -->
 			<div id="tabs-info" title="调试中">
-				<!--<button id="info" title="显示配置">
-					显示
-				</button> -->
 				<table class="infoTable">
 					<thead>
 						<tr>
@@ -231,15 +228,15 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td>服务器程序</td>
+							<td>服务器执行程序</td>
 							<td id="info_webbin">/mnt/nor/bin/webs</td>
 						</tr>
 						<tr>
-							<td>服务器配置文件</td>
-							<td id="info_webconf">/mnt/nor/conf/goahead.conf</td>
+							<td>webs配置文件</td>
+							<td id="info_webconf">/</td>
 						</tr>
 						<tr>
-							<td>服务器日志</td>
+							<td>webs日志</td>
 							<td id="info_weblog">/mnt/nor/goahead.log</td>
 						</tr>
 						<tr>
@@ -255,11 +252,18 @@
 							<td id="info_rtupara">/mnt/nor/para</td>
 						</tr>
 						<tr>
-							<td>网页前端版本号</td>
+							<td>webs客户端版本</td>
 							<td><label id="major">0</label>.<label id="mimor">0</label>.<label id="patchlevel">0</label> [<label id="git_version">0</label>]</td>
+						</tr>
+						<tr>
+							<td>webs服务器版本</td>
+							<td id="webs-version">0.0.0</td>
 						</tr>
 					</tbody>
 				</table>
+				<p align="center"><button id="info" title="显示配置">
+					读取
+				</button> </p>
 			</div>
 		</div>
 	</body>

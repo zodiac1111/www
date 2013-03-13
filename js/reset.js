@@ -24,7 +24,7 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 	var oBtnResetRtu = $("#btnResetRtu");
 	var oBtnClearData = $("#btnClearData");
 	oProbar.hide();
-		//标签页 标签id tabs
+	//标签页 标签id tabs
 	var tabs = $("#tabs").tabs();
 	///@todo TODO 传递的参数名称有意义,易于人类阅读
 	oBtnClearData.click(function() {
@@ -402,6 +402,27 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 			//});
 		});
 	});
+	//读取配置信息
+	$("#info").click(function() {
+		$.post('/goform/info', "action=get", function(result) {
+			//alert(result);
+			var oInfo = eval("(" + result + ")");
+			var str;
+			str = oInfo.major + "." + oInfo.minor + "." + oInfo.patchlevel + " [" + oInfo.git_version + "]";
+			$("#webs-version").html(str);
+			str = oInfo.info_webconf;
+			$("#info_webconf").html(str);
+			str = oInfo.info_weblog;
+			$("#info_weblog").html(str);
+			$("#info_rtuconf").html(oInfo.info_rtuconf);
+			$("#info_rtupara").html(oInfo.info_rtupara);
+			$("#info_wwwroot").html(oInfo.info_wwwroot);
+			$("#info_webbin").html(oInfo.info_webbin);
+			//$("#procotol_text").removeClass("textarea_bgpic");
+			//$("#procotol_text").val(result);
+		});
+	});
+	$("#info").click();
 	$("#mon_test").click(function() {
 		//alert("显示测试");
 		$("#msg_text").append();
