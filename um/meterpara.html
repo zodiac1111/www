@@ -20,23 +20,6 @@
 		<link type="text/css" href="/style/jquery.dataTables_themeroller.css" rel="stylesheet"  />
 		<script type="text/javascript" src="/js/jquery.dataTables.js"></script>
 		<script type="text/javascript">
-			//页面初始化 加载 JS函数
-			// $(document).ready(cloneTableHeader_Width);
-			// //调整 浏览器 表格的显示宽度  以及 调用  锁定 表头和列  的JS函数。
-			// function cloneTableHeader_Width() {
-			// //document.body.clientWidth获得客户区域(浏览器窗口,不包括菜单栏和状态栏,就是内容窗口)的宽度 - 35像素的滚动条宽度。
-			// var tbl_mtrparams_Width = (document.body.clientWidth - 35);
-			// var tbl_mtrparams_Heigh = (document.body.clientHeight - 100);
-			// //alert(tbl_mtrparams_Width + "*" + tbl_mtrparams_Heigh);//测试屏幕宽度
-			// if ((document.body.clientWidth - 35) < 855) {
-			// tbl_mtrparams_Width = 855;
-			// //宽度
-			// }
-			// //调用 锁定表头和 列 的JS函数
-			// $(document).ready(function() {
-			// //FixTable("tbl_mtrparams", 3, tbl_mtrparams_Width, tbl_mtrparams_Heigh);
-			// });
-			// }
 			$(document).ready(function() {
 
 				$("#btnUpdate").button({
@@ -256,23 +239,23 @@
 				return "<td><input type=text maxlength=10 onchange=\"ue_changed(event);\"" + "name=" + name + " value=" + it_dot + ">\n</td>\n";
 			}
 			function append_IEdot(name, it_dot) {
-				return "<td><input type=text maxlength=10 onchange=\"ie_changed(event);\"" + "name=" + name + " value=" + it_dot + ">\n</td>\n";
+				return "<td><input type=text maxlength=10 onchange=\"ie_changed(event);\"" + "name=" + name + " value=" + it_dot + ">\n</td>";
 			}
 
 			function append_dot(name, it_dot) {
-				return "<td><input type=text maxlength=1 onchange=\"dot_changed(event);\"" + "name=" + name + " value=" + it_dot + ">\n</td>\n";
+				return "<td><input type=text maxlength=1 onchange=\"dot_changed(event);\"" + "name=" + name + " value=" + it_dot + "></td>";
 			}
 
 			function appendPwd(pwd) {
-				return "<td><input type=text maxlength=8 onchange=\"pwd_changed(event);\"" + "name=pwd value=\"" + pwd + "\" >\n</td>\n";
+				return "<td><input type=text maxlength=8 onchange=\"pwd_changed(event);\"" + "name=pwd value=\"" + pwd + "\" >●</td>";
 			}
 
 			function appendAddr(addr) {
-				return "<td><input type=text  maxlength=12 " + "onchange=\"addr_changed(event);\"" + "name=addr value=\"" + addr + "\" >\n</td>\n";
+				return "<td><input type=text  maxlength=12 " + "onchange=\"addr_changed(event);\"" + "name=addr value=\"" + addr + "\" >●</td>";
 			}
 
 			function appendLine(line) {
-				return "<td><input type=text name=line" + " maxlength=6 onchange=\"line_changed(event);\" value=" + line + "></td>";
+				return "<td><input type=text name=line" + " maxlength=6 onchange=\"line_changed(event);\" value=" + line + ">●</td>";
 			}
 
 			function appendMtrno(mtrno) {

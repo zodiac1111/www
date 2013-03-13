@@ -7,7 +7,7 @@
 $(document).ready(function() {
 	$("#major").html("1");
 	$("#mimor").html("1");
-	$("#patchlevel").html("165");
-	$("#git_version").html("r163+2-1f0643f");
+	$("#patchlevel").html("166");
+	$("#git_version").html("r165+1-640b014");
 });
 
