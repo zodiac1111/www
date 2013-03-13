@@ -410,10 +410,8 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 			var str;
 			str = oInfo.major + "." + oInfo.minor + "." + oInfo.patchlevel + " [" + oInfo.git_version + "]";
 			$("#webs-version").html(str);
-			str = oInfo.info_webconf;
-			$("#info_webconf").html(str);
-			str = oInfo.info_weblog;
-			$("#info_weblog").html(str);
+			$("#info_webconf").html(oInfo.info_webconf);
+			$("#info_weblog").html(oInfo.info_weblog);
 			$("#info_rtuconf").html(oInfo.info_rtuconf);
 			$("#info_rtupara").html(oInfo.info_rtupara);
 			$("#info_wwwroot").html(oInfo.info_wwwroot);
