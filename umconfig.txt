@@ -1,0 +1,15 @@
+TABLE=users
+ROW=0
+name=1
+password=
+group=no
+prot=0
+disable=0
+TABLE=groups
+ROW=0
+name=no
+priv=1
+method=3
+prot=0
+disable=0
+TABLE=access
