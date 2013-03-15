@@ -625,6 +625,22 @@ function lessthan1byte(e) {
 	}
 }
 
+//系统参数表个数 的限制
+function syspara_mtrnum(e) {
+	var curobj = e.srcElement || e.target;
+	var rNums = /^[0-9]{1,3}$/;
+	curobj.style.color = "green";
+	// 数值改变了,字体变绿色
+	// 数值错误: 0也是不合逻辑的
+	if (!rNums.test(curobj.value) || curobj.value <= 0 || curobj.value > 128) {
+		curobj.style.backgroundColor = "red";
+		curobj.id = "errobj";
+	} else {// 正确则恢复
+		curobj.style.backgroundColor = "";
+		curobj.id = "";
+	}
+}
+
 // 验证终端地址 [0,255]
 function verify_rtu_addr(e) {
 	var curobj = e.srcElement || e.target;
