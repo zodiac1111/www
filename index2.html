@@ -5,24 +5,42 @@
 		<title>华立电力</title>
 		<!-- 首页加载所有js脚本 -->
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		<link rel="stylesheet" href="/style/normal_ws.css" type="text/css" />
-		<link rel="stylesheet" href="/style/sys.css" type="text/css" />
+		<link type="text/css"rel="stylesheet" href="/style/normal_ws.css" />
+		<link type="text/css" rel="stylesheet" href="/style/sys.css"/>
 		<link href="/style/table.css" type="text/css" rel="stylesheet" />
 		<link href="/style/menuExpandable3.css" rel="stylesheet" type="text/css" />
-		<link rel="stylesheet" media="all" type="text/css" href="/style/jquery-ui-timepicker-addon.css" />
-		<script src="/js/wwyfunc.js" type="text/javascript"></script>
+		<link type="text/css" rel="stylesheet" media="all" href="/style/jquery-ui-timepicker-addon.css" />
 		<!-- 基于jquery的日期时间控件所需要的文件 -开始 -->
 		<link rel="stylesheet" media="all" type="text/css" href="/style/jquery-ui.css" />
 		<script type="text/javascript" src="/js/jquery-1.9.1.min.js"></script>
-		<script type="text/javascript" src="/style/jquery-ui.min.js"></script>
-		<script type="text/javascript" src="/style/jquery-ui.min-zh-CN.js"></script>
-		<script type="text/javascript" src="/js/index.js"></script>
-		<script type="text/javascript" src="/style/jquery-ui-timepicker-addon.js"></script>
-		<script type="text/javascript" src="/style/jquery-ui-timepicker-zh-CN.js"></script>
+		<script type="text/javascript" src="/js/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="/js/jquery-ui.min-zh-CN.js"></script>
+		<script type="text/javascript" src="/js/jquery-ui-timepicker-addon.js"></script>
+		<script type="text/javascript" src="/js/jquery-ui-timepicker-zh-CN.js"></script>
+		<script type="text/javascript" src="/js/jquery-ui-sliderAccess.js"></script>
 		<!-- jquery plugin:datatable-->
+		<script type="text/javascript" src="/js/jquery.dataTables.js"></script>
 		<link type="text/css" href="/style/jquery.dataTables.css" rel="stylesheet"  />
 		<link type="text/css" href="/style/jquery.dataTables_themeroller.css" rel="stylesheet"  />
-		<script type="text/javascript" src="/js/jquery.dataTables.js"></script>
+		<script type="text/javascript" src="/js/wwyfunc.js" ></script>
+		<script type="text/javascript" src="/js/reset.js"></script>
+		<script type="text/javascript" src="/version.js"></script>
+		<script type="text/javascript" src="/js/index.js"></script>
+		<script type=text/javascript>
+			$(document).ready(function() {
+				jQuery.ajaxPrefilter("script", function(s) {
+					if (s.cache === undefined) {
+						s.cache = false;
+					}
+					// 强制设置为缓存
+					s.cache = true;
+					if (s.crossDomain) {
+						s.type = "GET";
+						s.global = false;
+					}
+				});
+			});
+		</script>
 		<style type="text/css">
 			/*整个页面的容器 */
 			#container {
@@ -150,6 +168,7 @@
 					</div>
 				</div>
 			</div>
+			body 内容页面
 			<div id="inter_page">
 				body 内容页面
 				<table id="example">
@@ -162,7 +181,7 @@
 				</table>
 			</div>
 			<!-- 页脚 -->
-			<br class="clearfloat" />
+			<!-- <br class="clearfloat" /> -->
 			<div id="footer">
 				Foot 华立电力(R) 版权所有
 			</div>
