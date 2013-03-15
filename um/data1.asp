@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 <head>
 <title>终端数据浏览</title>
@@ -9,14 +9,14 @@
 		<meta name="Keywords" content="jQuery, UI, datepicker, timepicker, datetime, time, format" />
 <script src="/style/Calendar.js"></script>
 		<!- 基于jquery的日期时间控件所需要的文件 -开始->
-		<link rel="stylesheet" media="all" type="text/css" href="/style/jquery-ui.css"/> 
+		<link rel="stylesheet" media="all" type="text/css" href="/style/jquery-ui.css"/>
 		<link rel="stylesheet" media="all" type="text/css" href="/style/jquery-ui-timepicker-addon.css"/>
-		<script type="text/javascript" src="/style/jquery-1.8.3.min.js"></script>
-		<script type="text/javascript" src="/style/jquery-ui.min.js"></script>
-		<script type="text/javascript" src="/style/jquery-ui.min-zh-CN.js"></script>
-		<script type="text/javascript" src="/style/jquery-ui-timepicker-addon.js"></script>
-		<script type="text/javascript" src="/style/jquery-ui-timepicker-zh-CN.js"></script>
-		<script type="text/javascript" src="/style/jquery-ui-sliderAccess.js"></script>
+		<script type="text/javascript" src="/js/jquery-1.9.1.min.js"></script>
+		<script type="text/javascript" src="/js/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="/js/jquery-ui.min-zh-CN.js"></script>
+		<script type="text/javascript" src="/js/jquery-ui-timepicker-addon.js"></script>
+		<script type="text/javascript" src="/js/jquery-ui-timepicker-zh-CN.js"></script>
+		<script type="text/javascript" src="/js/jquery-ui-sliderAccess.js"></script>
 		<!- 基于jquery的日期时间控件所需要的文件 -结束->
 				<script type="text/javascript">
 
@@ -36,9 +36,9 @@ img {border-width: 0px 0px 0px 0px}
 <body >
 <form>
 <table width="100%" border="0" cellspacing="0" cellpadding="4">
-  <tr> 
+  <tr>
     <td bgcolor="#ffffff">      <table width="100%" border="0" cellspacing="1" cellpadding="2">
-        <tr> 
+        <tr>
           <td align="center" width="33%"><a href="/um/data1.asp"><img src="/graphics/logo80.png" onmouseover="this.src='/graphics/logo81.png';" onmouseout="this.src='/graphics/logo80.png';" height="40"/></a></td>
           <td align="center" width="33%"><a href="/um/data2.asp"><img src="/graphics/logo90.png" onmouseover="this.src='/graphics/logo91.png';" onmouseout="this.src='/graphics/logo90.png';" height="40"/></a></td>
           <td align="center" width="33%"><a href="/um/data3.asp"><img src="/graphics/logo100.png" onmouseover="this.src='/graphics/logo101.png';" onmouseout="this.src='/graphics/logo100.png';" height="40"/></a></td>
@@ -47,17 +47,17 @@ img {border-width: 0px 0px 0px 0px}
   </tr>
 </table>
 <table width="100%" border="0" cellspacing="0" cellpadding="2" bgcolor="#76A8D9">
-  <tr> 
-    <td> 
-       &#149; <a href="#">历史电量数据</a> 
+  <tr>
+    <td>
+       &#149; <a href="#">历史电量数据</a>
 	 </td>
     <td align="right">
-   <a >起始时间</a> &#149; <a ><input type="text" name="rest_example_4_start" id="rest_example_4_start" value="" /> </a>&nbsp;<a>结束时间</a>     &#149; <a > <input type="text" name="rest_example_4_end" id="rest_example_4_end" value="" /></a>    
-      <a href="">search</a> 
+   <a >起始时间</a> &#149; <a ><input type="text" name="rest_example_4_start" id="rest_example_4_start" value="" /> </a>&nbsp;<a>结束时间</a>     &#149; <a > <input type="text" name="rest_example_4_end" id="rest_example_4_end" value="" /></a>
+      <a href="">search</a>
 	  		<script language=javascript>
 var startDateTextBox = $('#rest_example_4_start');
 var endDateTextBox = $('#rest_example_4_end');
-startDateTextBox.datetimepicker({ 
+startDateTextBox.datetimepicker({
 	onClose: function(dateText, inst) {
 		if (endDateTextBox.val() != '') {
 			var testStartDate = startDateTextBox.datetimepicker('getDate');
@@ -73,7 +73,7 @@ startDateTextBox.datetimepicker({
 		endDateTextBox.datetimepicker('option', 'minDate', startDateTextBox.datetimepicker('getDate') );
 	}
 });
-endDateTextBox.datetimepicker({ 
+endDateTextBox.datetimepicker({
 	onClose: function(dateText, inst) {
 		if (startDateTextBox.val() != '') {
 			var testStartDate = startDateTextBox.datetimepicker('getDate');
