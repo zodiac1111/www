@@ -113,6 +113,19 @@
 								执行
 							</button></td>
 						</tr>
+						<tr>
+							<td>6</td>
+							<td colspan="2">
+							<form id="webs_update" action="/goform/upload_file" method="post"
+							enctype="multipart/form-data">
+								<label>更新webs服务器程序(webs.update)
+									<br>
+								</label>
+								<label for="file">文件名:</label>
+								<input type="file" name="file" id="file" />
+								<input type="submit" name="submit" value="更新" />
+							</form></td>
+						</tr>
 					</tbody>
 				</table>
 				<!-- 进度条 -->
@@ -124,6 +137,7 @@
 						Loading...
 					</div>
 				</div>
+				</td>
 			</div>
 			<!-- ###标签: 日志 ### -->
 			<div id="tabs-log">
@@ -213,7 +227,7 @@
 						停止
 					</button>
 					<!--<button id="mon_test" title="调试中">
-						调试中
+					调试中
 					</button> -->
 				</p>
 			</div>
@@ -261,13 +275,15 @@
 						</tr>
 						<tr>
 							<td>webs服务器编译日期</td>
-							<td id="build_time"> </td>
+							<td id="build_time"></td>
 						</tr>
 					</tbody>
 				</table>
-				<p align="center"><button id="info" title="显示配置">
-					读取
-				</button> </p>
+				<p align="center">
+					<button id="info" title="显示配置">
+						读取
+					</button>
+				</p>
 			</div>
 		</div>
 	</body>
