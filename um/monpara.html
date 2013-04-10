@@ -158,7 +158,7 @@
 			function appendRtuAddr(addr) {
 				var str = "<td><input type=text name=rtu_addr ";
 				str += "onchange=\"verify_rtu_addr(event);\""
-				str += " size=3  maxlength=4 value=" + addr + "></td>";
+				str += " size=6  maxlength=4 value=" + addr + "></td>";
 				return str;
 			}
 
@@ -199,12 +199,12 @@
 			<table width="60%" class="monparamTable"  border="1" cellspacing="1" cellpadding="1" >
 				<thead>
 					<tr>
-						<th width="5%" class="monparamTableHead">序号</th>
+						<th width="3%" class="monparamTableHead">序号</th>
 						<th width="6%" class="monparamTableHead">使用端口</th>
 						<th width="4%" class="monparamTableHead">服务端口</th>
 						<th width="6%" class="monparamTableHead">串口方案</th>
 						<th width="6%" class="monparamTableHead">使用规约</th>
-						<th width="5%" class="monparamTableHead">终端地址</th>
+						<th width="4%" class="monparamTableHead">终端地址HEX</th>
 						<th width="6%" class="monparamTableHead">对时有效</th>
 						<th width="6%" class="monparamTableHead">转发有效</th>
 						<th width="5%" class="monparamTableHead">转发数目</th>

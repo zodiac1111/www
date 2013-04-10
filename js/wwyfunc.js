@@ -644,7 +644,7 @@ function syspara_mtrnum(e) {
 // 验证终端地址 [0,255]
 function verify_rtu_addr(e) {
 	var curobj = e.srcElement || e.target;
-	var rNums = /^[0-9]{1,4}$/;
+	var rNums = /^[0-9a-fA-F]{1,4}$/;
 	curobj.style.color = "green";
 	// 数值改变了,字体变绿色
 	// 数值错误:
