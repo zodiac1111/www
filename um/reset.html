@@ -36,7 +36,7 @@
 		</style>
 		<script type="text/javascript">
 			$(document).ready(function() {
-				$("#save_log").hide();
+			//	$("#save_log").hide();
 			});
 		</script>
 	</head>
@@ -147,14 +147,14 @@
 					<button id="load_log" title="从终端读取日志文件.">
 						读取
 					</button>
-					<button id="save_log" title="将文本保存到终端日志文件中.">
-						保存
+					<button id="save_log" title="清空日志.">
+						清空
 					</button>
 				</p>
 				<!-- 保存确认对话框1 -->
-				<div id="dialog-confirm" class="dialog" title="确认将修改保存到终端中?">
+				<div id="dialog-confirm" class="dialog" title="确认将终端(webs服务器)日志清空?">
 					<span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"> </span>
-					这个操作会将文本框中的内容保存到终端日志文件中,不能撤销,请自留备份.是否保存到终端?
+					这个操作会将会清空webs服务器日志文件中,不能撤销,请自留备份.是否清空日志?
 				</div>
 			</div>
 			<!-- ###标签: 监视端口描述配置文件 ### -->

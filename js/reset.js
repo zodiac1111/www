@@ -223,11 +223,11 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 		});
 	});
 	/**
-	 * 将文本保存到服务器的错误日志文件
+	 * 将文本保存到服务器的错误日志文件//清空日志文件
 	 */
 	$("#save_log").click(function() {
 		var b = document.getElementById("log_text");
-		if (b.value == "") {
+		if (b.value == "空") {
 			alert("文本不能为空");
 		} else {
 			//确认信息框
@@ -239,12 +239,13 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 							$(this).dialog("close");
 							//alert("取消了");
 						},
-						"保存" : function() {
+						"确认" : function() {
 							$(this).dialog("close");
 							//alert("确认保存");
 							$("#log_text").addClass("textarea_bgpic");
-							$.post("/goform/save_log", $("#log_text").val(), function(result) {
+							$.post("/goform/save_log", "No Log", function(result) {
 								// 完成之后隐藏
+								$("#log_text")[0].value="";
 								$("#log_text").removeClass("textarea_bgpic");
 							});
 						}
