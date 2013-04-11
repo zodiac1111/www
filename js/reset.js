@@ -417,6 +417,7 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 			$("#info_wwwroot").html(oInfo.info_wwwroot);
 			$("#info_webbin").html(oInfo.info_webbin);
 			$("#build_time").html(oInfo.build_time);
+			$("#main_version_string").html(oInfo.main_version_string);
 			//$("#procotol_text").removeClass("textarea_bgpic");
 			//$("#procotol_text").val(result);
 		});
