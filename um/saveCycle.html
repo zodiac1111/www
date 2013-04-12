@@ -59,7 +59,7 @@
 						var ocycle=	$("#select");
 						ocycle.html("");
 						for ( i = 0; i < 6; i++) {
-							chk.eq(i).attr('checked', oSavCycle.item[i].en == "1" ? true : false);
+							chk.eq(i)[0].checked=('checked', oSavCycle.item[i].en == "1" ? true : false);
 							t[i].value = oSavCycle.item[i].en;
 						}
 						var str = "";
