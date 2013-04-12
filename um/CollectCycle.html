@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--  Copyright (c) Echon., 2006. All Rights Reserved. 存储周期页面-->
+<html  xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>采集周期</title>
+		<meta http-equiv="Pragma" content="no-cache" charset="utf-8">
+		<link rel="stylesheet" href="/style/normal_ws.css" type="text/css"/>
+		<link rel="stylesheet" href="/style/sys.css" type="text/css"/>
+		<link rel="stylesheet" href="/style/table.css" type="text/css"/>
+		<link href="/style/menuExpandable3.css" rel="stylesheet" type="text/css"/>
+		<link rel="stylesheet" media="all" type="text/css" href="/style/jquery-ui.css" />
+		<script type="text/JavaScript" src="/js/wwyfunc.js" ></script>
+		<script type="text/javascript" src="/js/jquery-1.9.1.min.js"></script>
+		<script type="text/javascript" src="/js/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="/js/jquery-ui.min-zh-CN.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				var oBtnLoad=$("#btnLoad");
+				var oBtnUpdate=$("#btnUpdate");
+				var oIconLoad=$("#icon_init");
+				var oIconOk=$("#icon_ok");
+				/* 按钮 */
+				$(function() {
+					oBtnUpdate.button({
+						icons : {
+							primary : "ui-icon-refresh"
+						}
+					});
+					oBtnLoad.button();
+				});
+
+				oIconLoad.hide();
+				oIconOk.hide();
+				/* 定义更新按钮事件 1.检查;2.更新 */
+				oBtnUpdate.click(function() {
+					var errobj = document.getElementById("errobj");
+					if (errobj != null) {
+						alert("非法参数");
+						return;
+					}
+					oIconLoad.show();
+					$.post('/goform/collectcycle', "action=set&" + $("#collectcycle").serialize(), function(result) {
+						//alert(result);
+						oIconLoad.hide();
+						oIconOk.show();
+						oIconOk.hide("fade", 1000);
+					});
+				});
+				/* 定义加载按钮点击事件,因为post的form只能使用按钮触发 */
+				oBtnLoad.click(function() {
+					oIconLoad.show();
+					//post 过程
+					$.post('/goform/collectcycle', "action=get", function(result) {
+						//alert(result);
+						//var oCollectCycle = JSON.parse(result);
+						var oCollectCycle = eval("(" + result + ")");
+						var chk = $("input[name=chk_save_enable]");
+						var t = $("input[name=flag]");
+						var ocycle=	$("#select");
+						ocycle.html("");
+						for ( i = 0; i < 6; i++) {
+							chk.eq(i)[0].checked=('checked', oCollectCycle.item[i].en == "1" ? true : false);
+							t[i].value = oCollectCycle.item[i].en;
+						}
+						var str = "";
+						str += "<td>采集周期</td>";
+						for ( i = 0; i < 6; i++) {
+							//console.log(oCollectCycle.item[i].t); //ie不支持console:(
+							str += "<td>";
+							str += "<select name=\"cycle\">";
+							for (var j in oCollectCycle.cycle) {
+								str += "<option value=";
+								str += j + " ";
+								str += (j == oCollectCycle.item[i].t ? "selected" : "");
+								str += ">" + oCollectCycle.cycle[j] + "</option>";
+							}
+							str += "</td>";
+						}
+						str += "";
+						ocycle.html(str);
+						//alert(str);
+						//alert(chk[0]);
+						oIconLoad.hide("fade", 2000);
+					});
+				});
+				/* 点击加载按钮 */
+				oBtnLoad.click();
+			});
+		</script>
+	</head>
+	<body>
+		<h1>采集周期</h1>
+		<form action="/goform/collectcycle"  id="collectcycle" >
+			<table id="Table1" class="sioplanTable" border="1" cellspacing="1" cellpadding="1">
+				<thead>
+					<tr>
+						<th>采集项目</th>
+						<th>总电量</th>
+						<th>分时电量</th>
+						<th>象限无功</th>
+						<th>最大需量</th>
+						<th>瞬时量</th>
+						<th>断相记录</th>
+					</tr>
+				</thead>
+				<tbody id="tbody_dat">
+					<tr>
+						<td> 有效 </td>
+						<td>
+						<input type="checkbox" name="chk_save_enable" onclick="chk_change(event);">
+						<input type="text" class="hideinp" size=1 name="flag" >
+						</td>
+						<td>
+						<input type="checkbox" name="chk_save_enable" onclick="chk_change(event);">
+						<input type="text" class="hideinp" size=1 name="flag" >
+						</td>
+						<td>
+						<input type="checkbox" name="chk_save_enable" onclick="chk_change(event);">
+						<input type="text" class="hideinp" size=1 name="flag" >
+						</td>
+						<td>
+						<input type="checkbox" name="chk_save_enable" onclick="chk_change(event);">
+						<input type="text" class="hideinp" size=1 name="flag" >
+						</td>
+						<td>
+						<input type="checkbox" name="chk_save_enable" onclick="chk_change(event);">
+						<input type="text" class="hideinp" size=1 name="flag" >
+						</td>
+						<td>
+						<input type="checkbox" name="chk_save_enable" onclick="chk_change(event);">
+						<input type="text" class="hideinp" size=1 name="flag" >
+						</td>
+					</tr>
+					<tr id="select">
+
+					</tr>
+				</tbody>
+			</table>
+		</form>
+		<p align="center">
+			<button id="btnLoad" class="" >读取</button>
+			<button id="btnUpdate" class="btn_update">更新</button>
+			<input type="text" id="icon_init" class="wait_icon_24x24_load" />
+			<input type="text" id="icon_ok" class="wait_icon_24x24 icon_ok" />
+		</p>
+	</body>
+</html>
