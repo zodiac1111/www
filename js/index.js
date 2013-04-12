@@ -57,7 +57,7 @@ $(document).ready(function() {
 	$("#btnFunction").click(function() {
 		$("#inter_page").html("");
 		$("#inter_page").addClass('load_bgpic_hight');
-		$.get("/um/reset.html", function(result) {
+		$.get("/um/sysFunction.html", function(result) {
 			$("#inter_page").removeClass('load_bgpic_hight');
 			$("#inter_page").html(result);
 		});
