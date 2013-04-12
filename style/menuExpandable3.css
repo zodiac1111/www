@@ -9,7 +9,19 @@ body {
   width: 203px;
 }
 
+.mainMenu {
+  background-color: none;
+  border: 0px solid #CCC;
+  color: #000;
+  width: 203px;
+}
+
+
 #menuList {
+  margin: 0px;
+  padding: 10px 0px 10px 15px;
+}
+.menuList {
   margin: 0px;
   padding: 10px 0px 10px 15px;
 }
@@ -22,7 +34,7 @@ li.menubar {
 }
 
 .menu, .submenu {
-  display:  block; /*是否展开  */ 
+  display:  block; /*是否展开  */
   margin-left: 15px;
   padding: 0px;
 }
@@ -32,7 +44,7 @@ li.menubar {
   list-style: none outside;
 }
 
- 
+
 a.actuator {
   background-color: transparent;
   color: #FFF;
