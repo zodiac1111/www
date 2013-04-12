@@ -47,8 +47,8 @@ li.menubar {
 
 a.actuator {
   background-color: transparent;
-  color: #FFF;
-  font-size: 35px;
+  /*color: #FFF;*/
+  font-size: 25px;
   padding-left: 15px;
   text-decoration: none;
 }
@@ -59,7 +59,7 @@ a.actuator:hover {
 .menu li a, .submenu li a {
   background-color: transparent;
   /*color: #FFF;*//* 字体颜色*/
-  font-size: 20px;
+  font-size: 15px;
   padding-left: 15px;
   text-decoration: none;
 }
