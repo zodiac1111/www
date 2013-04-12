@@ -19,10 +19,10 @@
 			window.onload = function() {
 				//alert('refresh');
 				initializeMenu("menu_mtrpara_list", "menu_mtrpara");
-				initializeMenu("products1Menu", "products1Actuator");
-				initializeMenu("products2Menu", "products2Actuator");
+				initializeMenu("menu_rtupara_list", "menu_rtupara");
+				initializeMenu("menu_data_list", "menu_data");
 				initializeMenu("programParaMenu", "programParaActuator");
-				initializeMenu("resendParaMenu", "resParaActuator");
+				//initializeMenu("resendParaMenu", "resParaActuator");
 			}
 		</SCRIPT>
 
@@ -35,9 +35,8 @@
 				<div class="mainMenu" onclick="">
 					<ul class="menuList">
 						<li class=menubar>
-							<a href="#" class=actuator
-							id="products1Actuator">终端参数</a>
-							<ul class=menu id="products1Menu">
+							<a href="#" class="actuator" id="menu_rtupara">终端参数</a><!--1级菜单 -->
+							<ul class=menu id="menu_rtupara_list">
 								<li style="BACKGROUND-IMAGE: url(/graphics/minus.gif)">
 									<a class=actuator id="a1" href="um/syspara.html">系统参数</a>
 								</li>
@@ -78,8 +77,8 @@
 					<ul class="menuList">
 						<li class=menubar>
 							<a href="#" class="actuator"
-							id="products2Actuator">终端数据</a>
-							<ul class=menu id="products2Menu">
+							id="menu_data">终端数据</a>
+							<ul class=menu id="menu_data_list">
 								<li style="BACKGROUND-IMAGE: url(/graphics/minus.gif)">
 									<a class=actuator id="a7" href="um/tou.html">历史电量</a>
 								</li>

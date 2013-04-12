@@ -48,26 +48,18 @@ li.menubar {
 a.actuator {
   background-color: transparent;
   color: #FFF;
-  font-size: 14px;
+  font-size: 35px;
   padding-left: 15px;
   text-decoration: none;
 }
-a.actuator1 {
-  background-color: transparent;
-  color: #FFF;
-  font-size: 6px;
-  padding-left: 6px;
-  text-decoration: none;
-}
-
 a.actuator:hover {
   text-decoration: underline;
 }
 
 .menu li a, .submenu li a {
   background-color: transparent;
-  color: #FFF;/* 字体颜色*/
-  font-size: 12px;
+  /*color: #FFF;*//* 字体颜色*/
+  font-size: 20px;
   padding-left: 15px;
   text-decoration: none;
 }

@@ -337,7 +337,8 @@ a.menu:hover {
 	top: 1px
 }
 h1{
-	margin: auto;
+	vertical-align:middle;
+	margin:0 auto;
 }
 .treat {
 	BACKGROUND-IMAGE: url(images/treat.gif);
