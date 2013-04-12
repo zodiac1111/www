@@ -18,7 +18,7 @@
 		<SCRIPT type=text/javascript>
 			window.onload = function() {
 				//alert('refresh');
-				initializeMenu("productsMenu", "productsActuator");
+				initializeMenu("menu_mtrpara_list", "menu_mtrpara");
 				initializeMenu("products1Menu", "products1Actuator");
 				initializeMenu("products2Menu", "products2Actuator");
 				initializeMenu("programParaMenu", "programParaActuator");
@@ -31,44 +31,27 @@
 	height="100%">
 		<table>
 			<tr>
-				<td>
-				<!-- 系统参数大项目 -->
+				<td><!-- 系统参数大项目 -->
 				<div class="mainMenu" onclick="">
 					<ul class="menuList">
 						<li class=menubar>
 							<a href="#" class=actuator
-							id="products1Actuator"><img src="/graphics/logo11.png"
-							height="45" /></a>
+							id="products1Actuator">终端参数</a>
 							<ul class=menu id="products1Menu">
 								<li style="BACKGROUND-IMAGE: url(/graphics/minus.gif)">
-									<a class=actuator id="a1" href="um/syspara.html"> <img
-									src="/graphics/logo20.png"
-									onmouseover="this.src='/graphics/logo21.png';"
-									onmouseout="this.src='/graphics/logo20.png';" height="40" /></a>
+									<a class=actuator id="a1" href="um/syspara.html">系统参数</a>
 								</li>
 								<li style="BACKGROUND-IMAGE: url(/graphics/minus.gif)">
-									<a class=actuator id="a2" href="um/sioplan.html"> <img
-									src="/graphics/logo30.png"
-									onmouseover="this.src='/graphics/logo31.png';"
-									onmouseout="this.src='/graphics/logo30.png';" height="40" /></a>
+									<a class=actuator id="a2" href="um/sioplan.html">串口参数</a>
 								</li>
 								<li style="BACKGROUND-IMAGE: url(/graphics/minus.gif)">
-									<a class=actuator id="a3" href="um/netpara.html"><img
-									src="/graphics/logo40.png"
-									onmouseover="this.src='/graphics/logo41.png';"
-									onmouseout="this.src='/graphics/logo40.png';" height="40" /></a>
+									<a class=actuator id="a3" href="um/netpara.html">网口参数</a>
 								</li>
 								<li style="BACKGROUND-IMAGE: url(/graphics/minus.gif)">
-									<a class=actuator id="a4" href="um/monpara.html"><img
-									src="/graphics/logo50.png"
-									onmouseover="this.src='/graphics/logo51.png';"
-									onmouseout="this.src='/graphics/logo51.png';" height="40" /></a>
+									<a class=actuator id="a4" href="um/monpara.html">监视参数</a>
 								</li>
 								<li style="BACKGROUND-IMAGE: url(/graphics/minus.gif)">
-									<a class=actuator id="a5" href="um/saveCycle.html"><img
-									src="/graphics/logo70.png"
-									onmouseover="this.src='/graphics/logo71.png';"
-									onmouseout="this.src='/graphics/logo70.png';" height="40" /></a>
+									<a class=actuator id="a5" href="um/saveCycle.html">储存周期</a>
 								</li>
 								<li style="BACKGROUND-IMAGE: url(/graphics/minus.gif)">
 									<a class=actuator id="a6" href="um/CollectCycle.html">采集周期</a>
@@ -76,20 +59,14 @@
 							</ul>
 						</li>
 					</ul>
-				</div>
-				<!-- 表计参数大项目 -->
+				</div><!-- 表计参数大项目 -->
 				<div class="mainMenu" onclick="">
 					<ul class="menuList">
 						<li class=menubar>
-							<a href="#" class="actuator"
-							id="productsActuator"><img src="/graphics/logo12.png"
-							height="45"></a>
-							<ul class=menu id="productsMenu">
+							<a href="#" class="actuator"id="menu_mtrpara">电表参数</a>
+							<ul class=menu id="menu_mtrpara_list">
 								<li style="BACKGROUND-IMAGE: url(/graphics/minus.gif)">
-									<a class="actuator" id="a21" href="um/meterpara.html"><img
-									src="/graphics/logo60.png"
-									onmouseover="this.src='/graphics/logo61.png';"
-									onmouseout="this.src='/graphics/logo60.png';" height="40" /></a>
+									<a class="actuator" id="a21" href="um/meterpara.html">表计参数</a>
 								</li>
 							</ul>
 						</li>
@@ -101,14 +78,10 @@
 					<ul class="menuList">
 						<li class=menubar>
 							<a href="#" class="actuator"
-							id="products2Actuator"><img src="/graphics/logo13.png"
-							height="45"></a>
+							id="products2Actuator">终端数据</a>
 							<ul class=menu id="products2Menu">
 								<li style="BACKGROUND-IMAGE: url(/graphics/minus.gif)">
-									<a class=actuator id="a7" href="um/tou.html"><img
-									src="/graphics/logo80.png"
-									onmouseover="this.src='/graphics/logo81.png';"
-									onmouseout="this.src='/graphics/logo80.png';" height="40" /></a>
+									<a class=actuator id="a7" href="um/tou.html">历史电量</a>
 								</li>
 							</ul>
 						</li>
