@@ -22,16 +22,24 @@
 		<link type="text/css" href="/style/jquery.dataTables_themeroller.css" rel="stylesheet"  />
 		<script type="text/javascript" src="/js/jquery.dataTables.js"></script>
 		<script type="text/javascript">
+			var conf = true;
 			$(document).ready(function() {
 				var obtnRefresh = $("#btnManualRefresh");
+				$("#realtime_dat").hide();
 				obtnRefresh.click(function() {
 					//alert("手动刷新");
+					var itemArray = "";
+					var aItem = $("[id^='tou']");
+					var len = aItem.length;
+					for ( i = 0; i < len; i++) {
+						itemArray += aItem[i].value;
+					}
 					$.ajax({
 						type : "post",
 						url : "/goform/realtime_tou",
 						contentType : "application/x-www-form-urlencoded; charset=utf-8",
 						dataType : "text",
-						data : "action=get&" + $("#form_realtime_dat_select").serialize(),
+						data : "action=get" + +"&itemArray=" + itemArray + "&mtrArray=" + "100100",
 						success : function(result, textStatus) {
 							alert("ajax成功");
 						},
@@ -40,11 +48,108 @@
 						}
 					});
 				});
+				setItem($("#select_item"));
+				setItemFirst($("#select_item_first"));
+				$("#btnSelectItem").click(function() {
+					if (conf == true) {
+						conf = false;
+						$("#tbl_realtime_dat_select").hide();
+						$("#realtime_dat").show();
+					} else {
+						conf = true;
+						$("#realtime_dat").hide();
+						$("#tbl_realtime_dat_select").show();
+					}
+				});
 			});
+
+			function setItemFirst(obj) {
+				obj.html("");
+				var str = "";
+				for ( i = 0; i < 8; i++) {
+					var name = "all_tou";
+					name += i;
+					str += "<td colspan=\"5\">" + "<input type=\"checkbox\" name=" + name + " value=\"" + "0" + "\" id=\"" + name + "\" onclick= \"check_click(" + i + ");\"" + " />" + "<label for=" + name + ">";
+					switch(i) {
+						case 0:
+							str += "正向有功";
+							break;
+						case 1:
+							str += "反向有功";
+							break;
+						case 2:
+							str += "正向无功";
+							break;
+						case 3:
+							str += "反向无功";
+							break;
+						case 4:
+							str += "第一象限无功";
+							break;
+						case 5:
+							str += "第二象限无功";
+							break;
+						case 6:
+							str += "第三象限无功";
+							break;
+						case 7:
+							str += "第四象限无功";
+							break;
+					}
+					str += "</label></td>";
+				}
+				obj.append(str);
+			}
+
+			function check_click(i) {
+				for ( ind = 0; ind < 5; ind++) {
+					$("#tou"+(i*5+ind))[0].checked = $("#all_tou"+i)[0].checked;
+					change_val(i * 5 + ind);
+				}
+			}
+
+			function change_val(i) {
+				$("#tou" + i)[0].value = $("#tou" + i)[0].checked ? "1" : "0";
+			}
+
+			function setItem(obj) {
+				obj.html("");
+				var str = "";
+				for ( i = 0; i < 40; i++) {
+					var name = "tou";
+					name += i;
+					str += "<td><input type=checkbox name=" + name + " value=" + "0" + " onclick= \"change_val(" + i + ");\"" + " id=" + name + " /><br><label for=" + name + ">";
+					switch(i % 5) {
+						case 0:
+							str += "总";
+							break;
+						case 1:
+							str += "尖";
+							break;
+						case 2:
+							str += "峰";
+							break;
+						case 3:
+							str += "平";
+							break;
+						case 4:
+							str += "谷";
+							break;
+					}
+					str += "</label></td>";
+				}
+				obj.append(str);
+			}
 		</script>
 	</head>
 	<body>
 		<table class="sioplanTable"  id="tbl_realtime_tou" border="1" cellspacing="1" cellpadding="1">
+			<td id="mtr_selected">
+			<select name="mtr" multiple="multiple">
+				<option selected="selected">0</option>
+				<option selected="selected">1</option>
+				<option>2</option>
+			</select></td>
 			<td> 自动刷新间隔:
 			<input id="autoRefresh_interval" />
 			秒
@@ -55,37 +160,38 @@
 			<button id="btnManualRefresh" class="simple_button">
 				手动刷新
 			</button></td>
+			<td>
+			<button id="btnSelectItem" class="btnSet">
+				设置
+			</button></td>
 		</table>
 		<form id="form_realtime_dat_select">
-		<table class="sioplanTable"  id="tbl_realtime_dat_select" border="1" cellspacing="1" cellpadding="1">
+			<table class="sioplanTable"  id="tbl_realtime_dat_select" border="1" cellspacing="1" cellpadding="1">
+				<thead>
+					<tr>
+						<td colspan="40">电度量</td>
+					</tr>
+					<tr id="select_item_first">
+						<td colspan="40">总项目</td>
+					</tr>
+					<tr id="select_item">
+						<td colspan="40">分时项目</td>
+					</tr>
+				</thead>
+			</table>
+		</form>
+		<table class="sioplanTable"  id="realtime_dat" border="1" cellspacing="1" cellpadding="1">
 			<thead>
 				<tr>
 					<td colspan="40">电度量</td>
 				</tr>
-				<tr>
-					<td colspan="5">正向有功</td>
-					<td colspan="5">反向有功</td>
-					<td colspan="5">正向无功</td>
-					<td colspan="5">反向无功</td>
-					<td colspan="5">一象限无功</td>
-					<td colspan="5">二象限无功</td>
-					<td colspan="5">三象限无功</td>
-					<td colspan="5">四象限无功</td>
+				<tr id="ret_index">
+					<td colspan="40">总项目</td>
 				</tr>
-				<tr id="select_item">
-					<td><input type="checkbox" name="check" value="check1" id="ch1"/>
-  <label for="ch1">总</label> <input type="text" name="in" value="iii" id="i"/></td>
-  				<td>尖</td><td>峰</td><td>平</td><td>谷</td>
-					<td>总</td><td>尖</td><td>峰</td><td>平</td><td>谷</td>
-					<td>总</td><td>尖</td><td>峰</td><td>平</td><td>谷</td>
-					<td>总</td><td>尖</td><td>峰</td><td>平</td><td>谷</td>
-					<td>总</td><td>尖</td><td>峰</td><td>平</td><td>谷</td>
-					<td>总</td><td>尖</td><td>峰</td><td>平</td><td>谷</td>
-					<td>总</td><td>尖</td><td>峰</td><td>平</td><td>谷</td>
-					<td>总</td><td>尖</td><td>峰</td><td>平</td><td>谷</td>
+				<tr id="ret_items">
+					<td colspan="40">分时项目</td>
 				</tr>
 			</thead>
 		</table>
-		</form>
 	</body>
 </html>
