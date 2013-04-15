@@ -17,12 +17,13 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 	//进度条
 	var oProbar = $("#divProgressbar");
 	var progressLabel = $(".progress-label");
-	//4个按钮
+	//按钮
 	var obtnResetPro = $("#btnResetPro");
 	var obtnResetWeb = $("#btnResetWeb");
 	var obtnResetSample = $("#btnResetSample");
 	var oBtnResetRtu = $("#btnResetRtu");
 	var oBtnClearData = $("#btnClearData");
+	var oBtnUpdate = $("#btnWebsUpdate");
 	oProbar.hide();
 	//标签页 标签id tabs
 	var tabs = $("#tabs").tabs();
@@ -433,6 +434,17 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 	$(document).tooltip();
 	//重启按钮
 	$(".reboot").button({
+		icons : {
+			primary : "ui-icon-power"
+		}
+	});
+	//上传按钮
+	$(".update").button({
+		icons : {
+		primary : "ui-icon-document"
+		}
+	});
+	$(".select_file").button({
 		icons : {
 			primary : "ui-icon-power"
 		}

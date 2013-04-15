@@ -36,7 +36,7 @@
 		</style>
 		<script type="text/javascript">
 			$(document).ready(function() {
-			//	$("#save_log").hide();
+				//	$("#save_log").hide();
 			});
 		</script>
 	</head>
@@ -108,24 +108,26 @@
 						</tr>
 						<tr>
 							<td>5</td>
-							<td>清空终端数据</td>
+							<td>清空终端数据(删除所有历史数据)</td>
 							<td>
 							<button id="btnClearData" class="reboot">
 								执行
 							</button></td>
 						</tr>
 						<tr>
-							<td>6</td>
-							<td colspan="2">
 							<form id="webs_update" action="/goform/upload_file" method="post"
 							enctype="multipart/form-data">
-								<label>更新webs程序(webs-binary-*.tar.gz)
-									<br>
-								</label>
+								<td>6</td>
+								<td><label>更新webs程序(webs-binary-*.tar.gz)</label>
+								<br>
 								<label for="file">文件名:</label>
-								<input type="file" name="file" id="file" />
-								<input type="submit" name="submit" value="更新" />
-							</form></td>
+								<input type="file" name="file" id="file" style="border:1px solid green;"/>
+								</td>
+								<td>
+								<button id="btnWebsUpdate" type="submit" name="submit" class="update">
+									更新
+								</button></td>
+							</form>
 						</tr>
 					</tbody>
 				</table>
