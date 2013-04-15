@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+	<head>
+		<title>实时电度量</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link rel="stylesheet" href="/style/normal_ws.css" type="text/css" />
+		<link rel="stylesheet" href="/style/sys.css" type="text/css" />
+		<link rel="stylesheet" href="/style/table.css" type="text/css" />
+		<link href="/style/table.css" type="text/css" rel="stylesheet" />
+		<link href="/style/menuExpandable3.css" rel="stylesheet" type="text/css" />
+		<script src="/js/wwyfunc.js" type="text/javascript"></script>
+		<!-- 基于jquery的日期时间控件所需要的文件 --开始-->
+		<link rel="stylesheet" media="all" type="text/css" href="/style/jquery-ui.css" />
+		<script type="text/javascript" src="/js/jquery-1.9.1.min.js"></script>
+		<script type="text/javascript" src="/js/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="/js/jquery-ui.min-zh-CN.js"></script>
+		<script type="text/javascript" src="/js/jquery-ui-sliderAccess.js"></script>
+		<script type="text/javascript" src="/js/reset.js"></script>
+		<!-- 基于jquery的日期时间控件所需要的文件 --结束-->
+		<link type="text/css" href="/style/jquery.dataTables.css" rel="stylesheet"  />
+		<link type="text/css" href="/style/jquery.dataTables_themeroller.css" rel="stylesheet"  />
+		<script type="text/javascript" src="/js/jquery.dataTables.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				var obtnRefresh = $("#btnManualRefresh");
+				obtnRefresh.click(function() {
+					//alert("手动刷新");
+					$.ajax({
+						type : "post",
+						url : "/goform/realtime_tou",
+						contentType : "application/x-www-form-urlencoded; charset=utf-8",
+						dataType : "text",
+						data : "action=get&" + $("#form_realtime_dat_select").serialize(),
+						success : function(result, textStatus) {
+							alert("ajax成功");
+						},
+						error : function() {//失败
+							alert("服务器通讯错误");
+						}
+					});
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<table class="sioplanTable"  id="tbl_realtime_tou" border="1" cellspacing="1" cellpadding="1">
+			<td> 自动刷新间隔:
+			<input id="autoRefresh_interval" />
+			秒
+			<button id="btnAutoRefresh" class="run">
+				启动
+			</button></td>
+			<td>
+			<button id="btnManualRefresh" class="simple_button">
+				手动刷新
+			</button></td>
+		</table>
+		<form id="form_realtime_dat_select">
+		<table class="sioplanTable"  id="tbl_realtime_dat_select" border="1" cellspacing="1" cellpadding="1">
+			<thead>
+				<tr>
+					<td colspan="40">电度量</td>
+				</tr>
+				<tr>
+					<td colspan="5">正向有功</td>
+					<td colspan="5">反向有功</td>
+					<td colspan="5">正向无功</td>
+					<td colspan="5">反向无功</td>
+					<td colspan="5">一象限无功</td>
+					<td colspan="5">二象限无功</td>
+					<td colspan="5">三象限无功</td>
+					<td colspan="5">四象限无功</td>
+				</tr>
+				<tr id="select_item">
+					<td><input type="checkbox" name="check" value="check1" id="ch1"/>
+  <label for="ch1">总</label> <input type="text" name="in" value="iii" id="i"/></td>
+  				<td>尖</td><td>峰</td><td>平</td><td>谷</td>
+					<td>总</td><td>尖</td><td>峰</td><td>平</td><td>谷</td>
+					<td>总</td><td>尖</td><td>峰</td><td>平</td><td>谷</td>
+					<td>总</td><td>尖</td><td>峰</td><td>平</td><td>谷</td>
+					<td>总</td><td>尖</td><td>峰</td><td>平</td><td>谷</td>
+					<td>总</td><td>尖</td><td>峰</td><td>平</td><td>谷</td>
+					<td>总</td><td>尖</td><td>峰</td><td>平</td><td>谷</td>
+					<td>总</td><td>尖</td><td>峰</td><td>平</td><td>谷</td>
+				</tr>
+			</thead>
+		</table>
+		</form>
+	</body>
+</html>

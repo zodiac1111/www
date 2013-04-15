@@ -438,6 +438,14 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 			primary : "ui-icon-power"
 		}
 	});
+	$(".run").button({
+		icons : {
+			primary : "ui-icon-play"
+		}
+	});
+	$(".simple_button").button({
+
+	});
 	//上传按钮
 	$(".update").button({
 		icons : {
