@@ -152,7 +152,7 @@
 				str+=$.datepicker.formatDate('yy-mm-dd ',now);
 				str+=now.getHours()<10?"0":"";
 				str+=now.getHours();
-				str+=":"+(now.getMinutes()<10?"0":"")+now.getHours()
+				str+=":"+(now.getMinutes()<10?"0":"")+now.getMinutes()
 				str+=":"+(now.getSeconds()<10?"0":"")+now.getSeconds();
 					$("#timestamp").html(str);
 			}
