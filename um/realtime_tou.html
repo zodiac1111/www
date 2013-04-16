@@ -6,8 +6,7 @@
 		<link rel="stylesheet" href="/style/normal_ws.css" type="text/css" />
 		<link rel="stylesheet" href="/style/sys.css" type="text/css" />
 		<link rel="stylesheet" href="/style/table.css" type="text/css" />
-		<link href="/style/table.css" type="text/css" rel="stylesheet" />
-		<link href="/style/menuExpandable3.css" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" href="/style/menuExpandable3.css"  type="text/css" />
 		<script src="/js/wwyfunc.js" type="text/javascript"></script>
 		<!-- 基于jquery的日期时间控件所需要的文件 --开始-->
 		<link rel="stylesheet" media="all" type="text/css" href="/style/jquery-ui.css" />
@@ -253,7 +252,8 @@
 					str += "<tr>";
 					fillMtrNumber(i, mtrArray)
 					for ( j = 0; j < oTou[i].length; j++) {
-						str += "<td>" + oTou[i][j] + "</td>";
+						var iv=(oTou[i][j][0]==1)?"iv":"";
+						str += "<td class="+iv+">" + oTou[i][j][0] + "</td>";
 					}
 					str += "</tr>";
 				}
