@@ -246,7 +246,7 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 							$("#log_text").addClass("textarea_bgpic");
 							$.post("/goform/save_log", "No Log", function(result) {
 								// 完成之后隐藏
-								$("#log_text")[0].value="";
+								$("#log_text")[0].value = "";
 								$("#log_text").removeClass("textarea_bgpic");
 							});
 						}
@@ -443,6 +443,11 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 			primary : "ui-icon-play"
 		}
 	});
+	$(".stop").button({
+		icons : {
+			primary : "ui-icon-pause"
+		}
+	});
 	$(".simple_button").button({
 
 	});
@@ -454,7 +459,7 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 	//上传按钮
 	$(".update").button({
 		icons : {
-		primary : "ui-icon-document"
+			primary : "ui-icon-document"
 		}
 	});
 	$(".select_file").button({
