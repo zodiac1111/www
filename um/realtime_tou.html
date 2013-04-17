@@ -1,8 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<title>实时电度量</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<!-- xxx-->
+		<title>实时电度量</title>
 		<link rel="stylesheet" href="/style/normal_ws.css" type="text/css"/>
 		<link rel="stylesheet" href="/style/sys.css" type="text/css"/>
 		<link rel="stylesheet" href="/style/table.css" type="text/css"/>
@@ -20,32 +21,38 @@
 		<link type="text/css" href="/style/jquery.dataTables_themeroller.css" rel="stylesheet"/>
 		<script type="text/javascript" src="/js/jquery.dataTables.js"></script>
 		<script type="text/javascript">
-			var conf = true;
+			//var ie = !-[1,]; //ie则返回true,否则返回false
+			var timeZoneMs = 8 * 60 * 60;
+			// 当前显示类型.显示参数还是显示数据.开始时显示参数设置
+			var isShowSet = true;
 			$(document).ready(function() {
 				///主过程
+				var btnAutoRefresh = $("#btnAutoRefresh");
+				var btnStopRefresh = $("#btnStopRefresh");
 				var obtnRefresh = $("#btnManualRefresh");
-				//$("#realtime_dat").hide();
-				obtnRefresh.click(function() {
-					refresh();
-				});
+				//界面的生成
 				setMtr();
 				setItem($("#select_item"));
 				setItemFirst($("#select_item_first"));
-				$("#btnSelectItem").click(function() {
-					if (conf == true) {
-						conf = false;
-						//$("#tbl_realtime_dat_select").hide();
-						//$("#realtime_dat").show();
-					} else {
-						conf = true;
-						//$("#realtime_dat").hide();
-						//$("#tbl_realtime_dat_select").show();
-					}
+				//然后才是事件的绑定
+				obtnRefresh.click(function() {
+					refresh();
 				});
-				var btnAutoRefresh = $("#btnAutoRefresh");
-				var btnStopRefresh = $("#btnStopRefresh");
-				var refreshIntervalId;
+				$("#btnSelectItem").click(function() {
+					if (isShowSet) {
+						$("#tbl_realtime_dat_select").hide();
+						$("#realtime_dat").show();
+						$("#btnSelectItem [class='ui-button-text']")[0].textContent = "设置页面";
+					} else {
+						$("#realtime_dat").hide();
+						$("#tbl_realtime_dat_select").show();
+						$("#btnSelectItem [class='ui-button-text']")[0].textContent = "数据视图";
+					}
+					isShowSet = !isShowSet;
+				});
+
 				//时钟id
+				var refreshIntervalId;
 				btnAutoRefresh.click(function() {
 					btnAutoRefresh.hide();
 					$("#btnManualRefresh").attr("disabled", "disabled");
@@ -54,6 +61,8 @@
 						t = 5;
 						$("#autoRefresh_interval").val("1");
 					}
+					//点击开始就立刻刷新一次,之后按照定时器刷新.
+					refresh();
 					refreshIntervalId = setInterval(refresh, t * 1000);
 					btnStopRefresh.show();
 				});
@@ -85,21 +94,25 @@
 						alert("服务器通讯错误");
 					}
 				});
-				var newline = 10;
 				//每几个换一行
+				var newline = 10;
 				for ( i = 0; i < mtrNumber; i++) {
-					name = "mtrNo" + i;
+					var name = "mtrNo" + i;
 					str += "<input type=checkbox name=" + name + " id=\"" + name + "\" />" + "<label for=" + name + ">" + "表" + i + "</label>";
 					//如果有20个,则分两行,第二行末尾不增加换行
 					if ((i % newline == newline - 1) && (i < (mtrNumber - 1))) {
-						str += "<br>"
+						str += "<br>";
 					}
 				}
 				$("#mtr_selected").html("");
 				$("#mtr_selected").html(str);
 			}
 
+			//刷新函数,手动刷新
 			function refresh() {
+				if (isShowSet) {
+					$("#btnSelectItem").click();
+				}
 				$("#btnManualRefresh").attr("disabled", "disabled");
 				var itemArray = "";
 				var mtrArray = ""
@@ -125,7 +138,7 @@
 				//时间
 				$.post('/goform/srv_time', "action=get", function(result) {
 					var oTime = eval("(" + result + ")");
-					var timeZoneMs = 8 * 60 * 60;
+					//转化成为标准时间（减去时区偏移即可），
 					srvTimestarmp = Number(oTime.timestamp - timeZoneMs);
 					fillDataTimestarmp(srvTimestarmp);
 				});
@@ -138,8 +151,8 @@
 					data : "action=get" + "&itemArray=" + itemArray + "&mtrArray=" + mtrArray,
 					success : function(result, textStatus) {
 						var oTou = eval("(" + result + ")");
-						fillDataHead($("#dateHead"), itemArray);
-						fillData($("#touData"), oTou.mtr, mtrArray);
+						fillDataHead($("#dateHead"), oTou.item_selected);
+						fillData($("#touData"), oTou.mtr, oTou.mtr_selected);
 					},
 					error : function() {//失败
 						alert("服务器通讯错误");
@@ -154,14 +167,26 @@
 
 			//填写时间戳(标识终端实时数据的时间)
 			function fillDataTimestarmp(srvTimestarmp) {
-				var now = new Date(srvTimestarmp * 1000);
 				var str = "数据时刻:";
-				str += $.datepicker.formatDate('yy-mm-dd ', now);
+				str += timestarmpToString(srvTimestarmp);
+				$("#timestamp").html(str);
+			}
+
+			//将时间戳换算成为完整的日期时刻格式,
+			//输入 srvTimestarmp 为数值型整形 时间戳(标准时间),到现在的秒数(Unix格式)
+			//返回形如 2013-02-20 14:45:09 的字符串
+			function timestarmpToString(UnixUtcTimestarmp) {
+				if (UnixUtcTimestarmp <= 0) {//时区的关系(可能要扩展到24个小时)
+					return "---------- --:--:--";
+				}
+				var now = new Date(UnixUtcTimestarmp * 1000);
+				//js中是毫秒
+				var str = $.datepicker.formatDate('yy-mm-dd ', now);
 				str += now.getHours() < 10 ? "0" : "";
 				str += now.getHours();
 				str += ":" + (now.getMinutes() < 10 ? "0" : "") + now.getMinutes()
 				str += ":" + (now.getSeconds() < 10 ? "0" : "") + now.getSeconds();
-				$("#timestamp").html(str);
+				return str;
 			}
 
 			//生成数据表头
@@ -170,12 +195,14 @@
 				str = "";
 				len = itemArray.length;
 				str += "<td>表号</td>";
+				str += "<td>抄表时刻</td>";
 				var head = false;
 				for ( i = 0; i < len; i++) {
 					if (i % 5 == 0) {//每种数据开始使用全名称
 						head = true;
 					}
-					if (itemArray[i] == "1") {
+					//ie 不能使用 string[i]来索引char,只能使用charAt
+					if (itemArray.charAt(i) == "1") {
 						str += "<td>";
 						switch (parseInt(i/5)) {
 							case 0:
@@ -238,33 +265,37 @@
 			function fillMtrNumber(i, mtrArray) {
 				var num = 0;
 				for ( j = 0; j < mtrArray.length; j++) {
-					if (mtrArray[j] == 1) {
+					if (mtrArray.charAt(j) == "1") {//tian sha de ie!
 						if (num == i) {
 							break;
 						}
 						num++;
 					}
 				}
-				str += "<td>" + j + "</td>";
-				return str
+				return "<td>" + j + "</td>";
 			}
 
-			//将数据填充到表格中
-			function fillData(oTable, oTou, mtrArray) {
-				oTable.html("");
-				str = "";
-				mtrnum = oTou.length;
-				for ( i = 0; i < mtrnum; i++) {
+			//填写抄表时刻表格
+			function fillMtrReadTime(UnixUTCTimestarmp) {
+				return "<td>" + timestarmpToString(UnixUTCTimestarmp - timeZoneMs) + "</td>";
+			}
 
+			//将数据填充到表格中,aMtr:表计对象数组
+			function fillData(oTable, aMtr, mtrArray) {
+				str = "";
+				mtrnum = aMtr.length;
+				for ( i = 0; i < mtrnum; i++) {
 					str += "<tr>";
-					fillMtrNumber(i, mtrArray)
-					for ( j = 0; j < oTou[i].length; j++) {
-						//有效标识
-						var iv = (oTou[i].it[j][1] == "1") ? "valid " : "iv";
-						str += "<td class=" + iv + ">" + oTou[i].it[j][0] + "</td>";
+					str += fillMtrNumber(i, mtrArray)
+					str += fillMtrReadTime(parseInt(aMtr[i].Meter_ReadTime));
+					for ( j = 0; j < aMtr[i].it.length; j++) {
+						var iv = (aMtr[i].it[j][1] == "1") ? "valid " : "iv";
+						// *有效*标识
+						str += "<td class=" + iv + ">" + aMtr[i].it[j][0] + "</td>";
 					}
 					str += "</tr>";
 				}
+				oTable.html("");
 				oTable.html(str);
 				return;
 			}
@@ -277,14 +308,15 @@
 				set_val(15, true);
 				$("#btnStopRefresh").hide();
 				$("#mtrNo0")[0].checked = true;
+				$("#realtime_dat").hide();
 			}
 
 			//设置高一级的项目(大的项目)
 			function setItemFirst(obj) {
-				obj.html("");
 				var str = "";
+				var i = 0;
+				var name = "all_tou";
 				for ( i = 0; i < 8; i++) {
-					var name = "all_tou";
 					name += i;
 					str += "<td colspan=\"5\">" + "<input type=\"checkbox\" name=" + name + " value=\"" + "0" + "\" id=\"" + name + "\" onclick= \"check_click(" + i + ");\"" + " />" + "<label for=" + name + ">";
 					switch(i) {
@@ -315,7 +347,8 @@
 					}
 					str += "</label></td>";
 				}
-				obj.append(str);
+				obj.html("");
+				obj.html(str);
 			}
 
 			//单击上层选中下层的5个分时电量
@@ -330,6 +363,7 @@
 				$("#touItem" + i)[0].checked = bchecked;
 				$("#touItem" + i)[0].value = bchecked ? "1" : "0";
 			}
+
 			//选中/不选中中切换,同时更新value
 			function change_val(i) {
 				bchecked = $("#touItem" + i)[0].checked;
@@ -338,7 +372,6 @@
 			}
 
 			function setItem(obj) {
-				obj.html("");
 				var str = "";
 				for ( i = 0; i < 40; i++) {
 					var name = "touItem" + i;
@@ -362,7 +395,8 @@
 					}
 					str += "</label></td>";
 				}
-				obj.append(str);
+				obj.html("");
+				obj.html(str);
 			}
 		</script>
 	</head>
@@ -387,7 +421,7 @@
 				</button></td>
 				<td>
 				<button id="btnSelectItem" class="btnSet">
-					设置
+					数据视图
 				</button></td>
 			</tr>
 		</table>
