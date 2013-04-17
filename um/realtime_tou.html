@@ -315,9 +315,9 @@
 			function setItemFirst(obj) {
 				var str = "";
 				var i = 0;
-				var name = "all_tou";
+				var name = "";
 				for ( i = 0; i < 8; i++) {
-					name += i;
+					name = "all_tou" + i;
 					str += "<td colspan=\"5\">" + "<input type=\"checkbox\" name=" + name + " value=\"" + "0" + "\" id=\"" + name + "\" onclick= \"check_click(" + i + ");\"" + " />" + "<label for=" + name + ">";
 					switch(i) {
 						case 0:
@@ -353,8 +353,9 @@
 
 			//单击上层选中下层的5个分时电量
 			function check_click(i) {
+				var bchecked = $("#all_tou"+i)[0].checked;
 				for ( ind = 0; ind < 5; ind++) {
-					set_val(i * 5 + ind, $("#all_tou"+i)[0].checked);
+					set_val(i * 5 + ind, bchecked);
 				}
 			}
 
