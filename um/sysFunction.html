@@ -33,14 +33,28 @@
 				font-weight: bold;
 				text-shadow: 1px 1px 0 #fff;
 			}
-			td{
+			td {
 				font-size: 14pt;
 			}
 		</style>
 		<script type="text/javascript">
 			$(document).ready(function() {
-				//	$("#save_log").hide();
+				$("#btnWebsUpdate").click(function() {
+					if ($("#file").val() == "") {
+						alert("请选择文件.");
+						return false;
+					}
+				});
 			});
+			//文件名过滤
+			function fileFilter(obj) {
+				var file = obj.value.match(/[^\/\\]+$/gi)[0];
+				var rx = new RegExp('webs-binary-hl3104(ha|jd).tar.gz$', 'gi');
+				if (file && !file.match(rx)) {
+					$("#file").val("");
+					alert("根据终端类型,升级包文件应该是:\n" + "\"webs-binary-hl3104ha.tar.gz\" 或\n" + "\"webs-binary-hl3104jd.tar.gz\".\n" + "请选择正确的升级包文件.");
+				}
+			};
 		</script>
 	</head>
 	<body>
@@ -67,7 +81,7 @@
 				</li>
 			</ul>
 			<!-- ###标签1 功能 ### -->
-			<div id="tabs_func">
+			<div id="tabs_func" title="对终端执行一些操作">
 				<table class="sioplanTable"  id="tbl_sysReset" border="1" cellspacing="1" cellpadding="1">
 					<thead>
 						<tr>
@@ -81,7 +95,7 @@
 							<td>1</td>
 							<td>重新加载规约文本.</td>
 							<td>
-							<button id="btnResetPro" class="reboot">
+							<button class="reboot" id="btnResetPro">
 								执行
 							</button></td>
 						</tr>
@@ -113,7 +127,7 @@
 							<td>5</td>
 							<td>清空终端数据(删除所有历史数据)</td>
 							<td>
-							<button id="btnClearData" class="reboot">
+							<button id="btnClearData" class="reboot" title="清空所有历史数据(包括电量,需量)">
 								执行
 							</button></td>
 						</tr>
@@ -121,10 +135,10 @@
 							<form id="webs_update" action="/goform/upload_file" method="post"
 							enctype="multipart/form-data">
 								<td>6</td>
-								<td><label>更新webs程序(webs-binary-*.tar.gz)</label>
+								<td><label>更新webs程序(webs-binary-hl3104*.tar.gz)</label>
 								<br>
 								<label for="file">文件名:</label>
-								<input type="file" name="file" id="file" style="border:1px solid green;"/>
+								<input type="file" name="file" id="file" accept=".tar.gz" onchange="fileFilter(this);" style="border:1px solid green;"/>
 								</td>
 								<td>
 								<button id="btnWebsUpdate" type="submit" name="submit" class="update">
@@ -238,7 +252,7 @@
 				</p>
 			</div>
 			<!-- ###标签 web配置 ### -->
-			<div id="tabs-info" title="调试中">
+			<div id="tabs-info">
 				<table class="infoTable">
 					<thead>
 						<tr>
@@ -285,7 +299,7 @@
 						</tr>
 						<tr>
 							<td>webs服务器编译日期</td>
-							<td id="build_time"></td>
+							<td id="build_time">---------</td>
 						</tr>
 					</tbody>
 				</table>

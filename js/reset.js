@@ -438,6 +438,12 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 			primary : "ui-icon-power"
 		}
 	});
+	//上传按钮
+	$(".update").button({
+		icons : {
+			primary : "ui-icon-document"
+		}
+	});
 	$(".run").button({
 		icons : {
 			primary : "ui-icon-play"
@@ -456,12 +462,7 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 			primary : "ui-icon-gear"
 		}
 	});
-	//上传按钮
-	$(".update").button({
-		icons : {
-			primary : "ui-icon-document"
-		}
-	});
+
 	$(".select_file").button({
 		icons : {
 			primary : "ui-icon-power"
