@@ -454,6 +454,11 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 			primary : "ui-icon-pause"
 		}
 	});
+	$(".manual").button({
+		icons : {
+			primary : "ui-icon-pause"
+		}
+	});
 	$(".simple_button").button({
 
 	});

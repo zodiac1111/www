@@ -40,11 +40,13 @@
 				$("#btnSelectItem").click(function() {
 					if (isShowSet) {
 						$("#tbl_realtime_dat_select").hide();
-						$("#realtime_dat").show();
+						$("#tbl_realtime_tou").hide();
+						//$("#realtime_dat").show();
 						//$("#btnSelectItem [class='ui-button-text']")[0].textContent = "设置页面";
 					} else {
-						$("#realtime_dat").hide();
+						//$("#realtime_dat").hide();
 						$("#tbl_realtime_dat_select").show();
+						$("#tbl_realtime_tou").show();
 						//$("#btnSelectItem [class='ui-button-text']")[0].textContent = "数据视图";
 					}
 					isShowSet = !isShowSet;
@@ -110,7 +112,7 @@
 			//刷新函数,手动刷新
 			function refresh() {
 				if (isShowSet) {
-					$("#btnSelectItem").click();
+					//$("#btnSelectItem").click();
 				}
 				$("#btnManualRefresh").attr("disabled", "disabled");
 				var itemArray = "";
@@ -307,7 +309,7 @@
 				set_val(15, true);
 				$("#btnStopRefresh").hide();
 				$("#mtrNo0")[0].checked = true;
-				$("#realtime_dat").hide();
+				//$("#realtime_dat").hide();
 			}
 
 			//设置高一级的项目(大的项目)
@@ -401,6 +403,11 @@
 		</script>
 	</head>
 	<body>
+		<div style="position:fixed;right:0px;top:0px">
+			<button id="btnSelectItem" class="btnSet" >
+				Menu
+			</button>
+		</div>
 		<table class="sioplanTable"  id="tbl_realtime_tou" border="1" cellspacing="1" cellpadding="1">
 			<tr>
 				<td id="mtr_selected" colspan="4">所有表计</td>
@@ -419,10 +426,10 @@
 				<button id="btnManualRefresh" class="simple_button">
 					手动刷新
 				</button></td>
-				<td>
+				<!--<td>
 				<button id="btnSelectItem" class="btnSet">
-					切换
-				</button></td>
+				切换
+				</button></td> -->
 			</tr>
 		</table>
 		<!-- 查询项目选择 -->
