@@ -2,8 +2,8 @@
 <!--  Copyright (c) Echon., 2006. All Rights Reserved. 存储周期页面-->
 <html  xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<title>采集周期</title>
 		<meta http-equiv="Pragma" content="no-cache" charset="utf-8">
+		<title>采集周期</title>
 		<link rel="stylesheet" href="/style/normal_ws.css" type="text/css"/>
 		<link rel="stylesheet" href="/style/sys.css" type="text/css"/>
 		<link rel="stylesheet" href="/style/table.css" type="text/css"/>
@@ -15,10 +15,10 @@
 		<script type="text/javascript" src="/js/jquery-ui.min-zh-CN.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function() {
-				var oBtnLoad=$("#btnLoad");
-				var oBtnUpdate=$("#btnUpdate");
-				var oIconLoad=$("#icon_init");
-				var oIconOk=$("#icon_ok");
+				var oBtnLoad = $("#btnLoad");
+				var oBtnUpdate = $("#btnUpdate");
+				var oIconLoad = $("#icon_init");
+				var oIconOk = $("#icon_ok");
 				/* 按钮 */
 				$(function() {
 					oBtnUpdate.button({
@@ -56,10 +56,10 @@
 						var oCollectCycle = eval("(" + result + ")");
 						var chk = $("input[name=chk_save_enable]");
 						var t = $("input[name=flag]");
-						var ocycle=	$("#select");
+						var ocycle = $("#select");
 						ocycle.html("");
 						for ( i = 0; i < 6; i++) {
-							chk.eq(i)[0].checked=('checked', oCollectCycle.item[i].en == "1" ? true : false);
+							chk.eq(i)[0].checked = ('checked', oCollectCycle.item[i].en == "1" ? true : false);
 							t[i].value = oCollectCycle.item[i].en;
 						}
 						var str = "";
@@ -138,8 +138,12 @@
 			</table>
 		</form>
 		<p align="center">
-			<button id="btnLoad" class="" >读取</button>
-			<button id="btnUpdate" class="btn_update">更新</button>
+			<button id="btnLoad" class="" >
+				读取
+			</button>
+			<button id="btnUpdate" class="btn_update">
+				更新
+			</button>
 			<input type="text" id="icon_init" class="wait_icon_24x24_load" />
 			<input type="text" id="icon_ok" class="wait_icon_24x24 icon_ok" />
 		</p>
