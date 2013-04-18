@@ -6,7 +6,7 @@
  */
 $(document).ready(function() {
 	$("#major").html("1");
-	$("#mimor").html("1");
+	$("#mimor").html("2");
 	$("#patchlevel").html("$PATHLEAVE");
 	$("#git_version").html("$GIT_VERSION");
 });
