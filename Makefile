@@ -1,0 +1,2 @@
+version:
+	./makeversion.sh
