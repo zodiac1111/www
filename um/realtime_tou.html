@@ -184,7 +184,7 @@
 					url : "/goform/realtime_tou",
 					contentType : "application/x-www-form-urlencoded; charset=utf-8",
 					dataType : "text",
-					data : "action=get" + "&itemArray=" + itemArray + "&mtrArray=" + mtrArray,
+					data : "action=get" + "&tou=" + itemArray + "&mtrArray=" + mtrArray,
 					success : function(result, textStatus) {
 						var oTou = eval("(" + result + ")");
 						fillDataHead($("#dateHead"), oTou.item_selected);
