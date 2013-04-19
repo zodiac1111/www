@@ -91,4 +91,12 @@
 .valid {/*有效的*/
 	color: #047c2b;
 }
+.realtimeTouTable {
+	BORDER-BOTTOM:  2px outset;
+	BORDER-LEFT:  2px outset;
+	BORDER-RIGHT:  2px outset;
+	BORDER-TOP:  2px outset;
+	text-align: center; /*表格内文本水平居中*/
+	margin: auto; /*整个表格居中*/
+}
 

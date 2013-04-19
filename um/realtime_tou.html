@@ -20,10 +20,25 @@
 		<link type="text/css" href="/style/jquery.dataTables_themeroller.css" rel="stylesheet"/>
 		<script type="text/javascript" src="/js/jquery.dataTables.min.js"></script>
 		<script type="text/javascript">
+			$.extend($.fn.dataTable.defaults, {//设置表格属性
+				"bInfo" : false, //显示一共几条这种信息
+				"bFilter" : false, //不要搜索
+				"bSort" : false, //不要排序
+				//"sScrollY" : "320px", //固定高度
+				//"bPaginate" : false, //不分页
+				//"bScrollCollapse" : true, //显示滚动条
+				"bRetrieve" : true,
+				"bJQueryUI" : true,
+				"bDestroy" : true
+				//"bAutoWidth" : true
+			});
 			//var ie = !-[1,]; //ie则返回true,否则返回false
 			var timeZoneMs = 8 * 60 * 60;
 			// 当前显示类型.显示参数还是显示数据.开始时显示参数设置
 			var isShowSet = true;
+			var ShowData = true;
+			//时钟id
+			var refreshIntervalId;
 			$(document).ready(function() {
 				///主过程
 				var btnAutoRefresh = $("#btnAutoRefresh");
@@ -40,27 +55,19 @@
 				$("#btnSelectItem").click(function() {
 					if (isShowSet) {
 						$("#tbl_realtime_dat_select").hide();
-						$("#tbl_realtime_tou").hide();
-						//$("#realtime_dat").show();
-						//$("#btnSelectItem [class='ui-button-text']")[0].textContent = "设置页面";
 					} else {
-						//$("#realtime_dat").hide();
 						$("#tbl_realtime_dat_select").show();
-						$("#tbl_realtime_tou").show();
-						//$("#btnSelectItem [class='ui-button-text']")[0].textContent = "数据视图";
 					}
 					isShowSet = !isShowSet;
 				});
 
-				//时钟id
-				var refreshIntervalId;
 				btnAutoRefresh.click(function() {
 					btnAutoRefresh.hide();
 					$("#btnManualRefresh").attr("disabled", "disabled");
 					var t = parseInt($("#autoRefresh_interval").val()) || 0;
 					if (t < 5) {
 						t = 5;
-						$("#autoRefresh_interval").val("1");
+						$("#autoRefresh_interval").val("5");
 					}
 					//点击开始就立刻刷新一次,之后按照定时器刷新.
 					refresh();
@@ -92,14 +99,15 @@
 						mtrNumber = parseInt(oSysPara.meter_num);
 					},
 					error : function() {//失败
-						alert("服务器通讯错误");
+						alert("服务器通讯错误,获取表号失败");
 					}
 				});
 				//每几个换一行
-				var newline = 10;
+				var newline = 20;
 				for ( i = 0; i < mtrNumber; i++) {
 					var name = "mtrNo" + i;
-					str += "<input type=checkbox name=" + name + " id=\"" + name + "\" />" + "<label for=" + name + ">" + "表" + i + "</label>";
+					//width: 44px; str += "<span><input type=checkbox name=" + name + " id=\"" + name + "\" />" + "<label for=" + name + ">" + "表" + i + "</label><span>";
+					str += "<span style=\"display: inline-block; width: 25px;\"><label><input type=checkbox name=" + name + " id=\"" + name + "\" /><br>" + "表" + i + "</label></span>";
 					//如果有20个,则分两行,第二行末尾不增加换行
 					if ((i % newline == newline - 1) && (i < (mtrNumber - 1))) {
 						str += "<br>";
@@ -107,12 +115,29 @@
 				}
 				$("#mtr_selected").html("");
 				$("#mtr_selected").html(str);
+				$(function() {
+					$("#slider-range").slider({
+						range : true,
+						min : 0,
+						max : mtrNumber,
+						values : [0, 1],
+						slide : function(event, ui) {
+							for(i=0;i<mtrNumber;i++){
+								$("#mtrNo" + i)[0].checked = false;
+							}
+							for(i=ui.values[0];i<ui.values[1];i++){
+								$("#mtrNo" + i)[0].checked = true;
+							}
+						}
+					});
+				});
 			}
 
 			//刷新函数,手动刷新
 			function refresh() {
-				if (isShowSet) {
-					//$("#btnSelectItem").click();
+				if (ShowData) {
+					$("#realtime_dat").show();
+					ShowData = false;
 				}
 				$("#btnManualRefresh").attr("disabled", "disabled");
 				var itemArray = "";
@@ -137,11 +162,21 @@
 					return;
 				}
 				//时间
-				$.post('/goform/srv_time', "action=get", function(result) {
-					var oTime = eval("(" + result + ")");
-					//转化成为标准时间（减去时区偏移即可），
-					srvTimestarmp = Number(oTime.timestamp - timeZoneMs);
-					fillDataTimestarmp(srvTimestarmp);
+				$.ajax({
+					type : "post",
+					url : "/goform/srv_time",
+					contentType : "application/x-www-form-urlencoded; charset=utf-8",
+					dataType : "text",
+					data : "action=get",
+					success : function(result, textStatus) {
+						var oTime = eval("(" + result + ")");
+						//转化成为标准时间（减去时区偏移即可），
+						srvTimestarmp = Number(oTime.timestamp - timeZoneMs);
+						fillDataTimestarmp(srvTimestarmp);
+					},
+					error : function() {//失败
+						alert("服务器通讯错误,获取时间失败");
+					}
 				});
 				//开始通讯
 				$.ajax({
@@ -154,9 +189,11 @@
 						var oTou = eval("(" + result + ")");
 						fillDataHead($("#dateHead"), oTou.item_selected);
 						fillData($("#touData"), oTou.mtr, oTou.mtr_selected);
+						//oTable.fnDestroy(false);
+						$('#realtime_dat').dataTable();
 					},
 					error : function() {//失败
-						alert("服务器通讯错误");
+						alert("服务器通讯错误,获取数据失败");
 					},
 					//完成(发生在失败或成功之后)
 					complete : function(XMLHttpRequest, textStatus) {
@@ -195,8 +232,8 @@
 				oHead.html("");
 				str = "";
 				len = itemArray.length;
-				str += "<td>表号</td>";
-				str += "<td>抄表时刻</td>";
+				str += "<th>表号</th>";
+				str += "<th>抄表时刻</th>";
 				var head = false;
 				for ( i = 0; i < len; i++) {
 					if (i % 5 == 0) {//每种数据开始使用全名称
@@ -204,38 +241,38 @@
 					}
 					//ie 不能使用 string[i]来索引char,只能使用charAt
 					if (itemArray.charAt(i) == "1") {
-						str += "<td>";
+						str += "<th>";
 						switch (parseInt(i/5)) {
 							case 0:
-								str += head ? "正向有功" : "";
+								str += head ? "正向<br>有功<br>" : "<br><br>";
 								head = false;
 								break;
 							case 1:
-								str += head ? "反向有功" : "";
+								str += head ? "反向<br>有功<br>" : "<br><br>";
 								head = false;
 								break;
 							case 2:
-								str += head ? "正向无功" : "";
+								str += head ? "正向<br>无功<br>" : "<br><br>";
 								head = false;
 								break;
 							case 3:
-								str += head ? "反向无功" : "";
+								str += head ? "反向<br>无功<br>" : "<br><br>";
 								head = false;
 								break;
 							case 4:
-								str += head ? "一象限无功" : "";
+								str += head ? "一象限<br>无功<br>" : "<br><br>";
 								head = false;
 								break;
 							case 5:
-								str += head ? "二象限无功" : "";
+								str += head ? "二象限<br>无功<br>" : "<br><br>";
 								head = false;
 								break;
 							case 6:
-								str += head ? "二象限无功" : "";
+								str += head ? "三象限<br>无功<br>" : "<br><br>";
 								head = false;
 								break;
 							case 7:
-								str += head ? "二象限无功" : "";
+								str += head ? "四象限<br>无功<br>" : "<br><br>";
 								head = false;
 								break;
 						}
@@ -256,7 +293,7 @@
 								str += "谷";
 								break;
 						}
-						str += "</td>";
+						str += "</th>";
 					}
 				}
 				oHead.html(str);
@@ -309,7 +346,8 @@
 				set_val(15, true);
 				$("#btnStopRefresh").hide();
 				$("#mtrNo0")[0].checked = true;
-				//$("#realtime_dat").hide();
+				//$('#realtime_dat').dataTable();
+				$("#realtime_dat").hide();
 			}
 
 			//设置高一级的项目(大的项目)
@@ -403,63 +441,59 @@
 		</script>
 	</head>
 	<body>
-		<div style="position:fixed;right:0px;top:0px">
+		<!-- 显示/隐藏按钮 -->
+		<div style="position:fixed;right:0px;top:0px;z-index:99;">
 			<button id="btnSelectItem" class="btnSet" >
 				Menu
 			</button>
 		</div>
-		<table class="sioplanTable"  id="tbl_realtime_tou" border="1" cellspacing="1" cellpadding="1">
+		<!-- 查询项目选择 -->
+		<table class="sioplanTable" style="width:100%;"  id="tbl_realtime_dat_select" border="1" cellspacing="1" cellpadding="1">
 			<tr>
-				<td id="mtr_selected" colspan="4">所有表计</td>
+				<th colspan="2">表号</th>
+				<td colspan="30" id="mtr_selected_bar"><div id="slider-range"> </div></td>
+				<td colspan="5">自动刷新间隔
+				<input id="autoRefresh_interval" value="5"/>
+				秒</td>
+				<td colspan="3">_</td>
 			</tr>
 			<tr>
-				<td>自动刷新间隔:
-				<input id="autoRefresh_interval" value="5"/>
-				秒
+				<td colspan="32" id="mtr_selected" style="text-align:left;">[表号列表]</td>
+				<td colspan="4"><span>
 				<button id="btnAutoRefresh" class="run">
-					启动
-				</button>
+					自动刷新
+				</button><br>
 				<button id="btnStopRefresh" class="stop">
-					停止
-				</button></td>
-				<td>
+					停止刷新
+				</button></span></td>
+				<td colspan="4">
 				<button id="btnManualRefresh" class="simple_button">
 					手动刷新
 				</button></td>
-				<!--<td>
-				<button id="btnSelectItem" class="btnSet">
-				切换
-				</button></td> -->
+			</tr>
+			<tr>
+				<th colspan="40">电度量</th>
+			</tr>
+			<tr id="select_item_first">
+				<td colspan="40">总项目</td>
+			</tr>
+			<tr id="select_item">
+				<td colspan="40">分时项目</td>
 			</tr>
 		</table>
-		<!-- 查询项目选择 -->
-		<form id="form_realtime_dat_select">
-			<table class="sioplanTable"  id="tbl_realtime_dat_select" border="1" cellspacing="1" cellpadding="1">
-				<thead>
-					<tr>
-						<td colspan="40">电度量</td>
-					</tr>
-					<tr id="select_item_first">
-						<td colspan="40">总项目</td>
-					</tr>
-					<tr id="select_item">
-						<td colspan="40">分时项目</td>
-					</tr>
-				</thead>
-			</table>
-		</form>
+		<br>
 		<!-- 数据显示 -->
-		<table class="sioplanTable"  id="realtime_dat" border="1" cellspacing="1" cellpadding="1">
+		<table class="realtimeTouTable" style="width:100%;" id="realtime_dat" border="1" cellspacing="1" cellpadding="1">
 			<thead>
 				<tr>
-					<td colspan="40">电度量 (<span id="timestamp">时刻</span>)</td>
+					<th colspan="42">电度量 (<span id="timestamp">查询时刻</span>)</th>
 				</tr>
 				<tr id="dateHead">
-					<td colspan="2">项目名称</td>
+					<th colspan="42">项目名称</th>
 				</tr>
 			</thead>
 			<tbody id="touData">
-				<td colspan="2">实时数据</td>
+				<td colspan="42">实时数据</td>
 			</tbody>
 		</table>
 	</body>
