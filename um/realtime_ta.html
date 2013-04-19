@@ -54,9 +54,9 @@
 				});
 				$("#btnSelectItem").click(function() {
 					if (isShowSet) {
-						$(".conf_talbe").hide();
+						$(".conf_table").hide();
 					} else {
-						$(".conf_talbe").show();
+						$(".conf_table").show();
 					}
 					isShowSet = !isShowSet;
 				});
@@ -335,13 +335,8 @@
 
 			//设定初始(默认)状态.
 			function init() {
-				set_val(0, true);
-				set_val(5, true);
-				set_val(10, true);
-				set_val(15, true);
 				$("#btnStopRefresh").hide();
-				$("#mtrNo0")[0].checked = true;
-				//$('#realtime_dat').dataTable();
+
 				$("#realtime_dat").hide();
 				$("input[id^='all_']").click(function(event) {
 					var id = event.target.id.substr(4);
@@ -351,13 +346,17 @@
 						aChild[i].checked = bcheck;
 					}
 				});
-				$.each($("input[id^='item_v]"), function(index, e) {
+				//勾上默认选项
+				$("#mtrNo0")[0].checked = true;
+				$.each($("input[id^='item_v']"), function(index, e) {
 					e.checked = true;
 				})
-				$.each($("input[id^='item_i]"), function(index, e) {
+				$.each($("input[id^='item_i']"), function(index, e) {
 					e.checked = true;
 				})
-				$("#item_p_0").checked = true;
+				$("#all_item_v")[0].checked = true;
+				$("#all_item_i")[0].checked = true;
+				$("#item_p_0")[0].checked = true;
 			}
 
 			//填写一个配置表格的大项目单元格,名称,中文名称,包含多少子项目
@@ -365,7 +364,8 @@
 				var str = "";
 				str += "<td colspan=\"" + items + "\">";
 				str += "<label>";
-				str += "<input class=\"main_category\" type=\"checkbox\" name=" + name + "\" id=\"" + name + "\" />";
+				str += "<input class=\"main_category\" type=\"checkbox\"";
+				str += "name=" + name + "\" id=\"" + name + "\" />";
 				str += name_cn + "</label>";
 				str += "</td>";
 				return str;
@@ -382,27 +382,6 @@
 				str += setItemFirstTableData("all_item_f", "频率", 1);
 				obj.html("");
 				obj.html(str);
-			}
-
-			//单击上层选中下层的5个分时电量
-			function check_click(i) {
-				var bchecked = $("#all_tou"+i)[0].checked;
-				for ( ind = 0; ind < 5; ind++) {
-					set_val(i * 5 + ind, bchecked);
-				}
-			}
-
-			//设置checkbox选中/不选中
-			function set_val(i, bchecked) {
-				//$("#touItem" + i)[0].checked = bchecked;
-				//$("#touItem" + i)[0].value = bchecked ? "1" : "0";
-			}
-
-			//选中/不选中中切换,同时更新value
-			function change_val(i) {
-				//bchecked = $("#touItem" + i)[0].checked;
-				//$("#touItem" + i)[0].checked = bchecked;
-				//$("#touItem" + i)[0].value = bchecked ? "1" : "0";
 			}
 
 			function setItemTableDate(name, index, name_cn) {
@@ -488,7 +467,7 @@
 		</table>
 		<br>
 		<!-- 数据显示 -->
-		<table class="realtimeTouTable" style="width:100%;" id="realtime_dat" border="1" cellspacing="1" cellpadding="1">
+		<table class="realtimeTouTable " style="width:100%;" id="realtime_dat" border="1" cellspacing="1" cellpadding="1">
 			<thead>
 				<tr>
 					<th colspan="42">瞬时量 (<span id="timestamp">查询时刻</span>)</th>
