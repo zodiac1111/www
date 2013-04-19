@@ -111,7 +111,8 @@
 					// + "\" />" + "<label for=" + name + ">" + "表" + i + "</label><span>";
 					str += "<span style=\"display: inline-block; width: 25px;\">";
 					str += "<label>";
-					str += "<input type=checkbox name=" + name + " id=\"" + name + "\" /><br>";
+					str += "<input class=\"meterNumber\" type=checkbox name=" + name;
+					str += " id=\"" + name + "\" /><br>";
 					str += "表" + i + "</label></span>";
 					//如果有20个,则分两行,第二行末尾不增加换行
 					if ((i % newline == newline - 1) && (i < (mtrNumber - 1))) {
@@ -144,7 +145,6 @@
 					$("#realtime_dat").show();
 					ShowData = false;
 				}
-				$("#btnManualRefresh").attr("disabled", "disabled");
 				var itemArray = "";
 				var mtrArray = ""
 				var aItem = $("[id^='touItem']");
@@ -158,14 +158,15 @@
 				for ( i = 0; i < lenMtr; i++) {
 					mtrArray += aMtr[i].checked ? "1" : "0";
 				}
-				if ($("[id^='touItem']:checked:enabled").length <= 0) {
+				if ($(".subcategory:checked:enabled").length <= 0) {
 					alert("至少选择一个监视项目");
 					return;
 				}
-				if ($("[id^='mtrNo']:checked:enabled").length <= 0) {
+				if ($(".meterNumber:checked:enabled").length <= 0) {
 					alert("至少选择一个表");
 					return;
 				}
+				$("#btnManualRefresh").attr("disabled", "disabled");
 				//时间
 				$.ajax({
 					type : "post",
@@ -350,6 +351,13 @@
 						aChild[i].checked = bcheck;
 					}
 				});
+				$.each($("input[id^='item_v]"), function(index, e) {
+					e.checked = true;
+				})
+				$.each($("input[id^='item_i]"), function(index, e) {
+					e.checked = true;
+				})
+				$("#item_p_0").checked = true;
 			}
 
 			//填写一个配置表格的大项目单元格,名称,中文名称,包含多少子项目
@@ -357,7 +365,7 @@
 				var str = "";
 				str += "<td colspan=\"" + items + "\">";
 				str += "<label>";
-				str += "<input type=\"checkbox\" name=" + name + "\" id=\"" + name + "\" />";
+				str += "<input class=\"main_category\" type=\"checkbox\" name=" + name + "\" id=\"" + name + "\" />";
 				str += name_cn + "</label>";
 				str += "</td>";
 				return str;
@@ -401,7 +409,7 @@
 				str = "";
 				str += "<td>";
 				str += "<label>";
-				str += "<input type=\"checkbox\" name=" + name + "_" + index;
+				str += "<input class=\"subcategory\" type=\"checkbox\" name=" + name + "_" + index;
 				str += "\" id=\"" + name + "_" + index + "\" />"
 				str += name_cn + "</label>";
 				str += "</td>";
@@ -444,16 +452,16 @@
 		<!-- 查询项目选择 -->
 		<table class="sioplanTable conf_table" style="width:100%;"  id="tbl_realtime_dat_select" border="1" cellspacing="1" cellpadding="1">
 			<tr>
-				<th colspan="2">表号</th>
-				<td colspan="30" id="mtr_selected_bar"><div id="slider-range"></div></td>
-				<td colspan="5">自动刷新间隔
+				<th colspan="1" style="width: 5%;">表号</th>
+				<td colspan="1" style="width: 75%;" id="mtr_selected_bar"><div id="slider-range"></div></td>
+				<td colspan="5" style="width: 12.5%;">自动刷新间隔
 				<input id="autoRefresh_interval" value="5"/>
 				秒</td>
-				<td colspan="3">_</td>
+				<td colspan="3"style="width: 7.5%;">_</td>
 			</tr>
 			<tr>
-				<td colspan="32" id="mtr_selected" style="text-align:left;">[表号列表]</td>
-				<td colspan="4"><span>
+				<td colspan="2"style="width: 80%;" id="mtr_selected" style="text-align:left;">[表号列表]</td>
+				<td colspan="4" style="width: 10%;"><span>
 					<button id="btnAutoRefresh" class="run">
 						自动刷新
 					</button>
@@ -461,7 +469,7 @@
 					<button id="btnStopRefresh" class="stop">
 						停止刷新
 					</button></span></td>
-				<td colspan="4">
+				<td colspan="4" style="width: 10%;">
 				<button id="btnManualRefresh" class="simple_button">
 					手动刷新
 				</button></td>
@@ -469,7 +477,7 @@
 		</table>
 		<table class="sioplanTable conf_table" style="width:100%;" border="1" cellspacing="1" cellpadding="1">
 			<tr>
-				<th colspan="">电度量</th>
+				<th colspan="99">电度量</th>
 			</tr>
 			<tr id="select_item_first">
 				<td colspan="">总项目</td>
