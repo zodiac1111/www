@@ -42,6 +42,7 @@ $(document).ready(function() {
 	setMtr();
 	initSubCategoryName($("#select_item"));
 	initMainCategoryName($("#select_item_first"));
+	$("#tabs").tabs();
 	initEvent();
 	//然后才是事件的绑定
 	obtnRefresh.click(function() {

@@ -20,9 +20,43 @@
 		<link type="text/css" href="/style/jquery.dataTables_themeroller.css" rel="stylesheet"/>
 		<script type="text/javascript" src="/js/jquery.dataTables.min.js"></script>
 		<script type="text/javascript" src="/js/rt.js"></script>
+		<script type="text/javascript"></script>
 	</head>
 	<body>
 		<h1>实时数据</h1>
+		<div id="tabs" title="">
+			<ul>
+				<li>
+					<a href="#tabs_mtr">表计选择</a>
+				</li>
+				<li>
+					<a href="#tabs_tou_qr">电量</a>
+				</li>
+				<li>
+					<a href="#tabs_i_v_p_q_pf">瞬时量</a>
+				</li>
+			</ul>
+			<!-- ###标签1 功能 ### -->
+			<div id="tabs_mtr" title="选择监视的表号">
+				表计选择
+			</div>
+			<div  id="tabs_tou_qr" title="选择监视的电量项目">
+				<table>
+					<tr>
+						<th colspan="40">电度量</th>
+					</tr>
+					<tr id="select_item_first">
+						<td colspan="40">总项目</td>
+					</tr>
+					<tr id="select_item">
+						<td colspan="40">分时项目</td>
+					</tr>
+				</table>
+			</div>
+			<div  id="tabs_i_v_p_q_pf" title="选择监视的瞬时量项目">
+				瞬时量
+			</div>
+		</div>
 		<!-- 显示/隐藏按钮 -->
 		<div style="position:fixed;right:0px;top:0px;z-index:99;">
 			<button id="btnSelectItem" class="btnSet" >
@@ -33,7 +67,10 @@
 		<table class="sioplanTable" style="width:100%;"  id="tbl_realtime_dat_select" border="1" cellspacing="1" cellpadding="1">
 			<tr>
 				<th colspan="2">表号</th>
-				<td colspan="30" id="mtr_selected_bar"><div id="slider-range">表号</div></td>
+				<td colspan="30" id="mtr_selected_bar">
+				<div id="slider-range">
+					表号
+				</div></td>
 				<td colspan="5">自动刷新间隔
 				<input id="autoRefresh_interval" value="5"/>
 				秒</td>
@@ -54,15 +91,17 @@
 					手动刷新
 				</button></td>
 			</tr>
+			<!--
 			<tr>
-				<th colspan="40">电度量</th>
+			<th colspan="40">电度量</th>
 			</tr>
 			<tr id="select_item_first">
-				<td colspan="40">总项目</td>
+			<td colspan="40">总项目</td>
 			</tr>
 			<tr id="select_item">
-				<td colspan="40">分时项目</td>
+			<td colspan="40">分时项目</td>
 			</tr>
+			-->
 		</table>
 		<br>
 		<!-- 数据显示 -->
