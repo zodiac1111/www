@@ -42,6 +42,7 @@ $(document).ready(function() {
 	setMtr();
 	initSubCategoryName($("#select_item"));
 	initMainCategoryName($("#select_item_first"));
+	initEvent();
 	//然后才是事件的绑定
 	obtnRefresh.click(function() {
 		refresh();
@@ -136,12 +137,12 @@ function refresh() {
 		ShowData = false;
 	}
 	var itemArray = "";
-	var abTou="";
+	var abTou = "";
 	var abQr = "";
 	var abMtr = ""
 	var objMtr = $(".meterNumber");
-	var objTou=$(".subcategory.chk_all_tou");
-	var objQr=$(".subcategory.chk_all_qr");
+	var objTou = $(".subcategory.chk_sub_tou");
+	var objQr = $(".subcategory.chk_sub_qr");
 	if ($(".meterNumber:checked:enabled").length <= 0) {
 		alert("至少选择一个表");
 		return;
@@ -173,7 +174,8 @@ function refresh() {
 			var oTime = eval("(" + result + ")");
 			//转化成为标准时间（减去时区偏移即可），
 			srvTimestarmp = Number(oTime.timestamp - timeZoneMs);
-			fillDataTimestarmp(srvTimestarmp);
+			$("#timestamp").html(fillDataTimestarmp(srvTimestarmp));
+			//fillDataTimestarmp(srvTimestarmp);
 		},
 		error : function() {//失败
 			alert("服务器通讯错误,获取时间失败");
@@ -213,7 +215,7 @@ function refresh() {
 function fillDataTimestarmp(srvTimestarmp) {
 	var str = "数据时刻:";
 	str += timestarmpToString(srvTimestarmp);
-	$("#timestamp").html(str);
+	return str;
 }
 
 //将时间戳换算成为完整的日期时刻格式,
@@ -335,10 +337,10 @@ function fillData(oTable, aMtr, abMtr) {
 
 //设定初始(默认)状态.
 function init() {
-	set_val(0, true);
-	set_val(5, true);
-	set_val(10, true);
-	set_val(15, true);
+	$(".subcategory.chk_sub_tou")[0].checked = true;
+	$(".subcategory.chk_sub_tou")[5].checked = true;
+	$(".subcategory.chk_sub_tou")[10].checked = true;
+	$(".subcategory.chk_sub_tou")[15].checked = true;
 	$("#btnStopRefresh").hide();
 	$("#mtrNo0")[0].checked = true;
 	//$('#realtime_dat').dataTable();
@@ -356,7 +358,8 @@ function initMainCategoryName(obj) {
 		name = "all_tou" + i;
 		str += "<td colspan=\"" + subcategory_len + "\">";
 		str += "<label>";
-		str += "<input type=checkbox class=\"chk_all_tou\" id=\"" + name + "\" />";
+		str += "<input type=checkbox class=\"chk_all_tou\"";
+		str += "id=\"" + name + "\"" + "index=" + i + " />";
 		str += tou_dir[i % 2];
 		str += tou_pa[parseInt(i / 2)];
 		str += "</label>";
@@ -368,7 +371,8 @@ function initMainCategoryName(obj) {
 		name = "all_qr" + i;
 		str += "<td colspan=\"" + subcategory_len + "\">";
 		str += "<label>";
-		str += "<input type=checkbox class=\"chk_all_qr\" id=\"" + name + "\" />";
+		str += "<input type=checkbox class=\"chk_all_qr\"";
+		str += "id=\"" + name + "\"" + "index=" + i + " />";
 		str += qr_phase[i];
 		str += "</label>";
 		str += "</td>";
@@ -415,7 +419,7 @@ function subCategoryName_tou() {
 		name = "touItem" + i;
 		str += "<td>";
 		str += "<label>";
-		str += "<input class=\"subcategory chk_all_tou\" type=\"checkbox\"";
+		str += "<input class=\"subcategory chk_sub_tou\" type=\"checkbox\"";
 		str += "name=" + name;
 		str += " id=" + name + " />";
 		str += "<br>" + tou_time[parseInt(i % 5)];
@@ -433,7 +437,7 @@ function subCategoryName_qr() {
 		name = "qrItem" + i;
 		str += "<td>";
 		str += "<label>";
-		str += "<input class=\"subcategory chk_all_qr\" type=\"checkbox\"";
+		str += "<input class=\"subcategory chk_sub_qr\" type=\"checkbox\"";
 		str += " name=" + name;
 		str += " id=" + name + " />";
 		str += "<br>" + qr_time[parseInt(i % 5)];
@@ -442,7 +446,23 @@ function subCategoryName_qr() {
 	}
 	return str;
 }
-//设置一些对象的触发事件
-function setEvent(){
 
+//设置一些对象的触发事件,ini
+//如: 点击高层的项目,全选其下层的所有子项目
+function initEvent() {
+	var i = 0;
+	$(".chk_all_tou").click(function(event) {
+		var bcheck = event.target.checked;
+		var index = parseInt(event.target.getAttribute("index"));
+		for ( i = 0; i < 5; i++) {
+			$(".subcategory.chk_sub_tou")[index * 5 + i].checked = bcheck;
+		}
+	});
+	$(".chk_all_qr").click(function(event) {
+		var bcheck = event.target.checked;
+		var index = parseInt(event.target.getAttribute("index"));
+		for ( i = 0; i < 5; i++) {
+			$(".subcategory.chk_sub_qr")[index * 5 + i].checked = bcheck;
+		}
+	});
 }
