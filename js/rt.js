@@ -2,7 +2,8 @@
  * 1. 构造查询字符串,0表示不查询,1表示查询
  * 2. 解析服务器返回的对象.
  * 类别分为一下部分:
- * 1. tou 电量,正有,反有,正无,反无*5
+ * 1. tou 电量,正有,反有,正无,反无*5(总尖峰平谷) ,
+ *    abTou 为查询使能的数组类似 10000100001000010000 表示4个总
  * 2. qr 象限无功 4(象限)*5(分时电量)=20
  */
 $.extend($.fn.dataTable.defaults, {//设置表格属性
@@ -26,6 +27,12 @@ var isShowSet = true;
 var ShowData = true;
 //时钟id
 var refreshIntervalId;
+var tou_dir = new Array("正向", "反向");
+var tou_pa = new Array("有功", "无功");
+var tou_time = new Array("总", "尖", "峰", "平", "谷");
+var qr_phase = new Array("第一象限无功", "第二象限无功", "第三象限无功", "第四象限无功");
+var qr_time = new Array("总", "尖", "峰", "平", "谷");
+var v_phase = new Array("A", "B", "C");
 $(document).ready(function() {
 	///主过程
 	var btnAutoRefresh = $("#btnAutoRefresh");
@@ -33,8 +40,8 @@ $(document).ready(function() {
 	var obtnRefresh = $("#btnManualRefresh");
 	//界面的生成
 	setMtr();
-	setItem($("#select_item"));
-	setItemFirst($("#select_item_first"));
+	initSubCategoryName($("#select_item"));
+	initMainCategoryName($("#select_item_first"));
 	//然后才是事件的绑定
 	obtnRefresh.click(function() {
 		refresh();
@@ -129,29 +136,29 @@ function refresh() {
 		ShowData = false;
 	}
 	var itemArray = "";
+	var abTou="";
 	var abQr = "";
-	var mtrArray = ""
-	var aItem = $("[id^='touItem']");
-	var aMtr = $("[id^='mtrNo']");
-	var len = aItem.length;
-	var lenMtr = aMtr.length;
-	if ($(".subcategory:checked:enabled").length <= 0) {
-		alert("至少选择一个监视项目");
-		return;
-	}
+	var abMtr = ""
+	var objMtr = $(".meterNumber");
+	var objTou=$(".subcategory.chk_all_tou");
+	var objQr=$(".subcategory.chk_all_qr");
 	if ($(".meterNumber:checked:enabled").length <= 0) {
 		alert("至少选择一个表");
 		return;
 	}
+	if ($(".subcategory:checked:enabled").length <= 0) {
+		alert("至少选择一个监视项目");
+		return;
+	}
 	//构造表号和项目字串 如 001100 1表示有效 项目/表
-	for ( i = 0; i < lenMtr; i++) {
-		mtrArray += aMtr[i].checked ? "1" : "0";
+	for ( i = 0; i < objMtr.length; i++) {
+		abMtr += objMtr[i].checked ? "1" : "0";
 	}
-	for ( i = 0; i < 20; i++) {
-		itemArray += aItem[i].checked ? "1" : 0;
+	for ( i = 0; i < objTou.length; i++) {
+		abTou += objTou[i].checked ? "1" : 0;
 	}
-	for ( i = 4; i < len; i++) {
-		abQr += aItem[i].checked ? "1" : 0;
+	for ( i = 0; i < objQr.length; i++) {
+		abQr += objQr[i].checked ? "1" : 0;
 	}
 
 	$("#btnManualRefresh").attr("disabled", "disabled");
@@ -172,10 +179,9 @@ function refresh() {
 			alert("服务器通讯错误,获取时间失败");
 		}
 	});
-	var strPost = "";
-	strPost += "action=get";
-	strPost += "&mtrArray=" + mtrArray;
-	strPost += "&tou=" + itemArray;
+	var strPost = "action=get";
+	strPost += "&abMtr=" + abMtr;
+	strPost += "&tou=" + abTou;
 	strPost += "&qr=" + abQr;
 	//开始通讯
 	$.ajax({
@@ -186,8 +192,9 @@ function refresh() {
 		data : strPost,
 		success : function(result, textStatus) {
 			var oTou = eval("(" + result + ")");
-			fillDataHead($("#dateHead"), oTou.item_selected);
-			fillData($("#touData"), oTou.mtr, oTou.mtr_selected);
+			var oRealTimeData = eval("(" + result + ")");
+			fillDataHead(oRealTimeData, $("#dateHead"));
+			fillData($("#touData"), oTou.mtr, oTou.abMtr);
 			//oTable.fnDestroy(false);
 			$('#realtime_dat').dataTable();
 		},
@@ -227,82 +234,66 @@ function timestarmpToString(UnixUtcTimestarmp) {
 }
 
 //生成数据表头
-function fillDataHead(oHead, itemArray) {
+function fillDataHead(oRealTimeData, oHead) {
 	oHead.html("");
 	str = "";
-	len = itemArray.length;
 	str += "<th>表号</th>";
 	str += "<th>抄表时刻</th>";
-	var head = false;
-	for ( i = 0; i < len; i++) {
-		if (i % 5 == 0) {//每种数据开始使用全名称
-			head = true;
-		}
-		//ie 不能使用 string[i]来索引char,只能使用charAt
-		if (itemArray.charAt(i) == "1") {
-			str += "<th>";
-			switch (parseInt(i/5)) {
-				case 0:
-					str += head ? "正向<br>有功<br>" : "<br><br>";
-					head = false;
-					break;
-				case 1:
-					str += head ? "反向<br>有功<br>" : "<br><br>";
-					head = false;
-					break;
-				case 2:
-					str += head ? "正向<br>无功<br>" : "<br><br>";
-					head = false;
-					break;
-				case 3:
-					str += head ? "反向<br>无功<br>" : "<br><br>";
-					head = false;
-					break;
-				case 4:
-					str += head ? "一象限<br>无功<br>" : "<br><br>";
-					head = false;
-					break;
-				case 5:
-					str += head ? "二象限<br>无功<br>" : "<br><br>";
-					head = false;
-					break;
-				case 6:
-					str += head ? "三象限<br>无功<br>" : "<br><br>";
-					head = false;
-					break;
-				case 7:
-					str += head ? "四象限<br>无功<br>" : "<br><br>";
-					head = false;
-					break;
-			}
-			switch (i%5) {
-				case 0:
-					str += "总";
-					break;
-				case 1:
-					str += "尖";
-					break;
-				case 2:
-					str += "峰";
-					break;
-				case 3:
-					str += "平";
-					break;
-				case 4:
-					str += "谷";
-					break;
-			}
-			str += "</th>";
-		}
-	}
+	var fullName = false;
+	//电量头
+	str += fillHead_tou(oRealTimeData.abTou);
+	str += fillHead_qr(oRealTimeData.abQr);
 	oHead.html(str);
 }
 
+function fillHead_qr(oRealTimeData_abQr) {
+	var str = "";
+	var qr_len = oRealTimeData_abQr.length;
+	for ( i = 0; i < qr_len; i++) {
+		if (i % 5 == 0) {//每种数据[总尖峰平谷]开始使用全名称
+			fullName = true;
+		}
+		if (oRealTimeData_abQr.charAt(i) == "1") {
+			str += "<th>";
+			if (fullName) {
+				//同项的分时数据不需要全名称
+				fullName = false;
+				str += qr_phase[parseInt(i / 4)];
+			}
+			str += qr_time[i % 5];
+			str += "</th>";
+		}
+	}
+	return str;
+}
+
+function fillHead_tou(oRealTimeData_abTou) {
+	var str = "";
+	var tou_len = oRealTimeData_abTou.length;
+	for ( i = 0; i < tou_len; i++) {
+		if (i % 5 == 0) {//每种数据[总尖峰平谷]开始使用全名称
+			fullName = true;
+		}
+		if (oRealTimeData_abTou.charAt(i) == "1") {
+			str += "<th>";
+			//同项的分时数据不需要全名称
+			if (fullName) {
+				fullName = false;
+				str += tou_dir[parseInt(i / 4) % 2];
+				str += tou_pa[parseInt(i / 10)];
+			}
+			str += tou_time[i % 5];
+			str += "</th>";
+		}
+	}
+	return str;
+}
+
 //在mtrArray 中找到第 i 个 等于"1"的字符,返回这个字符的index
-function fillMtrNumber(i, mtrArray) {
+function fillMtrNumber(i, abMtr) {
 	var num = 0;
-	for ( j = 0; j < mtrArray.length; j++) {
-		if (mtrArray.charAt(j) == "1") {//tian sha de ie!
+	for ( j = 0; j < abMtr.length; j++) {
+		if (abMtr.charAt(j) == "1") {//tian sha de ie!
 			if (num == i) {
 				break;
 			}
@@ -318,12 +309,12 @@ function fillMtrReadTime(UnixUTCTimestarmp) {
 }
 
 //将数据填充到表格中,aMtr:表计对象数组
-function fillData(oTable, aMtr, mtrArray) {
+function fillData(oTable, aMtr, abMtr) {
 	str = "";
 	mtrnum = aMtr.length;
 	for ( i = 0; i < mtrnum; i++) {
 		str += "<tr>";
-		str += fillMtrNumber(i, mtrArray)
+		str += fillMtrNumber(i, abMtr)
 		str += fillMtrReadTime(parseInt(aMtr[i].Meter_ReadTime));
 		for ( j = 0; j < aMtr[i].tou.length; j++) {
 			var iv = (aMtr[i].tou[j][1] == "1") ? "valid " : "iv";
@@ -354,42 +345,35 @@ function init() {
 	$("#realtime_dat").hide();
 }
 
-//设置高一级的项目(大的项目)
-function setItemFirst(obj) {
+//设置高一级的项目(大的项目)主要项目名称
+function initMainCategoryName(obj) {
 	var str = "";
 	var i = 0;
 	var name = "";
-	for ( i = 0; i < 8; i++) {
+	var main_category_len = tou_dir.length * tou_pa.length;
+	var subcategory_len = tou_time.length;
+	for ( i = 0; i < main_category_len; i++) {
 		name = "all_tou" + i;
-		str += "<td colspan=\"5\">" + "<input type=\"checkbox\" name=" + name + " value=\"" + "0" + "\" id=\"" + name + "\" onclick= \"check_click(" + i + ");\"" + " />" + "<label for=" + name + ">";
-		switch(i) {
-			case 0:
-				str += "正向有功";
-				break;
-			case 1:
-				str += "反向有功";
-				break;
-			case 2:
-				str += "正向无功";
-				break;
-			case 3:
-				str += "反向无功";
-				break;
-			case 4:
-				str += "第一象限无功";
-				break;
-			case 5:
-				str += "第二象限无功";
-				break;
-			case 6:
-				str += "第三象限无功";
-				break;
-			case 7:
-				str += "第四象限无功";
-				break;
-		}
-		str += "</label></td>";
+		str += "<td colspan=\"" + subcategory_len + "\">";
+		str += "<label>";
+		str += "<input type=checkbox class=\"chk_all_tou\" id=\"" + name + "\" />";
+		str += tou_dir[i % 2];
+		str += tou_pa[parseInt(i / 2)];
+		str += "</label>";
+		str += "</td>";
 	}
+	main_category_len = qr_phase.length;
+	subcategory_len = qr_time.length;
+	for ( i = 0; i < main_category_len; i++) {
+		name = "all_qr" + i;
+		str += "<td colspan=\"" + subcategory_len + "\">";
+		str += "<label>";
+		str += "<input type=checkbox class=\"chk_all_qr\" id=\"" + name + "\" />";
+		str += qr_phase[i];
+		str += "</label>";
+		str += "</td>";
+	}
+
 	obj.html("");
 	obj.html(str);
 }
@@ -415,30 +399,50 @@ function change_val(i) {
 	$("#touItem" + i)[0].value = bchecked ? "1" : "0";
 }
 
-function setItem(obj) {
+function initSubCategoryName(obj) {
 	var str = "";
-	for ( i = 0; i < 40; i++) {
-		var name = "touItem" + i;
-		str += "<td><input class=\"subcategory\" type=checkbox name=" + name + " value=" + "0" + " onclick= \"change_val(" + i + ");\"" + " id=" + name + " /><br><label for=" + name + ">";
-		switch(i % 5) {
-			case 0:
-				str += "总";
-				break;
-			case 1:
-				str += "尖";
-				break;
-			case 2:
-				str += "峰";
-				break;
-			case 3:
-				str += "平";
-				break;
-			case 4:
-				str += "谷";
-				break;
-		}
-		str += "</label></td>";
-	}
+	str += subCategoryName_tou();
+	str += subCategoryName_qr();
 	obj.html("");
 	obj.html(str);
+}
+
+function subCategoryName_tou() {
+	var str = "";
+	var name = "";
+	var touTotalNum = tou_dir.length * tou_pa.length * tou_time.length;
+	for ( i = 0; i < touTotalNum; i++) {
+		name = "touItem" + i;
+		str += "<td>";
+		str += "<label>";
+		str += "<input class=\"subcategory chk_all_tou\" type=\"checkbox\"";
+		str += "name=" + name;
+		str += " id=" + name + " />";
+		str += "<br>" + tou_time[parseInt(i % 5)];
+		str += "</label>";
+		str += "</td>";
+	}
+	return str;
+}
+
+function subCategoryName_qr() {
+	var str = "";
+	var name = "";
+	var qrTotalNum = qr_phase.length * qr_time.length;
+	for ( i = 0; i < qrTotalNum; i++) {
+		name = "qrItem" + i;
+		str += "<td>";
+		str += "<label>";
+		str += "<input class=\"subcategory chk_all_qr\" type=\"checkbox\"";
+		str += " name=" + name;
+		str += " id=" + name + " />";
+		str += "<br>" + qr_time[parseInt(i % 5)];
+		str += "</label>";
+		str += "</td>";
+	}
+	return str;
+}
+//设置一些对象的触发事件
+function setEvent(){
+
 }
