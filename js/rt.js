@@ -400,12 +400,12 @@ function initMainCategoryName() {
 	$("#instant_select_main").html(str);
 }
 
-function initTdMainCategory_instant(name, name_cn, sub_len) {
+function initTdMainCategory_instant(id, name_cn, sub_len) {
 	var str = "";
-	name = "all_" + name + "0";
+	name = "all_" + id + "0";
 	str += "<td colspan=\"" + sub_len + "\">";
 	str += "<label>";
-	str += "<input type=checkbox class=\"chk_all_" + name + "\"";
+	str += "<input type=checkbox class=\"chk_all_" + id + "\"";
 	str += "id=\"" + name + "\"" + "index=" + "0" + " />";
 	str += name_cn;
 	str += "</label>";
@@ -421,13 +421,13 @@ function initSubCategoryName() {
 	str += subCategoryName_qr();
 	obj.html(str);
 	//瞬时量
-	obj = $("#instant_select_sub");
 	str = "";
-	str += subCategoryName_v();
-	str += subCategoryName_i();
-	str += subCategoryName_p();
-	str += subCategoryName_pf();
-	obj.html(str);
+	str+=subCategoryName_instan("v",phase);
+	str+=subCategoryName_instan("i",phase);
+	str+=subCategoryName_instan("p",power);
+	str+=subCategoryName_instan("q",power);
+	str+=subCategoryName_instan("pf",power);
+	$("#instant_select_sub").html(str);
 }
 
 function subCategoryName_tou() {
@@ -460,6 +460,24 @@ function subCategoryName_qr() {
 		str += " name=" + name;
 		str += " id=" + name + " />";
 		str += "<br>" + qr_time[parseInt(i % 5)];
+		str += "</label>";
+		str += "</td>";
+	}
+	return str;
+}
+//瞬时量选择框生成
+function subCategoryName_instan(id,array) {
+	var str = "";
+	var name = "";
+	var vTotalNum = array.length
+	for ( i = 0; i < vTotalNum; i++) {
+		name = "Item"+ id+ i;
+		str += "<td>";
+		str += "<label>";
+		str += "<input class=\"subcategory chk_sub_"+id+"\" type=\"checkbox\"";
+		str += " name=" + name;
+		str += " id=" + name + " />";
+		str += "<br>" + array[i];
 		str += "</label>";
 		str += "</td>";
 	}
@@ -577,4 +595,35 @@ function initEvent() {
 			$(".subcategory.chk_sub_qr")[index * 5 + i].checked = bcheck;
 		}
 	});
+	$(".chk_all_v").click(function(event) {
+		var bcheck = event.target.checked;
+		for ( i = 0; i < phase.length; i++) {
+			$(".subcategory.chk_sub_v")[i].checked = bcheck;
+		}
+	});
+	$(".chk_all_i").click(function(event) {
+		var bcheck = event.target.checked;
+		for ( i = 0; i < phase.length; i++) {
+			$(".subcategory.chk_sub_i")[i].checked = bcheck;
+		}
+	});
+	$(".chk_all_p").click(function(event) {
+		var bcheck = event.target.checked;
+		for ( i = 0; i < power.length; i++) {
+			$(".subcategory.chk_sub_p")[i].checked = bcheck;
+		}
+	});
+	$(".chk_all_q").click(function(event) {
+		var bcheck = event.target.checked;
+		for ( i = 0; i < power.length; i++) {
+			$(".subcategory.chk_sub_q")[i].checked = bcheck;
+		}
+	});
+	$(".chk_all_pf").click(function(event) {
+		var bcheck = event.target.checked;
+		for ( i = 0; i < power.length; i++) {
+			$(".subcategory.chk_sub_pf")[i].checked = bcheck;
+		}
+	});
+
 }
