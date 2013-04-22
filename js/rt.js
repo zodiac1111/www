@@ -19,12 +19,13 @@ $.extend($.fn.dataTable.defaults, {//设置表格属性
 	//"bAutoWidth" : true
 });
 //表号显示每几个换一行
-var newline = 20;
+var newline = 40;
 //var ie = !-[1,]; //ie则返回true,否则返回false
 var timeZoneMs = 8 * 60 * 60;
 // 当前显示类型.显示参数还是显示数据.开始时显示参数设置
 var isShowSet = true;
 var ShowData = true;
+var ChangeTimeColor = false;
 //时钟id
 var refreshIntervalId;
 var tou_dir = new Array("正向", "反向");
@@ -32,7 +33,8 @@ var tou_pa = new Array("有功", "无功");
 var tou_time = new Array("总", "尖", "峰", "平", "谷");
 var qr_phase = new Array("第一象限无功", "第二象限无功", "第三象限无功", "第四象限无功");
 var qr_time = new Array("总", "尖", "峰", "平", "谷");
-var v_phase = new Array("A", "B", "C");
+var phase = new Array("A", "B", "C");
+var power = new Array("总", "A", "B", "C");
 $(document).ready(function() {
 	///主过程
 	var btnAutoRefresh = $("#btnAutoRefresh");
@@ -40,19 +42,19 @@ $(document).ready(function() {
 	var obtnRefresh = $("#btnManualRefresh");
 	//界面的生成
 	setMtr();
-	initSubCategoryName($("#select_item"));
-	initMainCategoryName($("#select_item_first"));
+	initSubCategoryName();
+	initMainCategoryName();
 	$("#tabs").tabs();
 	initEvent();
 	//然后才是事件的绑定
 	obtnRefresh.click(function() {
 		refresh();
 	});
-	$("#btnSelectItem").click(function() {
+	$("#btnHideMenu").click(function() {
 		if (isShowSet) {
-			$("#tbl_realtime_dat_select").hide();
+			$("#tabs").hide();
 		} else {
-			$("#tbl_realtime_dat_select").show();
+			$("#tabs").show();
 		}
 		isShowSet = !isShowSet;
 	});
@@ -215,7 +217,14 @@ function refresh() {
 //填写时间戳(标识终端实时数据的时间)
 function fillDataTimestarmp(srvTimestarmp) {
 	var str = "数据时刻:";
-	str += timestarmpToString(srvTimestarmp);
+	var timeColor = "";
+	if (ChangeTimeColor) {//变色,使效果看上去更加明显
+		timeColor = "style=\"color: green;\""
+	} else {
+		timeColor = "style=\"color: blue;\""
+	}
+	ChangeTimeColor = !ChangeTimeColor;
+	str += "<span " + timeColor + ">" + timestarmpToString(srvTimestarmp) + "</span>";
 	return str;
 }
 
@@ -349,7 +358,8 @@ function init() {
 }
 
 //设置高一级的项目(大的项目)主要项目名称
-function initMainCategoryName(obj) {
+function initMainCategoryName() {
+	var obj = $("#select_item_first");
 	var str = "";
 	var i = 0;
 	var name = "";
@@ -378,37 +388,45 @@ function initMainCategoryName(obj) {
 		str += "</label>";
 		str += "</td>";
 	}
-
 	obj.html("");
 	obj.html(str);
+	//瞬时量 主项目表头
+	str = "";
+	str += initTdMainCategory_instant("v", "电压", phase.length);
+	str += initTdMainCategory_instant("i", "电流", phase.length);
+	str += initTdMainCategory_instant("p", "有功功率", power.length);
+	str += initTdMainCategory_instant("q", "无功功率", power.length);
+	str += initTdMainCategory_instant("pf", "功率因数", power.length);
+	$("#instant_select_main").html(str);
 }
 
-//单击上层选中下层的5个分时电量
-function check_click(i) {
-	var bchecked = $("#all_tou"+i)[0].checked;
-	for ( ind = 0; ind < 5; ind++) {
-		set_val(i * 5 + ind, bchecked);
-	}
+function initTdMainCategory_instant(name, name_cn, sub_len) {
+	var str = "";
+	name = "all_" + name + "0";
+	str += "<td colspan=\"" + sub_len + "\">";
+	str += "<label>";
+	str += "<input type=checkbox class=\"chk_all_" + name + "\"";
+	str += "id=\"" + name + "\"" + "index=" + "0" + " />";
+	str += name_cn;
+	str += "</label>";
+	str += "</td>";
+	return str;
 }
 
-//设置checkbox选中/不选中
-function set_val(i, bchecked) {
-	$("#touItem" + i)[0].checked = bchecked;
-	$("#touItem" + i)[0].value = bchecked ? "1" : "0";
-}
-
-//选中/不选中中切换,同时更新value
-function change_val(i) {
-	bchecked = $("#touItem" + i)[0].checked;
-	$("#touItem" + i)[0].checked = bchecked;
-	$("#touItem" + i)[0].value = bchecked ? "1" : "0";
-}
-
-function initSubCategoryName(obj) {
+function initSubCategoryName() {
+	//电量
+	var obj = $("#select_item")
 	var str = "";
 	str += subCategoryName_tou();
 	str += subCategoryName_qr();
-	obj.html("");
+	obj.html(str);
+	//瞬时量
+	obj = $("#instant_select_sub");
+	str = "";
+	str += subCategoryName_v();
+	str += subCategoryName_i();
+	str += subCategoryName_p();
+	str += subCategoryName_pf();
 	obj.html(str);
 }
 
@@ -442,6 +460,99 @@ function subCategoryName_qr() {
 		str += " name=" + name;
 		str += " id=" + name + " />";
 		str += "<br>" + qr_time[parseInt(i % 5)];
+		str += "</label>";
+		str += "</td>";
+	}
+	return str;
+}
+
+function subCategoryName_v() {
+	var str = "";
+	var name = "";
+	var vTotalNum = phase.length
+	for ( i = 0; i < vTotalNum; i++) {
+		name = "vItem" + i;
+		str += "<td>";
+		str += "<label>";
+		str += "<input class=\"subcategory chk_sub_v\" type=\"checkbox\"";
+		str += " name=" + name;
+		str += " id=" + name + " />";
+		str += "<br>" + phase[i];
+		str += "</label>";
+		str += "</td>";
+	}
+	return str;
+}
+
+function subCategoryName_i() {
+	var str = "";
+	var name = "";
+	var iTotalNum = phase.length
+	for ( i = 0; i < iTotalNum; i++) {
+		name = "iItem" + i;
+		str += "<td>";
+		str += "<label>";
+		str += "<input class=\"subcategory chk_sub_i\" type=\"checkbox\"";
+		str += " name=" + name;
+		str += " id=" + name + " />";
+		str += "<br>" + phase[i];
+		str += "</label>";
+		str += "</td>";
+	}
+	return str;
+}
+
+//有功功率,子项目
+function subCategoryName_p() {
+	var str = "";
+	var name = "";
+	var pTotalNum = power.length
+	for ( i = 0; i < pTotalNum; i++) {
+		name = "pItem" + i;
+		str += "<td>";
+		str += "<label>";
+		str += "<input class=\"subcategory chk_sub_p\" type=\"checkbox\"";
+		str += " name=" + name;
+		str += " id=" + name + " />";
+		str += "<br>" + power[i];
+		str += "</label>";
+		str += "</td>";
+	}
+	return str;
+}
+
+//无功功率,子项目
+function subCategoryName_q() {
+	var str = "";
+	var name = "";
+	var qTotalNum = power.length
+	for ( i = 0; i < pTotalNum; i++) {
+		name = "qItem" + i;
+		str += "<td>";
+		str += "<label>";
+		str += "<input class=\"subcategory chk_sub_q\" type=\"checkbox\"";
+		str += " name=" + name;
+		str += " id=" + name + " />";
+		str += "<br>" + power[i];
+		str += "</label>";
+		str += "</td>";
+	}
+	return str;
+}
+
+//功率因数,子项目
+function subCategoryName_pf() {
+	var str = "";
+	var name = "";
+	var pfTotalNum = power.length
+	for ( i = 0; i < pfTotalNum; i++) {
+		name = "pfItem" + i;
+		str += "<td>";
+		str += "<label>";
+		str += "<input class=\"subcategory chk_sub_pf\" type=\"checkbox\"";
+		str += " name=" + name;
+		str += " id=" + name + " />";
+		str += "<br>" + power[i];
 		str += "</label>";
 		str += "</td>";
 	}

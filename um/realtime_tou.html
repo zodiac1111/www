@@ -38,10 +38,24 @@
 			</ul>
 			<!-- ###标签1 功能 ### -->
 			<div id="tabs_mtr" title="选择监视的表号">
-				表计选择
+				<table class="sioplanTable" style="width:100%;"  id="tbl_realtime_dat_select" border="1" cellspacing="1" cellpadding="1">
+					<tr>
+						<th style="width:5%;" >表号</th>
+						<td style="width:80%;" id="mtr_selected_bar">
+						<div id="slider-range">
+							表号
+						</div></td>
+						<td style="width:15%;" >自动刷新间隔
+						<input id="autoRefresh_interval" value="5"/>
+						秒</td>
+					</tr>
+					<tr>
+						<td colspan="3"id="mtr_selected" style="text-align:left;">[表号列表]</td>
+					</tr>
+				</table>
 			</div>
 			<div  id="tabs_tou_qr" title="选择监视的电量项目">
-				<table>
+				<table class="sioplanTable" style="width:100%;"  id="tbl_select_tou_qr" border="1" cellspacing="1" cellpadding="1">
 					<tr>
 						<th colspan="40">电度量</th>
 					</tr>
@@ -54,55 +68,35 @@
 				</table>
 			</div>
 			<div  id="tabs_i_v_p_q_pf" title="选择监视的瞬时量项目">
-				瞬时量
+				<table class="sioplanTable" style="width:100%;"  id="tbl_select_instant" border="1" cellspacing="1" cellpadding="1">
+					<tr>
+						<th colspan="40">电度量</th>
+					</tr>
+					<tr id="instant_select_main">
+						<td colspan="40">总项目</td>
+					</tr>
+					<tr id="instant_select_sub">
+						<td colspan="40">分时项目</td>
+					</tr>
+				</table>
 			</div>
 		</div>
 		<!-- 显示/隐藏按钮 -->
 		<div style="position:fixed;right:0px;top:0px;z-index:99;">
-			<button id="btnSelectItem" class="btnSet" >
-				Menu
+			<button id="btnAutoRefresh" class="run" title="按照设定间隔自动刷下数据">
+				自动刷新
+			</button>
+			<button id="btnStopRefresh" class="stop"title="停止自动刷新">
+				停止刷新
+			</button>
+			<button id="btnManualRefresh" class="simple_button"title="点击手动刷新实时数据">
+				手动刷新
+			</button>
+			<button id="btnHideMenu" class="btnSet" title="显示/隐藏菜单" >
+				菜单
 			</button>
 		</div>
 		<!-- 查询项目选择 -->
-		<table class="sioplanTable" style="width:100%;"  id="tbl_realtime_dat_select" border="1" cellspacing="1" cellpadding="1">
-			<tr>
-				<th colspan="2">表号</th>
-				<td colspan="30" id="mtr_selected_bar">
-				<div id="slider-range">
-					表号
-				</div></td>
-				<td colspan="5">自动刷新间隔
-				<input id="autoRefresh_interval" value="5"/>
-				秒</td>
-				<td colspan="3">_</td>
-			</tr>
-			<tr>
-				<td colspan="32" id="mtr_selected" style="text-align:left;">[表号列表]</td>
-				<td colspan="4"><span>
-					<button id="btnAutoRefresh" class="run">
-						自动刷新
-					</button>
-					<br>
-					<button id="btnStopRefresh" class="stop">
-						停止刷新
-					</button></span></td>
-				<td colspan="4">
-				<button id="btnManualRefresh" class="simple_button">
-					手动刷新
-				</button></td>
-			</tr>
-			<!--
-			<tr>
-			<th colspan="40">电度量</th>
-			</tr>
-			<tr id="select_item_first">
-			<td colspan="40">总项目</td>
-			</tr>
-			<tr id="select_item">
-			<td colspan="40">分时项目</td>
-			</tr>
-			-->
-		</table>
 		<br>
 		<!-- 数据显示 -->
 		<table class="realtimeTouTable" style="width:100%;" id="realtime_dat" border="1" cellspacing="1" cellpadding="1">
