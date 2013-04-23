@@ -20,20 +20,13 @@
 		<link type="text/css" href="/style/jquery.dataTables_themeroller.css" rel="stylesheet"/>
 		<script type="text/javascript" src="/js/jquery.dataTables.min.js"></script>
 		<script type="text/javascript" src="/js/rt.js"></script>
-		<script type="text/javascript"></script>
 	</head>
 	<body>
 		<h1>实时数据</h1>
 		<div id="tabs" title="">
 			<ul>
 				<li>
-					<a href="#tabs_mtr">表计选择</a>
-				</li>
-				<li>
-					<a href="#tabs_tou_qr">电量</a>
-				</li>
-				<li>
-					<a href="#tabs_i_v_p_q_pf">瞬时量</a>
+					<a href="#tabs_mtr">监视项目选择</a>
 				</li>
 			</ul>
 			<!-- ###标签1 功能 ### -->
@@ -53,8 +46,6 @@
 						<td colspan="3"id="mtr_selected" style="text-align:left;">[表号列表]</td>
 					</tr>
 				</table>
-			</div>
-			<div  id="tabs_tou_qr" title="选择监视的电量项目">
 				<table class="sioplanTable" style="width:100%;"  id="tbl_select_tou_qr" border="1" cellspacing="1" cellpadding="1">
 					<tr>
 						<th colspan="40">电度量</th>
@@ -66,16 +57,25 @@
 						<td colspan="40">分时项目</td>
 					</tr>
 				</table>
-			</div>
-			<div  id="tabs_i_v_p_q_pf" title="选择监视的瞬时量项目">
 				<table class="sioplanTable" style="width:100%;"  id="tbl_select_instant" border="1" cellspacing="1" cellpadding="1">
 					<tr>
-						<th colspan="40">电度量</th>
+						<th colspan="18">瞬时量</th>
 					</tr>
 					<tr id="instant_select_main">
-						<td colspan="40">总项目</td>
+						<td colspan="18">总项目</td>
 					</tr>
 					<tr id="instant_select_sub">
+						<td colspan="18">分时项目</td>
+					</tr>
+				</table>
+				<table class="sioplanTable" style="width:100%;"  id="tbl_select_maxneed" border="1" cellspacing="1" cellpadding="1">
+					<tr>
+						<th colspan="40">最大需量</th>
+					</tr>
+					<tr id="maxneed_select_main">
+						<td colspan="40">总项目</td>
+					</tr>
+					<tr id="maxneed_select_sub">
 						<td colspan="40">分时项目</td>
 					</tr>
 				</table>

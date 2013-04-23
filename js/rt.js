@@ -33,6 +33,8 @@ var tou_pa = new Array("有功", "无功");
 var tou_time = new Array("总", "尖", "峰", "平", "谷");
 var qr_phase = new Array("第一象限无功", "第二象限无功", "第三象限无功", "第四象限无功");
 var qr_time = new Array("总", "尖", "峰", "平", "谷");
+var maxn_phase = new Array("正向有功", "反向有功", "正向无功", "反向无功");
+var maxn_time = new Array("总", "尖", "峰", "平", "谷");
 var phase = new Array("A", "B", "C");
 var power = new Array("总", "A", "B", "C");
 $(document).ready(function() {
@@ -239,7 +241,7 @@ function refresh() {
 			fillData($("#touData"), oTou.mtr, oTou.abMtr);
 			//oTable.fnDestroy(false);
 			//$("#realtime_dat").fnDestroy(false);
-			var t=$("#realtime_dat").dataTable();
+			var t = $("#realtime_dat").dataTable();
 			//t.fnDraw(true);
 			//$("#realtime_dat").fnDestroy(false);
 
@@ -452,18 +454,7 @@ function initMainCategoryName() {
 		str += "</label>";
 		str += "</td>";
 	}
-	main_category_len = qr_phase.length;
-	subcategory_len = qr_time.length;
-	for ( i = 0; i < main_category_len; i++) {
-		name = "all_qr" + i;
-		str += "<td colspan=\"" + subcategory_len + "\">";
-		str += "<label>";
-		str += "<input type=checkbox class=\"chk_all_qr\"";
-		str += "id=\"" + name + "\"" + "index=" + i + " />";
-		str += qr_phase[i];
-		str += "</label>";
-		str += "</td>";
-	}
+	str += initTdMainCategory_tou("qr", qr_phase, qr_time.length);
 	obj.html("");
 	obj.html(str);
 	//瞬时量 主项目表头
@@ -474,8 +465,29 @@ function initMainCategoryName() {
 	str += initTdMainCategory_instant("q", "无功功率", power.length);
 	str += initTdMainCategory_instant("pf", "功率因数", power.length);
 	$("#instant_select_main").html(str);
+
+	str = initTdMainCategory_tou("maxn", maxn_phase, maxn_time.length);
+	$("#maxneed_select_main").html(str);
 }
 
+///电量选择列表,主项目
+function initTdMainCategory_tou(id, nameArrayCn, sub_len) {
+	var str = "";
+	var name = "";
+	for ( i = 0; i < nameArrayCn.length; i++) {
+		name = "all_" + id + i;
+		str += "<td colspan=\"" + sub_len + "\">";
+		str += "<label>";
+		str += "<input type=checkbox class=\"chk_all_" + id + " \"";
+		str += "id=\"" + name + "\"" + "index=" + i + " />";
+		str += nameArrayCn[i];
+		str += "</label>";
+		str += "</td>";
+	}
+	return str;
+}
+
+//瞬时量选择列表,主项目
 function initTdMainCategory_instant(id, name_cn, sub_len) {
 	var str = "";
 	var name = "all_" + id + "0";
@@ -490,12 +502,12 @@ function initTdMainCategory_instant(id, name_cn, sub_len) {
 }
 
 function initSubCategoryName() {
-	//电量
-	var obj = $("#select_item")
+
 	var str = "";
-	str += subCategoryName_tou();
-	str += subCategoryName_qr();
-	obj.html(str);
+	//电量
+	str += subCategoryName_tatil("tou", 4, tou_time);
+	str += subCategoryName_tatil("qr", qr_phase.length, qr_time);
+	$("#select_item").html(str);
 	//瞬时量
 	str = "";
 	str += subCategoryName_instan("v", phase);
@@ -504,38 +516,23 @@ function initSubCategoryName() {
 	str += subCategoryName_instan("q", power);
 	str += subCategoryName_instan("pf", power);
 	$("#instant_select_sub").html(str);
+	str = subCategoryName_tatil("maxn", maxn_phase.length, maxn_time);
+	$("#maxneed_select_sub").html(str);
 }
 
-function subCategoryName_tou() {
+function subCategoryName_tatil(id, mainArrayLen, subArray) {
 	var str = "";
 	var name = "";
-	var touTotalNum = tou_dir.length * tou_pa.length * tou_time.length;
-	for ( i = 0; i < touTotalNum; i++) {
-		name = "touItem" + i;
+	var subLen = subArray.length;
+	var TotalNum = mainArrayLen * subLen;
+	for ( i = 0; i < TotalNum; i++) {
+		name = "Item_" + id + i;
 		str += "<td>";
 		str += "<label>";
-		str += "<input class=\"subcategory chk_sub_tou\" type=\"checkbox\"";
-		str += "name=" + name;
-		str += " id=" + name + " />";
-		str += "<br>" + tou_time[parseInt(i % 5)];
-		str += "</label>";
-		str += "</td>";
-	}
-	return str;
-}
-
-function subCategoryName_qr() {
-	var str = "";
-	var name = "";
-	var qrTotalNum = qr_phase.length * qr_time.length;
-	for ( i = 0; i < qrTotalNum; i++) {
-		name = "qrItem" + i;
-		str += "<td>";
-		str += "<label>";
-		str += "<input class=\"subcategory chk_sub_qr\" type=\"checkbox\"";
+		str += "<input class=\"subcategory chk_sub_" + id + "\" type=\"checkbox\"";
 		str += " name=" + name;
 		str += " id=" + name + " />";
-		str += "<br>" + qr_time[parseInt(i % 5)];
+		str += "<br>" + subArray[parseInt(i % subLen)];
 		str += "</label>";
 		str += "</td>";
 	}
@@ -609,5 +606,11 @@ function initEvent() {
 			$(".subcategory.chk_sub_pf")[i].checked = bcheck;
 		}
 	});
-
+	$(".chk_all_maxn").click(function(event) {
+		var bcheck = event.target.checked;
+		var index = parseInt(event.target.getAttribute("index"));
+		for ( i = 0; i < 5; i++) {
+			$(".subcategory.chk_sub_maxn")[index * 5 + i].checked = bcheck;
+		}
+	});
 }
