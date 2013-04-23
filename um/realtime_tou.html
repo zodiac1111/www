@@ -26,20 +26,22 @@
 		<div id="tabs" title="">
 			<ul>
 				<li>
-					<a href="#tabs_mtr">监视项目选择</a>
+					<a href="#tabs_base">基本项目选择</a>
+				</li>
+				<li>
+					<a href="#tabs_mtr">电表状态</a>
 				</li>
 			</ul>
-			<!-- ###标签1 功能 ### -->
-			<div id="tabs_mtr" title="选择监视的表号">
+			<!-- ###标签1 基本数据 ### -->
+			<div id="tabs_base">
 				<table class="sioplanTable" style="width:100%;"  id="tbl_realtime_dat_select" border="1" cellspacing="1" cellpadding="1">
 					<tr>
 						<th style="width:5%;" >表号</th>
-						<td style="width:85%;" id="mtr_selected_bar">
-						<div id="slider-range">
+						<td style="width:85%;" id="mtr_selected_bar"><div id="slider-range">
 
 						</div></td>
 						<td style="width:10%;">自动刷新间隔
-						<input id="autoRefresh_interval" value="5"/>
+						<input id="autoRefresh_interval" style="width:4em;" value="5"/>
 						秒</td>
 					</tr>
 					<tr>
@@ -80,9 +82,14 @@
 					</tr>
 				</table>
 			</div>
+			<!-- 标签2 电表数据 -->
+			<div id="tabs_mtr">
+				Debugging
+			</div>
 		</div>
 		<!-- 显示/隐藏按钮 -->
 		<div style="position:fixed;right:0px;top:0px;z-index:99;">
+			<input type="text" id="icon_load" class="wait_icon_24x24_load" />
 			<button id="btnAutoRefresh" class="run" title="按照设定间隔自动刷下数据">
 				自动刷新
 			</button>
@@ -95,22 +102,26 @@
 			<button id="btnHideMenu" class="btnSet" title="显示/隐藏菜单" >
 				菜单
 			</button>
+			<br>
+			<div id="timestamp" style="float:right">
+				刷新时刻
+			</div>
 		</div>
 		<!-- 查询项目选择 -->
 		<br>
-		<!-- 数据显示 -->
+		<!-- 数据显示   -->
 		<table class="realtimeTouTable" style="width:100%;" id="realtime_dat" border="1" cellspacing="1" cellpadding="1">
 			<thead>
-				<tr>
-					<th colspan="99">电度量 (<span id="timestamp">查询时刻</span>)</th>
-				</tr>
 				<tr id="dateHead">
-					<th colspan="99">项目名称</th>
+					<th>项目名称</th>
 				</tr>
 			</thead>
 			<tbody id="touData">
-				<td colspan="99">实时数据</td>
+				<tr>
+					<td>实时数据</td>
+				</tr>
 			</tbody>
 		</table>
+		<br>
 	</body>
 </html>

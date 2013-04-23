@@ -1,23 +1,12 @@
 /* 实时数据脚本,所有实时数据都在这里实现,只要实现:
- * 1. 构造查询字符串,0表示不查询,1表示查询
- * 2. 解析服务器返回的对象.
- * 类别分为一下部分:
- * 1. tou 电量,正有,反有,正无,反无*5(总尖峰平谷) ,
- *    abTou 为查询使能的数组类似 10000100001000010000 表示4个总
- * 2. qr 象限无功 4(象限)*5(分时电量)=20
- */
-$.extend($.fn.dataTable.defaults, {//设置表格属性
-	"bInfo" : false, //显示一共几条这种信息
-	"bFilter" : false, //不要搜索
-	"bSort" : false, //不要排序
-	//"sScrollY" : "320px", //固定高度
-	"bPaginate" : false, //不显示分页
-	//"bScrollCollapse" : true, //显示滚动条
-	"bRetrieve" : true,
-	"bJQueryUI" : true,
-	"bDestroy" : true
-	//"bAutoWidth" : true
-});
+* 1. 构造查询字符串,0表示不查询,1表示查询
+* 2. 解析服务器返回的对象.
+* 类别分为一下部分:
+* 1. tou 电量,正有,反有,正无,反无*5(总尖峰平谷) ,
+*    abTou 为查询使能的数组类似 10000100001000010000 表示4个总
+* 2. qr 象限无功 4(象限)*5(分时电量)=20
+*/
+
 //表号显示每几个换一行
 var newline = 40;
 //var ie = !-[1,]; //ie则返回true,否则返回false
@@ -30,14 +19,28 @@ var ChangeTimeColor = false;
 var refreshIntervalId;
 var tou_dir = new Array("正向", "反向");
 var tou_pa = new Array("有功", "无功");
-var tou_time = new Array("总", "尖", "峰", "平", "谷");
+var tou_time = new Array("<b>总</b>", "尖", "峰", "平", "谷");
 var qr_phase = new Array("第一象限无功", "第二象限无功", "第三象限无功", "第四象限无功");
-var qr_time = new Array("总", "尖", "峰", "平", "谷");
-var maxn_phase = new Array("正向有功", "反向有功", "正向无功", "反向无功");
-var maxn_time = new Array("总", "尖", "峰", "平", "谷");
+var qr_time = new Array("<b>总</b>", "尖", "峰", "平", "谷");
+var maxn_phase = new Array("正向有功需量", "反向有功需量", "正向无功需量", "反向无功需量");
+var maxn_time = new Array("<b>总</b>", "尖", "峰", "平", "谷");
 var phase = new Array("A", "B", "C");
-var power = new Array("总", "A", "B", "C");
+var power = new Array("<b>总</b>", "A", "B", "C");
+var oTable = new Object();
 $(document).ready(function() {
+	$.extend($.fn.dataTable.defaults, {//设置表格属性
+		"bInfo" : false, //显示一共几条这种信息
+		"bFilter" : false, //不要搜索
+		"bSort" : false, //不要排序
+		//"sScrollY" : "320px", //固定高度
+		"bPaginate" : false, //不显示分页
+		//"bScrollCollapse" : true, //显示滚动条
+		"bRetrieve" : true,
+		//"bJQueryUI" : true,
+		"bDestroy" : true,
+		//"bAutoWidth" : true
+	});
+
 	///主过程
 	var btnAutoRefresh = $("#btnAutoRefresh");
 	var btnStopRefresh = $("#btnStopRefresh");
@@ -63,7 +66,6 @@ $(document).ready(function() {
 
 	btnAutoRefresh.click(function() {
 		btnAutoRefresh.hide();
-		$("#btnManualRefresh").attr("disabled", "disabled");
 		var t = parseInt($("#autoRefresh_interval").val()) || 0;
 		if (t < 5) {
 			t = 5;
@@ -71,6 +73,7 @@ $(document).ready(function() {
 		}
 		//点击开始就立刻刷新一次,之后按照定时器刷新.
 		refresh();
+		$("#btnManualRefresh").attr("disabled", "disabled");
 		refreshIntervalId = setInterval(refresh, t * 1000);
 		btnStopRefresh.show();
 	});
@@ -214,6 +217,7 @@ function refresh() {
 
 	$("#btnManualRefresh").attr("disabled", "disabled");
 	//时间
+
 	$.ajax({
 		type : "post",
 		url : "/goform/srv_time",
@@ -234,23 +238,23 @@ function refresh() {
 	var strPost = makePostStr();
 
 	//开始通讯
+	//oTable.fnDestroy();
 	$.ajax({
 		type : "post",
 		url : "/goform/realtime_tou",
 		contentType : "application/x-www-form-urlencoded; charset=utf-8",
 		dataType : "text",
 		data : strPost,
+		beforeSend : function(XMLHttpRequest) {
+			$("#icon_load").show();
+		},
 		success : function(result, textStatus) {
 			var oTou = eval("(" + result + ")");
 			var oRealTimeData = eval("(" + result + ")");
+			//每一行列的数据对齐,方便datetable插件使用
 			fillDataHead(oRealTimeData, $("#dateHead"));
 			fillData($("#touData"), oTou.mtr, oTou.abMtr);
-			//oTable.fnDestroy(false);
-			//$("#realtime_dat").fnDestroy(false);
-			var t = $("#realtime_dat").dataTable();
-			//t.fnDraw(true);
-			//$("#realtime_dat").fnDestroy(false);
-
+			var oTable = $("#realtime_dat").dataTable();
 		},
 		error : function() {//失败
 			alert("服务器通讯错误,获取数据失败");
@@ -258,13 +262,14 @@ function refresh() {
 		//完成(发生在失败或成功之后)
 		complete : function(XMLHttpRequest, textStatus) {
 			$("#btnManualRefresh").removeAttr("disabled");
+			$("#icon_load").hide("fade", 400);
 		}
 	});
 }
 
 //填写时间戳(标识终端实时数据的时间)
 function fillDataTimestarmp(srvTimestarmp) {
-	var str = "数据时刻:";
+	var str = "刷新时刻:";
 	var timeColor = "";
 	if (ChangeTimeColor) {//变色,使效果看上去更加明显
 		timeColor = "style=\"color: green;\""
@@ -310,6 +315,7 @@ function fillDataHead(oRealTimeData, oHead) {
 	str += fillHead_instan(oRealTimeData.abQ, "无功功率", power);
 	str += fillHead_instan(oRealTimeData.abPf, "功率因数", power);
 	//最大需量
+	str += fillHead_maxn(oRealTimeData.abMaxn);
 	oHead.html(str);
 }
 
@@ -326,6 +332,27 @@ function fillHead_instan(oRealTimeData_abInstan, name_cn, subArray) {
 				str += name_cn;
 			}
 			str += subArray[i];
+			str += "</th>";
+		}
+	}
+	return str;
+}
+
+function fillHead_maxn(oRealTimeData_abMaxn) {
+	var str = "";
+	var len = oRealTimeData_abMaxn.length;
+	for ( i = 0; i < len; i++) {
+		if (i % 5 == 0) {//每种数据[总尖峰平谷]开始使用全名称
+			fullName = true;
+		}
+		if (oRealTimeData_abMaxn.charAt(i) == "1") {
+			str += "<th>";
+			if (fullName) {
+				//同项的分时数据不需要全名称
+				fullName = false;
+				str += maxn_phase[parseInt(i / 4)];
+			}
+			str += maxn_time[i % 5];
 			str += "</th>";
 		}
 	}
@@ -406,6 +433,24 @@ function fillData_OneData(aData) {
 	return str;
 }
 
+function fillData_OneData_Maxn(aData) {
+	var j;
+	var str = "";
+	var iv;
+	for ( j = 0; j < aData.length; j++) {
+		iv = (aData[j][1] == "1") ? "valid " : "iv";
+		// *有效*标识
+		str += "<td class=" + iv + ">";
+		str += aData[j][0];
+		//需量无效就不显示发生时间
+		if (aData[j][1] == "1") {
+			str += "(" + timestarmpToString(parseInt(aData[j][2]) - timeZoneMs) + ")";
+		}
+		str += "</td>";
+	}
+	return str;
+}
+
 //将数据填充到表格中,aMtr:表计对象数组
 function fillData(oTable, aMtr, abMtr) {
 	str = "";
@@ -421,6 +466,7 @@ function fillData(oTable, aMtr, abMtr) {
 		str += fillData_OneData(aMtr[i].p);
 		str += fillData_OneData(aMtr[i].q);
 		str += fillData_OneData(aMtr[i].pf);
+		str += fillData_OneData_Maxn(aMtr[i].maxn);
 		str += "</tr>";
 	}
 	oTable.html(str);
@@ -437,8 +483,9 @@ function init() {
 	$(".subcategory.chk_sub_i")[0].checked = true;
 	$("#btnStopRefresh").hide();
 	$("#mtrNo0")[0].checked = true;
-	//$('#realtime_dat').dataTable();
+	oTable = $("#realtime_dat").dataTable();
 	$("#realtime_dat").hide();
+	$("#icon_load").hide();
 }
 
 //设置高一级的项目(大的项目)主要项目名称
