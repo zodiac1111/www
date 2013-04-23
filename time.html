@@ -24,11 +24,10 @@
 	</head>
 	<body>
 		<script type="text/javascript">
+			//时区的秒 东8区 * 60分 * 60秒
 			var timeZoneMs = 8 * 60 * 60;
-			//时区的秒
 			var srvTimestarmp = 0;
-			function Year_Month() {
-				var now = new Date();
+			function Year_Month(now) {
 				var yy = now.getFullYear();
 				var mm = now.getMonth();
 				var mmm = new Array();
@@ -48,19 +47,16 @@
 				return (mm );
 			}
 
-			function thisYear() {
-				var now = new Date();
+			function thisYear(now) {
 				var yy = now.getFullYear();
 				return (yy);
 			}
 
-			function Date_of_Today() {
-				var now = new Date();
+			function Date_of_Today(now) {
 				return (now.getDate() );
 			}
 
-			function Date_of_week() {
-				var now = new Date();
+			function Date_of_week(now) {
 				var w;
 				if (now.getDay() == 0)
 					w = "星期日";
@@ -79,11 +75,8 @@
 				return (w);
 			}
 
-			/**
-			 *本地时间
-			 */
-
-			function CurentTime() {
+			//本地时间
+			function localTime() {
 				var now = new Date();
 				var hh = now.getHours();
 				var mm = now.getMinutes();
@@ -99,12 +92,13 @@
 				return (clock);
 			}
 
-			function CurenDate() {
+			//本地日期
+			function localDate() {
 				var now = new Date();
-				var year = thisYear();
-				var month = Year_Month();
-				var Today = Date_of_Today();
-				var week = Date_of_week();
+				var year = thisYear(now);
+				var month = Year_Month(now);
+				var Today = Date_of_Today(now);
+				var week = Date_of_week(now);
 				var day = year + '年' + month + Today + '日  ' + week;
 				return (day);
 			}
@@ -114,9 +108,6 @@
 			 * 所以与服务器交互都统一使用UTC时间,不管读还是写.
 			 */
 			function UTCYear_Month(now) {
-				//var now = new Date();
-				//var yy = now.getUTCFullYear();
-				//var mm = now.getUTCMonth();
 				var yy = now.getFullYear();
 				var mm = now.getMonth();
 				var mmm = new Array();
@@ -137,7 +128,6 @@
 			}
 
 			function UTC_Date_of_week(now) {
-				//var now = new Date();
 				var w;
 				if (now.getUTCDay() == 0)
 					w = "星期日";
@@ -170,15 +160,12 @@
 			//服务器时间
 			function srvTime(t) {
 				var now = new Date(t * 1000);
-
-				//	var hh = now.getUTCHours();
-				//var mm = now.getUTCMinutes();
 				var hh = now.getHours();
 				var mm = now.getMinutes();
-
 				var ss = now.getTime() % 60000;
 				ss = (ss - (ss % 1000)) / 1000;
-				var clock = hh + ':';
+				var clock = (hh < 10) ? "0" : "";
+				clocl += hh + ':';
 				if (mm < 10)
 					clock += '0';
 				clock += mm + ':';
@@ -189,14 +176,13 @@
 			}
 
 			function refreshCalendarClock() {
-				//document.all.calendarClock1.innerHTML = CurenDate();
-				//document.all.calendarClock2.innerHTML = CurentTime();
-				$("#calendarClock1").html(CurenDate());
-				$("#calendarClock2").html(CurentTime());
+				$("#calendarClock1").html(localDate());
+				$("#calendarClock2").html(localTime());
 				$("#srvDate").html(srvDate(srvTimestarmp));
 				$("#srvTime").html(srvTime(srvTimestarmp));
-				srvTimestarmp += 1;
 				//以后的服务器时间时在首次的基础上累加,不涉及服务端通讯
+				//减少不必要通讯,每一段时间同步一次即可
+				srvTimestarmp += 1;
 			};
 			//仅开始刷新完成后读取一次服务器时间.
 			$(document).ready(function() {
@@ -205,7 +191,6 @@
 				var oUpdateTime = $("#update");
 				oSynTime.button();
 				oUpdateTime.button();
-				//oSynTime.hide();
 				/* 更新终端(update)时间函数 */
 				oUpdateTime.click(function() {
 					//linux 只支持时间戳到秒,所以毫秒部分直接除掉
@@ -224,7 +209,6 @@
 							oSynTime.click();
 						},
 						error : function() {//失败
-							//	oIconLoad.hide();
 							alert("服务器通讯错误.");
 						}
 					});
