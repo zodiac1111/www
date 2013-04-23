@@ -224,6 +224,7 @@ function refresh() {
 		}
 	});
 	var strPost = makePostStr();
+
 	//开始通讯
 	$.ajax({
 		type : "post",
@@ -237,7 +238,11 @@ function refresh() {
 			fillDataHead(oRealTimeData, $("#dateHead"));
 			fillData($("#touData"), oTou.mtr, oTou.abMtr);
 			//oTable.fnDestroy(false);
-			$('#realtime_dat').dataTable();
+			//$("#realtime_dat").fnDestroy(false);
+			var t=$("#realtime_dat").dataTable();
+			//t.fnDraw(true);
+			//$("#realtime_dat").fnDestroy(false);
+
 		},
 		error : function() {//失败
 			alert("服务器通讯错误,获取数据失败");
@@ -247,7 +252,6 @@ function refresh() {
 			$("#btnManualRefresh").removeAttr("disabled");
 		}
 	});
-
 }
 
 //填写时间戳(标识终端实时数据的时间)
@@ -406,21 +410,9 @@ function fillData(oTable, aMtr, abMtr) {
 		str += fillData_OneData(aMtr[i].qr);
 		str += fillData_OneData(aMtr[i].i);
 		str += fillData_OneData(aMtr[i].v);
-		/*for ( j = 0; j < aMtr[i].qr.length; j++) {
-		 var iv = (aMtr[i].qr[j][1] == "1") ? "valid " : "iv";
-		 // *有效*标识
-		 str += "<td class=" + iv + ">" + aMtr[i].qr[j][0] + "</td>";
-		 }
-		 for ( j = 0; j < aMtr[i].v.length; j++) {
-		 var iv = (aMtr[i].v[j][1] == "1") ? "valid " : "iv";
-		 // *有效*标识
-		 str += "<td class=" + iv + ">" + aMtr[i].v[j][0] + "</td>";
-		 }
-		 for ( j = 0; j < aMtr[i].i.length; j++) {
-		 var iv = (aMtr[i].i[j][1] == "1") ? "valid " : "iv";
-		 // *有效*标识
-		 str += "<td class=" + iv + ">" + aMtr[i].i[j][0] + "</td>";
-		 }*/
+		str += fillData_OneData(aMtr[i].p);
+		str += fillData_OneData(aMtr[i].q);
+		str += fillData_OneData(aMtr[i].pf);
 		str += "</tr>";
 	}
 	oTable.html(str);
