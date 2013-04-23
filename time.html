@@ -113,8 +113,8 @@
 			 *服务器日期 **服务器目前全部使用标准时间,不考虑时区,
 			 * 所以与服务器交互都统一使用UTC时间,不管读还是写.
 			 */
-			function UTCYear_Month() {
-				var now = new Date();
+			function UTCYear_Month(now) {
+				//var now = new Date();
 				//var yy = now.getUTCFullYear();
 				//var mm = now.getUTCMonth();
 				var yy = now.getFullYear();
@@ -136,8 +136,8 @@
 				return (mm );
 			}
 
-			function UTC_Date_of_week() {
-				var now = new Date();
+			function UTC_Date_of_week(now) {
+				//var now = new Date();
 				var w;
 				if (now.getUTCDay() == 0)
 					w = "星期日";
@@ -160,9 +160,9 @@
 			function srvDate(t) {
 				var now = new Date(t * 1000);
 				var year = now.getUTCFullYear();
-				var month = UTCYear_Month();
+				var month = UTCYear_Month(now);
 				var Today = now.getUTCDate();
-				var week = UTC_Date_of_week();
+				var week = UTC_Date_of_week(now);
 				var day = year + '年' + month + Today + '日  ' + week;
 				return (day);
 			}
