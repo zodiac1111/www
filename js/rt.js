@@ -133,19 +133,68 @@ function setMtr() {
 	});
 }
 
+//构造查询的字符串,组合他们
+function makePostStr() {
+	var strPost = "action=get";
+	var abMtr = ""
+	var abTou = "";
+	var abQr = "";
+	var abV = "";
+	var abI = "";
+	var abP = "";
+	var abQ = "";
+	var abPf = "";
+	var objMtr = $(".meterNumber");
+	var objTou = $(".subcategory.chk_sub_tou");
+	var objQr = $(".subcategory.chk_sub_qr");
+	var objV = $(".subcategory.chk_sub_v");
+	var objI = $(".subcategory.chk_sub_i");
+	var objP = $(".subcategory.chk_sub_p");
+	var objQ = $(".subcategory.chk_sub_q");
+	var objPf = $(".subcategory.chk_sub_pf");
+	//构造表号和项目字串 如 001100 1表示有效 项目/表
+	for ( i = 0; i < objMtr.length; i++) {
+		abMtr += objMtr[i].checked ? "1" : "0";
+	}
+	for ( i = 0; i < objTou.length; i++) {
+		abTou += objTou[i].checked ? "1" : "0";
+	}
+	for ( i = 0; i < objQr.length; i++) {
+		abQr += objQr[i].checked ? "1" : "0";
+	}
+	for ( i = 0; i < objV.length; i++) {
+		abV += objV[i].checked ? "1" : "0";
+	}
+	for ( i = 0; i < objI.length; i++) {
+		abI += objI[i].checked ? "1" : "0";
+	}
+	for ( i = 0; i < objP.length; i++) {
+		abP += objP[i].checked ? "1" : "0";
+	}
+	for ( i = 0; i < objQ.length; i++) {
+		abQ += objQ[i].checked ? "1" : "0";
+	}
+	for ( i = 0; i < objPf.length; i++) {
+		abPf += objPf[i].checked ? "1" : "0";
+	}
+	strPost += "&mtr=" + abMtr;
+	strPost += "&tou=" + abTou;
+	strPost += "&qr=" + abQr;
+	strPost += "&v=" + abV;
+	strPost += "&i=" + abI;
+	strPost += "&p=" + abP;
+	strPost += "&q=" + abQ;
+	strPost += "&pf=" + abPf;
+	return strPost;
+}
+
 //刷新函数,手动刷新
 function refresh() {
 	if (ShowData) {
 		$("#realtime_dat").show();
 		ShowData = false;
 	}
-	var itemArray = "";
-	var abTou = "";
-	var abQr = "";
-	var abMtr = ""
-	var objMtr = $(".meterNumber");
-	var objTou = $(".subcategory.chk_sub_tou");
-	var objQr = $(".subcategory.chk_sub_qr");
+
 	if ($(".meterNumber:checked:enabled").length <= 0) {
 		alert("至少选择一个表");
 		return;
@@ -153,16 +202,6 @@ function refresh() {
 	if ($(".subcategory:checked:enabled").length <= 0) {
 		alert("至少选择一个监视项目");
 		return;
-	}
-	//构造表号和项目字串 如 001100 1表示有效 项目/表
-	for ( i = 0; i < objMtr.length; i++) {
-		abMtr += objMtr[i].checked ? "1" : "0";
-	}
-	for ( i = 0; i < objTou.length; i++) {
-		abTou += objTou[i].checked ? "1" : 0;
-	}
-	for ( i = 0; i < objQr.length; i++) {
-		abQr += objQr[i].checked ? "1" : 0;
 	}
 
 	$("#btnManualRefresh").attr("disabled", "disabled");
@@ -184,10 +223,7 @@ function refresh() {
 			alert("服务器通讯错误,获取时间失败");
 		}
 	});
-	var strPost = "action=get";
-	strPost += "&abMtr=" + abMtr;
-	strPost += "&tou=" + abTou;
-	strPost += "&qr=" + abQr;
+	var strPost = makePostStr();
 	//开始通讯
 	$.ajax({
 		type : "post",
@@ -255,7 +291,33 @@ function fillDataHead(oRealTimeData, oHead) {
 	//电量头
 	str += fillHead_tou(oRealTimeData.abTou);
 	str += fillHead_qr(oRealTimeData.abQr);
+	//瞬时量也放在一个表格里
+	str += fillHead_instan(oRealTimeData.abV, "电压", phase);
+	str += fillHead_instan(oRealTimeData.abI, "电流", phase);
+	str += fillHead_instan(oRealTimeData.abP, "有功功率", power);
+	str += fillHead_instan(oRealTimeData.abQ, "无功功率", power);
+	str += fillHead_instan(oRealTimeData.abPf, "功率因数", power);
+	//最大需量
 	oHead.html(str);
+}
+
+function fillHead_instan(oRealTimeData_abInstan, name_cn, subArray) {
+	var str = "";
+	var len = oRealTimeData_abInstan.length;
+	var fullName = true;
+	for ( i = 0; i < len; i++) {
+		if (oRealTimeData_abInstan.charAt(i) == "1") {
+			str += "<th>";
+			if (fullName) {
+				//同项的分时数据不需要全名称
+				fullName = false;
+				str += name_cn;
+			}
+			str += subArray[i];
+			str += "</th>";
+		}
+	}
+	return str;
 }
 
 function fillHead_qr(oRealTimeData_abQr) {
@@ -320,6 +382,18 @@ function fillMtrReadTime(UnixUTCTimestarmp) {
 	return "<td>" + timestarmpToString(UnixUTCTimestarmp - timeZoneMs) + "</td>";
 }
 
+function fillData_OneData(aData) {
+	var j;
+	var str = "";
+	var iv;
+	for ( j = 0; j < aData.length; j++) {
+		iv = (aData[j][1] == "1") ? "valid " : "iv";
+		// *有效*标识
+		str += "<td class=" + iv + ">" + aData[j][0] + "</td>";
+	}
+	return str;
+}
+
 //将数据填充到表格中,aMtr:表计对象数组
 function fillData(oTable, aMtr, abMtr) {
 	str = "";
@@ -328,19 +402,27 @@ function fillData(oTable, aMtr, abMtr) {
 		str += "<tr>";
 		str += fillMtrNumber(i, abMtr)
 		str += fillMtrReadTime(parseInt(aMtr[i].Meter_ReadTime));
-		for ( j = 0; j < aMtr[i].tou.length; j++) {
-			var iv = (aMtr[i].tou[j][1] == "1") ? "valid " : "iv";
-			// *有效*标识
-			str += "<td class=" + iv + ">" + aMtr[i].tou[j][0] + "</td>";
-		}
-		for ( j = 0; j < aMtr[i].qr.length; j++) {
-			var iv = (aMtr[i].qr[j][1] == "1") ? "valid " : "iv";
-			// *有效*标识
-			str += "<td class=" + iv + ">" + aMtr[i].qr[j][0] + "</td>";
-		}
+		str += fillData_OneData(aMtr[i].tou);
+		str += fillData_OneData(aMtr[i].qr);
+		str += fillData_OneData(aMtr[i].i);
+		str += fillData_OneData(aMtr[i].v);
+		/*for ( j = 0; j < aMtr[i].qr.length; j++) {
+		 var iv = (aMtr[i].qr[j][1] == "1") ? "valid " : "iv";
+		 // *有效*标识
+		 str += "<td class=" + iv + ">" + aMtr[i].qr[j][0] + "</td>";
+		 }
+		 for ( j = 0; j < aMtr[i].v.length; j++) {
+		 var iv = (aMtr[i].v[j][1] == "1") ? "valid " : "iv";
+		 // *有效*标识
+		 str += "<td class=" + iv + ">" + aMtr[i].v[j][0] + "</td>";
+		 }
+		 for ( j = 0; j < aMtr[i].i.length; j++) {
+		 var iv = (aMtr[i].i[j][1] == "1") ? "valid " : "iv";
+		 // *有效*标识
+		 str += "<td class=" + iv + ">" + aMtr[i].i[j][0] + "</td>";
+		 }*/
 		str += "</tr>";
 	}
-	oTable.html("");
 	oTable.html(str);
 	return;
 }
@@ -351,6 +433,8 @@ function init() {
 	$(".subcategory.chk_sub_tou")[5].checked = true;
 	$(".subcategory.chk_sub_tou")[10].checked = true;
 	$(".subcategory.chk_sub_tou")[15].checked = true;
+	$(".subcategory.chk_sub_v")[0].checked = true;
+	$(".subcategory.chk_sub_i")[0].checked = true;
 	$("#btnStopRefresh").hide();
 	$("#mtrNo0")[0].checked = true;
 	//$('#realtime_dat').dataTable();
@@ -402,7 +486,7 @@ function initMainCategoryName() {
 
 function initTdMainCategory_instant(id, name_cn, sub_len) {
 	var str = "";
-	name = "all_" + id + "0";
+	var name = "all_" + id + "0";
 	str += "<td colspan=\"" + sub_len + "\">";
 	str += "<label>";
 	str += "<input type=checkbox class=\"chk_all_" + id + "\"";
@@ -422,11 +506,11 @@ function initSubCategoryName() {
 	obj.html(str);
 	//瞬时量
 	str = "";
-	str+=subCategoryName_instan("v",phase);
-	str+=subCategoryName_instan("i",phase);
-	str+=subCategoryName_instan("p",power);
-	str+=subCategoryName_instan("q",power);
-	str+=subCategoryName_instan("pf",power);
+	str += subCategoryName_instan("v", phase);
+	str += subCategoryName_instan("i", phase);
+	str += subCategoryName_instan("p", power);
+	str += subCategoryName_instan("q", power);
+	str += subCategoryName_instan("pf", power);
 	$("#instant_select_sub").html(str);
 }
 
@@ -465,112 +549,20 @@ function subCategoryName_qr() {
 	}
 	return str;
 }
+
 //瞬时量选择框生成
-function subCategoryName_instan(id,array) {
+function subCategoryName_instan(id, array) {
 	var str = "";
 	var name = "";
 	var vTotalNum = array.length
 	for ( i = 0; i < vTotalNum; i++) {
-		name = "Item"+ id+ i;
+		name = "Item" + id + i;
 		str += "<td>";
 		str += "<label>";
-		str += "<input class=\"subcategory chk_sub_"+id+"\" type=\"checkbox\"";
+		str += "<input class=\"subcategory chk_sub_" + id + "\" type=\"checkbox\"";
 		str += " name=" + name;
 		str += " id=" + name + " />";
 		str += "<br>" + array[i];
-		str += "</label>";
-		str += "</td>";
-	}
-	return str;
-}
-
-function subCategoryName_v() {
-	var str = "";
-	var name = "";
-	var vTotalNum = phase.length
-	for ( i = 0; i < vTotalNum; i++) {
-		name = "vItem" + i;
-		str += "<td>";
-		str += "<label>";
-		str += "<input class=\"subcategory chk_sub_v\" type=\"checkbox\"";
-		str += " name=" + name;
-		str += " id=" + name + " />";
-		str += "<br>" + phase[i];
-		str += "</label>";
-		str += "</td>";
-	}
-	return str;
-}
-
-function subCategoryName_i() {
-	var str = "";
-	var name = "";
-	var iTotalNum = phase.length
-	for ( i = 0; i < iTotalNum; i++) {
-		name = "iItem" + i;
-		str += "<td>";
-		str += "<label>";
-		str += "<input class=\"subcategory chk_sub_i\" type=\"checkbox\"";
-		str += " name=" + name;
-		str += " id=" + name + " />";
-		str += "<br>" + phase[i];
-		str += "</label>";
-		str += "</td>";
-	}
-	return str;
-}
-
-//有功功率,子项目
-function subCategoryName_p() {
-	var str = "";
-	var name = "";
-	var pTotalNum = power.length
-	for ( i = 0; i < pTotalNum; i++) {
-		name = "pItem" + i;
-		str += "<td>";
-		str += "<label>";
-		str += "<input class=\"subcategory chk_sub_p\" type=\"checkbox\"";
-		str += " name=" + name;
-		str += " id=" + name + " />";
-		str += "<br>" + power[i];
-		str += "</label>";
-		str += "</td>";
-	}
-	return str;
-}
-
-//无功功率,子项目
-function subCategoryName_q() {
-	var str = "";
-	var name = "";
-	var qTotalNum = power.length
-	for ( i = 0; i < pTotalNum; i++) {
-		name = "qItem" + i;
-		str += "<td>";
-		str += "<label>";
-		str += "<input class=\"subcategory chk_sub_q\" type=\"checkbox\"";
-		str += " name=" + name;
-		str += " id=" + name + " />";
-		str += "<br>" + power[i];
-		str += "</label>";
-		str += "</td>";
-	}
-	return str;
-}
-
-//功率因数,子项目
-function subCategoryName_pf() {
-	var str = "";
-	var name = "";
-	var pfTotalNum = power.length
-	for ( i = 0; i < pfTotalNum; i++) {
-		name = "pfItem" + i;
-		str += "<td>";
-		str += "<label>";
-		str += "<input class=\"subcategory chk_sub_pf\" type=\"checkbox\"";
-		str += " name=" + name;
-		str += " id=" + name + " />";
-		str += "<br>" + power[i];
 		str += "</label>";
 		str += "</td>";
 	}
