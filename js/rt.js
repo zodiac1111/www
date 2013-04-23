@@ -473,16 +473,24 @@ function fillData(oTable, aMtr, abMtr) {
 	return;
 }
 
-//设定初始(默认)状态.
+//设定初始(默认)状态.勾选一些量,隐藏不必要的表格
 function init() {
+	//默认个表
+	$("#mtrNo0")[0].checked = true;
+	//电量
 	$(".subcategory.chk_sub_tou")[0].checked = true;
 	$(".subcategory.chk_sub_tou")[5].checked = true;
 	$(".subcategory.chk_sub_tou")[10].checked = true;
 	$(".subcategory.chk_sub_tou")[15].checked = true;
+	//瞬时量
 	$(".subcategory.chk_sub_v")[0].checked = true;
+	$(".subcategory.chk_sub_v")[1].checked = true;
+	$(".subcategory.chk_sub_v")[2].checked = true;
 	$(".subcategory.chk_sub_i")[0].checked = true;
+	$(".subcategory.chk_sub_i")[1].checked = true;
+	$(".subcategory.chk_sub_i")[2].checked = true;
+	//不必显示
 	$("#btnStopRefresh").hide();
-	$("#mtrNo0")[0].checked = true;
 	oTable = $("#realtime_dat").dataTable();
 	$("#realtime_dat").hide();
 	$("#icon_load").hide();
