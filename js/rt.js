@@ -146,6 +146,7 @@ function makePostStr() {
 	var abP = "";
 	var abQ = "";
 	var abPf = "";
+	var abMaxn = "";
 	var objMtr = $(".meterNumber");
 	var objTou = $(".subcategory.chk_sub_tou");
 	var objQr = $(".subcategory.chk_sub_qr");
@@ -154,6 +155,7 @@ function makePostStr() {
 	var objP = $(".subcategory.chk_sub_p");
 	var objQ = $(".subcategory.chk_sub_q");
 	var objPf = $(".subcategory.chk_sub_pf");
+	var objMaxn = $(".subcategory.chk_sub_maxn");
 	//构造表号和项目字串 如 001100 1表示有效 项目/表
 	for ( i = 0; i < objMtr.length; i++) {
 		abMtr += objMtr[i].checked ? "1" : "0";
@@ -179,6 +181,9 @@ function makePostStr() {
 	for ( i = 0; i < objPf.length; i++) {
 		abPf += objPf[i].checked ? "1" : "0";
 	}
+	for ( i = 0; i < objMaxn.length; i++) {
+		abMaxn += objMaxn[i].checked ? "1" : "0";
+	}
 	strPost += "&mtr=" + abMtr;
 	strPost += "&tou=" + abTou;
 	strPost += "&qr=" + abQr;
@@ -187,6 +192,7 @@ function makePostStr() {
 	strPost += "&p=" + abP;
 	strPost += "&q=" + abQ;
 	strPost += "&pf=" + abPf;
+	strPost += "&maxn=" + abMaxn;
 	return strPost;
 }
 
