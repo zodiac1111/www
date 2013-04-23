@@ -36,7 +36,7 @@ $(document).ready(function() {
 		"bPaginate" : false, //不显示分页
 		//"bScrollCollapse" : true, //显示滚动条
 		"bRetrieve" : true,
-		//"bJQueryUI" : true,
+		"bJQueryUI" : true,
 		"bDestroy" : true,
 		//"bAutoWidth" : true
 	});
@@ -57,9 +57,9 @@ $(document).ready(function() {
 	});
 	$("#btnHideMenu").click(function() {
 		if (isShowSet) {
-			$("#tabs").hide();
+			$("#tabs").hide("fade", 400);
 		} else {
-			$("#tabs").show();
+			$("#tabs").show("fade", 400);
 		}
 		isShowSet = !isShowSet;
 	});
