@@ -477,18 +477,19 @@ function fillData(oTable, aMtr, abMtr) {
 function init() {
 	//默认个表
 	$("#mtrNo0")[0].checked = true;
+	//默认不要选择任何量
 	//电量
-	$(".subcategory.chk_sub_tou")[0].checked = true;
-	$(".subcategory.chk_sub_tou")[5].checked = true;
-	$(".subcategory.chk_sub_tou")[10].checked = true;
-	$(".subcategory.chk_sub_tou")[15].checked = true;
+	//$(".subcategory.chk_sub_tou")[0].checked = true;
+	//$(".subcategory.chk_sub_tou")[5].checked = true;
+	//$(".subcategory.chk_sub_tou")[10].checked = true;
+	//$(".subcategory.chk_sub_tou")[15].checked = true;
 	//瞬时量
-	$(".subcategory.chk_sub_v")[0].checked = true;
-	$(".subcategory.chk_sub_v")[1].checked = true;
-	$(".subcategory.chk_sub_v")[2].checked = true;
-	$(".subcategory.chk_sub_i")[0].checked = true;
-	$(".subcategory.chk_sub_i")[1].checked = true;
-	$(".subcategory.chk_sub_i")[2].checked = true;
+	//$(".subcategory.chk_sub_v")[0].checked = true;
+	//$(".subcategory.chk_sub_v")[1].checked = true;
+	//$(".subcategory.chk_sub_v")[2].checked = true;
+	//$(".subcategory.chk_sub_i")[0].checked = true;
+	//$(".subcategory.chk_sub_i")[1].checked = true;
+	//$(".subcategory.chk_sub_i")[2].checked = true;
 	//不必显示
 	$("#btnStopRefresh").hide();
 	oTable = $("#realtime_dat").dataTable();
