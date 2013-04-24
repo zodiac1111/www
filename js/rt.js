@@ -5,16 +5,23 @@
 * 1. tou 电量,正有,反有,正无,反无*5(总尖峰平谷) ,
 *    abTou 为查询使能的数组类似 10000100001000010000 表示4个总
 * 2. qr 象限无功 4(象限)*5(分时电量)=20
+* 3. 瞬时量=电压,电流,有功功率无功功率,功率因数
+* 4. 最大需量.
+* 提交查询字串都一字符0/1表示有效/无效.
+* post方式提交.参见函数 makePostStr() .
 */
 
 //表号显示每几个换一行
 var newline = 40;
 //var ie = !-[1,]; //ie则返回true,否则返回false
+//时区之在客户端处理,默认与服务端交互时都使用的标准时区,所以需要转换.
 var timeZoneMs = 8 * 60 * 60;
 // 当前显示类型.显示参数还是显示数据.开始时显示参数设置
 var isShowSet = true;
 var ShowData = true;
 var ChangeTimeColor = false;
+//自动查询
+var bAutoQuery=false;
 //时钟id
 var refreshIntervalId;
 var tou_dir = new Array("正向", "反向");
@@ -40,19 +47,37 @@ $(document).ready(function() {
 		"bDestroy" : true,
 		//"bAutoWidth" : true
 	});
-
-	///主过程
-	var btnAutoRefresh = $("#btnAutoRefresh");
-	var btnStopRefresh = $("#btnStopRefresh");
-	var obtnRefresh = $("#btnManualRefresh");
 	//界面的生成
-	setMtr();
-	initSubCategoryName();
-	initMainCategoryName();
 	$("#tabs").tabs();
+	initMtr();
+	initMainCategoryName();
+	initSubCategoryName();
+	//相关事件,勾选触发其他勾选
 	initEvent();
-	//然后才是事件的绑定
-	obtnRefresh.click(function() {
+	//菜单事件的绑定
+	$("#btnAutoRefresh").click(function() {
+		btnAutoRefresh.hide();
+		var t = parseInt($("#autoRefresh_interval").val()) || 0;
+		if (t < 5) {
+			t = 5;
+			$("#autoRefresh_interval").val("5");
+		}
+		//点击开始就立刻刷新一次,之后按照定时器刷新.
+		refresh();
+		$("#btnManualRefresh").attr("disabled", "disabled");
+		refreshIntervalId = setInterval(refresh, t * 1000);
+		$("#btnStopRefresh").show();
+		bAutoQuery=true;
+	});
+	$("#btnStopRefresh").click(function() {
+		$("#btnStopRefresh").hide();
+		$("#btnManualRefresh").removeAttr("disabled");
+		clearInterval(refreshIntervalId);
+		btnAutoRefresh.show();
+		bAutoQuery=false;
+	});
+	//最重要事件:提交/查询
+	$("#btnManualRefresh").click(function() {
 		refresh();
 	});
 	$("#btnHideMenu").click(function() {
@@ -64,29 +89,12 @@ $(document).ready(function() {
 		isShowSet = !isShowSet;
 	});
 
-	btnAutoRefresh.click(function() {
-		btnAutoRefresh.hide();
-		var t = parseInt($("#autoRefresh_interval").val()) || 0;
-		if (t < 5) {
-			t = 5;
-			$("#autoRefresh_interval").val("5");
-		}
-		//点击开始就立刻刷新一次,之后按照定时器刷新.
-		refresh();
-		$("#btnManualRefresh").attr("disabled", "disabled");
-		refreshIntervalId = setInterval(refresh, t * 1000);
-		btnStopRefresh.show();
-	});
-	btnStopRefresh.click(function() {
-		btnStopRefresh.hide();
-		$("#btnManualRefresh").removeAttr("disabled");
-		clearInterval(refreshIntervalId);
-		btnAutoRefresh.show();
-	});
 	init();
 });
-//根据系统参数设置表个数
-function setMtr() {
+/**
+ * 与服务器交互,得到系统参数-表计个数,按照表计个数生成界面,供选择
+ */
+function initMtr() {
 	var mtrNumber = 0;
 	var str = "";
 	$.ajax({
@@ -199,7 +207,7 @@ function makePostStr() {
 	return strPost;
 }
 
-//刷新函数,手动刷新
+//刷新函数,手动刷新,提交查询字符串,返回json数据,填写内容
 function refresh() {
 	if (ShowData) {
 		$("#realtime_dat").show();
@@ -261,7 +269,10 @@ function refresh() {
 		},
 		//完成(发生在失败或成功之后)
 		complete : function(XMLHttpRequest, textStatus) {
-			$("#btnManualRefresh").removeAttr("disabled");
+			//自动刷新时不允许手动,只能先停掉
+			if(!bAutoQuery){
+				$("#btnManualRefresh").removeAttr("disabled");
+			}
 			$("#icon_load").hide("fade", 400);
 		}
 	});
@@ -444,7 +455,7 @@ function fillData_OneData_Maxn(aData) {
 		str += aData[j][0];
 		//需量无效就不显示发生时间,
 		//有效但是没有发生时间的,也不显示时间,但还是绿色的,与为采集区分开来
-		if (aData[j][1] == "1" && parseInt(aData[j][2])>0 ) {
+		if (aData[j][1] == "1" && parseInt(aData[j][2]) > 0) {
 			str += "(" + timestarmpToString(parseInt(aData[j][2]) - timeZoneMs) + ")";
 		}
 		str += "</td>";
@@ -498,7 +509,7 @@ function init() {
 	$("#icon_load").hide();
 }
 
-//设置高一级的项目(大的项目)主要项目名称
+//设置高一级的项目(大的项目)主要项目名称,如正向有功,电压,反向无功需量 这些
 function initMainCategoryName() {
 	var obj = $("#select_item_first");
 	var str = "";
@@ -564,6 +575,9 @@ function initTdMainCategory_instant(id, name_cn, sub_len) {
 	return str;
 }
 
+/**
+ * 生成子项目,如正想有功的总,最大需量的平这些小项目的勾选
+ */
 function initSubCategoryName() {
 
 	var str = "";
