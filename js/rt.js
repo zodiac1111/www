@@ -442,8 +442,9 @@ function fillData_OneData_Maxn(aData) {
 		// *有效*标识
 		str += "<td class=" + iv + ">";
 		str += aData[j][0];
-		//需量无效就不显示发生时间
-		if (aData[j][1] == "1") {
+		//需量无效就不显示发生时间,
+		//有效但是没有发生时间的,也不显示时间,但还是绿色的,与为采集区分开来
+		if (aData[j][1] == "1" && parseInt(aData[j][2])>0 ) {
 			str += "(" + timestarmpToString(parseInt(aData[j][2]) - timeZoneMs) + ")";
 		}
 		str += "</td>";
