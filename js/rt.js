@@ -56,7 +56,7 @@ $(document).ready(function() {
 	initEvent();
 	//菜单事件的绑定
 	$("#btnAutoRefresh").click(function() {
-		btnAutoRefresh.hide();
+		$("#btnAutoRefresh").hide();
 		var t = parseInt($("#autoRefresh_interval").val()) || 0;
 		if (t < 5) {
 			t = 5;
@@ -73,7 +73,7 @@ $(document).ready(function() {
 		$("#btnStopRefresh").hide();
 		$("#btnManualRefresh").removeAttr("disabled");
 		clearInterval(refreshIntervalId);
-		btnAutoRefresh.show();
+		$("#btnAutoRefresh").show();
 		bAutoQuery=false;
 	});
 	//最重要事件:提交/查询
