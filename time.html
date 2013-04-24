@@ -149,10 +149,10 @@
 			//服务器日期
 			function srvDate(t) {
 				var now = new Date(t * 1000);
-				var year = now.getUTCFullYear();
-				var month = UTCYear_Month(now);
-				var Today = now.getUTCDate();
-				var week = UTC_Date_of_week(now);
+				var year = thisYear(now);
+				var month = Year_Month(now);
+				var Today =  Date_of_Today(now);
+				var week = Date_of_week(now);
 				var day = year + '年' + month + Today + '日  ' + week;
 				return (day);
 			}
