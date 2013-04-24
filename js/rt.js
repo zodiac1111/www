@@ -622,6 +622,7 @@ function subCategoryName_instan(id, array) {
 //设置一些对象的触发事件,ini
 //如: 点击高层的项目,全选其下层的所有子项目
 function initEvent() {
+	//电度量
 	var i = 0;
 	$(".chk_all_tou").click(function(event) {
 		var bcheck = event.target.checked;
@@ -637,6 +638,17 @@ function initEvent() {
 			$(".subcategory.chk_sub_qr")[index * 5 + i].checked = bcheck;
 		}
 	});
+	//电度量全选
+	$("#chk_tou_all").click(function(event) {
+		var bcheck = event.target.checked;
+		var objAll = $(".chk_all_tou,.chk_all_qr,.chk_sub_tou,.chk_sub_qr");
+		var len = objAll.length;
+		for ( i = 0; i < len; i++) {
+			objAll[i].checked = bcheck;
+		}
+	});
+
+	//各种瞬时量
 	$(".chk_all_v").click(function(event) {
 		var bcheck = event.target.checked;
 		for ( i = 0; i < phase.length; i++) {
@@ -667,11 +679,31 @@ function initEvent() {
 			$(".subcategory.chk_sub_pf")[i].checked = bcheck;
 		}
 	});
+	//瞬时量全选
+	$("#chk_instant_all").click(function(event) {
+		var bcheck = event.target.checked;
+		var objAll = $(".chk_all_v,.chk_all_i,.chk_all_p,.chk_all_q,.chk_all_pf," + ".chk_sub_v,.chk_sub_i,.chk_sub_p,.chk_sub_q,.chk_sub_pf");
+		var len = objAll.length;
+		for ( i = 0; i < len; i++) {
+			objAll[i].checked = bcheck;
+		}
+	});
+
+	//最大需量
 	$(".chk_all_maxn").click(function(event) {
 		var bcheck = event.target.checked;
 		var index = parseInt(event.target.getAttribute("index"));
 		for ( i = 0; i < 5; i++) {
 			$(".subcategory.chk_sub_maxn")[index * 5 + i].checked = bcheck;
+		}
+	});
+	//全选所有最大需量项目
+	$("#chk_maxneed_all").click(function(event) {
+		var bcheck = event.target.checked;
+		var objAll = $(".chk_all_maxn,.chk_sub_maxn");
+		var len = objAll.length;
+		for ( i = 0; i < len; i++) {
+			objAll[i].checked = bcheck;
 		}
 	});
 }
