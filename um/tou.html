@@ -23,61 +23,9 @@
 		<link type="text/css" href="/style/jquery.dataTables.css" rel="stylesheet"  />
 		<link type="text/css" href="/style/jquery.dataTables_themeroller.css" rel="stylesheet"  />
 		<script type="text/javascript" src="/js/jquery.dataTables.min.js"></script>
+		<script type="text/javascript" src="/js/tou.js"></script>
 		<script type="text/javascript">
-			$(document).ready(function() {
-				var stime_stamp = $("#stime_stamp");
-				var etime_stamp = $("#etime_stamp");
-				var obtnQurey = $("#btnQuery");
-				///按钮,查询历史数据
-				obtnQurey.button({
-					icons : {
-						primary : "ui-icon-search"
-					}
-				});
-				$("#history_tou").hide();
-				$.extend($.fn.dataTable.defaults, {//设置表格属性
-					"bInfo" : true, //显示一共几条这种信息
-					"bFilter" : false, //不要搜索
-					"bSort" : false, //不要排序
-					"sScrollY" : "320px", //固定高度
-					"bPaginate" : false, //不分页
-					"bScrollCollapse" : true, //显示滚动条
-					//"bRetrieve" : true,
-					"bJQueryUI" : true,
-					"bDestroy" : true,
-					"bAutoWidth" : true
-				});
-				$("#save_log").hide();
-				var oTable = $('#tbl_history_tou').dataTable();
-				//$('#tbl_sysReset').dataTable();
-				//$('#tbl_history_tou').dataTable();
-				obtnQurey.click(function() {
-					//$('#tbl_history_tou').dataTable();
-					//$("#tr_dat").html("<tr><td colspan=\"23\" ></td></tr>");
-					//$("#tr_dat tr td").addClass('load_bgpic_hight');
-					if (stime_stamp.val() == "0" || stime_stamp.val() == "") {
-						alert("请选择开始时刻")
-						return false;
-					}
-					if (etime_stamp.val() == "0" || etime_stamp.val() == "") {
-						alert("请选择截止时刻")
-						return false;
-					}
-					oTable.fnDestroy(false);
-					$.post('/goform/get_tou', $("#history_tou").serialize() + "&mtr_no=" + $("#mtr_no").val(), function(result) {
-						//$("#tr_dat tr td").removeClass('load_bgpic_hight');
-						//$('#tbl_history_tou').dataTable();
-						$("#tr_dat").html(result);
-						//oTable.fnDestroy();
-						oTable = $('#tbl_history_tou').dataTable();
-						//$('#tbl_history_tou').dataTable();
-						//oTable.fnAdjustColumnSizing();
-						//oTable.fnAdjustColumnSizing();
-						//oTable.fnUpdate();
-						//oTable.fnDraw(false);
-					});
-				});
-			});
+
 		</script>
 	</head>
 	<body >
@@ -94,7 +42,7 @@
 			</label>
 			<button class="ui-button" id="btnQuery" title="查询选中时段和指定表计的电量数据">
 				查询
-			</button>
+			</button><input type="text" id="icon_load" class="wait_icon_24x24_load" />
 			<form id="history_tou" name="history_tou">
 				<label> 时间戳(秒):
 					<input type="text" name="stime_stamp" id="stime_stamp" value="0" readonly>
