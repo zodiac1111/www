@@ -21,7 +21,7 @@ var isShowSet = true;
 var ShowData = true;
 var ChangeTimeColor = false;
 //自动查询
-var bAutoQuery=false;
+var bAutoQuery = false;
 //时钟id
 var refreshIntervalId;
 var tou_dir = new Array("正向", "反向");
@@ -56,6 +56,9 @@ $(document).ready(function() {
 	initEvent();
 	//菜单事件的绑定
 	$("#btnAutoRefresh").click(function() {
+		if(!isSelectedLegal()){
+			return;
+		}
 		$("#btnAutoRefresh").hide();
 		var t = parseInt($("#autoRefresh_interval").val()) || 0;
 		if (t < 5) {
@@ -67,14 +70,14 @@ $(document).ready(function() {
 		$("#btnManualRefresh").attr("disabled", "disabled");
 		refreshIntervalId = setInterval(refresh, t * 1000);
 		$("#btnStopRefresh").show();
-		bAutoQuery=true;
+		bAutoQuery = true;
 	});
 	$("#btnStopRefresh").click(function() {
 		$("#btnStopRefresh").hide();
 		$("#btnManualRefresh").removeAttr("disabled");
 		clearInterval(refreshIntervalId);
 		$("#btnAutoRefresh").show();
-		bAutoQuery=false;
+		bAutoQuery = false;
 	});
 	//最重要事件:提交/查询
 	$("#btnManualRefresh").click(function() {
@@ -209,20 +212,13 @@ function makePostStr() {
 
 //刷新函数,手动刷新,提交查询字符串,返回json数据,填写内容
 function refresh() {
+	if(!isSelectedLegal){
+		return;
+	}
 	if (ShowData) {
 		$("#realtime_dat").show();
 		ShowData = false;
 	}
-
-	if ($(".meterNumber:checked:enabled").length <= 0) {
-		alert("至少选择一个表");
-		return;
-	}
-	if ($(".subcategory:checked:enabled").length <= 0) {
-		alert("至少选择一个监视项目");
-		return;
-	}
-
 	$("#btnManualRefresh").attr("disabled", "disabled");
 	//时间
 
@@ -270,7 +266,7 @@ function refresh() {
 		//完成(发生在失败或成功之后)
 		complete : function(XMLHttpRequest, textStatus) {
 			//自动刷新时不允许手动,只能先停掉
-			if(!bAutoQuery){
+			if (!bAutoQuery) {
 				$("#btnManualRefresh").removeAttr("disabled");
 			}
 			$("#icon_load").hide("fade", 400);
@@ -308,6 +304,7 @@ function timestarmpToString(UnixUtcTimestarmp) {
 	str += ":" + (now.getSeconds() < 10 ? "0" : "") + now.getSeconds();
 	return str;
 }
+
 //时间个数,换行的,最小宽度
 function timestarmpToStringWithNewLine(UnixUtcTimestarmp) {
 	if (UnixUtcTimestarmp <= 0) {//时区的关系(可能要扩展到24个小时)
@@ -322,6 +319,7 @@ function timestarmpToStringWithNewLine(UnixUtcTimestarmp) {
 	str += ":" + (now.getSeconds() < 10 ? "0" : "") + now.getSeconds();
 	return str;
 }
+
 //生成数据表头
 function fillDataHead(oRealTimeData, oHead) {
 	oHead.html("");
@@ -646,6 +644,19 @@ function subCategoryName_instan(id, array) {
 		str += "</td>";
 	}
 	return str;
+}
+
+//检查选择的项目是否有效,必选选至少一个项目(表/数据项)
+function isSelectedLegal() {
+	if ($(".meterNumber:checked:enabled").length <= 0) {
+		alert("至少选择一个表");
+		return;
+	}
+	if ($(".subcategory:checked:enabled").length <= 0) {
+		alert("至少选择一个监视项目");
+		return;
+	}
+	return true;
 }
 
 //设置一些对象的触发事件,ini
