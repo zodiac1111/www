@@ -212,7 +212,7 @@ function makePostStr() {
 
 //刷新函数,手动刷新,提交查询字符串,返回json数据,填写内容
 function refresh() {
-	if(!isSelectedLegal){
+	if(!isSelectedLegal()){
 		return;
 	}
 	if (ShowData) {
