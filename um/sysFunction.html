@@ -49,7 +49,7 @@
 			//文件名过滤
 			function fileFilter(obj) {
 				var file = obj.value.match(/[^\/\\]+$/gi)[0];
-				var rx = new RegExp('webs-binary-hl3104(ha|jd).tar.gz$', 'gi');
+				var rx = new RegExp('webs-binary-hl3104(ha|jd|ja|j).tar.gz$', 'gi');
 				if (file && !file.match(rx)) {
 					$("#file").val("");
 					alert("根据终端类型,升级包文件应为:\n" + "\"webs-binary-hl3104ha.tar.gz\" 或\n" + "\"webs-binary-hl3104jd.tar.gz\".\n" + "请选择正确的升级包文件.");
