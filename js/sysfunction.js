@@ -457,17 +457,23 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 //初始化事件,如按钮的点击事件等
 function initEvent() {
 	$("#btnConfFile").click(function() {
-		var strParaDir=$("#info_rtupara").text();
-		var strConfDir=$("#info_rtuconf").text();
+		var strParaDir = $("#info_rtupara").text();
+		var strConfDir = $("#info_rtuconf").text();
 		var strPost = "action=export";
-		strPost += "&items="+strParaDir+"/sysspara.cfg";
-		strPost += "&items="+strParaDir+"/sioplan.cfg";
-		strPost += "&items="+strParaDir+"/netpara.cfg";
-		strPost += "&items="+strParaDir+"/ctspara.cfg";
-		strPost += "&items="+strParaDir+"/monpara.cfg";
-		strPost += "&items="+strParaDir+"/stspara.cfg";
-		strPost += "&items="+strParaDir+"/mtrspara.cfg";
-		strPost += "&items="+strParaDir+"/monpara.cfg";
+		strPost += "&items=" + strParaDir + "/sysspara.cfg";
+		strPost += "&items=" + strParaDir + "/sioplan.cfg";
+		strPost += "&items=" + strParaDir + "/netpara.cfg";
+		strPost += "&items=" + strParaDir + "/ctspara.cfg";
+		strPost += "&items=" + strParaDir + "/monpara.cfg";
+		strPost += "&items=" + strParaDir + "/stspara.cfg";
+		strPost += "&items=" + strParaDir + "/mtrspara.cfg";
+		strPost += "&items=" + strParaDir + "/monpara.cfg";
+		$.post('/goform/conf_file', strPost, function(result) {
+			alert("生成备份文件,点击下载/另存为");
+		});
+	});
+	$("#btnSysDir").click(function() {
+		var strPost = "action=sys";
 		$.post('/goform/conf_file', strPost, function(result) {
 			alert("生成备份文件,点击下载/另存为");
 		});
@@ -569,4 +575,5 @@ function initUI() {
 	});
 	///配置文件
 	$("#btnConfFile").button();
+	$("#btnSysDir").button();
 }
