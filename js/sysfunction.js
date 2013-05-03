@@ -574,6 +574,6 @@ function initUI() {
 		}
 	});
 	///配置文件
-	$("#btnConfFile").button();
-	$("#btnSysDir").button();
+	//$("#btnConfFile").button();
+	//$("#btnSysDir").button();
 }
