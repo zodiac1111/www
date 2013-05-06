@@ -4,6 +4,18 @@
  * 2. 历史象限无功
  * 3. 进行中...
  */
+$.extend($.fn.dataTable.defaults, {//设置表格属性
+	"bInfo" : false, //显示一共几条这种信息
+	"bFilter" : false, //不要搜索
+	"bSort" : false, //不要排序
+	"sScrollY" : "320px", //固定高度
+	"bPaginate" : false, //不分页
+	"bScrollCollapse" : true, //显示滚动条
+	//"bRetrieve" : true,
+	"bJQueryUI" : true,
+	"bDestroy" : true,
+	"bAutoWidth" : true
+});
 var oTable;
 $(document).ready(function() {
 	var stime_stamp = $("#stime_stamp");
@@ -16,21 +28,10 @@ $(document).ready(function() {
 		}
 	});
 	$("#history_tou").hide();
-	$.extend($.fn.dataTable.defaults, {//设置表格属性
-		"bInfo" : true, //显示一共几条这种信息
-		"bFilter" : false, //不要搜索
-		"bSort" : false, //不要排序
-		"sScrollY" : "320px", //固定高度
-		"bPaginate" : false, //不分页
-		"bScrollCollapse" : true, //显示滚动条
-		//"bRetrieve" : true,
-		"bJQueryUI" : true,
-		"bDestroy" : true,
-		"bAutoWidth" : true
-	});
+
 	initUI();
 	//$('#tbl_sysReset').dataTable();
-	//$('#tbl_history_tou').dataTable();
+	//oTable=$('#tbl_history_tou').dataTable();
 	obtnQurey.click(function() {
 		postQuery();
 	});
@@ -74,8 +75,9 @@ function postQuery() {
 		}
 	});
 }
+
 //生成/初始化界面
-function initUI(){
+function initUI() {
 	$("#save_log").hide();
 	$("#icon_load").hide();
 	oTable = $('#tbl_history_tou').dataTable();
