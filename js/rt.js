@@ -312,11 +312,10 @@ function timestarmpToStringWithNewLine(UnixUtcTimestarmp) {
 	}
 	var now = new Date(UnixUtcTimestarmp * 1000);
 	//js中是毫秒
-	var str = $.datepicker.formatDate('yymmdd<br>', now);
+	var str = $.datepicker.formatDate('mm/dd<br>', now);
 	str += now.getHours() < 10 ? "0" : "";
 	str += now.getHours();
-	str += ":" + (now.getMinutes() < 10 ? "0" : "") + now.getMinutes()
-	str += ":" + (now.getSeconds() < 10 ? "0" : "") + now.getSeconds();
+	str += ":" + (now.getMinutes() < 10 ? "0" : "") + now.getMinutes();
 	return str;
 }
 
