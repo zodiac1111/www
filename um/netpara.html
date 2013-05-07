@@ -89,8 +89,8 @@
 				for (var i in aNetParas.item) {
 					var str = "<tr>";
 					str += "<td><input class=\"ntx\" name=net_no type=text readonly size=1 value=";
-					str += aNetParas.item[i].no + "></td>";
-					str += appendEth(aNetParas.eth_num, aNetParas.item[i].eth);
+					str += "ETH"+(parseInt(aNetParas.item[i].no)+1) + "></td>";
+					//str += appendEth(aNetParas.eth_num, aNetParas.item[i].eth);
 					str += appendIpStruct("ip", aNetParas.item[i].ip);
 					str += appendIpStruct("mask", aNetParas.item[i].mask);
 					str += appendIpStruct("gateway", aNetParas.item[i].gateway);
@@ -99,7 +99,10 @@
 				}//end for 一行
 			}
 
-			/*  添加eth网口单元格 */
+			/*  添加eth网口单元格 (已废弃)
+			 * NOTE:这个参数已经没有意义,界面中将不显示
+			 * 仅以序号(即第一列的0..)索引网口,序号0对应ETH1,依次类推
+			 *  */
 			function appendEth(item, index) {
 				var str = "<td><select name=eth >";
 				for (var j = 0; j < item; j++) {
@@ -131,7 +134,8 @@
 				<thead>
 					<tr>
 						<th>网口号</th>
-						<th>使用网口</th>
+						<!-- 已废弃
+						<th>使用网口</th> -->
 						<th>IP地址</th>
 						<th>子网掩码</th>
 						<th>网关</th>
