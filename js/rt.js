@@ -483,8 +483,8 @@ function fillData(oTable, aMtr, abMtr) {
 		str += fillMtrReadTime(parseInt(aMtr[i].Meter_ReadTime));
 		str += fillData_OneData(aMtr[i].tou);
 		str += fillData_OneData(aMtr[i].qr);
-		str += fillData_OneData(aMtr[i].i);
 		str += fillData_OneData(aMtr[i].v);
+		str += fillData_OneData(aMtr[i].i);
 		str += fillData_OneData(aMtr[i].p);
 		str += fillData_OneData(aMtr[i].q);
 		str += fillData_OneData(aMtr[i].pf);
