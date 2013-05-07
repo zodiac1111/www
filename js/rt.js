@@ -56,7 +56,7 @@ $(document).ready(function() {
 	initEvent();
 	//菜单事件的绑定
 	$("#btnAutoRefresh").click(function() {
-		if(!isSelectedLegal()){
+		if (!isSelectedLegal()) {
 			return;
 		}
 		$("#btnAutoRefresh").hide();
@@ -91,7 +91,7 @@ $(document).ready(function() {
 		}
 		isShowSet = !isShowSet;
 	});
-
+	//界面内容调整,隐藏
 	init();
 });
 /**
@@ -212,7 +212,7 @@ function makePostStr() {
 
 //刷新函数,手动刷新,提交查询字符串,返回json数据,填写内容
 function refresh() {
-	if(!isSelectedLegal()){
+	if (!isSelectedLegal()) {
 		return;
 	}
 	if (ShowData) {
@@ -607,6 +607,7 @@ function initSubCategoryName() {
 	$("#maxneed_select_sub").html(str);
 }
 
+//(电量,无功,需量)子项目名称生成
 function subCategoryName_tatil(id, mainArrayLen, subArray) {
 	var str = "";
 	var name = "";
