@@ -88,8 +88,8 @@
 				obj.html("");
 				for (var i in aNetParas.item) {
 					var str = "<tr>";
-					str += "<td><input class=\"ntx\" name=net_no type=text readonly size=1 value=";
-					str += "ETH"+(parseInt(aNetParas.item[i].no)+1) + "></td>";
+					str += "<td>ETH<input class=\"ntx\" name=net_no type=text readonly size=1 value=";
+					str += (parseInt(aNetParas.item[i].no)+1) + "></td>";
 					//str += appendEth(aNetParas.eth_num, aNetParas.item[i].eth);
 					str += appendIpStruct("ip", aNetParas.item[i].ip);
 					str += appendIpStruct("mask", aNetParas.item[i].mask);

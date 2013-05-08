@@ -59,7 +59,6 @@ function postQuery() {
 	}
 	//var obtnQurey = $("#btnQuery");
 
-
 	var postsStr = /* $("#history_tou").serialize() + "&mtr_no=" + $("#mtr_no").val()
 	 * + */
 	makePostStr();
@@ -77,7 +76,7 @@ function postQuery() {
 			//$("#tr_dat").html(result);
 			var oRealTimeData = eval("(" + result + ")");
 			fillDataHead(oRealTimeData, $("#dateHead"));
-			fillData($("#touData"), oRealTimeData.mtr, oRealTimeData.abMtr);
+			fillData($("#touData"), oRealTimeData, oRealTimeData.abMtr);
 			oTable = $('#history_dat').dataTable();
 		},
 		error : function() {//失败
@@ -299,16 +298,16 @@ function isSelectedLegal() {
 //如: 点击高层的项目,全选其下层的所有子项目
 function initEvent() {
 	//选择查询的数据类型
-	$("#type").change(function(){
+	$("#type").change(function() {
 		$(".selectTable").hide();
-		var a=$('#type').val();
-		if(a=="tou"){
+		var a = $('#type').val();
+		if (a == "tou") {
 			$("#tbl_select_tou_qr").show();
-		}else if(a=="qr"){
+		} else if (a == "qr") {
 			$("#tbl_select_qr").show();
-		}else if (a=="instant"){
+		} else if (a == "instant") {
 			$("#tbl_select_instant").show();
-		}else if(a=="maxn"){
+		} else if (a == "maxn") {
 			$("#tbl_select_maxneed").show();
 		}
 	});
@@ -476,6 +475,7 @@ function makePostStr() {
 	strPost += "&maxn=" + abMaxn;
 	return strPost;
 }
+
 //初始化时间控件
 function initTimeBox() {
 	var startDateTextBox = $('#stime');
@@ -523,20 +523,25 @@ function fillDataHead(oRealTimeData, oHead) {
 	oHead.html("");
 	str = "";
 	str += "<th>表号</th>";
-	str += "<th>序号</th>";
-	str += "<th>抄表时刻</th>";
+	//str += "<th>序号</th>";
+	str += "<th>时刻</th>";
 	var fullName = false;
-	//电量头
-	str += fillHead_tou(oRealTimeData.abTou);
-	str += fillHead_qr(oRealTimeData.abQr);
-	//瞬时量也放在一个表格里
-	str += fillHead_instan(oRealTimeData.abV, "电压", phase);
-	str += fillHead_instan(oRealTimeData.abI, "电流", phase);
-	str += fillHead_instan(oRealTimeData.abP, "有功功率", power);
-	str += fillHead_instan(oRealTimeData.abQ, "无功功率", power);
-	str += fillHead_instan(oRealTimeData.abPf, "功率因数", power);
-	//最大需量
-	str += fillHead_maxn(oRealTimeData.abMaxn);
+	//数据分类讨论
+	if (oRealTimeData.type == "tou") {
+		str += fillHead_tou(oRealTimeData.abTou);
+	} else if (oRealTimeData.type == "qr") {
+		str += fillHead_qr(oRealTimeData.abQr);
+	} else if (oRealTimeData.type == "instant") {
+		//瞬时量也放在一个表格里
+		str += fillHead_instan(oRealTimeData.abV, "电压", phase);
+		str += fillHead_instan(oRealTimeData.abI, "电流", phase);
+		str += fillHead_instan(oRealTimeData.abP, "有功功率", power);
+		str += fillHead_instan(oRealTimeData.abQ, "无功功率", power);
+		str += fillHead_instan(oRealTimeData.abPf, "功率因数", power);
+	} else if (oRealTimeData.type == "maxn") {
+		//最大需量
+		str += fillHead_maxn(oRealTimeData.abMaxn);
+	}
 	oHead.html(str);
 }
 
@@ -673,29 +678,54 @@ function fillData_OneData_Maxn(aData) {
 	return str;
 }
 
-//将数据填充到表格中,aMtr:表计对象数组
-function fillData(oTable, aMtr, abMtr) {
+//将数据填充到表格中,oData:表计对象数组
+function fillData(oTable, oData, abMtr) {
 	str = "";
-	mtrnum = aMtr.length;
-	for ( i = 0; i < mtrnum; i++) {
-		for ( j = 0; j < aMtr[i].tou.length; j++) {
-			str += "<tr>";
-			//str += fillMtrNumber(i, abMtr)
-			//str += fillMtrReadTime(parseInt(aMtr[i].Meter_ReadTime));
-			str += "<td>" + aMtr[i].tou[j][0] + "</td>"; //表号
-			//str += "<td>" + aMtr[i].tou[j][1] + "</td>"; //序号
-			str += "<td>" + aMtr[i].tou[j][1] + "</td>"; //历史数据时刻
-			str += fillData_OneData(aMtr[i].tou[j]);
-			// str += fillData_OneData(aMtr[i].qr);
-			// str += fillData_OneData(aMtr[i].v);
-			// str += fillData_OneData(aMtr[i].i);
-			// str += fillData_OneData(aMtr[i].p);
-			// str += fillData_OneData(aMtr[i].q);
-			// str += fillData_OneData(aMtr[i].pf);
-			// str += fillData_OneData_Maxn(aMtr[i].maxn);
-			str += "</tr>";
+	mtrnum = oData.mtr.length;
+	if (oData.type == "tou") {
+		for ( i = 0; i < mtrnum; i++) {
+			for ( j = 0; j < oData.mtr[i].tou.length; j++) {
+				str += "<tr>";
+				//str += fillMtrNumber(i, abMtr)
+				//str += fillMtrReadTime(parseInt(oData.mtr[i].Meter_ReadTime));
+				str += "<td>" + oData.mtr[i].tou[j][0] + "</td>";
+				//表号
+				//str += "<td>" + oData.mtr[i].tou[j][1] + "</td>"; //序号
+				str += "<td>" + oData.mtr[i].tou[j][1] + "</td>";
+				//历史数据时刻
+				str += fillData_OneData(oData.mtr[i].tou[j]);
+				// str += fillData_OneData(oData.mtr[i].qr);
+				// str += fillData_OneData(oData.mtr[i].v);
+				// str += fillData_OneData(oData.mtr[i].i);
+				// str += fillData_OneData(oData.mtr[i].p);
+				// str += fillData_OneData(oData.mtr[i].q);
+				// str += fillData_OneData(oData.mtr[i].pf);
+				// str += fillData_OneData_Maxn(oData.mtr[i].maxn);
+				str += "</tr>";
+			}
 		}
+	} else if (oData.type == "qr") {
+	} else if (oData.type == "instant") {
+		for ( i = 0; i < mtrnum; i++) {
+			for ( j = 0; j < oData.mtr[i].instant.length; j++) {
+				str += "<tr>";
+				//str += fillMtrNumber(i, abMtr)
+				//str += fillMtrReadTime(parseInt(oData.mtr[i].Meter_ReadTime));
+				str += "<td>" + oData.mtr[i].instant[j][0] + "</td>";
+				//表号
+				//str += "<td>" + oData.mtr[i].tou[j][1] + "</td>"; //序号
+				str += "<td>" + oData.mtr[i].instant[j][1] + "</td>";
+				str += fillData_OneData(oData.mtr[i].instant[j][3].v);
+				str += fillData_OneData(oData.mtr[i].instant[j][3].i);
+				str += fillData_OneData(oData.mtr[i].instant[j][3].p);
+				str += fillData_OneData(oData.mtr[i].instant[j][3].q);
+				str += fillData_OneData(oData.mtr[i].instant[j][3].pf);
+				str += "</tr>";
+			}
+		}
+	} else if (oData.type == "maxn") {
 	}
+
 	oTable.html(str);
 	return;
 }
@@ -730,6 +760,7 @@ function timestarmpToString(UnixUtcTimestarmp) {
 	str += ":" + (now.getSeconds() < 10 ? "0" : "") + now.getSeconds();
 	return str;
 }
+
 //检查选择的项目是否有效,必选选至少一个项目(表/数据项)
 function isSelectedLegal() {
 	if ($(".meterNumber:checked:enabled").length <= 0) {
@@ -742,6 +773,7 @@ function isSelectedLegal() {
 	}
 	return true;
 }
+
 //时间个数,换行的,最小宽度
 function timestarmpToStringWithNewLine(UnixUtcTimestarmp) {
 	if (UnixUtcTimestarmp <= 0) {//时区的关系(可能要扩展到24个小时)
