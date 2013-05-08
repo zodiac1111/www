@@ -253,11 +253,11 @@ function refresh() {
 			$("#icon_load").show();
 		},
 		success : function(result, textStatus) {
-			var oTou = eval("(" + result + ")");
+			//var oTou = eval("(" + result + ")");
 			var oRealTimeData = eval("(" + result + ")");
 			//每一行列的数据对齐,方便datetable插件使用
 			fillDataHead(oRealTimeData, $("#dateHead"));
-			fillData($("#touData"), oTou.mtr, oTou.abMtr);
+			fillData($("#touData"), oRealTimeData.mtr, oRealTimeData.abMtr);
 			var oTable = $("#realtime_dat").dataTable();
 		},
 		error : function() {//失败
@@ -647,7 +647,18 @@ function subCategoryName_instan(id, array) {
 }
 
 //检查选择的项目是否有效,必选选至少一个项目(表/数据项)
+//时间必须选择
 function isSelectedLegal() {
+	var startDateTextBox = $('#stime');
+	var endDateTextBox = $('#etime');
+	if (startDateTextBox.val() == "0" || startDateTextBox.val() == "") {
+		alert("请选择开始时刻")
+		return false;
+	}
+	if (endDateTextBox.val() == "0" || endDateTextBox.val() == "") {
+		alert("请选择截止时刻")
+		return false;
+	}
 	if ($(".meterNumber:checked:enabled").length <= 0) {
 		alert("至少选择一个表");
 		return;
