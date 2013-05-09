@@ -24,14 +24,32 @@
 		<link type="text/css" href="/style/jquery.dataTables_themeroller.css" rel="stylesheet"  />
 		<script type="text/javascript" src="/js/jquery.dataTables.min.js"></script>
 		<script type="text/javascript" src="/js/tou.js"></script>
-		<script type="text/javascript">
-			$(document).ready(function() {
-
-			});
-		</script>
+		<style>
+			.fixed-menu {
+				background: AliceBlue;
+				position: fixed;
+				top: 0px;
+				right: 0px;
+				_position: absolute; /* position fixed for IE6 */
+				_top: expression(documentElement.scrollTop+0);
+				z-index: 99;
+			}
+		</style>
 	</head>
 	<body >
 		<h1>历史电量</h1>
+		<div class="fixed-menu">
+			<input type="text" id="icon_load" class="wait_icon_24x24_load"/>
+			<label> 时间范围:
+				<input type="text" name="stime" id="stime" readonly class="date">
+			</label><label> ~
+				<input type="text"
+				name="etime" id="etime" readonly class="date">
+			</label>
+			<button class="ui-button" id="btnQuery" title="查询选中时段和指定表计的电量数据">
+				查询
+			</button>
+		</div>
 		<!-- 表号选择 -->
 		<table class="sioplanTable" style="width:100%;"  id="tbl_realtime_dat_select" border="1" cellspacing="1" cellpadding="1">
 			<tr>
@@ -117,17 +135,5 @@
 				</tr>
 			</tbody>
 		</table>
-		<div style="position:fixed;right:0px;top:0px;z-index:99;background-color: PowderBlue;">
-			<input type="text" id="icon_load" class="wait_icon_24x24_load"/>
-			<label> 时间范围:
-				<input type="text" name="stime" id="stime" readonly class="date">
-			</label><label> ~
-				<input type="text"
-				name="etime" id="etime" readonly class="date">
-			</label>
-			<button class="ui-button" id="btnQuery" title="查询选中时段和指定表计的电量数据">
-				查询
-			</button>
-		</div>
 	</body>
 </html>
