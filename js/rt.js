@@ -44,7 +44,7 @@ $(document).ready(function() {
 		//"bScrollCollapse" : true, //显示滚动条
 		"bRetrieve" : true,
 		"bJQueryUI" : true,
-		"bDestroy" : true,
+		"bDestroy" : true
 		//"bAutoWidth" : true
 	});
 	//界面的生成
