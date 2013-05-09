@@ -34,19 +34,19 @@ var maxn_time = new Array("<b>总</b>", "尖", "峰", "平", "谷");
 var phase = new Array("A", "B", "C");
 var power = new Array("<b>总</b>", "A", "B", "C");
 var oTable = new Object();
+$.extend($.fn.dataTable.defaults, {//设置表格属性
+	"bInfo" : false, //显示一共几条这种信息
+	"bFilter" : false, //不要搜索
+	"bSort" : false, //不要排序
+	//"sScrollY" : "320px", //固定高度
+	"bPaginate" : false, //不显示分页
+	//"bScrollCollapse" : true, //显示滚动条
+	"bRetrieve" : true,
+	"bJQueryUI" : true,
+	"bDestroy" : true
+	//"bAutoWidth" : true
+});
 $(document).ready(function() {
-	$.extend($.fn.dataTable.defaults, {//设置表格属性
-		"bInfo" : false, //显示一共几条这种信息
-		"bFilter" : false, //不要搜索
-		"bSort" : false, //不要排序
-		//"sScrollY" : "320px", //固定高度
-		"bPaginate" : false, //不显示分页
-		//"bScrollCollapse" : true, //显示滚动条
-		"bRetrieve" : true,
-		"bJQueryUI" : true,
-		"bDestroy" : true
-		//"bAutoWidth" : true
-	});
 	//界面的生成
 	$("#tabs").tabs();
 	initMtr();
@@ -453,6 +453,7 @@ function fillData_OneData(aData) {
 	}
 	return str;
 }
+
 function fillData_OneData_Instan_pf(aData) {
 	var j;
 	var str = "";
@@ -460,7 +461,7 @@ function fillData_OneData_Instan_pf(aData) {
 	for ( j = 0; j < aData.length; j++) {
 		iv = (aData[j][1] == "1") ? "valid " : "iv";
 		// *有效*标识
-		str += "<td class=" + iv + ">" + aData[j][0]/100.0 + "</td>";
+		str += "<td class=" + iv + ">" + aData[j][0] / 100.0 + "</td>";
 	}
 	return str;
 }
