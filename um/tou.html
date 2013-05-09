@@ -36,40 +36,41 @@
 		<table class="sioplanTable" style="width:100%;"  id="tbl_realtime_dat_select" border="1" cellspacing="1" cellpadding="1">
 			<tr>
 				<th style="width:5%;" >表号</th>
-				<td style="width:95%;" id="mtr_selected_bar"><div style="width:95%;margin: auto;"id="slider-range"></div></td>
+				<td style="width:85%;" id="mtr_selected_bar"><div style="width:95%;margin: auto;"id="slider-range"></div></td>
+				<td style="width:10%;" >
+				<select id="type">
+					<option value="tou">电量</option>
+					<option value="qr">无功</option>
+					<option value="instant">瞬时量</option>
+					<option value="maxn">需量</option>
+				</select></td>
 			</tr>
 			<tr>
-				<td colspan="2" style="text-align:left;">
+				<td colspan="3" style="text-align:left;">
 				<div style="width:95%;margin: auto;" id="mtr_selected">
 					[表号列表]
 				</div></td>
 			</tr>
 		</table>
-		<select id="type">
-			<option value="tou">电量</option>
-			<option value="qr">无功</option>
-			<option value="instant">瞬时量</option>
-			<option value="maxn">需量</option>
-		</select>
 		<!-- 项目们选择 -->
 		<table class="sioplanTable selectTable" style="width:100%;"  id="tbl_select_tou_qr" border="1" cellspacing="1" cellpadding="1">
 			<tr>
-				<th colspan="40"><label>
+				<th colspan="20"><label>
 					<input type="checkbox" id="chk_tou_all" />
 					电度量</label></th>
 			</tr>
 			<tr id="select_item_first">
-				<td colspan="40">总项目</td>
+				<td colspan="20">总项目</td>
 			</tr>
 			<tr id="select_item">
-				<td colspan="40">分时项目</td>
+				<td colspan="20">分时项目</td>
 			</tr>
 		</table>
 		<table class="sioplanTable selectTable" style="width:100%;"  id="tbl_select_qr" border="1" cellspacing="1" cellpadding="1">
 			<tr>
 				<th colspan="20"><label>
 					<input type="checkbox" id="chk_qr_all" />
-					电度量</label></th>
+					四象限无功</label></th>
 			</tr>
 			<tr id="qr_select_main">
 				<td colspan="20">总项目</td>
@@ -116,7 +117,8 @@
 				</tr>
 			</tbody>
 		</table>
-		<div style="position:fixed;right:0px;top:0px;z-index:99;background-color: green;">
+		<div style="position:fixed;right:0px;top:0px;z-index:99;background-color: PowderBlue;">
+			<input type="text" id="icon_load" class="wait_icon_24x24_load"/>
 			<label> 时间范围:
 				<input type="text" name="stime" id="stime" readonly class="date">
 			</label><label> ~
@@ -126,7 +128,6 @@
 			<button class="ui-button" id="btnQuery" title="查询选中时段和指定表计的电量数据">
 				查询
 			</button>
-			<input type="text" id="icon_load" class="wait_icon_24x24_load" />
 		</div>
 	</body>
 </html>

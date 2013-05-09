@@ -1,4 +1,8 @@
 /**
+ * init* 初始化相关函数,包括界面和事件触发的初始化
+ * fill*数据相关函数
+ *   fillHead*数据表格的表头,根据查询的需要动态生成
+ *   fillData*数据表格的数据,根据查询的类型type(电量/象限/瞬时量/需量)填写对应的数据.
  * 历史数据查询脚本,包括
  * 1. 历史电量
  * 2. 历史象限无功
@@ -40,13 +44,9 @@ $(document).ready(function() {
 			primary : "ui-icon-search"
 		}
 	});
-	//$("#history_tou").hide();
 	initUI();
 	initEvent();
 	initTimeBox();
-	//$("#mtrNo0")[1].checked = true;
-	//$('#tbl_sysReset').dataTable();
-	//oTable=$('#history_dat').dataTable();
 	obtnQurey.click(function() {
 		postQuery();
 	});
@@ -57,11 +57,7 @@ function postQuery() {
 	if (!isSelectedLegal()) {
 		return;
 	}
-	//var obtnQurey = $("#btnQuery");
-
-	var postsStr = /* $("#history_tou").serialize() + "&mtr_no=" + $("#mtr_no").val()
-	 * + */
-	makePostStr();
+	var postsStr = 	makePostStr();
 	$.ajax({
 		type : "post",
 		url : "/goform/get_tou",
@@ -73,7 +69,6 @@ function postQuery() {
 			oTable.fnDestroy(false);
 		},
 		success : function(result, textStatus) {
-			//$("#tr_dat").html(result);
 			var oRealTimeData = eval("(" + result + ")");
 			fillDataHead(oRealTimeData, $("#dateHead"));
 			fillData($("#touData"), oRealTimeData, oRealTimeData.abMtr);
@@ -105,6 +100,7 @@ function initUI() {
 
 }
 
+//界面添加表号
 function initMtr() {
 	var mtrNumber = 0;
 	var str = "";
@@ -142,7 +138,7 @@ function initMtr() {
 			range : true,
 			min : 0,
 			max : mtrNumber,
-			values : [0, 1],
+			values : [0, 0],
 			slide : function(event, ui) {
 				for ( i = 0; i < mtrNumber; i++) {
 					$("#mtrNo" + i)[0].checked = false;
@@ -174,18 +170,18 @@ function initMainCategoryName() {
 		str += "</label>";
 		str += "</td>";
 	}
-	str += initTdMainCategory_tou("qr", qr_phase, qr_time.length);
-	obj.html("");
-	obj.html(str);
+	$("#select_item_first").html(str);
+	//象限无功
+	str = initTdMainCategory_tou("qr", qr_phase, qr_time.length);
+	$("#qr_select_main").html(str);
 	//瞬时量 主项目表头
-	str = "";
-	str += initTdMainCategory_instant("v", "电压", phase.length);
+	str = initTdMainCategory_instant("v", "电压", phase.length);
 	str += initTdMainCategory_instant("i", "电流", phase.length);
 	str += initTdMainCategory_instant("p", "有功功率", power.length);
 	str += initTdMainCategory_instant("q", "无功功率", power.length);
 	str += initTdMainCategory_instant("pf", "功率因数", power.length);
 	$("#instant_select_main").html(str);
-
+	//需量
 	str = initTdMainCategory_tou("maxn", maxn_phase, maxn_time.length);
 	$("#maxneed_select_main").html(str);
 }
@@ -213,7 +209,7 @@ function initTdMainCategory_instant(id, name_cn, sub_len) {
 	var name = "all_" + id + "0";
 	str += "<td colspan=\"" + sub_len + "\">";
 	str += "<label>";
-	str += "<input type=checkbox class=\"chk_all_" + id + "\"";
+	str += "<input type=checkbox class=\" chk_all_instant chk_all_" + id + "\"";
 	str += "id=\"" + name + "\"" + "index=" + "0" + " />";
 	str += name_cn;
 	str += "</label>";
@@ -227,17 +223,19 @@ function initTdMainCategory_instant(id, name_cn, sub_len) {
 function initSubCategoryName() {
 	var str = "";
 	//电量
-	str += subCategoryName_tatil("tou", 4, tou_time);
-	str += subCategoryName_tatil("qr", qr_phase.length, qr_time);
+	str = subCategoryName_tatil("tou", 4, tou_time);
 	$("#select_item").html(str);
+	//无功
+	str = subCategoryName_tatil("qr", qr_phase.length, qr_time);
+	$("#qr_select_sub").html(str);
 	//瞬时量
-	str = "";
-	str += subCategoryName_instan("v", phase);
+	str = subCategoryName_instan("v", phase);
 	str += subCategoryName_instan("i", phase);
 	str += subCategoryName_instan("p", power);
 	str += subCategoryName_instan("q", power);
 	str += subCategoryName_instan("pf", power);
 	$("#instant_select_sub").html(str);
+	//最大需量
 	str = subCategoryName_tatil("maxn", maxn_phase.length, maxn_time);
 	$("#maxneed_select_sub").html(str);
 }
@@ -271,7 +269,7 @@ function subCategoryName_instan(id, array) {
 		name = "Item" + id + i;
 		str += "<td>";
 		str += "<label>";
-		str += "<input class=\"subcategory chk_sub_" + id + "\" type=\"checkbox\"";
+		str += "<input class=\"subcategory chk_sub_instant chk_sub_" + id + "\" type=\"checkbox\"";
 		str += " name=" + name;
 		str += " id=" + name + " />";
 		str += "<br>" + array[i];
@@ -279,19 +277,6 @@ function subCategoryName_instan(id, array) {
 		str += "</td>";
 	}
 	return str;
-}
-
-//检查选择的项目是否有效,必选选至少一个项目(表/数据项)
-function isSelectedLegal() {
-	if ($(".meterNumber:checked:enabled").length <= 0) {
-		alert("至少选择一个表");
-		return;
-	}
-	if ($(".subcategory:checked:enabled").length <= 0) {
-		alert("至少选择一个监视项目");
-		return;
-	}
-	return true;
 }
 
 //设置一些对象的触发事件,ini
@@ -320,6 +305,15 @@ function initEvent() {
 			$(".subcategory.chk_sub_tou")[index * 5 + i].checked = bcheck;
 		}
 	});
+	//电度量全选
+	$("#chk_tou_all").click(function(event) {
+		var bcheck = event.target.checked;
+		var objAll = $(".chk_all_tou,.chk_sub_tou");
+		var len = objAll.length;
+		for ( i = 0; i < len; i++) {
+			objAll[i].checked = bcheck;
+		}
+	});
 	$(".chk_all_qr").click(function(event) {
 		var bcheck = event.target.checked;
 		var index = parseInt(event.target.getAttribute("index"));
@@ -327,16 +321,15 @@ function initEvent() {
 			$(".subcategory.chk_sub_qr")[index * 5 + i].checked = bcheck;
 		}
 	});
-	//电度量全选
-	$("#chk_tou_all").click(function(event) {
+	//四象限无功全选
+	$("#chk_qr_all").click(function(event) {
 		var bcheck = event.target.checked;
-		var objAll = $(".chk_all_tou,.chk_all_qr,.chk_sub_tou,.chk_sub_qr");
+		var objAll = $(".chk_all_qr,.chk_sub_qr");
 		var len = objAll.length;
 		for ( i = 0; i < len; i++) {
 			objAll[i].checked = bcheck;
 		}
 	});
-
 	//各种瞬时量
 	$(".chk_all_v").click(function(event) {
 		var bcheck = event.target.checked;
@@ -371,7 +364,7 @@ function initEvent() {
 	//瞬时量全选
 	$("#chk_instant_all").click(function(event) {
 		var bcheck = event.target.checked;
-		var objAll = $(".chk_all_v,.chk_all_i,.chk_all_p,.chk_all_q,.chk_all_pf," + ".chk_sub_v,.chk_sub_i,.chk_sub_p,.chk_sub_q,.chk_sub_pf");
+		var objAll = $(".chk_all_instant,.chk_sub_instant");
 		var len = objAll.length;
 		for ( i = 0; i < len; i++) {
 			objAll[i].checked = bcheck;
@@ -647,30 +640,63 @@ function fillMtrReadTime(UnixUTCTimestarmp) {
 	return "<td>" + timestarmpToString(UnixUTCTimestarmp - timeZoneMs) + "</td>";
 }
 
-function fillData_OneData(aData) {
+/* 一类瞬时量,比如电压,或者几个电流的二位数组
+ * 比如:
+ * aData =[["380","1"],["378","1"]] <-查询了2个电压
+ */
+function fillData_Instant(aData) {
 	var j;
 	var str = "";
 	var iv;
-	for ( j = 2; j < aData.length; j++) {
-		iv = (aData[j][1] == "1") ? "valid " : "iv";
-		// *有效*标识
+	for ( j = 0; j < aData.length; j++) {
+		// *无效*标识 1=无效
+		iv = (aData[j][1] == "1") ? "iv" : "valid";
 		str += "<td class=" + iv + ">" + aData[j][0] + "</td>";
 	}
 	return str;
 }
 
-function fillData_OneData_Maxn(aData) {
+//功率因数 除以100
+function fillData_Instant_pf(aData) {
 	var j;
 	var str = "";
 	var iv;
 	for ( j = 0; j < aData.length; j++) {
-		iv = (aData[j][1] == "1") ? "valid " : "iv";
-		// *有效*标识
+		// *无效*标识 1=无效
+		iv = (aData[j][1] == "1") ? "iv" : "valid";
+		str += "<td class=" + iv + ">" + aData[j][0] / 100.0 + "</td>";
+	}
+	return str;
+}
+
+function fillData_Tou(aData) {
+	var j;
+	var str = "";
+	var iv;
+	for ( j = 2; j < aData.length; j++) {
+		// *无效*标识 ,1=无效
+		iv = (aData[j][1] == "1") ? "iv" : "valid";
+		str += "<td class=" + iv + ">" + aData[j][0] + "</td>";
+	}
+	return str;
+}
+/**
+ * 填写最大需量数据 一条记录
+ * @param {int} perLen 一条记录前面还保存有1个表号,1个时间,去除这些项目
+ * @param {Array} aData 一天完整的最大需量数据记录,包含前面的表号,时间
+ */
+function fillData_OneData_Maxn(perLen,aData) {
+	var j;
+	var str = "";
+	var iv;
+	for ( j = perLen ; j < aData.length; j++) {
+		// *无效*标识
+		iv = (aData[j][1] == "1") ? "iv":"valid";
 		str += "<td class=" + iv + ">";
 		str += aData[j][0];
 		//需量无效就不显示发生时间,
 		//有效但是没有发生时间的,也不显示时间,但还是绿色的,与为采集区分开来
-		if (aData[j][1] == "1" && parseInt(aData[j][2]) > 0) {
+		if (aData[j][1] == "0" && parseInt(aData[j][2]) > 0) {
 			str += "<br>" + timestarmpToStringWithNewLine(parseInt(aData[j][2]) - timeZoneMs);
 		}
 		str += "</td>";
@@ -678,7 +704,12 @@ function fillData_OneData_Maxn(aData) {
 	return str;
 }
 
-//将数据填充到表格中,oData:表计对象数组
+/**
+ * 将数据填充到表格中,oData:表计对象数组
+ * @param {Object} oTable 填写到这个表格
+ * @param {Object} oData 要填写的数据
+ * @param {string} abMtr 查询了哪几块表,01组成的字符串,表示使能
+ */
 function fillData(oTable, oData, abMtr) {
 	str = "";
 	mtrnum = oData.mtr.length;
@@ -686,44 +717,46 @@ function fillData(oTable, oData, abMtr) {
 		for ( i = 0; i < mtrnum; i++) {
 			for ( j = 0; j < oData.mtr[i].tou.length; j++) {
 				str += "<tr>";
-				//str += fillMtrNumber(i, abMtr)
-				//str += fillMtrReadTime(parseInt(oData.mtr[i].Meter_ReadTime));
-				str += "<td>" + oData.mtr[i].tou[j][0] + "</td>";
 				//表号
-				//str += "<td>" + oData.mtr[i].tou[j][1] + "</td>"; //序号
-				str += "<td>" + oData.mtr[i].tou[j][1] + "</td>";
+				str += "<td>" + oData.mtr[i].tou[j][0] + "</td>";
 				//历史数据时刻
-				str += fillData_OneData(oData.mtr[i].tou[j]);
-				// str += fillData_OneData(oData.mtr[i].qr);
-				// str += fillData_OneData(oData.mtr[i].v);
-				// str += fillData_OneData(oData.mtr[i].i);
-				// str += fillData_OneData(oData.mtr[i].p);
-				// str += fillData_OneData(oData.mtr[i].q);
-				// str += fillData_OneData(oData.mtr[i].pf);
-				// str += fillData_OneData_Maxn(oData.mtr[i].maxn);
+				str += "<td>" + oData.mtr[i].tou[j][1] + "</td>";
+				str += fillData_Tou(oData.mtr[i].tou[j]);
 				str += "</tr>";
 			}
 		}
 	} else if (oData.type == "qr") {
+		//象限无功
 	} else if (oData.type == "instant") {
 		for ( i = 0; i < mtrnum; i++) {
 			for ( j = 0; j < oData.mtr[i].instant.length; j++) {
 				str += "<tr>";
-				//str += fillMtrNumber(i, abMtr)
-				//str += fillMtrReadTime(parseInt(oData.mtr[i].Meter_ReadTime));
-				str += "<td>" + oData.mtr[i].instant[j][0] + "</td>";
 				//表号
-				//str += "<td>" + oData.mtr[i].tou[j][1] + "</td>"; //序号
+				str += "<td>" + oData.mtr[i].instant[j][0] + "</td>";
+				//时刻
 				str += "<td>" + oData.mtr[i].instant[j][1] + "</td>";
-				str += fillData_OneData(oData.mtr[i].instant[j][3].v);
-				str += fillData_OneData(oData.mtr[i].instant[j][3].i);
-				str += fillData_OneData(oData.mtr[i].instant[j][3].p);
-				str += fillData_OneData(oData.mtr[i].instant[j][3].q);
-				str += fillData_OneData(oData.mtr[i].instant[j][3].pf);
+				str += fillData_Instant(oData.mtr[i].instant[j][2].v);
+				str += fillData_Instant(oData.mtr[i].instant[j][2].i);
+				str += fillData_Instant(oData.mtr[i].instant[j][2].p);
+				str += fillData_Instant(oData.mtr[i].instant[j][2].q);
+				str += fillData_Instant_pf(oData.mtr[i].instant[j][2].pf);
 				str += "</tr>";
 			}
 		}
 	} else if (oData.type == "maxn") {
+		//最大需量
+		for ( i = 0; i < mtrnum; i++) {
+			for ( j = 0; j < oData.mtr[i].maxn.length; j++) {
+				str += "<tr>";
+				//表号
+				str += "<td>" + oData.mtr[i].maxn[j][0] + "</td>";
+				//历史数据时刻
+				str += "<td>" + oData.mtr[i].maxn[j][1] + "</td>";
+				//2:去掉前面2项
+				str += fillData_OneData_Maxn(2,oData.mtr[i].maxn[j]);
+				str += "</tr>";
+			}
+		}
 	}
 
 	oTable.html(str);
@@ -763,27 +796,48 @@ function timestarmpToString(UnixUtcTimestarmp) {
 
 //检查选择的项目是否有效,必选选至少一个项目(表/数据项)
 function isSelectedLegal() {
+	var startDateTextBox = $('#stime');
+	var endDateTextBox = $('#etime');
+	if (startDateTextBox.val() == "0" || startDateTextBox.val() == "") {
+		alert("请选择开始时刻")
+		return false;
+	}
+	if (endDateTextBox.val() == "0" || endDateTextBox.val() == "") {
+		alert("请选择截止时刻")
+		return false;
+	}
 	if ($(".meterNumber:checked:enabled").length <= 0) {
 		alert("至少选择一个表");
 		return;
 	}
-	if ($(".subcategory:checked:enabled").length <= 0) {
+	var a = $('#type').val();
+	var len = 0;
+	if (a == "tou") {
+		len = $(".chk_sub_tou:checked:enabled").length;
+	} else if (a == "qr") {
+		len = $(".chk_sub_qr:checked:enabled").length;
+	} else if (a == "instant") {
+		len = $(".chk_sub_instant:checked:enabled").length;
+	} else if (a == "maxn") {
+		len = $(".chk_sub_maxn:checked:enabled").length;
+	}
+	if (len <= 0) {
 		alert("至少选择一个监视项目");
 		return;
 	}
 	return true;
 }
 
-//时间个数,换行的,最小宽度
+//时间个数,换行的,最小宽度 需要jQuery UI  中的日期datepicker控件支持
 function timestarmpToStringWithNewLine(UnixUtcTimestarmp) {
 	if (UnixUtcTimestarmp <= 0) {//时区的关系(可能要扩展到24个小时)
-		return "--------<br>--:--:--";
+		return "--/--<br>--:--";
 	}
-	var now = new Date(UnixUtcTimestarmp * 1000);
+	var t = new Date(UnixUtcTimestarmp * 1000);
 	//js中是毫秒
-	var str = $.datepicker.formatDate('mm/dd<br>', now);
-	str += now.getHours() < 10 ? "0" : "";
-	str += now.getHours();
-	str += ":" + (now.getMinutes() < 10 ? "0" : "") + now.getMinutes();
+	var str = $.datepicker.formatDate('mm/dd<br>', t);
+	str += t.getHours() < 10 ? "0" : "";
+	str += t.getHours();
+	str += ":" + (t.getMinutes() < 10 ? "0" : "") + t.getMinutes();
 	return str;
 }

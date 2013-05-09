@@ -308,7 +308,7 @@ function timestarmpToString(UnixUtcTimestarmp) {
 //时间个数,换行的,最小宽度
 function timestarmpToStringWithNewLine(UnixUtcTimestarmp) {
 	if (UnixUtcTimestarmp <= 0) {//时区的关系(可能要扩展到24个小时)
-		return "--------<br>--:--:--";
+		return "--/--<br>--:--";
 	}
 	var now = new Date(UnixUtcTimestarmp * 1000);
 	//js中是毫秒
@@ -453,6 +453,17 @@ function fillData_OneData(aData) {
 	}
 	return str;
 }
+function fillData_OneData_Instan_pf(aData) {
+	var j;
+	var str = "";
+	var iv;
+	for ( j = 0; j < aData.length; j++) {
+		iv = (aData[j][1] == "1") ? "valid " : "iv";
+		// *有效*标识
+		str += "<td class=" + iv + ">" + aData[j][0]/100.0 + "</td>";
+	}
+	return str;
+}
 
 function fillData_OneData_Maxn(aData) {
 	var j;
@@ -487,7 +498,7 @@ function fillData(oTable, aMtr, abMtr) {
 		str += fillData_OneData(aMtr[i].i);
 		str += fillData_OneData(aMtr[i].p);
 		str += fillData_OneData(aMtr[i].q);
-		str += fillData_OneData(aMtr[i].pf);
+		str += fillData_OneData_Instan_pf(aMtr[i].pf);
 		str += fillData_OneData_Maxn(aMtr[i].maxn);
 		str += "</tr>";
 	}
@@ -636,7 +647,7 @@ function subCategoryName_instan(id, array) {
 		name = "Item" + id + i;
 		str += "<td>";
 		str += "<label>";
-		str += "<input class=\"subcategory chk_sub_" + id + "\" type=\"checkbox\"";
+		str += "<input class=\"subcategory chk_sub_instant chk_sub_" + id + "\" type=\"checkbox\"";
 		str += " name=" + name;
 		str += " id=" + name + " />";
 		str += "<br>" + array[i];
@@ -649,16 +660,6 @@ function subCategoryName_instan(id, array) {
 //检查选择的项目是否有效,必选选至少一个项目(表/数据项)
 //时间必须选择
 function isSelectedLegal() {
-	var startDateTextBox = $('#stime');
-	var endDateTextBox = $('#etime');
-	if (startDateTextBox.val() == "0" || startDateTextBox.val() == "") {
-		alert("请选择开始时刻")
-		return false;
-	}
-	if (endDateTextBox.val() == "0" || endDateTextBox.val() == "") {
-		alert("请选择截止时刻")
-		return false;
-	}
 	if ($(".meterNumber:checked:enabled").length <= 0) {
 		alert("至少选择一个表");
 		return;
