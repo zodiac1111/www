@@ -57,7 +57,7 @@ function postQuery() {
 	if (!isSelectedLegal()) {
 		return;
 	}
-	var postsStr = 	makePostStr();
+	var postsStr = makePostStr();
 	$.ajax({
 		type : "post",
 		url : "/goform/get_tou",
@@ -680,18 +680,19 @@ function fillData_Tou(aData) {
 	}
 	return str;
 }
+
 /**
  * 填写最大需量数据 一条记录
  * @param {int} perLen 一条记录前面还保存有1个表号,1个时间,去除这些项目
  * @param {Array} aData 一天完整的最大需量数据记录,包含前面的表号,时间
  */
-function fillData_OneData_Maxn(perLen,aData) {
+function fillData_OneData_Maxn(perLen, aData) {
 	var j;
 	var str = "";
 	var iv;
-	for ( j = perLen ; j < aData.length; j++) {
+	for ( j = perLen; j < aData.length; j++) {
 		// *无效*标识
-		iv = (aData[j][1] == "1") ? "iv":"valid";
+		iv = (aData[j][1] == "1") ? "iv" : "valid";
 		str += "<td class=" + iv + ">";
 		str += aData[j][0];
 		//需量无效就不显示发生时间,
@@ -727,6 +728,17 @@ function fillData(oTable, oData, abMtr) {
 		}
 	} else if (oData.type == "qr") {
 		//象限无功
+		for ( i = 0; i < mtrnum; i++) {
+			for ( j = 0; j < oData.mtr[i].qr.length; j++) {
+				str += "<tr>";
+				//表号
+				str += "<td>" + oData.mtr[i].qr[j][0] + "</td>";
+				//历史数据时刻
+				str += "<td>" + oData.mtr[i].qr[j][1] + "</td>";
+				str += fillData_Tou(oData.mtr[i].qr[j]);
+				str += "</tr>";
+			}
+		}
 	} else if (oData.type == "instant") {
 		for ( i = 0; i < mtrnum; i++) {
 			for ( j = 0; j < oData.mtr[i].instant.length; j++) {
@@ -753,12 +765,11 @@ function fillData(oTable, oData, abMtr) {
 				//历史数据时刻
 				str += "<td>" + oData.mtr[i].maxn[j][1] + "</td>";
 				//2:去掉前面2项
-				str += fillData_OneData_Maxn(2,oData.mtr[i].maxn[j]);
+				str += fillData_OneData_Maxn(2, oData.mtr[i].maxn[j]);
 				str += "</tr>";
 			}
 		}
 	}
-
 	oTable.html(str);
 	return;
 }
