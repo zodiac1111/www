@@ -13,7 +13,36 @@
 		<script src="/js/wwyfunc.js" type='text/javascript'></script>
 		<script type="text/javascript">
 			$(document).ready(function() {
-
+				var oLoad = $("#init");
+				var oUpdate = $("#btnUpdate");
+				var oIconLoad = $("#icon_init");
+				var oIconOK = $("#icon_ok");
+				var oIconErr = $("#icon_err");
+				oLoad.click(function() {
+					oIconLoad.show();
+					$.ajax({
+						type : "post",
+						url : "/goform/comm_module",
+						contentType : "application/x-www-form-urlencoded; charset=utf-8",
+						dataType : "text",
+						data : "action=get",
+						success : function(data, textStatus) {//成功
+							var oSysPara = eval("(" + data + ")");
+							alert("json:" + oSysPara);
+							oIconLoad.hide("fade", 1000);
+							//alert("OK");
+						},
+						error : function() {//失败
+							oIconLoad.hide();
+							alert("服务器通讯错误");
+							oIconErr.show();
+							oIconErr.hide("fade", 5000);
+						},
+						complete : function(XMLHttpRequest, textStatus) {//完成(发生在失败或成功之后)
+							//alert("ajax完成,接收:对象:" + XMLHttpRequest + ",状态:" + textStatus);
+						}
+					});
+				});
 			});
 		</script>
 	</head>
