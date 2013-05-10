@@ -18,14 +18,25 @@
 				var oIconLoad = $("#icon_init");
 				var oIconOK = $("#icon_ok");
 				var oIconErr = $("#icon_err");
+				oUpdate.button({
+					icons : {
+						primary : "ui-icon-refresh"
+					}
+				});
+				oLoad.button();
+				oIconLoad.hide();
+				oIconOK.hide();
+				oIconErr.hide();
 				oLoad.click(function() {
-					oIconLoad.show();
 					$.ajax({
 						type : "post",
 						url : "/goform/master",
 						contentType : "application/x-www-form-urlencoded; charset=utf-8",
 						dataType : "text",
 						data : "action=get",
+						beforeSend : function(XMLHttpRequest) {
+							oIconLoad.show();
+						},
 						success : function(data, textStatus) {//成功
 							var oSysPara = eval("(" + data + ")");
 							alert("json:" + oSysPara);
