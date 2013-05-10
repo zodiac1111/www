@@ -20,7 +20,8 @@ var maxn_time = new Array("<b>总</b>", "尖", "峰", "平", "谷");
 var phase = new Array("A", "B", "C");
 var power = new Array("<b>总</b>", "A", "B", "C");
 //判断ie
-var isIE=!+[1,];
+var isIE =!+[1,];
+//var isIE =true;
 //设置表格属性
 $.extend($.fn.dataTable.defaults, {
 	"bInfo" : false, //显示一共几条这种信息
@@ -398,18 +399,24 @@ function makePostStr() {
 	var strPost = "action=get";
 	var stime_stamp = 0;
 	var etime_stamp = 0;
-	var testStartDate = $('#stime').datetimepicker('getDate');
-	if (testStartDate != null) {
-		stime_stamp = testStartDate.getTime() / 1000;
+	if (isIE) {
+		stime_stamp = +new Date($('#stime').val())/1000 || -1;
+		etime_stamp = +new Date($('#etime').val())/1000 || -1;
 	} else {
-		alert("开始时间错误");
+		var testStartDate = $('#stime').datetimepicker('getDate');
+		if (testStartDate != null) {
+			stime_stamp = testStartDate.getTime() / 1000;
+		} else {
+			alert("开始时间错误");
+		}
+		var testEndDate = $('#etime').datetimepicker('getDate');
+		if (testEndDate != null) {
+			etime_stamp = testEndDate.getTime() / 1000;
+		} else {
+			alert("结束时间错误");
+		}
 	}
-	var testEndDate = $('#etime').datetimepicker('getDate');
-	if (testEndDate != null) {
-		etime_stamp = testEndDate.getTime() / 1000;
-	} else {
-		alert("结束时间错误");
-	}
+
 	strPost += "&stime_stamp=" + stime_stamp;
 	strPost += "&etime_stamp=" + etime_stamp;
 	strPost += "&timezone=" + timeZoneMs;
@@ -478,9 +485,10 @@ function initTimeBox() {
 	var endDateTextBox = $('#etime');
 	//检查ie
 	if (isIE) {
-		startDateTextBox.$('#someid').removeAttr('readonly');
+		startDateTextBox.removeAttr('readonly');
+		return;
 	} else {
-		startDateTextBox.$('#someid').attr('readonly', 'readonly');
+		startDateTextBox.attr('readonly', 'readonly');
 	}
 	//var tz = document.getElementById("timezone");
 	//var tz2 = document.getElementById("timezone2");
@@ -674,9 +682,14 @@ function fillData_Instant_pf(aData) {
 	for ( j = 0; j < aData.length; j++) {
 		// *无效*标识 1=无效
 		iv = (aData[j][1] == "1") ? "iv" : "valid";
-		str += "<td class=" + iv + ">" + aData[j][0] / 100.0 + "</td>";
+		str += "<td class=" + iv + ">" + strip(aData[j][0] / 100) + "</td>";
 	}
 	return str;
+}
+
+//修正js浮点数bug
+function strip(number) {
+	return (parseFloat(number.toPrecision(12)));
 }
 
 function fillData_Tou(aData) {
@@ -814,19 +827,52 @@ function timestarmpToString(UnixUtcTimestarmp) {
 	str += ":" + (now.getSeconds() < 10 ? "0" : "") + now.getSeconds();
 	return str;
 }
-
+//用于ie浏览器查询时间的字符串
+function timestarmpToString_Query(UnixUtcTimestarmp) {
+	if (UnixUtcTimestarmp <= 0) {//时区的关系(可能要扩展到24个小时)
+		return "---------- --:--";
+	}
+	//js中是毫秒
+	var now = new Date(UnixUtcTimestarmp * 1000);
+	var str = $.datepicker.formatDate('yy-mm-dd ', now);
+	str += now.getHours() < 10 ? "0" : "";
+	str += now.getHours();
+	str += ":" + (now.getMinutes() < 10 ? "0" : "") + now.getMinutes()
+	return str;
+}
 //检查选择的项目是否有效,必选选至少一个项目(表/数据项)
 function isSelectedLegal() {
-	var startDateTextBox = $('#stime');
-	var endDateTextBox = $('#etime');
-	if (startDateTextBox.val() == "0" || startDateTextBox.val() == "") {
-		alert("请选择开始时刻")
-		return false;
+	if (isIE) {
+		var stime_stamp = +new Date($('#stime').val()) || -1;
+		if (stime_stamp <= 0) {
+			alert("开始时刻格式错误:\n yyyy-mm-dd hh:mm")
+			var now_stamp = +new Date() || -1;
+			//向前追溯至1小时以前为默认开始时刻
+			now_stamp-=1*60*60*1000;
+			$('#stime').val(timestarmpToString_Query(now_stamp / 1000))
+		}
+		var etime_stamp = +new Date($('#etime').val()) || -1;
+		if (etime_stamp <= 0) {
+			alert("结束时刻格式错误:\n yyyy-mm-dd hh:mm")
+			var now_stamp = +new Date() || -1;
+			$('#etime').val(timestarmpToString_Query(now_stamp / 1000))
+		}
+		if(stime_stamp<=0 || etime_stamp <= 0){
+			return false;
+		}
+	} else {
+		var startDateTextBox = $('#stime');
+		var endDateTextBox = $('#etime');
+		if (startDateTextBox.val() == "0" || startDateTextBox.val() == "") {
+			alert("请选择开始时刻")
+			return false;
+		}
+		if (endDateTextBox.val() == "0" || endDateTextBox.val() == "") {
+			alert("请选择截止时刻")
+			return false;
+		}
 	}
-	if (endDateTextBox.val() == "0" || endDateTextBox.val() == "") {
-		alert("请选择截止时刻")
-		return false;
-	}
+
 	if ($(".meterNumber:checked:enabled").length <= 0) {
 		alert("至少选择一个表");
 		return;

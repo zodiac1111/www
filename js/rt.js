@@ -461,7 +461,7 @@ function fillData_OneData_Instan_pf(aData) {
 	for ( j = 0; j < aData.length; j++) {
 		iv = (aData[j][1] == "1") ? "valid " : "iv";
 		// *有效*标识
-		str += "<td class=" + iv + ">" + aData[j][0] / 100.0 + "</td>";
+		str += "<td class=" + iv + ">" + strip(aData[j][0] / 100) + "</td>";
 	}
 	return str;
 }
@@ -759,4 +759,8 @@ function initEvent() {
 			objAll[i].checked = bcheck;
 		}
 	});
+}
+//修正js浮点数bug
+function strip(number) {
+	return (parseFloat(number.toPrecision(12)));
 }
