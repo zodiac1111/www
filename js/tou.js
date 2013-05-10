@@ -19,8 +19,10 @@ var maxn_phase = new Array("正向有功需量", "反向有功需量", "正向�
 var maxn_time = new Array("<b>总</b>", "尖", "峰", "平", "谷");
 var phase = new Array("A", "B", "C");
 var power = new Array("<b>总</b>", "A", "B", "C");
+//判断ie
 var isIE=!+[1,];
-$.extend($.fn.dataTable.defaults, {//设置表格属性
+//设置表格属性
+$.extend($.fn.dataTable.defaults, {
 	"bInfo" : false, //显示一共几条这种信息
 	"bFilter" : false, //不要搜索
 	"bSort" : false, //不要排序
@@ -472,13 +474,14 @@ function makePostStr() {
 
 //初始化时间控件
 function initTimeBox() {
-	//检查ie
-	 if(isIE){
-		alert("ie");
-		return;
-	}
 	var startDateTextBox = $('#stime');
 	var endDateTextBox = $('#etime');
+	//检查ie
+	if (isIE) {
+		startDateTextBox.$('#someid').removeAttr('readonly');
+	} else {
+		startDateTextBox.$('#someid').attr('readonly', 'readonly');
+	}
 	//var tz = document.getElementById("timezone");
 	//var tz2 = document.getElementById("timezone2");
 	startDateTextBox.datetimepicker({
@@ -494,7 +497,8 @@ function initTimeBox() {
 				endDateTextBox.datetimepicker('setDate', testStartDate);
 			}
 		},
-		onSelect : function(selectedDateTime) {//选择时 限定开始时间必须早于结束时间
+		//选择时 限定开始时间必须早于结束时间
+		onSelect : function(selectedDateTime) {
 			endDateTextBox.datetimepicker('option', 'minDate', startDateTextBox.datetimepicker('getDate'));
 		}
 	});
