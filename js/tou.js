@@ -21,7 +21,7 @@ var phase = new Array("A", "B", "C");
 var power = new Array("<b>总</b>", "A", "B", "C");
 //判断ie
 var isIE =!+[1,];
-//var isIE =true;
+//var isIE = true;
 //设置表格属性
 $.extend($.fn.dataTable.defaults, {
 	"bInfo" : false, //显示一共几条这种信息
@@ -400,8 +400,16 @@ function makePostStr() {
 	var stime_stamp = 0;
 	var etime_stamp = 0;
 	if (isIE) {
-		stime_stamp = +new Date($('#stime').val())/1000 || -1;
-		etime_stamp = +new Date($('#etime').val())/1000 || -1;
+		var dateStr = $('#stime').val();
+		var a = dateStr.split(" ");
+		var d = a[0].split("-");
+		var t = a[1].split(":");
+		stime_stamp = +new Date(d[0], (d[1] - 1), d[2], t[0], t[1]) / 1000 || -1;
+		var dateStr = $('#etime').val();
+		var a = dateStr.split(" ");
+		var d = a[0].split("-");
+		var t = a[1].split(":");
+		etime_stamp = +new Date(d[0], (d[1] - 1), d[2], t[0], t[1]) / 1000 || -1;
 	} else {
 		var testStartDate = $('#stime').datetimepicker('getDate');
 		if (testStartDate != null) {
@@ -486,12 +494,18 @@ function initTimeBox() {
 	//检查ie
 	if (isIE) {
 		startDateTextBox.removeAttr('readonly');
+		endDateTextBox.removeAttr('readonly');
+		var now_stamp = +new Date() || -1;
+		//向前追溯至1小时以前为默认开始时刻
+		now_stamp -= 1 * 60 * 60 * 1000;
+		startDateTextBox.val(timestarmpToString_Query(now_stamp / 1000))
+		var now_stamp = +new Date() || -1;
+		endDateTextBox.val(timestarmpToString_Query(now_stamp / 1000))
 		return;
 	} else {
 		startDateTextBox.attr('readonly', 'readonly');
+		endDateTextBox.attr('readonly', 'readonly');
 	}
-	//var tz = document.getElementById("timezone");
-	//var tz2 = document.getElementById("timezone2");
 	startDateTextBox.datetimepicker({
 		maxDate : 0,
 		controlType : 'select', //选择方式选时刻
@@ -827,6 +841,7 @@ function timestarmpToString(UnixUtcTimestarmp) {
 	str += ":" + (now.getSeconds() < 10 ? "0" : "") + now.getSeconds();
 	return str;
 }
+
 //用于ie浏览器查询时间的字符串
 function timestarmpToString_Query(UnixUtcTimestarmp) {
 	if (UnixUtcTimestarmp <= 0) {//时区的关系(可能要扩展到24个小时)
@@ -840,24 +855,33 @@ function timestarmpToString_Query(UnixUtcTimestarmp) {
 	str += ":" + (now.getMinutes() < 10 ? "0" : "") + now.getMinutes()
 	return str;
 }
+
 //检查选择的项目是否有效,必选选至少一个项目(表/数据项)
 function isSelectedLegal() {
 	if (isIE) {
-		var stime_stamp = +new Date($('#stime').val()) || -1;
+		var dateStr = $('#stime').val();
+		var a = dateStr.split(" ");
+		var d = a[0].split("-");
+		var t = a[1].split(":");
+		var stime_stamp = +new Date(d[0], (d[1] - 1), d[2], t[0], t[1])/1000 || -1;
 		if (stime_stamp <= 0) {
 			alert("开始时刻格式错误:\n yyyy-mm-dd hh:mm")
 			var now_stamp = +new Date() || -1;
 			//向前追溯至1小时以前为默认开始时刻
-			now_stamp-=1*60*60*1000;
+			now_stamp -= 1 * 60 * 60 * 1000;
 			$('#stime').val(timestarmpToString_Query(now_stamp / 1000))
 		}
-		var etime_stamp = +new Date($('#etime').val()) || -1;
+		var dateStr = $('#etime').val();
+		var a = dateStr.split(" ");
+		var d = a[0].split("-");
+		var t = a[1].split(":");
+		var etime_stamp = +new Date(d[0], (d[1] - 1), d[2], t[0], t[1])/1000 || -1;
 		if (etime_stamp <= 0) {
 			alert("结束时刻格式错误:\n yyyy-mm-dd hh:mm")
 			var now_stamp = +new Date() || -1;
 			$('#etime').val(timestarmpToString_Query(now_stamp / 1000))
 		}
-		if(stime_stamp<=0 || etime_stamp <= 0){
+		if (stime_stamp <= 0 || etime_stamp <= 0) {
 			return false;
 		}
 	} else {
