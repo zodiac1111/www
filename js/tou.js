@@ -20,8 +20,8 @@ var maxn_time = new Array("<b>总</b>", "尖", "峰", "平", "谷");
 var phase = new Array("A", "B", "C");
 var power = new Array("<b>总</b>", "A", "B", "C");
 //判断ie
-var isIE =!+[1,];
-//var isIE = true;
+//var isIE =!+[1,];
+var isIE = true;
 //设置表格属性
 $.extend($.fn.dataTable.defaults, {
 	"bInfo" : false, //显示一共几条这种信息
@@ -404,12 +404,12 @@ function makePostStr() {
 		var a = dateStr.split(" ");
 		var d = a[0].split("-");
 		var t = a[1].split(":");
-		stime_stamp = +new Date(d[0], (d[1] - 1), d[2], t[0], t[1]) / 1000 || -1;
+		stime_stamp = +new Date(d[0], (d[1] - 1), d[2], t[0], t[1]) / 1000 || 0;
 		var dateStr = $('#etime').val();
 		var a = dateStr.split(" ");
 		var d = a[0].split("-");
 		var t = a[1].split(":");
-		etime_stamp = +new Date(d[0], (d[1] - 1), d[2], t[0], t[1]) / 1000 || -1;
+		etime_stamp = +new Date(d[0], (d[1] - 1), d[2], t[0], t[1]) / 1000 || 0;
 	} else {
 		var testStartDate = $('#stime').datetimepicker('getDate');
 		if (testStartDate != null) {
@@ -856,14 +856,50 @@ function timestarmpToString_Query(UnixUtcTimestarmp) {
 	return str;
 }
 
+//检查日期是否符合格式,符合则返回时间戳,否则返回0-1
+function ieCheckDataTime(strData) {
+	var patrn = /[0-9]{4}-[0-9]{1,2}-[0-9]{1,2} [0-9]{1,2}:[0-9]{1,2}/;
+	if (patrn.exec(strData) == null) {
+		return -1;
+	}
+	var a = strData.split(" ");
+	var d = a[0].split("-");
+	var t = a[1].split(":");
+	//年
+	if (d[0] > 2100 || d[0] < 1970) {
+		return -1;
+	}
+	//月
+	if (d[1] > 12 || d[1] < 1) {
+		return -1;
+	}
+	//日
+	if (d[2] > 31 || d[2] < 1) {
+		return -1;
+	}
+	//月日组合
+	if((d[1]==4||d[1]==6||d[1]==9||d[1]==11)&&(d[2]>30)){
+		return -1;
+	}
+	if((d[1]==2)&&(d[2]>29)){
+		return -1;
+	}
+	//时
+	if (t[0] > 23 || t[0] < 0) {
+		return -1;
+	}
+	//分
+	if (t[0] > 59 || t[0] < 0) {
+		return -1;
+	}
+	var time_stamp = +new Date(d[0], (d[1] - 1), d[2], t[0], t[1]) / 1000 || -1;
+	return time_stamp;
+}
+
 //检查选择的项目是否有效,必选选至少一个项目(表/数据项)
 function isSelectedLegal() {
 	if (isIE) {
-		var dateStr = $('#stime').val();
-		var a = dateStr.split(" ");
-		var d = a[0].split("-");
-		var t = a[1].split(":");
-		var stime_stamp = +new Date(d[0], (d[1] - 1), d[2], t[0], t[1])/1000 || -1;
+		var stime_stamp = ieCheckDataTime($('#stime').val());
 		if (stime_stamp <= 0) {
 			alert("开始时刻格式错误:\n yyyy-mm-dd hh:mm")
 			var now_stamp = +new Date() || -1;
@@ -871,15 +907,15 @@ function isSelectedLegal() {
 			now_stamp -= 1 * 60 * 60 * 1000;
 			$('#stime').val(timestarmpToString_Query(now_stamp / 1000))
 		}
-		var dateStr = $('#etime').val();
-		var a = dateStr.split(" ");
-		var d = a[0].split("-");
-		var t = a[1].split(":");
-		var etime_stamp = +new Date(d[0], (d[1] - 1), d[2], t[0], t[1])/1000 || -1;
+		var etime_stamp = ieCheckDataTime($('#etime').val());
 		if (etime_stamp <= 0) {
 			alert("结束时刻格式错误:\n yyyy-mm-dd hh:mm")
 			var now_stamp = +new Date() || -1;
 			$('#etime').val(timestarmpToString_Query(now_stamp / 1000))
+		}
+		if (stime_stamp > etime_stamp) {
+			alert("开始时间应小于结束时间.");
+			return false;
 		}
 		if (stime_stamp <= 0 || etime_stamp <= 0) {
 			return false;
