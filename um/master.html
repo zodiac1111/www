@@ -5,6 +5,7 @@
 		<title>主站参数</title>
 		<link rel="stylesheet" href="/style/normal_ws.css" type="text/css" />
 		<link rel="stylesheet" href="/style/sys.css" type="text/css" />
+		<link rel="stylesheet" href="/style/table.css" type="text/css" />
 		<link href="/style/menuExpandable3.css" rel="stylesheet" type="text/css" />
 		<link rel="stylesheet" media="all" type="text/css" href="/style/jquery-ui-1.10.2.min.css" />
 		<script type="text/javascript" src="/js/jquery-1.9.1.min.js"></script>
@@ -39,7 +40,8 @@
 						},
 						success : function(data, textStatus) {//成功
 							var oSysPara = eval("(" + data + ")");
-							alert("json:" + oSysPara);
+							//alert("json:" + oSysPara);
+							fillData($("#tbody_dat"), oSysPara);
 							oIconLoad.hide("fade", 1000);
 							//alert("OK");
 						},
@@ -54,12 +56,99 @@
 						}
 					});
 				});
+				oLoad.click();
 			});
+
+			/**
+			 * 填充数据,
+			 */
+			function fillData(oTable, jsonRet) {
+				var i;
+				var str = ""
+				for ( i = 0; i < jsonRet.master.length; i++) {
+					str += "<tr>";
+					str += "<td>" + "Master" + i + "</td>";
+					//str += "<td>" + jsonRet.master[i].interface + "</td>";
+					str += appendInterface(jsonRet.interface,jsonRet.master[i].interface);
+					str += appendHost(jsonRet.master[i].host);
+					str += appendPort(jsonRet.master[i].port);
+					str += appendZone(jsonRet.master[i].zone);
+					str += appendAddr(jsonRet.master[i].addr);
+					str += appendHb(jsonRet.master[i].hb);
+					str += "</tr>"
+				}
+				oTable.html(str);
+			}
+
+			function appendInterface(oInterfaceList, inter_face) {
+				var str = "";
+				str += "<td>";
+				str += "<select>";
+				str += "</td>";
+				return str;
+			}
+
+			function appendHost(host) {
+				var str = "<td>";
+				str += "<input type=text id=host maxlength=16 style=\"width:9em;\" ";
+				str += " onchange=\"isIPv4(event);\" value=" + host + ">";
+				str += "</td>";
+				return str;
+			}
+
+			function appendPort(port) {
+				var str = "<td>";
+				str += "<input type=text id=port maxlength=6 style=\"width:4em;\" ";
+				str += " value=" + port + ">";
+				str += "</td>";
+				return str;
+			}
+
+			function appendZone(zone) {
+				var str = "<td>";
+				str += "<input type=text id=zone maxlength=6 style=\"width:4em;\" ";
+				str += " value=" + zone + ">";
+				str += "</td>";
+				return str;
+			}
+
+			function appendAddr(addr) {
+				var str = "<td>";
+				str += "<input type=text id=addr maxlength=6 style=\"width:4em;\" ";
+				str += " value=" + addr + ">";
+				str += "</td>";
+				return str;
+			}
+
+			function appendHb(hb) {
+				var str = "<td>";
+				str += "<input type=text id=hb maxlength=6 style=\"width:2em;\" ";
+				str += " value=" + hb + ">";
+				str += "</td>";
+				return str;
+			}
 		</script>
 	</head>
 	<body>
 		<h1>主站参数</h1>
-
+		<table class="sioplanTable" border="1">
+			<thead>
+				<tr>
+					<th>名称</th>
+					<th>主站接口</th>
+					<th>IP</th>
+					<th>主站端口</th>
+					<th>终端区域</th>
+					<th>终端地址</th>
+					<th>心跳周期</th>
+				</tr>
+			</thead>
+			<tbody id="tbody_dat">
+				<tr>
+					<td colspan="7">载入数据...</td>
+				</tr>
+			</tbody>
+		</table>
 		<p align="center">
 			<button id="init">
 				读取
