@@ -5,6 +5,7 @@
 		<title>通讯模块</title>
 		<link rel="stylesheet" href="/style/normal_ws.css" type="text/css" />
 		<link rel="stylesheet" href="/style/sys.css" type="text/css" />
+		<link rel="stylesheet" href="/style/table.css" type="text/css" />
 		<link href="/style/menuExpandable3.css" rel="stylesheet" type="text/css" />
 		<link rel="stylesheet" media="all" type="text/css" href="/style/jquery-ui-1.10.2.min.css" />
 		<script type="text/javascript" src="/js/jquery-1.9.1.min.js"></script>
@@ -18,17 +19,28 @@
 				var oIconLoad = $("#icon_init");
 				var oIconOK = $("#icon_ok");
 				var oIconErr = $("#icon_err");
+				oUpdate.button({
+					icons : {
+						primary : "ui-icon-refresh"
+					}
+				});
+				oLoad.button();
+				oIconLoad.hide();
+				oIconOK.hide();
+				oIconErr.hide();
 				oLoad.click(function() {
-					oIconLoad.show();
 					$.ajax({
 						type : "post",
 						url : "/goform/comm_module",
 						contentType : "application/x-www-form-urlencoded; charset=utf-8",
 						dataType : "text",
 						data : "action=get",
+						beforeSend : function(XMLHttpRequest) {
+							oIconLoad.show();
+						},
 						success : function(data, textStatus) {//成功
 							var oParam = eval("(" + data + ")");
-							alert("json:" + oParam);
+							fillData($("#tbody_dat"), oParam);
 							oIconLoad.hide("fade", 1000);
 							//alert("OK");
 						},
@@ -44,6 +56,18 @@
 					});
 				});
 			});
+			function fillData(oTable, jsonRet) {
+				var str = "";
+				var i;
+				str+="<tr><td>simc</td><td>"+jsonRet.simc+"</td></tr>"
+				str+="<tr><td>mode</td><td>"+jsonRet.mode+"</td></tr>"
+				str+="<tr><td>apn</td><td>"+jsonRet.apn+"</td></tr>"
+				str+="<tr><td>pitc</td><td>"+jsonRet.pitc+"</td></tr>"
+				str+="<tr><td>hbcy</td><td>"+jsonRet.hbcy+"</td></tr>"
+				str+="<tr><td>信号量</td><td>"+jsonRet.status.sig+"</td></tr>"
+				str+="<tr><td>状态量</td><td>"+jsonRet.status.stat+"</td></tr>"
+				oTable.html(str);
+			}
 		</script>
 	</head>
 	<body>
