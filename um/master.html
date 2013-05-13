@@ -58,13 +58,18 @@
 				});
 				oLoad.click();
 				oUpdate.click(function() {
-					var strPost=mkPostStr();
+					var errobj = document.getElementById("errobj");
+					if (errobj != null) {
+						alert("非法参数");
+						return;
+					}
+					var strPost = mkPostStr();
 					$.ajax({
 						type : "post",
 						url : "/goform/master",
 						contentType : "application/x-www-form-urlencoded; charset=utf-8",
 						dataType : "text",
-						data : "action=set"+strPost,
+						data : "action=set" + strPost,
 						beforeSend : function(XMLHttpRequest) {
 							oIconLoad.show();
 						},
@@ -162,17 +167,18 @@
 				str += "</td>";
 				return str;
 			}
-			function mkPostStr(){
-				var str="";
+
+			function mkPostStr() {
+				var str = "";
 				var i;
-				var len=$(".interface").length;
-				for(i=0;i<len;i++){
-						str+="&interface"+i+"="+$(".interface")[i].value;
-						str+="&host"+i+"="+$(".host")[i].value;
-						str+="&port"+i+"="+$(".port")[i].value;
-						str+="&zone"+i+"="+$(".zone")[i].value;
-						str+="&addr"+i+"="+$(".addr")[i].value;
-						str+="&hb"+i+"="+$(".hb")[i].value;
+				var len = $(".interface").length;
+				for ( i = 0; i < len; i++) {
+					str += "&interface" + i + "=" + $(".interface")[i].value;
+					str += "&host" + i + "=" + $(".host")[i].value;
+					str += "&port" + i + "=" + $(".port")[i].value;
+					str += "&zone" + i + "=" + $(".zone")[i].value;
+					str += "&addr" + i + "=" + $(".addr")[i].value;
+					str += "&hb" + i + "=" + $(".hb")[i].value;
 				}
 				return str;
 			}
