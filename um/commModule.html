@@ -27,8 +27,8 @@
 						dataType : "text",
 						data : "action=get",
 						success : function(data, textStatus) {//成功
-							var oSysPara = eval("(" + data + ")");
-							alert("json:" + oSysPara);
+							var oParam = eval("(" + data + ")");
+							alert("json:" + oParam);
 							oIconLoad.hide("fade", 1000);
 							//alert("OK");
 						},
@@ -48,7 +48,19 @@
 	</head>
 	<body>
 		<h1>通讯模块</h1>
-
+		<table class="sioplanTable" border="1">
+			<thead>
+				<tr>
+					<th>项目</th>
+					<th>参数</th>
+				</tr>
+			</thead>
+			<tbody id="tbody_dat">
+				<tr>
+					<td colspan="2">载入中...</td>
+				</tr>
+			</tbody>
+		</table>
 		<p align="center">
 			<button id="init">
 				读取
