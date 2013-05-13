@@ -69,7 +69,7 @@
 					str += "<tr>";
 					str += "<td>" + "Master" + i + "</td>";
 					//str += "<td>" + jsonRet.master[i].interface + "</td>";
-					str += appendInterface(jsonRet.interface,jsonRet.master[i].interface);
+					str += appendInterface(jsonRet.interface, jsonRet.master[i].interface);
 					str += appendHost(jsonRet.master[i].host);
 					str += appendPort(jsonRet.master[i].port);
 					str += appendZone(jsonRet.master[i].zone);
@@ -84,6 +84,14 @@
 				var str = "";
 				str += "<td>";
 				str += "<select>";
+				var i;
+				var len = oInterfaceList.length;
+				for ( i = 0; i < len; i++) {
+					str += "<option value="+oInterfaceList[i]+" ";
+					str += oInterfaceList[i] == inter_face ? "selected" : "";
+					str += ">" + oInterfaceList[i] + "</option>";
+				}
+				str += "</select>";
 				str += "</td>";
 				return str;
 			}
