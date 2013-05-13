@@ -57,6 +57,33 @@
 					});
 				});
 				oLoad.click();
+				oUpdate.click(function() {
+					var strPost=mkPostStr();
+					$.ajax({
+						type : "post",
+						url : "/goform/master",
+						contentType : "application/x-www-form-urlencoded; charset=utf-8",
+						dataType : "text",
+						data : "action=set"+strPost,
+						beforeSend : function(XMLHttpRequest) {
+							oIconLoad.show();
+						},
+						success : function(data, textStatus) {//成功
+							//alert("json:" + oSysPara);
+							oIconLoad.hide("fade", 1000);
+							//alert("OK");
+						},
+						error : function() {//失败
+							oIconLoad.hide();
+							alert("服务器通讯错误");
+							oIconErr.show();
+							oIconErr.hide("fade", 5000);
+						},
+						complete : function(XMLHttpRequest, textStatus) {//完成(发生在失败或成功之后)
+							//alert("ajax完成,接收:对象:" + XMLHttpRequest + ",状态:" + textStatus);
+						}
+					});
+				});
 			});
 
 			/**
@@ -67,7 +94,7 @@
 				var str = ""
 				for ( i = 0; i < jsonRet.master.length; i++) {
 					str += "<tr>";
-					str += "<td>" + "Master" + i + "</td>";
+					str += "<td class=name>" + "Master" + i + "</td>";
 					//str += "<td>" + jsonRet.master[i].interface + "</td>";
 					str += appendInterface(jsonRet.interface, jsonRet.master[i].interface);
 					str += appendHost(jsonRet.master[i].host);
@@ -83,11 +110,11 @@
 			function appendInterface(oInterfaceList, inter_face) {
 				var str = "";
 				str += "<td>";
-				str += "<select>";
+				str += "<select class=interface>";
 				var i;
 				var len = oInterfaceList.length;
 				for ( i = 0; i < len; i++) {
-					str += "<option value="+oInterfaceList[i]+" ";
+					str += "<option value=" + oInterfaceList[i] + " ";
 					str += oInterfaceList[i] == inter_face ? "selected" : "";
 					str += ">" + oInterfaceList[i] + "</option>";
 				}
@@ -98,7 +125,7 @@
 
 			function appendHost(host) {
 				var str = "<td>";
-				str += "<input type=text id=host maxlength=16 style=\"width:9em;\" ";
+				str += "<input type=text class=host maxlength=16 style=\"width:9em;\" ";
 				str += " onchange=\"isIPv4(event);\" value=" + host + ">";
 				str += "</td>";
 				return str;
@@ -106,7 +133,7 @@
 
 			function appendPort(port) {
 				var str = "<td>";
-				str += "<input type=text id=port maxlength=6 style=\"width:4em;\" ";
+				str += "<input type=text class=port maxlength=6 style=\"width:4em;\" ";
 				str += " value=" + port + ">";
 				str += "</td>";
 				return str;
@@ -114,7 +141,7 @@
 
 			function appendZone(zone) {
 				var str = "<td>";
-				str += "<input type=text id=zone maxlength=6 style=\"width:4em;\" ";
+				str += "<input type=text class=zone maxlength=6 style=\"width:4em;\" ";
 				str += " value=" + zone + ">";
 				str += "</td>";
 				return str;
@@ -122,7 +149,7 @@
 
 			function appendAddr(addr) {
 				var str = "<td>";
-				str += "<input type=text id=addr maxlength=6 style=\"width:4em;\" ";
+				str += "<input type=text class=addr maxlength=6 style=\"width:4em;\" ";
 				str += " value=" + addr + ">";
 				str += "</td>";
 				return str;
@@ -130,9 +157,23 @@
 
 			function appendHb(hb) {
 				var str = "<td>";
-				str += "<input type=text id=hb maxlength=6 style=\"width:2em;\" ";
+				str += "<input type=text class=hb maxlength=6 style=\"width:2em;\" ";
 				str += " value=" + hb + ">";
 				str += "</td>";
+				return str;
+			}
+			function mkPostStr(){
+				var str="";
+				var i;
+				var len=$(".interface").length;
+				for(i=0;i<len;i++){
+						str+="&interface"+i+"="+$(".interface")[i].value;
+						str+="&host"+i+"="+$(".host")[i].value;
+						str+="&port"+i+"="+$(".port")[i].value;
+						str+="&zone"+i+"="+$(".zone")[i].value;
+						str+="&addr"+i+"="+$(".addr")[i].value;
+						str+="&hb"+i+"="+$(".hb")[i].value;
+				}
 				return str;
 			}
 		</script>
