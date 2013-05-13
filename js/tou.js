@@ -19,9 +19,13 @@ var maxn_phase = new Array("正向有功需量", "反向有功需量", "正向�
 var maxn_time = new Array("<b>总</b>", "尖", "峰", "平", "谷");
 var phase = new Array("A", "B", "C");
 var power = new Array("<b>总</b>", "A", "B", "C");
-//判断ie
+//判断ie,ie6和7使用不同方式选择日期,因为控件太慢
+var ie = !!window.ActiveXObject;
+var ie6 = ie && !window.XMLHttpRequest;
+var ie8 = ie && !!document.documentMode;
+var ie7 = ie && !ie6 && !ie8;
 //var isIE =!+[1,];
-var isIE = true;
+var isIE = ie6 || ie7;
 //设置表格属性
 $.extend($.fn.dataTable.defaults, {
 	"bInfo" : false, //显示一共几条这种信息
@@ -878,10 +882,10 @@ function ieCheckDataTime(strData) {
 		return -1;
 	}
 	//月日组合
-	if((d[1]==4||d[1]==6||d[1]==9||d[1]==11)&&(d[2]>30)){
+	if ((d[1] == 4 || d[1] == 6 || d[1] == 9 || d[1] == 11) && (d[2] > 30)) {
 		return -1;
 	}
-	if((d[1]==2)&&(d[2]>29)){
+	if ((d[1] == 2) && (d[2] > 29)) {
 		return -1;
 	}
 	//时
