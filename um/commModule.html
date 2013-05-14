@@ -66,15 +66,17 @@
 				str += appendPitc(jsonRet);
 				str += appendHbcy(jsonRet);
 				str += "<tr><td>IP</td><td>" + jsonRet.status.ip + "</td></tr>";
-				str += "<tr><td>信号量</td><td>" + jsonRet.status.sig + " " + jsonRet.status.sig_str + "</td></tr>";
-				str += "<tr><td>状态量</td><td>" + jsonRet.status.stat + " " + jsonRet.status.stat_str + "</td></tr>";
+				str += "<tr><td>信号强度</td><td>" + jsonRet.status.sig_str;
+				str += "[" + jsonRet.status.sig + "]" + "</td></tr>";
+				str += "<tr><td>当前状态</td><td>" + jsonRet.status.stat_str;
+				str += "[" + jsonRet.status.stat + "]" + "</td></tr>";
 				oTable.html(str);
 			}
 
 			function appendSimc(jsonRet) {
 				var str = "";
 				str += "<tr><td>simc</td>";
-				str += "<td><input style=\"width:5em;\" maxlength=11 ";
+				str += "<td><input style=\"width:8em;\" maxlength=11 ";
 				str += " type=text id=simc value=" + jsonRet.simc + "></td>";
 				str += "</tr>"
 				return str;
