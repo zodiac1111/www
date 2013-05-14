@@ -20,7 +20,20 @@
 	BORDER-RIGHT: #ffffff 2px outset;
 	BORDER-TOP: #ffffff 2px outset;
 }
-
+.commModuleTable {
+	BORDER-BOTTOM: #76A8D9 2px outset;
+	BORDER-LEFT: #76A8D9 2px outset;
+	BORDER-RIGHT: #76A8D9 2px outset;
+	BORDER-TOP: #76A8D9 2px outset;
+	margin: auto; /*整个表格居中*/
+}
+.commModuleTable th {
+	BACKGROUND-COLOR: #76A8D9;
+	BORDER-BOTTOM: #ffffff 2px outset;
+	BORDER-LEFT: #ffffff 2px outset;
+	BORDER-RIGHT: #ffffff 2px outset;
+	BORDER-TOP: #ffffff 2px outset;
+}
 .sioplanTable td {
 	/*BACKGROUND-COLOR: #F7FAFF;*/
 }

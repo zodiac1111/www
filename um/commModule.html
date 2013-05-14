@@ -55,24 +55,94 @@
 						}
 					});
 				});
+				oLoad.click();
 			});
 			function fillData(oTable, jsonRet) {
 				var str = "";
 				var i;
-				str+="<tr><td>simc</td><td>"+jsonRet.simc+"</td></tr>"
-				str+="<tr><td>mode</td><td>"+jsonRet.mode+"</td></tr>"
-				str+="<tr><td>apn</td><td>"+jsonRet.apn+"</td></tr>"
-				str+="<tr><td>pitc</td><td>"+jsonRet.pitc+"</td></tr>"
-				str+="<tr><td>hbcy</td><td>"+jsonRet.hbcy+"</td></tr>"
-				str+="<tr><td>信号量</td><td>"+jsonRet.status.sig+"</td></tr>"
-				str+="<tr><td>状态量</td><td>"+jsonRet.status.stat+"</td></tr>"
+				str += appendSimc(jsonRet);
+				str += appendMode(jsonRet);
+				str += appendApn(jsonRet);
+				str += appendPitc(jsonRet);
+				str += appendHbcy(jsonRet);
+				str += "<tr><td>IP</td><td>" + jsonRet.status.ip + "</td></tr>";
+				str += "<tr><td>信号量</td><td>" + jsonRet.status.sig + " " + jsonRet.status.sig_str + "</td></tr>";
+				str += "<tr><td>状态量</td><td>" + jsonRet.status.stat + " " + jsonRet.status.stat_str + "</td></tr>";
 				oTable.html(str);
+			}
+
+			function appendSimc(jsonRet) {
+				var str = "";
+				str += "<tr><td>simc</td>";
+				str += "<td><input style=\"width:5em;\" maxlength=11 ";
+				str += " type=text id=simc value=" + jsonRet.simc + "></td>";
+				str += "</tr>"
+				return str;
+			}
+
+			function appendHbcy(jsonRet) {
+				var str = "";
+				str += "<tr><td>hbcy</td>";
+				str += "<td><input style=\"width:5em;\" maxlength=1 ";
+				str += "type=text id=pitc value=" + jsonRet.hbcy + "></td>";
+				str += "</tr>"
+				return str;
+			}
+
+			function appendPitc(jsonRet) {
+				var str = "";
+				str += "<tr>";
+				str += "<td>pitc</td>";
+				str += "<td><select id=hbcy>";
+				for ( i = 0; i < jsonRet.hbcy_list.length; i++) {
+					str += "<option value=" + jsonRet.hbcy_list[i] + " ";
+					str += jsonRet.hbcy_list[i] == jsonRet.pitc ? "selected" : "";
+					str += ">" + jsonRet.hbcy_list[i] + "</option>";
+				}
+				str += "</select>";
+				str += "</td>";
+				str += "</tr>"
+				return str;
+			}
+
+			function appendMode(jsonRet) {
+				var str = "";
+				var str = "";
+				var mode = ["client", "server"];
+				str += "<tr>";
+				str += "<td>mode</td>";
+				str += "<td><select id=mode>";
+				for ( i = 0; i < mode.length; i++) {
+					str += "<option value=" + mode[i] + " ";
+					str += (mode == jsonRet.mode) ? "selected" : "";
+					str += ">" + mode[i] + "</option>";
+				}
+				str += "</select>";
+				str += "</td>";
+				str += "</tr>"
+				return str;
+			}
+
+			function appendApn(jsonRet) {
+				var str = "";
+				str += "<tr>";
+				str += "<td>apn</td>";
+				str += "<td><select>";
+				for ( i = 0; i < jsonRet.apn_list.length; i++) {
+					str += "<option value=" + jsonRet.apn_list[i] + " ";
+					str += jsonRet.apn_list[i] == jsonRet.apn ? "selected" : "";
+					str += ">" + jsonRet.apn_list[i] + "</option>";
+				}
+				str += "</select>";
+				str += "</td>";
+				str += "</tr>"
+				return str;
 			}
 		</script>
 	</head>
 	<body>
 		<h1>通讯模块</h1>
-		<table class="sioplanTable" border="1">
+		<table class="commModuleTable" border="1">
 			<thead>
 				<tr>
 					<th>项目</th>
