@@ -1,5 +1,4 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<!-- 华立电力-表计参数页面 -->
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Pragma" content="no-cache" charset=utf-8>
@@ -61,12 +60,32 @@
 					}
 					oIconLoad.show();
 					/* formTest  get_tou */
-					$.post('/goform/mtrparams', "action=set&" + $("#mtrparaform").serialize(), function(result) {
-						//$('#tbl_mtrparams').dataTable();
-						oIconLoad.hide();
-						$("#icon_ok").show();
-						$("#icon_ok").hide("fade", 1000);
+					$.ajax({
+						cache: false,
+						type : "post",
+						url : "/goform/mtrparams",
+						contentType : "application/x-www-form-urlencoded; charset=utf-8",
+						dataType : "text",
+						data : "action=set&" + $("#mtrparaform").serialize(),
+						success : function(result, textStatus) {
+							$("#icon_ok").show();
+							$("#icon_ok").hide("fade", 1000);
+						},
+						complete : function(XMLHttpRequest, textStatus) {
+							oIconLoad.hide();
+						},
+						error : function() {//失败
+							oIconLoad.hide();
+							alert("服务器通讯错误");
+						}
 					});
+					/*	$.post('/goform/mtrparams', "action=set&" + $("#mtrparaform").serialize(),
+					 * function(result) {
+					 //$('#tbl_mtrparams').dataTable();
+					 oIconLoad.hide();
+					 $("#icon_ok").show();
+					 $("#icon_ok").hide("fade", 1000);
+					 });*/
 				});
 				/* 隐藏的按钮用于初始化,应为post的form只能使用按钮触发 */
 				$("#btnLoad").click(function() {
@@ -144,9 +163,10 @@
 					str += (i == index ? " selected" : "");
 					str += ">" + "方案" + oList[i] + "</option>";
 				}
-				str+="</select>";
+				str += "</select>";
 				return str;
 			}
+
 			//列举端口名称
 			function listPort(oList, index) {
 				if (index == null) {
@@ -159,7 +179,7 @@
 					str += (i == index ? " selected" : "");
 					str += ">" + oList[i] + "</option>";
 				}
-				str+="</select>";
+				str += "</select>";
 				return str;
 			}
 
@@ -174,7 +194,7 @@
 					str += (i == index ? " selected" : "");
 					str += ">" + oList[i] + "</option>";
 				}
-				str+="</select>";
+				str += "</select>";
 				return str;
 			}
 
@@ -189,7 +209,7 @@
 					str += (i == index ? " selected" : "");
 					str += ">" + oList[i] + "</option>";
 				}
-				str+="</select>";
+				str += "</select>";
 				return str;
 			}
 
@@ -204,7 +224,7 @@
 					str += (i == index ? " selected" : "");
 					str += ">" + oList[i] + "</option>";
 				}
-				str+="</select>";
+				str += "</select>";
 				return str;
 			}
 
@@ -238,6 +258,7 @@
 			function append_ue_dot(name, it_dot) {
 				return "<td><input type=text maxlength=10 onchange=\"ue_changed(event);\"" + "name=" + name + " value=" + it_dot + ">\n</td>\n";
 			}
+
 			function append_IEdot(name, it_dot) {
 				return "<td><input type=text maxlength=10 onchange=\"ie_changed(event);\"" + "name=" + name + " value=" + it_dot + ">\n</td>";
 			}
@@ -265,8 +286,8 @@
 			function appendChk(iv) {
 				var str = "";
 				str += "<td><input type=checkbox name=iv_check value=";
-				str += iv & 0x01 ;
-				str	+= ((iv & 0x01) ? " checked" : " ");
+				str += iv & 0x01;
+				str += ((iv & 0x01) ? " checked" : " ");
 				str += " id=ivchk onclick=\"chk_change(event);\" >";
 				str += "<input type=text size=1 name=iv value=" + (iv & 0x01);
 				str += "></td>";
