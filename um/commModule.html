@@ -28,6 +28,7 @@
 				oIconLoad.hide();
 				oIconOK.hide();
 				oIconErr.hide();
+				//读取事件
 				oLoad.click(function() {
 					$.ajax({
 						type : "post",
@@ -41,6 +42,7 @@
 						success : function(data, textStatus) {//成功
 							var oParam = eval("(" + data + ")");
 							fillData($("#tbody_dat"), oParam);
+							initEvent();
 							oIconLoad.hide("fade", 1000);
 							//alert("OK");
 						},
@@ -56,7 +58,76 @@
 					});
 				});
 				oLoad.click();
+				//更新事件
+				oUpdate.click(function() {
+					var errobj = $(".errobj")
+					if (errobj.length != 0) {
+						alert("非法参数");
+						return;
+					}
+					var strPost = mkPostStr();
+					$.ajax({
+						type : "post",
+						url : "/goform/comm_module",
+						contentType : "application/x-www-form-urlencoded; charset=utf-8",
+						dataType : "text",
+						data : "action=set" + strPost,
+						beforeSend : function(XMLHttpRequest) {
+							oIconLoad.show();
+						},
+						success : function(data, textStatus) {//成功
+							//alert("json:" + oSysPara);
+							oIconLoad.hide("fade", 1000);
+							//alert("OK");
+						},
+						error : function() {//失败
+							oIconLoad.hide();
+							alert("服务器通讯错误");
+							oIconErr.show();
+							oIconErr.hide("fade", 5000);
+						},
+						complete : function(XMLHttpRequest, textStatus) {//完成(发生在失败或成功之后)
+							//alert("ajax完成,接收:对象:" + XMLHttpRequest + ",状态:" + textStatus);
+						}
+					});
+				});
 			});
+			//设置响应事件
+			function initEvent() {
+				$("#simc").blur(function() {
+					var rNums = /^[0-9]{1,11}$/;
+					if (!rNums.test($(this)[0].value)) {// 数值错误:
+						$(this)[0].style.backgroundColor = "red";
+						$(this).addClass("errobj");
+					} else {// 正确则恢复
+						$(this)[0].style.backgroundColor = "";
+						$(this).removeClass("errobj");
+					}
+				});
+				$("#hbcy").blur(function() {
+					var rNums = /^[0-9]{1}$/;
+					if (!rNums.test($(this)[0].value)) {// 数值错误:
+						$(this)[0].style.backgroundColor = "red";
+						$(this).addClass("errobj");
+					} else {// 正确则恢复
+						$(this)[0].style.backgroundColor = "";
+						$(this).removeClass("errobj");
+					}
+				});
+				$(function() {
+					$("#hbcy").spinner({
+						spin : function(event, ui) {
+							if (ui.value > 9) {
+								$(this).spinner("value", 0);
+								return false;
+							} else if (ui.value < 0) {
+								$(this).spinner("value", 9);
+								return false;
+							}
+						}
+					});
+				});
+			}
 			function fillData(oTable, jsonRet) {
 				var str = "";
 				var i;
@@ -86,7 +157,7 @@
 				var str = "";
 				str += "<tr><td>hbcy</td>";
 				str += "<td><input style=\"width:5em;\" maxlength=1 ";
-				str += "type=text id=pitc value=" + jsonRet.hbcy + "></td>";
+				str += "type=text id=hbcy value=" + jsonRet.hbcy + "></td>";
 				str += "</tr>"
 				return str;
 			}
@@ -95,10 +166,10 @@
 				var str = "";
 				str += "<tr>";
 				str += "<td>pitc</td>";
-				str += "<td><select id=hbcy>";
+				str += "<td><select id=pitc>";
 				for ( i = 0; i < jsonRet.hbcy_list.length; i++) {
-					str += "<option value=" + jsonRet.hbcy_list[i] + " ";
-					str += jsonRet.hbcy_list[i] == jsonRet.pitc ? "selected" : "";
+					str += "<option value=\"" + jsonRet.hbcy_list[i] + "\" ";
+					str += (i == jsonRet.pitc) ? "selected" : "";
 					str += ">" + jsonRet.hbcy_list[i] + "</option>";
 				}
 				str += "</select>";
@@ -116,7 +187,7 @@
 				str += "<td><select id=mode>";
 				for ( i = 0; i < mode.length; i++) {
 					str += "<option value=" + mode[i] + " ";
-					str += (mode == jsonRet.mode) ? "selected" : "";
+					str += (mode[i] == jsonRet.mode) ? "selected" : "";
 					str += ">" + mode[i] + "</option>";
 				}
 				str += "</select>";
@@ -129,7 +200,7 @@
 				var str = "";
 				str += "<tr>";
 				str += "<td>apn</td>";
-				str += "<td><select>";
+				str += "<td><select id=apn>";
 				for ( i = 0; i < jsonRet.apn_list.length; i++) {
 					str += "<option value=" + jsonRet.apn_list[i] + " ";
 					str += jsonRet.apn_list[i] == jsonRet.apn ? "selected" : "";
@@ -138,6 +209,16 @@
 				str += "</select>";
 				str += "</td>";
 				str += "</tr>"
+				return str;
+			}
+
+			function mkPostStr() {
+				var str = "";
+				str += "&simc=" + $("#simc")[0].value;
+				str += "&mode=" + $("#mode")[0].value;
+				str += "&apn=" + $("#apn")[0].value;
+				str += "&pitc=" + $("#pitc")[0].selectedIndex;
+				str += "&hbcy=" + $("#hbcy")[0].value;
 				return str;
 			}
 		</script>

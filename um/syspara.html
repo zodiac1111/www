@@ -109,6 +109,37 @@
 				});
 				/* 首次加载串口参数 */
 				oLoad.click();
+
+				$("#meter_num").spinner({
+					spin : function(event, ui) {
+						syspara_mtrnum(event);
+					}
+				});
+				$("#sioplan_num").spinner({
+					spin : function(event, ui) {
+						syspara_mtrnum(event);
+					}
+				});
+				$("#monitor_ports").spinner({
+					spin : function(event, ui) {
+						syspara_mtrnum(event);
+					}
+				});
+				$("#netports_num").spinner({
+					spin : function(event, ui) {
+						syspara_mtrnum(event);
+					}
+				});
+				$("#sioports_num").spinner({
+					spin : function(event, ui) {
+						syspara_mtrnum(event);
+					}
+				});
+				$("#control_ports").spinner({
+					spin : function(event, ui) {
+						syspara_mtrnum(event);
+					}
+				});
 			});
 		</script>
 	</head>
@@ -125,31 +156,31 @@
 								<tr align="center">
 									<td align="center">表计总数目:</td>
 									<td align="left">
-									<input id="meter_num" type="text" name="meter_num" size=12  maxlength=3 onchange="syspara_mtrnum(event);">
+									<input id="meter_num" type="text" name="meter_num" size=12  maxlength=3 onblur="syspara_mtrnum(event);">
 									</td>
 									<td align="center">串口方案数:</td>
 									<td align="left">
-									<input id="sioplan_num"type="text" name="sioplan_num" size=12  maxlength=3 onchange="lessthan1byte(event);">
+									<input id="sioplan_num"type="text" name="sioplan_num" size=12  maxlength=3 onblur="lessthan1byte(event);">
 									</td>
 								</tr>
 								<tr align="left">
 									<td align="center">监视参数:</td>
 									<td align="left">
-									<input id="monitor_ports" type="text" name="monitor_ports" size=12  maxlength=3 onchange="lessthan1byte(event);">
+									<input id="monitor_ports" type="text" name="monitor_ports" size=12  maxlength=3 onblur="lessthan1byte(event);">
 									</td>
 									<td align="center">网口数目:</td>
 									<td align="left">
-									<input id="netports_num" type="text" name="netports_num" size=12  maxlength=3 onchange="lessthan1byte(event);">
+									<input id="netports_num" type="text" name="netports_num" size=12  maxlength=3 onblur="lessthan1byte(event);">
 									</td>
 								</tr>
 								<tr align="left">
 									<td align="center">串口总数目:</td>
 									<td align="left">
-									<input id="sioports_num" type="text" name="sioports_num" size=12  maxlength=3 onchange="lessthan1byte(event);">
+									<input id="sioports_num" type="text" name="sioports_num" size=12  maxlength=3 onblur="lessthan1byte(event);">
 									</td>
 									<td align="center" title="2.0版本已弃用">控制端口数:</td>
 									<td align="left">
-									<input id="control_ports" type="text" name="control_ports" size=12  maxlength=3 onchange="lessthan1byte(event);" title="2.0版本已弃用">
+									<input id="control_ports" type="text" name="control_ports" size=12  maxlength=3 onblur="lessthan1byte(event);" title="2.0版本已弃用">
 									</td>
 								</tr>
 							</table></td>
@@ -159,8 +190,12 @@
 			</table>
 		</form>
 		<p align="center">
-			<button id="init">读取</button>
-			<button id="btnUpdate" class="btn_update">更新</button>
+			<button id="init">
+				读取
+			</button>
+			<button id="btnUpdate" class="btn_update">
+				更新
+			</button>
 			<input type="text" id="icon_init" class="wait_icon_24x24_load" />
 			<input type="text" id="icon_ok" class="wait_icon_24x24 icon_ok" />
 			<input type="text" id="icon_err" class="wait_icon_24x24 icon_err" />
