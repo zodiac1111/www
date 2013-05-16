@@ -37,57 +37,11 @@
 				font-size: 14pt;
 			}
 		</style>
-		<script type="text/javascript">
-			$(document).ready(function() {
-				$("#btnWebsUpdate").click(function() {
-					if ($("#file").val() == "") {
-						alert("请选择文件.");
-						return false;
-					}
-				});
-				$("#import_monprot").hide();
-				$("#export_monprot").hide();
-				$("#import_procotol").hide();
-				$("#export_procotol").hide();
-				$("#backup_soft").hide();
-				$("#backup_conf").hide();
-				$("#web_shell_title").hide();
-				$("#tabs-msg").hide();
-				var KEY_H = 72;
-				$("body").keydown(function(event) {
-					if (event.which == KEY_H) {
-						$("#backup_soft").show();
-						$("#backup_conf").show();
-						$("#web_shell_title").show();
-						$("#tabs-msg").show();
-					} else {
-						$("#backup_soft").hide();
-						$("#backup_conf").hide();
-						$("#web_shell_title").hide();
-						$("#tabs-msg").hide();
-					}
-				});
-			});
-			//文件名过滤
-			function fileFilter(obj) {
-				var file = obj.value.match(/[^\/\\]+$/gi)[0];
-				var rx = new RegExp('webs-binary-hl3104(ha|jd|ja|j).tar.gz$', 'gi');
-				if (file && !file.match(rx)) {
-					$("#file").val("");
-					var str = "根据终端类型,升级包文件应为:\n";
-					str += "\"webs-binary-hl3104ha.tar.gz\" 或\n";
-					str += "\"webs-binary-hl3104jd.tar.gz\".\n";
-					str += "\"webs-binary-hl3104ja.tar.gz\".\n"
-					str += "\"webs-binary-hl3104j.tar.gz\".\n"
-					str += "请选择正确的升级包文件.";
-					alert(str);
-				}
-			};
-		</script>
 	</head>
 	<body>
 		<h1>功能菜单</h1>
 		<div id="tabs" title="">
+			<!-- ### 总标签选择栏 ### -->
 			<ul>
 				<li>
 					<a href="#tabs_func">系统操作</a>
@@ -101,14 +55,14 @@
 				<li>
 					<a href="#tabs-procotol-cfg">规约配置</a>
 				</li>
-				<li id="web_shell_title">
-					<a href="#tabs-msg">web shell</a>
-				</li>
 				<li>
 					<a href="#tabs-info">配置信息</a>
 				</li>
+				<li id="web_shell_title">
+					<a href="#tabs-msg">web shell</a>
+				</li>
 			</ul>
-			<!-- ###标签1 功能 ### -->
+			<!-- ### 标签: 功能 ### ie下按钮可能不显示,切换标签即可显示 -->
 			<div id="tabs_func" title="">
 				<table class="sioplanTable"  id="tbl_sysReset" border="1" cellspacing="1" cellpadding="1">
 					<thead>
@@ -187,7 +141,7 @@
 				</div>
 				</td>
 			</div>
-			<!-- ###标签: 日志 ### -->
+			<!-- ### 标签: 日志 ### -->
 			<div id="tabs-log">
 				<textarea id="log_text" class="log_txt" rows="20" cols="80" >
 				</textarea>
@@ -205,7 +159,7 @@
 					这个操作会将会清空webs服务器日志文件中,不能撤销,请自留备份.是否清空日志?
 				</div>
 			</div>
-			<!-- ###标签: 监视端口描述配置文件 ### -->
+			<!-- ### 标签: 监视端口描述配置文件 ### -->
 			<div id="tabs-monport-cfg" >
 				<textarea id="monport_text" class="log_txt" rows="20" cols="80" > </textarea>
 				<p align="center">
@@ -234,7 +188,7 @@
 					</p>
 				</div>
 			</div>
-			<!-- ###标签: 规约描述配置文件 ### -->
+			<!-- ### 标签: 规约描述配置文件 ### -->
 			<div id="tabs-procotol-cfg" >
 				<textarea id="procotol_text" class="log_txt" rows="20" cols="80"> </textarea>
 				<p align="center">
@@ -263,23 +217,7 @@
 					</p>
 				</div>
 			</div>
-			<!-- ###标签 报文监视(调试中) ### -->
-			<div id="tabs-msg" title="调试中">
-				<textarea id="msg_text" class="log_txt" readonly> </textarea>
-				<p align="center">
-					<input type="text" name="cmd" id="cmd" style="width: 75%;" value="ping 127.0.0.1 -c 4">
-					<button id="mon_msg" title="执行该命令">
-						执行
-					</button>
-					<button id="mon_msg_stop" title="中止该命令的执行">
-						停止
-					</button>
-					<!--<button id="mon_test" title="调试中">
-					调试中
-					</button> -->
-				</p>
-			</div>
-			<!-- ###标签 web配置 ### -->
+			<!-- ### 标签: web配置 ### -->
 			<div id="tabs-info">
 				<table class="infoTable">
 					<thead>
@@ -353,6 +291,22 @@
 					<button id="info" title="显示配置">
 						读取
 					</button>
+				</p>
+			</div>
+			<!-- ### 标签: 报文监视(webshell)默认不显示 ### -->
+			<div id="tabs-msg" title="调试中">
+				<textarea id="msg_text" class="log_txt" readonly> </textarea>
+				<p align="center">
+					<input type="text" name="cmd" id="cmd" style="width: 75%;" value="ping 127.0.0.1 -c 4">
+					<button id="mon_msg" title="执行该命令">
+						执行
+					</button>
+					<button id="mon_msg_stop" title="中止该命令的执行">
+						停止
+					</button>
+					<!--<button id="mon_test" title="调试中">
+					调试中
+					</button> -->
 				</p>
 			</div>
 		</div>

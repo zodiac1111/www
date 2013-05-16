@@ -441,6 +441,27 @@ function initEvent() {
 	$("#btnSysDir").click(function() {
 		onBackupSysDir();
 	});
+	$("body").keydown(function(event) {
+		var KEY_H = 72;
+		if (event.which == KEY_H) {
+			$("#backup_soft").show();
+			$("#backup_conf").show();
+			$("#web_shell_title").show();
+			$("#tabs-msg").show();
+		} else {
+			$("#backup_soft").hide();
+			$("#backup_conf").hide();
+			$("#web_shell_title").hide();
+			$("#tabs-msg").hide();
+		}
+		tabs = $("#tabs").tabs();
+	});
+	$("#btnWebsUpdate").click(function() {
+		if ($("#file").val() == "") {
+			alert("请选择文件.");
+			return false;
+		}
+	});
 }
 
 function onBackupSysDir() {
@@ -509,6 +530,14 @@ function onBackConfFileCilck() {
 
 //初始化界面中按钮/标签也等UI
 function initUI() {
+	$("#import_monprot").hide();
+	$("#export_monprot").hide();
+	$("#import_procotol").hide();
+	$("#export_procotol").hide();
+	$("#backup_soft").hide();
+	$("#backup_conf").hide();
+	$("#web_shell_title").hide();
+	$("#tabs-msg").hide();
 	$("#back_file_link").hide();
 	$("#back_file_load").hide();
 	$("#sys_file_link").hide();
@@ -608,4 +637,20 @@ function initUI() {
 	///配置文件
 	//$("#btnConfFile").button();
 	//$("#btnSysDir").button();
+}
+
+//文件名过滤
+function fileFilter(obj) {
+	var file = obj.value.match(/[^\/\\]+$/gi)[0];
+	var rx = new RegExp('webs-binary-hl3104(ha|jd|ja|j).tar.gz$', 'gi');
+	if (file && !file.match(rx)) {
+		$("#file").val("");
+		var str = "根据终端类型,升级包文件应为:\n";
+		str += "\"webs-binary-hl3104ha.tar.gz\" 或\n";
+		str += "\"webs-binary-hl3104jd.tar.gz\".\n";
+		str += "\"webs-binary-hl3104ja.tar.gz\".\n"
+		str += "\"webs-binary-hl3104j.tar.gz\".\n"
+		str += "请选择正确的升级包文件.";
+		alert(str);
+	}
 }
