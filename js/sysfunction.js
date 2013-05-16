@@ -441,20 +441,24 @@ function initEvent() {
 	$("#btnSysDir").click(function() {
 		onBackupSysDir();
 	});
+	$("#btnWebsInstaller").click(function() {
+		onBackupInstaller();
+	});
 	$("body").keydown(function(event) {
 		var KEY_H = 72;
 		if (event.which == KEY_H) {
 			$("#backup_soft").show();
 			$("#backup_conf").show();
+			$("#backup_installer").show();
 			$("#web_shell_title").show();
 			$("#tabs-msg").show();
 		} else {
 			$("#backup_soft").hide();
 			$("#backup_conf").hide();
+			$("#backup_installer").hide();
 			$("#web_shell_title").hide();
 			$("#tabs-msg").hide();
 		}
-		tabs = $("#tabs").tabs();
 	});
 	$("#btnWebsUpdate").click(function() {
 		if ($("#file").val() == "") {
@@ -477,8 +481,9 @@ function onBackupSysDir() {
 		},
 		success : function(data, textStatus) {
 			//alert("成功"+textStatus);
+			$("#btnSysDir").hide()
 			$("#sys_file_link").show();
-			alert("生成备份文件,点击链接下载/另存为");
+			alert("生成备份文件,点击链接下载");
 		},
 		error : function() {
 			alert("服务器通讯错误(ajax错误)");
@@ -486,11 +491,39 @@ function onBackupSysDir() {
 		//完成(成功/失败)之后
 		complete : function(XMLHttpRequest, textStatus) {
 			$("#sys_file_load").hide();
-			$("#btnSysDir").removeAttr("disabled");
+			//$("#btnSysDir").removeAttr("disabled");
 		}
 	});
 }
-
+function onBackupInstaller() {
+	var strPost = "action=webs_installer";
+	$.ajax({
+		type : "post",
+		url : "/goform/conf_file",
+		data : strPost,
+		beforeSend : function(XMLHttpRequest) {
+			$("#btnWebsInstaller").attr("disabled", "disabled");
+			$("#installer_link").hide();
+			$("#installer_load").show();
+		},
+		success : function(data, textStatus) {
+			//alert("成功"+textStatus);
+			$("#btnWebsInstaller").hide();
+			$("#installer_link").show();
+			var ver=$("#main_version_string").html().toLowerCase().replace(/[^a-z]/ig,"");
+			$("#installer_link").attr("href","/tmp/webs-binary-hl3104"+ver+".tar.gz");
+			alert("生成备份文件,点击链接下载");
+		},
+		error : function() {
+			alert("服务器通讯错误(ajax错误)");
+		},
+		//完成(成功/失败)之后
+		complete : function(XMLHttpRequest, textStatus) {
+			$("#installer_load").hide();
+			//$("#btnWebsInstaller").removeAttr("disabled");
+		}
+	});
+}
 function onBackConfFileCilck() {
 	var strParaDir = $("#info_rtupara").text();
 	var strConfDir = $("#info_rtuconf").text();
@@ -514,8 +547,9 @@ function onBackConfFileCilck() {
 		},
 		success : function(data, textStatus) {
 			//alert("成功"+textStatus);
+			$("#btnConfFile").hide();
 			$("#back_file_link").show();
-			alert("生成备份文件,点击下载/另存为");
+			alert("生成备份文件,点击链接下载");
 		},
 		error : function() {
 			alert("服务器通讯错误(ajax错误)");
@@ -523,7 +557,7 @@ function onBackConfFileCilck() {
 		//完成(成功/失败)之后
 		complete : function(XMLHttpRequest, textStatus) {
 			$("#back_file_load").hide();
-			$("#btnConfFile").removeAttr("disabled");
+			//$("#btnConfFile").removeAttr("disabled");
 		}
 	});
 }
@@ -533,15 +567,21 @@ function initUI() {
 	$("#import_monprot").hide();
 	$("#export_monprot").hide();
 	$("#import_procotol").hide();
+	//
 	$("#export_procotol").hide();
 	$("#backup_soft").hide();
 	$("#backup_conf").hide();
-	$("#web_shell_title").hide();
-	$("#tabs-msg").hide();
+	$("#backup_installer").hide();
 	$("#back_file_link").hide();
 	$("#back_file_load").hide();
 	$("#sys_file_link").hide();
 	$("#sys_file_load").hide();
+	$("#installer_link").hide();
+	$("#installer_load").hide();
+	//
+	$("#web_shell_title").hide();
+	$("#tabs-msg").hide();
+
 	$("#info").hide();
 	//文本提示信息,鼠标移上 显示提示信息
 	$(document).tooltip();
