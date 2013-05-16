@@ -424,31 +424,10 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 			//$("#procotol_text").val(result);
 		});
 	});
-
 	$("#info").click();
-	$("#info").hide();
 	$("#mon_test").click(function() {
 		//alert("显示测试");
 		$("#msg_text").append();
-	});
-	$("#info").click(function() {
-		$.post('/goform/info', "action=get", function(result) {
-			//alert(result);
-			var oInfo = eval("(" + result + ")");
-			var str;
-			str = oInfo.major + "." + oInfo.minor + "." + oInfo.patchlevel + " [" + oInfo.git_version + "]";
-			$("#webs-version").html(str);
-			$("#info_webconf").html(oInfo.info_webconf);
-			$("#info_weblog").html(oInfo.info_weblog);
-			$("#info_rtuconf").html(oInfo.info_rtuconf);
-			$("#info_rtupara").html(oInfo.info_rtupara);
-			$("#info_wwwroot").html(oInfo.info_wwwroot);
-			$("#info_webbin").html(oInfo.info_webbin);
-			$("#build_time").html(oInfo.build_time);
-			$("#main_version_string").html(oInfo.main_version_string);
-			//$("#procotol_text").removeClass("textarea_bgpic");
-			//$("#procotol_text").val(result);
-		});
 	});
 	initUI();
 	initEvent();
@@ -457,31 +436,84 @@ $(document).ready(function() {// 所有脚本都在文档加载完全后执行
 //初始化事件,如按钮的点击事件等
 function initEvent() {
 	$("#btnConfFile").click(function() {
-		var strParaDir = $("#info_rtupara").text();
-		var strConfDir = $("#info_rtuconf").text();
-		var strPost = "action=export";
-		strPost += "&items=" + strParaDir + "/sysspara.cfg";
-		strPost += "&items=" + strParaDir + "/sioplan.cfg";
-		strPost += "&items=" + strParaDir + "/netpara.cfg";
-		strPost += "&items=" + strParaDir + "/ctspara.cfg";
-		strPost += "&items=" + strParaDir + "/monpara.cfg";
-		strPost += "&items=" + strParaDir + "/stspara.cfg";
-		strPost += "&items=" + strParaDir + "/mtrspara.cfg";
-		strPost += "&items=" + strParaDir + "/monpara.cfg";
-		$.post('/goform/conf_file', strPost, function(result) {
-			alert("生成备份文件,点击下载/另存为");
-		});
+		onBackConfFileCilck();
 	});
 	$("#btnSysDir").click(function() {
-		var strPost = "action=sys";
-		$.post('/goform/conf_file', strPost, function(result) {
+		onBackupSysDir();
+	});
+}
+
+function onBackupSysDir() {
+	var strPost = "action=sys";
+	$.ajax({
+		type : "post",
+		url : "/goform/conf_file",
+		data : strPost,
+		beforeSend : function(XMLHttpRequest) {
+			$("#btnSysDir").attr("disabled", "disabled");
+			$("#sys_file_link").hide();
+			$("#sys_file_load").show();
+		},
+		success : function(data, textStatus) {
+			//alert("成功"+textStatus);
+			$("#sys_file_link").show();
+			alert("生成备份文件,点击链接下载/另存为");
+		},
+		error : function() {
+			alert("服务器通讯错误(ajax错误)");
+		},
+		//完成(成功/失败)之后
+		complete : function(XMLHttpRequest, textStatus) {
+			$("#sys_file_load").hide();
+			$("#btnSysDir").removeAttr("disabled");
+		}
+	});
+}
+
+function onBackConfFileCilck() {
+	var strParaDir = $("#info_rtupara").text();
+	var strConfDir = $("#info_rtuconf").text();
+	var strPost = "action=export";
+	strPost += "&items=" + strParaDir + "/sysspara.cfg";
+	strPost += "&items=" + strParaDir + "/sioplan.cfg";
+	strPost += "&items=" + strParaDir + "/netpara.cfg";
+	strPost += "&items=" + strParaDir + "/ctspara.cfg";
+	strPost += "&items=" + strParaDir + "/monpara.cfg";
+	strPost += "&items=" + strParaDir + "/stspara.cfg";
+	strPost += "&items=" + strParaDir + "/mtrspara.cfg";
+	strPost += "&items=" + strParaDir + "/monpara.cfg";
+	$.ajax({
+		type : "post",
+		url : "/goform/conf_file",
+		data : strPost,
+		beforeSend : function(XMLHttpRequest) {
+			$("#btnConfFile").attr("disabled", "disabled");
+			$("#back_file_link").hide();
+			$("#back_file_load").show();
+		},
+		success : function(data, textStatus) {
+			//alert("成功"+textStatus);
+			$("#back_file_link").show();
 			alert("生成备份文件,点击下载/另存为");
-		});
+		},
+		error : function() {
+			alert("服务器通讯错误(ajax错误)");
+		},
+		//完成(成功/失败)之后
+		complete : function(XMLHttpRequest, textStatus) {
+			$("#back_file_load").hide();
+			$("#btnConfFile").removeAttr("disabled");
+		}
 	});
 }
 
 //初始化界面中按钮/标签也等UI
 function initUI() {
+	$("#back_file_link").hide();
+	$("#back_file_load").hide();
+	$("#sys_file_link").hide();
+	$("#sys_file_load").hide();
+	$("#info").hide();
 	//文本提示信息,鼠标移上 显示提示信息
 	$(document).tooltip();
 	//重启按钮
