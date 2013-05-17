@@ -12,7 +12,7 @@ body{
 	line-height: 1.166;	
 	margin: 0px;
 	padding: 0px;
-	background: #4682B4 url("bg_grad.jpg") fixed;
+	background: #4682B4 /*url("bg_grad.jpg") fixed*/;
 }
 
 /******* hyperlink and anchor tag styles *******/
