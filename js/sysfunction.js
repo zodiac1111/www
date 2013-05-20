@@ -452,13 +452,13 @@ function initEvent() {
 			$("#backup_installer").show();
 			$("#web_shell_title").show();
 			$("#tabs-msg").show();
-		} else {
+		} /*else {
 			$("#backup_soft").hide();
 			$("#backup_conf").hide();
 			$("#backup_installer").hide();
 			$("#web_shell_title").hide();
 			$("#tabs-msg").hide();
-		}
+		}*/
 	});
 	$("#btnWebsUpdate").click(function() {
 		if ($("#file").val() == "") {
