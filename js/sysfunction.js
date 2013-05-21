@@ -528,14 +528,19 @@ function onBackConfFileCilck() {
 	var strParaDir = $("#info_rtupara").text();
 	var strConfDir = $("#info_rtuconf").text();
 	var strPost = "action=export";
-	strPost += "&items=" + strParaDir + "/sysspara.cfg";
-	strPost += "&items=" + strParaDir + "/sioplan.cfg";
-	strPost += "&items=" + strParaDir + "/netpara.cfg";
-	strPost += "&items=" + strParaDir + "/ctspara.cfg";
-	strPost += "&items=" + strParaDir + "/monpara.cfg";
-	strPost += "&items=" + strParaDir + "/stspara.cfg";
-	strPost += "&items=" + strParaDir + "/mtrspara.cfg";
-	strPost += "&items=" + strParaDir + "/monpara.cfg";
+	// strPost += "&items=" + strParaDir + "/sysspara.cfg";
+	// strPost += "&items=" + strParaDir + "/sioplan.cfg";
+	// strPost += "&items=" + strParaDir + "/netpara.cfg";
+	// strPost += "&items=" + strParaDir + "/ctspara.cfg";
+	// strPost += "&items=" + strParaDir + "/monpara.cfg";
+	// strPost += "&items=" + strParaDir + "/stspara.cfg";
+	// strPost += "&items=" + strParaDir + "/mtrspara.cfg";
+	// strPost += "&items=" + strParaDir + "/monpara.cfg";
+	// strPost += "&items=" + strParaDir + "/gprs.txt";
+	// strPost += "&items=" + strParaDir + "/rtu.xml";
+	//默认下载这两个文件夹写所有文件
+	strPost += "&items=" + strParaDir + "/*";
+	strPost += "&items=" + strConfDir + "/*";
 	$.ajax({
 		type : "post",
 		url : "/goform/conf_file",
