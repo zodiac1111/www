@@ -61,6 +61,9 @@
 				<li id="web_shell_title">
 					<a href="#tabs-msg">web shell</a>
 				</li>
+				<li id="Exfunc_title">
+					<a href="#Exfunc">扩展功能</a>
+				</li>
 			</ul>
 			<!-- ### 标签: 功能 ### ie下按钮可能不显示,切换标签即可显示 -->
 			<div id="tabs_func" title="">
@@ -267,33 +270,6 @@
 							<td>webs服务器编译日期</td>
 							<td id="build_time">---------</td>
 						</tr>
-						<tr id="backup_conf">
-							<td>导出配置文件</td>
-							<td id="file_test">
-							<button id="btnConfFile">
-								生成
-							</button>
-							<input type="text" id="back_file_load" class="wait_icon_24x24_load" />
-							<a id="back_file_link" href="/tmp/backup.tar">backup.tar</a></td>
-						</tr>
-						<tr id="backup_installer">
-							<td>导出webs安装包</td>
-							<td>
-							<button id="btnWebsInstaller">
-								生成
-							</button>
-							<input type="text" id="installer_load" class="wait_icon_24x24_load" />
-							<a id="installer_link" href="/tmp/webs-binary-hl3104XX.tar">webs-binary-hl3104.tar.gz</a></td>
-						</tr>
-						<tr id="backup_soft">
-							<td>导出系统目录(/mnt/nor/)</td>
-							<td>
-							<button id="btnSysDir">
-								生成
-							</button>
-							<input type="text" id="sys_file_load" class="wait_icon_24x24_load" />
-							<a id="sys_file_link" href="/tmp/sys.tar">sys.tar</a></td>
-						</tr>
 					</tbody>
 				</table>
 				<p align="center">
@@ -302,8 +278,55 @@
 					</button>
 				</p>
 			</div>
+			<!-- ### 标签: web配置 ### -->
+			<div id="Exfunc">
+				<table class="infoTable">
+					<thead>
+						<tr>
+							<th>项目</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>导出配置文件</td>
+							<td id="file_test">
+							<button id="btnConfFile">
+								生成
+							</button>
+							<input type="text" id="back_file_load" class="wait_icon_24x24_load" />
+							<a id="back_file_link" href="/tmp/backup.tar">backup.tar</a></td>
+						</tr>
+						<tr>
+							<td>导出webs安装包</td>
+							<td>
+							<button id="btnWebsInstaller">
+								生成
+							</button>
+							<input type="text" id="installer_load" class="wait_icon_24x24_load" />
+							<a id="installer_link" href="/tmp/webs-binary-hl3104XX.tar">webs-binary-hl3104.tar.gz</a></td>
+						</tr>
+						<tr>
+							<td>导出系统目录(/mnt/nor/)</td>
+							<td>
+							<button id="btnSysDir">
+								生成
+							</button>
+							<input type="text" id="sys_file_load" class="wait_icon_24x24_load" />
+							<a id="sys_file_link" href="/tmp/sys.tar">sys.tar</a></td>
+						</tr>
+						<tr>
+							<td>gdbserver</td>
+							<td>
+							<button id="btnGdb">
+								调试
+							</button></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 			<!-- ### 标签: 报文监视(webshell)默认不显示 ### -->
-			<div id="tabs-msg" title="调试中">
+			<div id="tabs-msg" title="调试中" class="hide_div">
 				<textarea id="msg_text" class="log_txt" readonly> </textarea>
 				<p align="center">
 					<input type="text" name="cmd" id="cmd" style="width: 75%;" value="ping 127.0.0.1 -c 4">

@@ -444,12 +444,14 @@ function initEvent() {
 	$("#btnWebsInstaller").click(function() {
 		onBackupInstaller();
 	});
+	$("#btnGdb").click(function() {
+		onGdbServer();
+	});
 	$("body").keydown(function(event) {
 		var KEY_H = 72;
 		if (event.which == KEY_H) {
-			$("#backup_soft").show();
-			$("#backup_conf").show();
-			$("#backup_installer").show();
+			$("#Exfunc_title").show();
+			$("#Exfunc").show();
 			$("#web_shell_title").show();
 			$("#tabs-msg").show();
 		} /*else {
@@ -528,16 +530,6 @@ function onBackConfFileCilck() {
 	var strParaDir = $("#info_rtupara").text();
 	var strConfDir = $("#info_rtuconf").text();
 	var strPost = "action=export";
-	// strPost += "&items=" + strParaDir + "/sysspara.cfg";
-	// strPost += "&items=" + strParaDir + "/sioplan.cfg";
-	// strPost += "&items=" + strParaDir + "/netpara.cfg";
-	// strPost += "&items=" + strParaDir + "/ctspara.cfg";
-	// strPost += "&items=" + strParaDir + "/monpara.cfg";
-	// strPost += "&items=" + strParaDir + "/stspara.cfg";
-	// strPost += "&items=" + strParaDir + "/mtrspara.cfg";
-	// strPost += "&items=" + strParaDir + "/monpara.cfg";
-	// strPost += "&items=" + strParaDir + "/gprs.txt";
-	// strPost += "&items=" + strParaDir + "/rtu.xml";
 	//默认下载这两个文件夹写所有文件
 	strPost += "&items=" + strParaDir + "/*";
 	strPost += "&items=" + strConfDir + "/*";
@@ -566,17 +558,39 @@ function onBackConfFileCilck() {
 		}
 	});
 }
-
+function onGdbServer() {
+	var strPost = "action=gdbserver";
+	//默认下载这两个文件夹写所有文件
+	strPost += "&ip="  + "192.168.1.113";
+	strPost += "&port=" + "3104";
+	$.ajax({
+		type : "post",
+		url : "/goform/conf_file",
+		data : strPost,
+		beforeSend : function(XMLHttpRequest) {
+			alert("调式运行");
+		},
+		success : function(data, textStatus) {
+			;
+			//alert("成功"+textStatus);
+		},
+		error : function() {
+			;
+			//alert("服务器通讯错误(ajax错误)");
+		},
+		complete : function(XMLHttpRequest, textStatus) {
+			;
+		}
+	});
+}
 //初始化界面中按钮/标签也等UI
 function initUI() {
 	$("#import_monprot").hide();
 	$("#export_monprot").hide();
 	$("#import_procotol").hide();
-	//
 	$("#export_procotol").hide();
-	$("#backup_soft").hide();
-	$("#backup_conf").hide();
-	$("#backup_installer").hide();
+	$("#info").hide();
+	//
 	$("#back_file_link").hide();
 	$("#back_file_load").hide();
 	$("#sys_file_link").hide();
@@ -584,10 +598,10 @@ function initUI() {
 	$("#installer_link").hide();
 	$("#installer_load").hide();
 	//
+	$("#Exfunc_title").hide();
+	$("#Exfunc").hide();
 	$("#web_shell_title").hide();
 	$("#tabs-msg").hide();
-
-	$("#info").hide();
 	//文本提示信息,鼠标移上 显示提示信息
 	$(document).tooltip();
 	//重启按钮
